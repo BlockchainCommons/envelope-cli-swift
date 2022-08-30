@@ -10,5 +10,6 @@ enum DataType: EnumerableFlag {
     case envelope
     case int
     case string
+    case ur
     case uuid
 }

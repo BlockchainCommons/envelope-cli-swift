@@ -9,6 +9,9 @@ struct Subject: ParsableCommand {
     @Argument(help: "The value for the Envelope's subject")
     var value: String
     
+    @Option(help: "The integer tag for an enclosed UR.")
+    var tag: UInt64?
+    
     func run() throws {
         resetOutput()
         let envelope: Envelope
@@ -57,6 +60,20 @@ struct Subject: ParsableCommand {
             envelope = Envelope(n)
         case .string:
             envelope = Envelope(value)
+        case .ur:
+            let ur = try UR(urString: value)
+            if ur.type == "envelope" {
+                envelope = try Envelope(ur: ur)
+                    .wrap()
+            } else {
+                guard let tag else {
+                    throw EnvelopeToolError.urTagRequired
+                }
+                let cborTag = CBOR.Tag(rawValue: tag)
+                let cbor = try CBOR(ur.cbor)
+                let contentCBOR = CBOR.tagged(cborTag, cbor)
+                envelope = Envelope(contentCBOR)
+            }
         case .uuid:
             guard let uuid = UUID(uuidString: value) else {
                 throw EnvelopeToolError.invalidType(expectedType: "UUID")

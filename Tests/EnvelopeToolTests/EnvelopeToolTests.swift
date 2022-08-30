@@ -9,6 +9,7 @@ let uuidExample = "EB377E65-5774-410A-B9CB-510BFC73E6D9"
 let cidExample = "dec7e82893c32f7a4fcec633c02c0ec32a4361ca3ee3bc8758ae07742e940550"
 let dateExample = "2022-08-30T07:16:11Z"
 let digestExample = Digest(helloString).data.hex
+let customURExample = "ur:crypto-seed/oyadgdaawzwplrbdhdpabgrnvokorolnrtemksayyadmut"
 
 final class EnvelopeToolTests: XCTestCase {
     static override func setUp() {
@@ -52,6 +53,7 @@ final class EnvelopeToolTests: XCTestCase {
         )
         XCTAssertEqual(try envelope("extract --envelope \(e)"), helloEnvelopeUR)
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "d8c8d8dc6648656c6c6f2e")
+        XCTAssertEqual(try envelope("extract --ur \(e)"), helloEnvelopeUR)
     }
 
     func testDataSubject() throws {
@@ -103,6 +105,18 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(try envelope("subject --string Hello."), helloEnvelopeUR)
         XCTAssertEqual(try envelope("extract \(helloEnvelopeUR)"), helloString)
         XCTAssertEqual(try envelope("extract --cbor \(helloEnvelopeUR)"), "6648656c6c6f2e")
+    }
+    
+    func testEnvelopeURSubject() throws {
+        let e = try envelope("subject --ur \(helloEnvelopeUR)")
+        XCTAssertEqual(e, "ur:envelope/tpvttpuoiyfdihjzjzjldmfxonfnpk")
+        XCTAssertEqual(try envelope("extract --ur \(e)"), helloEnvelopeUR)
+    }
+    
+    func testCustomURSubject() throws {
+        let e = try envelope("subject --ur \(customURExample) --tag 300")
+        XCTAssertEqual(e, "ur:envelope/tpuotaaddwoyadgdaawzwplrbdhdpabgrnvokorolnrtemksjztypkmh")
+        XCTAssertEqual(try envelope("extract --ur \(e) --tag 300 --type crypto-seed"), customURExample)
     }
     
     func testUUIDSubject() throws {
