@@ -6,6 +6,7 @@ enum DataType: EnumerableFlag {
     case cid
     case data
     case date
+    case digest
     case int
     case string
     case uuid

@@ -26,6 +26,8 @@ struct Extract: ParsableCommand {
             let date = try envelope.extractSubject(Date.self)
             let dateString = ISO8601DateFormatter().string(from: date)
             printOut(dateString)
+        case .digest:
+            printOut(try envelope.extractSubject(Digest.self).hex)
         case .int:
             printOut(try envelope.extractSubject(Int.self))
         case .string:

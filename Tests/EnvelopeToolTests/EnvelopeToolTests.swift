@@ -8,6 +8,7 @@ let cborArrayExample = CBOR.array([1, 2, 3]).cborEncode.hex
 let uuidExample = "EB377E65-5774-410A-B9CB-510BFC73E6D9"
 let cidExample = "dec7e82893c32f7a4fcec633c02c0ec32a4361ca3ee3bc8758ae07742e940550"
 let dateExample = "2022-08-30T07:16:11Z"
+let digestExample = Digest(helloString).data.hex
 
 final class EnvelopeToolTests: XCTestCase {
     static override func setUp() {
@@ -56,6 +57,14 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "c11a630db93b")
     }
     
+    func testDigestSubject() throws {
+        let e = try envelope("subject --digest \(digestExample)")
+        XCTAssertEqual(e, "ur:envelope/tpuotpsbhdcxfdurmtpygubelooyaowdrpglbakeuodanylrbbesimbnwlkgbywpmksgbbsajnlklalsjkjn")
+        XCTAssertEqual(try envelope(e), "Digest(\(digestExample))")
+        XCTAssertEqual(try envelope("extract --digest \(e)"), digestExample)
+        XCTAssertEqual(try envelope("extract --cbor \(e)"), "d8cb582048df96ab531088a102eab64e0e7cdc259a8414396a0ce97b11ec98ca14c26d8c")
+    }
+
     func testIntSubject() throws {
         let value = "42"
         let e = try envelope("subject --int \(value)")

@@ -39,6 +39,14 @@ struct Subject: ParsableCommand {
                 throw EnvelopeToolError.invalidType(expectedType: "date")
             }
             envelope = Envelope(date)
+        case .digest:
+            guard
+                let data = value.hexData,
+                let digest = Digest(rawValue: data)
+            else {
+                throw EnvelopeToolError.invalidType(expectedType: "digest")
+            }
+            envelope = Envelope(digest)
         case .int:
             guard let n = Int(value) else {
                 throw EnvelopeToolError.invalidType(expectedType: "integer")
