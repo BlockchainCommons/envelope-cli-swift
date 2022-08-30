@@ -47,6 +47,9 @@ struct Subject: ParsableCommand {
                 throw EnvelopeToolError.invalidType(expectedType: "digest")
             }
             envelope = Envelope(digest)
+        case .envelope:
+            envelope = try Envelope(urString: value)
+                .wrap()
         case .int:
             guard let n = Int(value) else {
                 throw EnvelopeToolError.invalidType(expectedType: "integer")

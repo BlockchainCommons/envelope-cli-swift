@@ -14,10 +14,13 @@ struct Extract: ParsableCommand {
         
         switch type {
         case .cbor:
-            guard let cbor = envelope.leaf else {
+            if let cbor = envelope.leaf {
+                printOut(cbor.hex)
+            } else if envelope.isWrapped {
+                printOut(try envelope.unwrap().cbor.hex)
+            } else {
                 throw EnvelopeToolError.notCBOR
             }
-            printOut(cbor.hex)
         case .cid:
             printOut(try envelope.extractSubject(CID.self).hex)
         case .data:
@@ -28,6 +31,8 @@ struct Extract: ParsableCommand {
             printOut(dateString)
         case .digest:
             printOut(try envelope.extractSubject(Digest.self).hex)
+        case .envelope:
+            printOut(try envelope.unwrap().ur)
         case .int:
             printOut(try envelope.extractSubject(Int.self))
         case .string:

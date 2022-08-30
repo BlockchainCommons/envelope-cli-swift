@@ -39,6 +39,20 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(try envelope("extract --cid \(e)"), cidExample)
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "d8ca5820dec7e82893c32f7a4fcec633c02c0ec32a4361ca3ee3bc8758ae07742e940550")
     }
+    
+    func testWrappedEnvelopeSubject() throws {
+        let e = try envelope("subject --envelope \(helloEnvelopeUR)")
+        XCTAssertEqual(e, "ur:envelope/tpvttpuoiyfdihjzjzjldmfxonfnpk")
+        XCTAssertEqual(try envelope(e),
+        """
+        {
+            "Hello."
+        }
+        """
+        )
+        XCTAssertEqual(try envelope("extract --envelope \(e)"), helloEnvelopeUR)
+        XCTAssertEqual(try envelope("extract --cbor \(e)"), "d8c8d8dc6648656c6c6f2e")
+    }
 
     func testDataSubject() throws {
         let value = "cafebabe"
