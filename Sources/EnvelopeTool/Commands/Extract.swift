@@ -19,6 +19,11 @@ struct Extract: ParsableCommand {
         resetOutput()
         
         switch type {
+        case .assertion:
+            guard let assertion = envelope.assertion else {
+                throw EnvelopeToolError.notAssertion
+            }
+            printOut("\(assertion.predicate.ur) \(assertion.object.ur)")
         case .cbor:
             if let cbor = envelope.leaf {
                 printOut(cbor.hex)

@@ -2,6 +2,7 @@ import Foundation
 import ArgumentParser
 
 enum DataType: EnumerableFlag {
+    case assertion
     case cbor
     case cid
     case data

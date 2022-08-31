@@ -16,6 +16,8 @@ struct Subject: ParsableCommand {
         resetOutput()
         let envelope: Envelope
         switch type {
+        case .assertion:
+            throw EnvelopeToolError.useAssertionCommand
         case .cbor:
             guard
                 let data = value.hexData,

@@ -1,4 +1,5 @@
 import XCTest
+import WolfBase
 import BCFoundation
 @testable import EnvelopeTool
 
@@ -24,6 +25,16 @@ final class EnvelopeToolTests: XCTestCase {
 
         XCTAssertEqual(try envelope(helloEnvelopeUR), expectedOutput)
         XCTAssertEqual(try envelope("format \(helloEnvelopeUR)"), expectedOutput)
+    }
+    
+    func testExtractAssertionSubject() throws {
+        let e = Envelope(predicate: .note, object: "This is a note.")
+        let ur = e.ur.string
+        let predObj = try envelope("extract --assertion \(ur)")
+        let parts = predObj.split(separator: " ").map { String($0) }
+        XCTAssertEqual(parts†, #"["ur:envelope/tpuraakicmnbgu", "ur:envelope/tpuojlghisinjkcxinjkcxhscxjtjljyihdmnygsmnhl"]"#)
+        let parts2 = try parts.map { try Envelope(urString: String($0)).ur.string }
+        XCTAssertEqual(parts†, parts2†)
     }
     
     func testCBORSubject() throws {
