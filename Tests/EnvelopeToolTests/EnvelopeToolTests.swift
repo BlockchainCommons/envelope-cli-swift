@@ -99,6 +99,15 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(try envelope("extract --int \(e)"), value)
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "3829")
     }
+    
+    func testKnownPredicateSubject() throws {
+        let value = "note"
+        let e = try envelope("subject --known-predicate \(value)")
+        XCTAssertEqual(e, "ur:envelope/tpuraakicmnbgu")
+        XCTAssertEqual(try envelope(e), "note")
+        XCTAssertEqual(try envelope("extract --known-predicate \(e)"), "note")
+        XCTAssertEqual(try envelope("extract --cbor \(e)"), "d8df04")
+    }
 
     func testStringSubject() throws {
         XCTAssertEqual(try envelope("subject Hello."), helloEnvelopeUR)

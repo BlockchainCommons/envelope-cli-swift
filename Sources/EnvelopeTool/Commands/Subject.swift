@@ -58,6 +58,15 @@ struct Subject: ParsableCommand {
                 throw EnvelopeToolError.invalidType(expectedType: "integer")
             }
             envelope = Envelope(n)
+        case .knownPredicate:
+            if let n = UInt64(value) {
+                let p = KnownPredicate(rawValue: n)
+                envelope = Envelope(p)
+            } else if let p = KnownPredicate(name: value) {
+                envelope = Envelope(p)
+            } else {
+                throw EnvelopeToolError.unknownPredicate(value)
+            }
         case .string:
             envelope = Envelope(value)
         case .ur:

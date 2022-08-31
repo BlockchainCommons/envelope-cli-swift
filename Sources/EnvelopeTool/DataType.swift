@@ -9,6 +9,7 @@ enum DataType: EnumerableFlag {
     case digest
     case envelope
     case int
+    case knownPredicate
     case string
     case ur
     case uuid

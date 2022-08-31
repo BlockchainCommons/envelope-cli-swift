@@ -7,4 +7,5 @@ enum EnvelopeToolError: Error {
     case urTypeRequired
     case urTagMismatch
     case urTypeMismatch
+    case unknownPredicate(String)
 }
