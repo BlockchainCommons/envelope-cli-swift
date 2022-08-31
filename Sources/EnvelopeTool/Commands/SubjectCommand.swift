@@ -1,8 +1,8 @@
 import ArgumentParser
 import BCFoundation
 
-struct Subject: ParsableCommand {
-    static var configuration = CommandConfiguration(abstract: "Create an envelope with the given subject.")
+struct SubjectCommand: ParsableCommand {
+    static var configuration = CommandConfiguration(commandName: "subject", abstract: "Create an envelope with the given subject.")
     @Flag(help: "The data type of the subject.")
     var type: DataType = .string
     

@@ -1,8 +1,8 @@
 import ArgumentParser
 import BCFoundation
 
-struct Extract: ParsableCommand {
-    static var configuration = CommandConfiguration(abstract: "Extract the subject of the input envelope.")
+struct ExtractCommand: ParsableCommand {
+    static var configuration = CommandConfiguration(commandName: "extract", abstract: "Extract the subject of the input envelope.")
     @Flag(help: "The data type of the subject.")
     var type: DataType = .string
     

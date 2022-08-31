@@ -5,7 +5,7 @@ import BCFoundation
 struct Main: ParsableCommand {
     static var configuration = CommandConfiguration(
         abstract: "A tool for manipulating the Envelope data type.",
-        subcommands: [Format.self, Subject.self, Extract.self],
-        defaultSubcommand: Format.self
+        subcommands: [FormatCommand.self, SubjectCommand.self, ExtractCommand.self],
+        defaultSubcommand: FormatCommand.self
     )
 }
