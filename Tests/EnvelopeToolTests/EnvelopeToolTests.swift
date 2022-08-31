@@ -15,6 +15,7 @@ let customURExample = "ur:crypto-seed/oyadgdaawzwplrbdhdpabgrnvokorolnrtemksayya
 final class EnvelopeToolTests: XCTestCase {
     static override func setUp() {
         EnvelopeTool.outputToStdout = false
+        EnvelopeTool.readFromStdin = false
     }
     
     func testFormat() throws {
@@ -24,7 +25,9 @@ final class EnvelopeToolTests: XCTestCase {
         """
 
         XCTAssertEqual(try envelope(helloEnvelopeUR), expectedOutput)
+        XCTAssertEqual(try envelope("", input: helloEnvelopeUR), expectedOutput)
         XCTAssertEqual(try envelope("format \(helloEnvelopeUR)"), expectedOutput)
+        XCTAssertEqual(try envelope("format", input: helloEnvelopeUR), expectedOutput)
     }
     
     func testExtractAssertionSubject() throws {
@@ -42,6 +45,9 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(e, "ur:envelope/tpuolsadaoaxhfrkweia")
         XCTAssertEqual(try envelope(e), "CBOR")
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "83010203")
+        
+        let e2 = try envelope("subject --cbor", input: cborArrayExample)
+        XCTAssertEqual(e, e2)
     }
     
     func testCIDSubject() throws {
@@ -125,6 +131,8 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(try envelope("subject --string Hello."), helloEnvelopeUR)
         XCTAssertEqual(try envelope("extract \(helloEnvelopeUR)"), helloString)
         XCTAssertEqual(try envelope("extract --cbor \(helloEnvelopeUR)"), "6648656c6c6f2e")
+        
+        XCTAssertEqual(try pipe(["subject", "extract"], input: helloString), helloString)
     }
     
     func testEnvelopeURSubject() throws {
@@ -156,12 +164,27 @@ final class EnvelopeToolTests: XCTestCase {
     }
 }
 
-func envelope(_ arguments: [String]) throws -> String {
+func envelope(_ arguments: [String], input: [String] = []) throws -> String {
+    EnvelopeTool.setInputLines(input)
     var t = try Main.parseAsRoot(arguments)
     try t.run()
     return EnvelopeTool.outputText
 }
 
-func envelope(_ argument: String) throws -> String {
-    try envelope(argument.split(separator: " ").map { String($0) })
+func envelope(_ argument: String, input: String? = nil) throws -> String {
+    let inputLines: [String]
+    if let input {
+        inputLines = [input]
+    } else {
+        inputLines = []
+    }
+    return try envelope(argument.split(separator: " ").map { String($0) }, input: inputLines)
+}
+
+func pipe(_ arguments: [String], input: String? = nil) throws -> String {
+    var input = input
+    for argument in arguments {
+        input = try envelope(argument, input: input)
+    }
+    return input ?? ""
 }

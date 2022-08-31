@@ -10,4 +10,5 @@ enum EnvelopeToolError: Error {
     case unknownPredicate(String)
     case useAssertionCommand
     case notAssertion
+    case missingArgument(String)
 }

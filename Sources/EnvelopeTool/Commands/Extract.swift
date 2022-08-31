@@ -7,7 +7,7 @@ struct Extract: ParsableCommand {
     var type: DataType = .string
     
     @Argument(help: "The input envelope.")
-    var envelope: Envelope
+    var envelope: Envelope?
     
     @Option(name: .customLong("type"), help: "The type for an extracted UR.")
     var urType: String?
@@ -15,9 +15,16 @@ struct Extract: ParsableCommand {
     @Option(name: .customLong("tag"), help: "The expected tag for an extracted UR.")
     var urTag: UInt64?
     
-    func run() throws {
+    mutating func run() throws {
         resetOutput()
         
+        if envelope == nil {
+            envelope = readIn(Envelope.self)
+        }
+        guard let envelope else {
+            throw EnvelopeToolError.missingArgument("envelope")
+        }
+
         switch type {
         case .assertion:
             guard let assertion = envelope.assertion else {
