@@ -17,7 +17,15 @@ final class EnvelopeToolTests: XCTestCase {
         EnvelopeTool.outputToStdout = false
         EnvelopeTool.readFromStdin = false
     }
+
+    func testInvalidCommand() throws {
+        XCTAssertThrowsError(try envelope("unknownCommand"))
+    }
     
+    func testInvalidData() throws {
+        XCTAssertThrowsError(try envelope("ur:crypto-seed/oyadgdtokgdpwkrsonfdltvdwttsnddneonbmdbntakkss"))
+    }
+
     func testFormat() throws {
         let expectedOutput =
         """
@@ -154,13 +162,17 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(try envelope("extract --uuid \(e)"), uuidExample)
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "d82550eb377e655774410ab9cb510bfc73e6d9")
     }
-
-    func testInvalidCommand() throws {
-        XCTAssertThrowsError(try envelope("unknownCommand"))
+    
+    func testAssertion() throws {
+        let e = try envelope("subject assertion Alpha Beta")
+        print(e)
+        print(try envelope(e))
     }
     
-    func testInvalidData() throws {
-        XCTAssertThrowsError(try envelope("ur:crypto-seed/oyadgdtokgdpwkrsonfdltvdwttsnddneonbmdbntakkss"))
+    func testAssertion2() throws {
+        let e = try envelope("subject assertion --int 1 --int 2")
+        print(e)
+        print(try envelope(e))
     }
 }
 

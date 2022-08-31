@@ -11,4 +11,6 @@ enum EnvelopeToolError: Error {
     case useAssertionCommand
     case notAssertion
     case missingArgument(String)
+    case tooManyArguments
+    case tooManyTypes
 }
