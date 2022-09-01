@@ -13,4 +13,5 @@ enum EnvelopeToolError: Error {
     case missingArgument(String)
     case tooManyArguments
     case tooManyTypes
+    case unexpectedEOF
 }

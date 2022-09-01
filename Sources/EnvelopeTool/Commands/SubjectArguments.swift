@@ -16,9 +16,9 @@ struct SubjectArguments: ParsableArguments {
     mutating func validate() throws {
         if value == nil {
             value = readIn()
-        }
-        guard value != nil else {
-            throw EnvelopeToolError.missingArgument("value")
+            guard value != nil else {
+                throw EnvelopeToolError.unexpectedEOF
+            }
         }
     }
     
@@ -31,7 +31,9 @@ struct SubjectArguments: ParsableArguments {
     
     var envelope: Envelope {
         get throws {
-            let value = value!
+            guard let value else {
+                throw EnvelopeToolError.missingArgument("value")
+            }
             let envelope: Envelope
             switch type {
             case .assertion:

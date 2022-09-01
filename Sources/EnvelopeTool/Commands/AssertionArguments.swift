@@ -14,6 +14,15 @@ struct AssertionArguments: ParsableArguments {
     @Option(help: "The integer tag for the object provided as an enclosed UR.")
     var objectTag: UInt64?
     
+    mutating func validate() throws {
+        while values.count < 2 {
+            guard let value = readIn() else {
+                throw EnvelopeToolError.unexpectedEOF
+            }
+            values.append(value)
+        }
+    }
+
     var assertion: Envelope {
         get throws {
             switch values.count {
