@@ -33,9 +33,9 @@ final class EnvelopeToolTests: XCTestCase {
         """
 
         XCTAssertEqual(try envelope(helloEnvelopeUR), expectedOutput)
-        XCTAssertEqual(try envelope("", input: helloEnvelopeUR), expectedOutput)
+        XCTAssertEqual(try envelope("", inputLine: helloEnvelopeUR), expectedOutput)
         XCTAssertEqual(try envelope("format \(helloEnvelopeUR)"), expectedOutput)
-        XCTAssertEqual(try envelope("format", input: helloEnvelopeUR), expectedOutput)
+        XCTAssertEqual(try envelope("format", inputLine: helloEnvelopeUR), expectedOutput)
     }
     
     func testExtractAssertionSubject() throws {
@@ -54,7 +54,7 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(try envelope(e), "CBOR")
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "83010203")
         
-        let e2 = try envelope("subject --cbor", input: cborArrayExample)
+        let e2 = try envelope("subject --cbor", inputLine: cborArrayExample)
         XCTAssertEqual(e, e2)
     }
     
@@ -140,7 +140,7 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(try envelope("extract \(helloEnvelopeUR)"), helloString)
         XCTAssertEqual(try envelope("extract --cbor \(helloEnvelopeUR)"), "6648656c6c6f2e")
         
-        XCTAssertEqual(try pipe(["subject", "extract"], input: helloString), helloString)
+        XCTAssertEqual(try pipe(["subject", "extract"], inputLine: helloString), helloString)
     }
     
     func testEnvelopeURSubject() throws {
@@ -165,38 +165,44 @@ final class EnvelopeToolTests: XCTestCase {
     
     func testAssertion() throws {
         let e = try envelope("subject assertion Alpha Beta")
-        print(e)
-        print(try envelope(e))
+        XCTAssertEqual(e, "ur:envelope/tputlftpsptpuoihfpjzjoishstpsptpuoiefwihjyhsaoadzcsn")
+        XCTAssertEqual(try envelope(e), #""Alpha": "Beta""#)
     }
     
     func testAssertion2() throws {
         let e = try envelope("subject assertion --int 1 --int 2")
-        print(e)
-        print(try envelope(e))
+        XCTAssertEqual(e, "ur:envelope/tputlftpsptpuoadtpsptpuoaoiyjpzosr")
+        XCTAssertEqual(try envelope(e), "1: 2")
+    }
+    
+    func testAssertion3() throws {
+        let e = try envelope("subject assertion --known-predicate note ThisIsANote.")
+        XCTAssertEqual(e, "ur:envelope/tputlftpsptpuraatpsptpuojzghisinjkgajkfpgljljyihdmmdqdwsgt")
+        XCTAssertEqual(try envelope(e), #"note: "ThisIsANote.""#)
     }
 }
 
-func envelope(_ arguments: [String], input: [String] = []) throws -> String {
-    EnvelopeTool.setInputLines(input)
+func envelope(_ arguments: [String], inputLines: [String] = []) throws -> String {
+    EnvelopeTool.setInputLines(inputLines)
     var t = try Main.parseAsRoot(arguments)
     try t.run()
     return EnvelopeTool.outputText
 }
 
-func envelope(_ argument: String, input: String? = nil) throws -> String {
+func envelope(_ argument: String, inputLine: String? = nil) throws -> String {
     let inputLines: [String]
-    if let input {
-        inputLines = [input]
+    if let inputLine {
+        inputLines = [inputLine]
     } else {
         inputLines = []
     }
-    return try envelope(argument.split(separator: " ").map { String($0) }, input: inputLines)
+    return try envelope(argument.split(separator: " ").map { String($0) }, inputLines: inputLines)
 }
 
-func pipe(_ arguments: [String], input: String? = nil) throws -> String {
-    var input = input
+func pipe(_ arguments: [String], inputLine: String? = nil) throws -> String {
+    var inputLine = inputLine
     for argument in arguments {
-        input = try envelope(argument, input: input)
+        inputLine = try envelope(argument, inputLine: inputLine)
     }
-    return input ?? ""
+    return inputLine ?? ""
 }
