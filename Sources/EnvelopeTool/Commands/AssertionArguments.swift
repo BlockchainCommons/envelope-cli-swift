@@ -40,8 +40,8 @@ struct AssertionArguments: ParsableArguments {
                 throw EnvelopeToolError.tooManyTypes
             }
             
-            let predicate = try envelopeForValue(values[0], type: types[0], tag: predicateTag)
-            let object = try envelopeForValue(values[1], type: types[1], tag: objectTag)
+            let predicate = try SubjectArguments(type: types[0], value: values[0], tag: predicateTag).envelope
+            let object = try SubjectArguments(type: types[1], value: values[1], tag: objectTag).envelope
             return Envelope(predicate: predicate, object: object)
         }
     }
