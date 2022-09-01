@@ -67,7 +67,7 @@ final class EnvelopeToolTests: XCTestCase {
     }
     
     func testWrappedEnvelopeSubject() throws {
-        let e = try envelope("subject --envelope \(helloEnvelopeUR)")
+        let e = try envelope("subject --wrapped \(helloEnvelopeUR)")
         XCTAssertEqual(e, "ur:envelope/tpvttpuoiyfdihjzjzjldmfxonfnpk")
         XCTAssertEqual(try envelope(e),
         """
@@ -76,7 +76,7 @@ final class EnvelopeToolTests: XCTestCase {
         }
         """
         )
-        XCTAssertEqual(try envelope("extract --envelope \(e)"), helloEnvelopeUR)
+        XCTAssertEqual(try envelope("extract --wrapped \(e)"), helloEnvelopeUR)
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "d8c8d8dc6648656c6c6f2e")
         XCTAssertEqual(try envelope("extract --ur \(e)"), helloEnvelopeUR)
     }
@@ -146,12 +146,25 @@ final class EnvelopeToolTests: XCTestCase {
     func testEnvelopeURSubject() throws {
         let e = try envelope("subject --ur \(helloEnvelopeUR)")
         XCTAssertEqual(e, "ur:envelope/tpvttpuoiyfdihjzjzjldmfxonfnpk")
+        XCTAssertEqual(try envelope(e),
+            """
+            {
+                "Hello."
+            }
+            """
+        )
         XCTAssertEqual(try envelope("extract --ur \(e)"), helloEnvelopeUR)
+        XCTAssertEqual(try envelope("extract --wrapped \(e)"), helloEnvelopeUR)
     }
     
     func testCustomURSubject() throws {
         let e = try envelope("subject --ur \(customURExample) --tag 300")
         XCTAssertEqual(e, "ur:envelope/tpuotaaddwoyadgdaawzwplrbdhdpabgrnvokorolnrtemksjztypkmh")
+        XCTAssertEqual(try envelope(e),
+            """
+            CBOR
+            """
+        )
         XCTAssertEqual(try envelope("extract --ur \(e) --tag 300 --type crypto-seed"), customURExample)
     }
     
@@ -179,6 +192,33 @@ final class EnvelopeToolTests: XCTestCase {
         let e = try envelope("subject assertion --known-predicate note ThisIsANote.")
         XCTAssertEqual(e, "ur:envelope/tputlftpsptpuraatpsptpuojzghisinjkgajkfpgljljyihdmmdqdwsgt")
         XCTAssertEqual(try envelope(e), #"note: "ThisIsANote.""#)
+    }
+    
+    func testAddAssertion() throws {
+        let subject = try envelope("subject Alice")
+        let e = try envelope("add \(subject) knows Bob ")
+        XCTAssertEqual(e, "ur:envelope/lftpsptpuoihfpjziniaihtpsptputlftpsptpuoihjejtjlktjktpsptpuoiafwjlidrdpdiesk")
+        XCTAssertEqual(try envelope(e),
+            """
+            "Alice" [
+                "knows": "Bob"
+            ]
+            """
+        )
+    }
+    
+    func testAddAssertion2() throws {
+        let subject = try envelope("subject Alice")
+        let predicate = try envelope("subject knows")
+        let object = try envelope("subject Bob")
+        let e = try envelope("add \(subject) --envelope \(predicate) --envelope \(object)")
+        XCTAssertEqual(try envelope(e),
+            """
+            "Alice" [
+                "knows": "Bob"
+            ]
+            """
+        )
     }
 }
 

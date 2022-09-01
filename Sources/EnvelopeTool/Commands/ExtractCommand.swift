@@ -15,12 +15,16 @@ struct ExtractCommand: ParsableCommand {
     @Option(name: .customLong("tag"), help: "The expected tag for an extracted UR.")
     var urTag: UInt64?
     
+    mutating func fill() throws {
+        if envelope == nil {
+            envelope = try readIn(Envelope.self)
+        }
+    }
+    
     mutating func run() throws {
         resetOutput()
-        
-        if envelope == nil {
-            envelope = readIn(Envelope.self)
-        }
+        try fill()
+
         guard let envelope else {
             throw EnvelopeToolError.missingArgument("envelope")
         }
@@ -52,7 +56,7 @@ struct ExtractCommand: ParsableCommand {
         case .digest:
             printOut(try envelope.extractSubject(Digest.self).hex)
         case .envelope:
-            printOut(try envelope.unwrap().ur)
+            printOut(envelope.ur)
         case .int:
             printOut(try envelope.extractSubject(Int.self))
         case .knownPredicate:
@@ -84,6 +88,8 @@ struct ExtractCommand: ParsableCommand {
             } else {
                 throw EnvelopeToolError.notCBOR
             }
+        case .wrapped:
+            printOut(try envelope.unwrap().ur)
         case .uuid:
             printOut(try envelope.extractSubject(UUID.self))
         }

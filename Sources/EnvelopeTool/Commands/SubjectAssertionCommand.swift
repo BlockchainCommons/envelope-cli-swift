@@ -7,8 +7,13 @@ struct SubjectAssertionCommand: ParsableCommand {
     @OptionGroup
     var arguments: AssertionArguments
     
+    mutating func fill() throws {
+        try arguments.fill()
+    }
+
     mutating func run() throws {
         resetOutput()
+        try fill()
         printOut(try arguments.assertion.ur)
     }
 }

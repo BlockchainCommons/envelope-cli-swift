@@ -14,4 +14,5 @@ enum DataType: EnumerableFlag {
     case string
     case ur
     case uuid
+    case wrapped
 }

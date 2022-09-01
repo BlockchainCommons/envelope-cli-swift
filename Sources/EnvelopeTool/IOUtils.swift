@@ -1,5 +1,6 @@
 import Foundation
 import ArgumentParser
+import WolfBase
 
 #if DEBUG
 
@@ -27,16 +28,21 @@ func printOut(
     }
 }
 
-func readIn() -> String? {
+func readIn() throws -> String {
+    let result: String?
     if readFromStdin {
-        return readLine()
+        result = readLine()
     } else {
         if _inputLines.isEmpty {
-            return nil
+            result = nil
         } else {
-            return _inputLines.removeFirst()
+            result = _inputLines.removeFirst()
         }
     }
+    guard let result else {
+        throw EnvelopeToolError.unexpectedEOF
+    }
+    return result
 }
 
 #else
@@ -49,15 +55,19 @@ func printOut(
     print(items, separator: separator, terminator: terminator)
 }
 
-func readIn() -> String? {
-    readLine()
+func readIn() throws -> String {
+    guard let result = readLine() else {
+        throw EnvelopeToolError.unexpectedEOF
+    }
+    return result
 }
 
 #endif
 
-func readIn<T>(_ type: T.Type) -> T? where T: ExpressibleByArgument {
-    guard let t = readIn() else {
-        return nil
+func readIn<T>(_ type: T.Type) throws -> T where T: ExpressibleByArgument {
+    let inputLine = try readIn()
+    guard let result = T.init(argument: inputLine) else {
+        throw EnvelopeToolError.invalidType(expectedType: T.self†)
     }
-    return T.init(argument: t)
+    return result
 }

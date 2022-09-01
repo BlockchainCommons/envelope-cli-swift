@@ -13,12 +13,9 @@ struct SubjectArguments: ParsableArguments {
     @Option(help: "The integer tag for an enclosed UR.")
     var tag: UInt64?
     
-    mutating func validate() throws {
+    mutating func fill() throws {
         if value == nil {
-            value = readIn()
-            guard value != nil else {
-                throw EnvelopeToolError.unexpectedEOF
-            }
+            value = try readIn()
         }
     }
     
@@ -74,7 +71,6 @@ struct SubjectArguments: ParsableArguments {
                 envelope = Envelope(digest)
             case .envelope:
                 envelope = try Envelope(urString: value)
-                    .wrap()
             case .int:
                 guard let n = Int(value) else {
                     throw EnvelopeToolError.invalidType(expectedType: "integer")
@@ -110,6 +106,9 @@ struct SubjectArguments: ParsableArguments {
                     throw EnvelopeToolError.invalidType(expectedType: "UUID")
                 }
                 envelope = Envelope(uuid)
+            case .wrapped:
+                envelope = try Envelope(urString: value)
+                    .wrap()
             }
             return envelope
         }
