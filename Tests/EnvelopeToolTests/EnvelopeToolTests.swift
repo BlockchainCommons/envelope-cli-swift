@@ -301,6 +301,12 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(e, "ur:envelope/tputlftpsptpuraotpsptpuokscffxihjpjyiniyiniahsjyihcxjliycxfxjljnjojzihjyinjljtzspfltol")
         XCTAssertEqual(try envelope(e), #"isA: "Certificate of Completion""#)
     }
+    
+    func testAssertionObjectFind1() throws {
+        let e = try pipe(["extract --wrapped", "assertion find object Maxwell"], inputLine: credentialExample)
+        XCTAssertEqual(e, "ur:envelope/tputlftpsptpuoisjzhsjkjyglhsjnihtpsptpuoiogthsksktihjzjzaaaybway")
+        XCTAssertEqual(try envelope(e), #""lastName": "Maxwell""#)
+    }
 
     func testEnvelopeDigest() throws {
         let d = try envelope("digest \(aliceKnowsBobExample)")

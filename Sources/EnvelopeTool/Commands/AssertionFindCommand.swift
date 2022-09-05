@@ -6,7 +6,8 @@ struct AssertionFindCommand: ParsableCommand {
         commandName: "find",
         abstract: "Find all assertions matching the given criteria.",
         subcommands: [
-            AssertionFindPredicateCommand.self
+            AssertionFindPredicateCommand.self,
+            AssertionFindObjectCommand.self,
         ],
         defaultSubcommand: AssertionFindPredicateCommand.self
     )

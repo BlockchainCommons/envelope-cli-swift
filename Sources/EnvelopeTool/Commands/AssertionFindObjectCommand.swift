@@ -1,10 +1,10 @@
 import ArgumentParser
 import BCFoundation
 
-struct AssertionFindPredicateCommand: ParsableCommand {
+struct AssertionFindObjectCommand: ParsableCommand {
     static var configuration = CommandConfiguration(
-        commandName: "predicate",
-        abstract: "Find all assertions having the given predicate."
+        commandName: "object",
+        abstract: "Find all assertions having the given object."
     )
 
     @OptionGroup
@@ -27,9 +27,9 @@ struct AssertionFindPredicateCommand: ParsableCommand {
             throw EnvelopeToolError.missingArgument("envelope")
         }
 
-        let predicate = try arguments.envelope
+        let object = try arguments.envelope
         
-        let result = envelope.assertions.filter { $0.predicate?.subject == predicate }
+        let result = envelope.assertions.filter { $0.object?.subject == object }
         
         for assertion in result {
             printOut(assertion.ur)
