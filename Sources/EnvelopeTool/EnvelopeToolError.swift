@@ -15,4 +15,5 @@ enum EnvelopeToolError: Error {
     case tooManyTypes
     case unexpectedEOF
     case indexOutOfRange(Range<Int>, Int)
+    case missingSearchCriteria
 }

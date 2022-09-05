@@ -10,6 +10,7 @@ struct AssertionCommand: ParsableCommand {
             AssertionCountCommand.self,
             AssertionAtCommand.self,
             AssertionAllCommand.self,
+            AssertionFindCommand.self,
         ],
         defaultSubcommand: AssertionAddCommand.self
     )

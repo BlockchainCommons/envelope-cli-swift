@@ -2,19 +2,19 @@ import ArgumentParser
 import BCFoundation
 
 struct AssertionAddCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "add", abstract: "Add an assertion to the given envelope")
-
-    @Argument(help: "The envelope to add the assertion to.")
-    var envelope: Envelope?
+    static var configuration = CommandConfiguration(commandName: "add", abstract: "Add an assertion to the given envelope.")
 
     @OptionGroup
     var arguments: AssertionArguments
+
+    @Argument
+    var envelope: Envelope?
     
     mutating func fill() throws {
+        try arguments.fill()
         if envelope == nil {
             envelope = try readIn(Envelope.self)
         }
-        try arguments.fill()
     }
 
     mutating func run() throws {

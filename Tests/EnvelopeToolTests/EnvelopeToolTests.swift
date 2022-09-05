@@ -213,7 +213,7 @@ final class EnvelopeToolTests: XCTestCase {
     
     func testAssertionAdd() throws {
         let subject = try envelope("subject Alice")
-        let e = try envelope("assertion add \(subject) knows Bob ")
+        let e = try envelope("assertion add knows Bob \(subject)")
         XCTAssertEqual(e, aliceKnowsBobExample)
         XCTAssertEqual(try envelope(e),
             """
@@ -228,7 +228,7 @@ final class EnvelopeToolTests: XCTestCase {
         let subject = try envelope("subject Alice")
         let predicate = try envelope("subject knows")
         let object = try envelope("subject Bob")
-        let e = try envelope("assertion \(subject) --envelope \(predicate) --envelope \(object)")
+        let e = try envelope("assertion --envelope \(predicate) --envelope \(object) \(subject)")
         XCTAssertEqual(try envelope(e),
             """
             "Alice" [
@@ -288,6 +288,18 @@ final class EnvelopeToolTests: XCTestCase {
         ur:envelope/tputlftpsptpuokscejojpjliyihjkjkinjljthsjzfyihkoihjzjljojnihjtjyfdjlkpjpjktpsptpuobsnbidkihy
         """
         )
+    }
+    
+    func testAssertionPredicateFind1() throws {
+        let e = try pipe(["extract --wrapped", "assertion find predicate photo"], inputLine: credentialExample)
+        XCTAssertEqual(e, "ur:envelope/tputlftpsptpuoihjoisjljyjltpsptpuoksckghisinjkcxinjkcxgehsjnihjkcxgthsksktihjzjzdijkcxjoisjljyjldmmkiohphn")
+        XCTAssertEqual(try envelope(e), #""photo": "This is James Maxwell's photo.""#)
+    }
+    
+    func testAssertionPredicateFind2() throws {
+        let e = try pipe(["extract --wrapped", "assertion find predicate --known-predicate isA"], inputLine: credentialExample)
+        XCTAssertEqual(e, "ur:envelope/tputlftpsptpuraotpsptpuokscffxihjpjyiniyiniahsjyihcxjliycxfxjljnjojzihjyinjljtzspfltol")
+        XCTAssertEqual(try envelope(e), #"isA: "Certificate of Completion""#)
     }
 
     func testEnvelopeDigest() throws {
