@@ -1,9 +1,9 @@
 import ArgumentParser
 import BCFoundation
 
-struct FormatCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "format", abstract: "Print the envelope in Envelope Notation.")
-
+struct AssertionAllCommand: ParsableCommand {
+    static var configuration = CommandConfiguration(commandName: "all", abstract: "Retrieve all the envelope's assertions.")
+    
     @Argument var envelope: Envelope?
     
     mutating func fill() throws {
@@ -18,6 +18,6 @@ struct FormatCommand: ParsableCommand {
         guard let envelope else {
             throw EnvelopeToolError.missingArgument("envelope")
         }
-        printOut(envelope.format)
+        printOut(envelope.assertions.map { $0.ur.string }.joined(separator: "\n"))
     }
 }

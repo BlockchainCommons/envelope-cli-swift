@@ -11,6 +11,8 @@ enum DataType: EnumerableFlag {
     case envelope
     case int
     case knownPredicate
+    case object
+    case predicate
     case string
     case ur
     case uuid

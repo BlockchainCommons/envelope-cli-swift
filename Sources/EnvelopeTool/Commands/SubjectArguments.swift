@@ -33,7 +33,7 @@ struct SubjectArguments: ParsableArguments {
             }
             let envelope: Envelope
             switch type {
-            case .assertion:
+            case .assertion, .predicate, .object:
                 throw EnvelopeToolError.useAssertionCommand
             case .cbor:
                 guard

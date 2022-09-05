@@ -34,7 +34,17 @@ struct ExtractCommand: ParsableCommand {
             guard let assertion = envelope.assertion else {
                 throw EnvelopeToolError.notAssertion
             }
-            printOut("\(assertion.predicate.ur) \(assertion.object.ur)")
+            printOut([assertion.predicate, assertion.object].map { $0.ur.string }.joined(separator: "\n"))
+        case .predicate:
+            guard let assertion = envelope.assertion else {
+                throw EnvelopeToolError.notAssertion
+            }
+            printOut(assertion.predicate.ur)
+        case .object:
+            guard let assertion = envelope.assertion else {
+                throw EnvelopeToolError.notAssertion
+            }
+            printOut(assertion.object.ur)
         case .cbor:
             if let cbor = envelope.leaf {
                 printOut(cbor.hex)

@@ -1,10 +1,11 @@
 import ArgumentParser
 import BCFoundation
 
-struct FormatCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "format", abstract: "Print the envelope in Envelope Notation.")
-
-    @Argument var envelope: Envelope?
+struct DigestCommand: ParsableCommand {
+    static var configuration = CommandConfiguration(commandName: "digest", abstract: "Print the envelope's digest.")
+    
+    @Argument(help: "The envelope to retrieve the digest from.")
+    var envelope: Envelope?
     
     mutating func fill() throws {
         if envelope == nil {
@@ -18,6 +19,6 @@ struct FormatCommand: ParsableCommand {
         guard let envelope else {
             throw EnvelopeToolError.missingArgument("envelope")
         }
-        printOut(envelope.format)
+        printOut(envelope.digest.ur)
     }
 }

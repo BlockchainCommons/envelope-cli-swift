@@ -9,7 +9,8 @@ struct Main: ParsableCommand {
             FormatCommand.self,
             SubjectCommand.self,
             ExtractCommand.self,
-            AddAssertionCommand.self
+            AssertionCommand.self,
+            DigestCommand.self,
         ],
         defaultSubcommand: FormatCommand.self
     )

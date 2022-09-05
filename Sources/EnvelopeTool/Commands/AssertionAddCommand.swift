@@ -1,7 +1,7 @@
 import ArgumentParser
 import BCFoundation
 
-struct AddAssertionCommand: ParsableCommand {
+struct AssertionAddCommand: ParsableCommand {
     static var configuration = CommandConfiguration(commandName: "add", abstract: "Add an assertion to the given envelope")
 
     @Argument(help: "The envelope to add the assertion to.")

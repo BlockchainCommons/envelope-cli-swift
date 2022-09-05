@@ -14,4 +14,5 @@ enum EnvelopeToolError: Error {
     case tooManyArguments
     case tooManyTypes
     case unexpectedEOF
+    case indexOutOfRange(Range<Int>, Int)
 }
