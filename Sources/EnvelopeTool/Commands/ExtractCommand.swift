@@ -3,6 +3,7 @@ import BCFoundation
 
 struct ExtractCommand: ParsableCommand {
     static var configuration = CommandConfiguration(commandName: "extract", abstract: "Extract the subject of the input envelope.")
+    
     @Flag(help: "The data type of the subject.")
     var type: DataType = .string
     
@@ -64,9 +65,9 @@ struct ExtractCommand: ParsableCommand {
             let dateString = ISO8601DateFormatter().string(from: date)
             printOut(dateString)
         case .digest:
-            printOut(try envelope.extractSubject(Digest.self).hex)
+            printOut(try envelope.extractSubject(Digest.self).ur)
         case .envelope:
-            printOut(envelope.ur)
+            printOut(envelope.subject.ur)
         case .int:
             printOut(try envelope.extractSubject(Int.self))
         case .knownPredicate:

@@ -28,21 +28,14 @@ func printOut(
     }
 }
 
-func readIn() throws -> String {
-    let result: String?
+func readIn() -> String? {
     if readFromStdin {
-        result = readLine()
+        return readLine()
+    } else if _inputLines.isEmpty {
+        return nil
     } else {
-        if _inputLines.isEmpty {
-            result = nil
-        } else {
-            result = _inputLines.removeFirst()
-        }
+        return _inputLines.removeFirst()
     }
-    guard let result else {
-        throw EnvelopeToolError.unexpectedEOF
-    }
-    return result
 }
 
 #else
@@ -55,17 +48,16 @@ func printOut(
     print(items, separator: separator, terminator: terminator)
 }
 
-func readIn() throws -> String {
-    guard let result = readLine() else {
-        throw EnvelopeToolError.unexpectedEOF
-    }
-    return result
+func readIn() -> String? {
+    readLine()
 }
 
 #endif
 
-func readIn<T>(_ type: T.Type) throws -> T where T: ExpressibleByArgument {
-    let inputLine = try readIn()
+func readIn<T>(_ type: T.Type) throws -> T? where T: ExpressibleByArgument {
+    guard let inputLine = readIn() else {
+        return nil
+    }
     guard let result = T.init(argument: inputLine) else {
         throw EnvelopeToolError.invalidType(expectedType: T.self†)
     }

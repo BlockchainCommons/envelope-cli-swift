@@ -15,7 +15,7 @@ struct SubjectArguments: ParsableArguments {
     
     mutating func fill() throws {
         if value == nil {
-            value = try readIn()
+            value = readIn()
         }
     }
     
@@ -62,13 +62,7 @@ struct SubjectArguments: ParsableArguments {
                 }
                 envelope = Envelope(date)
             case .digest:
-                guard
-                    let data = value.hexData,
-                    let digest = Digest(rawValue: data)
-                else {
-                    throw EnvelopeToolError.invalidType(expectedType: "digest")
-                }
-                envelope = Envelope(digest)
+                envelope = Envelope(try Digest(urString: value))
             case .envelope:
                 envelope = try Envelope(urString: value)
             case .int:

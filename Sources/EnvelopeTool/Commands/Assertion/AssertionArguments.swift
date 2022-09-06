@@ -19,11 +19,11 @@ struct AssertionArguments: ParsableArguments {
     
     mutating func fill() throws {
         if predicateValue == nil {
-            predicateValue = try readIn()
+            predicateValue = readIn()
         }
         
         if objectValue == nil {
-            objectValue = try readIn()
+            objectValue = readIn()
         }
     }
 

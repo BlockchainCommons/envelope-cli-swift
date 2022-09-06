@@ -11,6 +11,7 @@ struct Main: ParsableCommand {
             ExtractCommand.self,
             AssertionCommand.self,
             DigestCommand.self,
+            ElideCommand.self
         ],
         defaultSubcommand: FormatCommand.self
     )

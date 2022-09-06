@@ -1,7 +1,7 @@
 import XCTest
 import WolfBase
 import BCFoundation
-@testable import EnvelopeTool
+import EnvelopeTool
 
 let helloString = "Hello."
 let helloEnvelopeUR = "ur:envelope/tpuoiyfdihjzjzjldmgsgontio"
@@ -9,15 +9,14 @@ let cborArrayExample = CBOR.array([1, 2, 3]).cborEncode.hex
 let uuidExample = "EB377E65-5774-410A-B9CB-510BFC73E6D9"
 let cidExample = "dec7e82893c32f7a4fcec633c02c0ec32a4361ca3ee3bc8758ae07742e940550"
 let dateExample = "2022-08-30T07:16:11Z"
-let digestExample = Digest(helloString).data.hex
+let digestExample = Digest(helloString).ur.string
 let customURExample = "ur:crypto-seed/oyadgdaawzwplrbdhdpabgrnvokorolnrtemksayyadmut"
 let aliceKnowsBobExample = "ur:envelope/lftpsptpuoihfpjziniaihtpsptputlftpsptpuoihjejtjlktjktpsptpuoiafwjlidrdpdiesk"
 let credentialExample = "ur:envelope/lstpsptpvtmntpsptpuotpsghdcxfgkoiahtjthnissawsfhzcmyyldsutfzcttefpaxjtmobsbwimcaleykvsdtgajntpsptputlftpsptpuoihjoisjljyjltpsptpuoksckghisinjkcxinjkcxgehsjnihjkcxgthsksktihjzjzdijkcxjoisjljyjldmtpsptputlftpsptpuoisjzhsjkjyglhsjnihtpsptpuoiogthsksktihjzjztpsptputlftpsptpuoininjkjkkpihfyhsjyihtpsptpuosecyhybdvyaetpsptputlftpsptpurattpsptpuoksdkfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpietpsptputlftpsptpuoiyjyjljoiniajktpsptpuolfingukpidimihiajycxehingukpidimihiajycxeytpsptputlftpsptpuraotpsptpuokscffxihjpjyiniyiniahsjyihcxjliycxfxjljnjojzihjyinjljttpsptputlftpsptpuokscsiajljtjyinjtkpinjtiofeiekpiahsjyinjljtgojtinjyjktpsptpuozofhyaaeaeaeaeaeaetpsptputlftpsptpurbttpsptpuoksdkfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpietpsptputlftpsptpuojtihksjoinjphsjyinjljtfyhsjyihtpsptpuosecyjncscxaetpsptputlftpsptpuojsiaihjpjyiniyiniahsjyihglkpjnidihjptpsptpuojeeheyeodpeeecendpemetestpsptputlftpsptpuoiniyinjpjkjyglhsjnihtpsptpuoihgehsjnihjktpsptputlftpsptpuoiojkkpidimihiajytpsptpuokscegmfgcxhsjtiecxgtiniajpjlkthskoihcxfejtioinjtihihjpinjtiotpsptputlftpsptpuokscejojpjliyihjkjkinjljthsjzfyihkoihjzjljojnihjtjyfdjlkpjpjktpsptpuobstpsptputlftpsptpuraxtpsptpuotpuehdfzftuyfsticwgdosgeswtswkbdosrecyesdeplqzjoghiogacedlqdsgtbpewtdroytlmdaavavsspiygmrflfgrkohtinvswykbkbpsyllbmhdyzerpemlsykvapkchbttpsptputlftpsptpuraatpsptpuoksdmguiniojtihiecxidkkcxfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpiejprdstpa"
 
 final class EnvelopeToolTests: XCTestCase {
     static override func setUp() {
-        EnvelopeTool.outputToStdout = false
-        EnvelopeTool.readFromStdin = false
+        setUpTest()
     }
 
     func testInvalidCommand() throws {
@@ -118,7 +117,7 @@ final class EnvelopeToolTests: XCTestCase {
     func testDigestSubject() throws {
         let e = try envelope("subject --digest \(digestExample)")
         XCTAssertEqual(e, "ur:envelope/tpuotpsbhdcxfdurmtpygubelooyaowdrpglbakeuodanylrbbesimbnwlkgbywpmksgbbsajnlklalsjkjn")
-        XCTAssertEqual(try envelope(e), "Digest(\(digestExample))")
+        XCTAssertEqual(try envelope(e), "Digest(48df96ab531088a102eab64e0e7cdc259a8414396a0ce97b11ec98ca14c26d8c)")
         XCTAssertEqual(try envelope("extract --digest \(e)"), digestExample)
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "d8cb582048df96ab531088a102eab64e0e7cdc259a8414396a0ce97b11ec98ca14c26d8c")
     }
@@ -312,29 +311,44 @@ final class EnvelopeToolTests: XCTestCase {
         let d = try envelope("digest \(aliceKnowsBobExample)")
         XCTAssertEqual(d, "ur:crypto-digest/hdcxvwgtjltemnnlgmwttslynblpgamugszmtdlkmnckwkatmelbpdwljnynnehedrmhnnlfmthl")
     }
-}
+    
+    func testElide1() throws {
+        var target: [String] = []
+        // Top level
+        target.append(try envelope("digest \(aliceKnowsBobExample)"))
+        // Subject
+        target.append(try pipe(["extract --envelope \(aliceKnowsBobExample)", "digest"]))
+        // Assertion
+        let assertion = try envelope("assertion at 0 \(aliceKnowsBobExample)")
+        target.append(try envelope("digest \(assertion)"))
+        // Object
+        let object = try envelope("extract --object \(assertion)")
+        target.append(try envelope("digest \(object)"))
 
-func envelope(_ arguments: [String], inputLines: [String] = []) throws -> String {
-    EnvelopeTool.setInputLines(inputLines)
-    var t = try Main.parseAsRoot(arguments)
-    try t.run()
-    return EnvelopeTool.outputText
-}
-
-func envelope(_ argument: String, inputLine: String? = nil) throws -> String {
-    let inputLines: [String]
-    if let inputLine {
-        inputLines = [inputLine]
-    } else {
-        inputLines = []
+        let digests = target.joined(separator: " ")
+        let elided = try envelope("elide \(aliceKnowsBobExample) \(digests)")
+        XCTAssertEqual(elided, "ur:envelope/lftpsptpuoihfpjziniaihtpsptputlftpsptpsbhdcxjomotbcxaosrtiwfspldahlamovamehppmmhmyaxdsfndpsocwzeolzcmnvadlpytpsptpuoiafwjlidmddagond")
+        XCTAssertEqual(try envelope(elided),
+        """
+        "Alice" [
+            ELIDED: "Bob"
+        ]
+        """
+        )
     }
-    return try envelope(argument.split(separator: " ").map { String($0) }, inputLines: inputLines)
-}
-
-func pipe(_ arguments: [String], inputLine: String? = nil) throws -> String {
-    var inputLine = inputLine
-    for argument in arguments {
-        inputLine = try envelope(argument, inputLine: inputLine)
+    
+    func testElide2() throws {
+        var target: [String] = []
+        target.append(try pipe(["subject knows", "digest"]))
+        let digests = target.joined(separator: " ")
+        let elided = try envelope("elide removing \(aliceKnowsBobExample) \(digests)")
+        XCTAssertEqual(elided, "ur:envelope/lftpsptpuoihfpjziniaihtpsptputlftpsptpsbhdcxjomotbcxaosrtiwfspldahlamovamehppmmhmyaxdsfndpsocwzeolzcmnvadlpytpsptpuoiafwjlidmddagond")
+        XCTAssertEqual(try envelope(elided),
+        """
+        "Alice" [
+            ELIDED: "Bob"
+        ]
+        """
+        )
     }
-    return inputLine ?? ""
 }
