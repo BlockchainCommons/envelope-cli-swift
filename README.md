@@ -24,9 +24,12 @@ SUBCOMMANDS:
   assertion               Work with the envelope's assertions.
   digest                  Print the envelope's digest.
   elide                   Elide a subset of elements.
-  generate                Utilities to generate various objects.
+  generate                Utilities to generate and convert various objects.
   encrypt                 Encrypt the envelope's subject using the provided key.
   decrypt                 Decrypt the envelope's subject using the provided key.
+  sign                    Sign the envelope with the provided private key base.
+  validate                Validate a signature on the envelope using the provided public key base.
+  sskr                    Sharded Secret Key Reconstruction (SSKR).
 
   See 'envelope help <subcommand>' for detailed help.
 ```
@@ -384,3 +387,40 @@ Error: invalidSignature
 ```
 
 Note that like encryption, signing uses randomness. So even if you sign the same envelope twice with the same private key, the two resulting envelopes will not be the same although both signatures will validate against the same public key.
+
+### SSKR
+
+SSKR lets you split ("shard") an envelope into several shares, a threshold of which is necessary to recover the original message. If we shard our example envelope into 3 shares, we get:
+
+```
+$ envelope sskr split -g 2-of-3 $ALICE_KNOWS_BOB
+ur:envelope/lftpsptpsolrhddkoemtimttadbyntmozsvshlcfurjnbbgyrtrdpdhlhgmhfpjovsdkhtcwgttscadedatprkkkgsinoybkwkwzcwwtsavddtgubagdfddwkofdyalthpsfdejpqdgrtspfvlimhddktpsbhdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwditpsptputlftpsptpuramtpsptpuotaadechddactsraeadaejkrnwnbypauekkcstshymsbsptvthtpfeoylcfcpfrpsnthffpgsdtcxhtlufzzclunteode
+ur:envelope/lftpsptpsolrhddkoemtimttadbyntmozsvshlcfurjnbbgyrtrdpdhlhgmhfpjovsdkhtcwgttscadedatprkkkgsinoybkwkwzcwwtsavddtgubagdfddwkofdyalthpsfdejpqdgrtspfvlimhddktpsbhdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwditpsptputlftpsptpuramtpsptpuotaadechddactsraeadadgwfzkeaotatkmtaeoywmosqzjowtdntlsocfbgfgcmzccabyktluzooxvwfwioayspssongs
+ur:envelope/lftpsptpsolrhddkoemtimttadbyntmozsvshlcfurjnbbgyrtrdpdhlhgmhfpjovsdkhtcwgttscadedatprkkkgsinoybkwkwzcwwtsavddtgubagdfddwkofdyalthpsfdejpqdgrtspfvlimhddktpsbhdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwditpsptputlftpsptpuramtpsptpuotaadechddactsraeadaobdhkwtemhsztrfdefrdlylidaertroknuodybswdhsbalntpdptamteofhaobabnwfltdsvs
+```
+
+Assume we've processed that output and have assigned them to SHARE_0, SHARE_1, and SHARE_2. If we format the first of those shares, we see that the subject is a symmetrically encrypted message, and its assertion is an SSKR share, which is one of the shares needed to decrypt the subject.
+
+```
+$ envelope $SHARE_0
+EncryptedMessage [
+    sskrShare: SSKRShare
+]
+```
+
+Taking the first and third of those shares, we can recover the original envelope:
+
+```
+$ RECOVERED=`envelope sskr join $SHARE_0 $SHARE_2`
+$ envelope $RECOVERED
+"Alice" [
+    "knows": "Bob"
+]
+```
+
+But just one of the shares is insufficient:
+
+```
+$ envelope sskr join $SHARE_1
+Error: invalidShares
+```
