@@ -13,6 +13,7 @@ let digestExample = Digest(helloString).ur.string
 let customURExample = "ur:crypto-seed/oyadgdaawzwplrbdhdpabgrnvokorolnrtemksayyadmut"
 let aliceKnowsBobExample = "ur:envelope/lftpsptpuoihfpjziniaihtpsptputlftpsptpuoihjejtjlktjktpsptpuoiafwjlidrdpdiesk"
 let credentialExample = "ur:envelope/lstpsptpvtmntpsptpuotpsghdcxfgkoiahtjthnissawsfhzcmyyldsutfzcttefpaxjtmobsbwimcaleykvsdtgajntpsptputlftpsptpuoihjoisjljyjltpsptpuoksckghisinjkcxinjkcxgehsjnihjkcxgthsksktihjzjzdijkcxjoisjljyjldmtpsptputlftpsptpuoisjzhsjkjyglhsjnihtpsptpuoiogthsksktihjzjztpsptputlftpsptpuoininjkjkkpihfyhsjyihtpsptpuosecyhybdvyaetpsptputlftpsptpurattpsptpuoksdkfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpietpsptputlftpsptpuoiyjyjljoiniajktpsptpuolfingukpidimihiajycxehingukpidimihiajycxeytpsptputlftpsptpuraotpsptpuokscffxihjpjyiniyiniahsjyihcxjliycxfxjljnjojzihjyinjljttpsptputlftpsptpuokscsiajljtjyinjtkpinjtiofeiekpiahsjyinjljtgojtinjyjktpsptpuozofhyaaeaeaeaeaeaetpsptputlftpsptpurbttpsptpuoksdkfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpietpsptputlftpsptpuojtihksjoinjphsjyinjljtfyhsjyihtpsptpuosecyjncscxaetpsptputlftpsptpuojsiaihjpjyiniyiniahsjyihglkpjnidihjptpsptpuojeeheyeodpeeecendpemetestpsptputlftpsptpuoiniyinjpjkjyglhsjnihtpsptpuoihgehsjnihjktpsptputlftpsptpuoiojkkpidimihiajytpsptpuokscegmfgcxhsjtiecxgtiniajpjlkthskoihcxfejtioinjtihihjpinjtiotpsptputlftpsptpuokscejojpjliyihjkjkinjljthsjzfyihkoihjzjljojnihjtjyfdjlkpjpjktpsptpuobstpsptputlftpsptpuraxtpsptpuotpuehdfzftuyfsticwgdosgeswtswkbdosrecyesdeplqzjoghiogacedlqdsgtbpewtdroytlmdaavavsspiygmrflfgrkohtinvswykbkbpsyllbmhdyzerpemlsykvapkchbttpsptputlftpsptpuraatpsptpuoksdmguiniojtihiecxidkkcxfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpiejprdstpa"
+let keyExample = "ur:crypto-key/hdcxmszmjlfsgssrbzehsslphdlgtbwesofnlpehlftldwotpaiyfwbtzsykwttomsbatnzswlqd"
 
 final class EnvelopeToolTests: XCTestCase {
     static override func setUp() {
@@ -350,5 +351,39 @@ final class EnvelopeToolTests: XCTestCase {
         ]
         """
         )
+    }
+    
+    func testGenerateKey() throws {
+        let key1 = try envelope("generate key")
+        let key2 = try envelope("generate key")
+        XCTAssertNotEqual(key1, key2)
+        XCTAssertEqual(try UR(urString: key1).type, "crypto-key")
+    }
+    
+    func testGenerateCID() throws {
+        let cid1 = try envelope("generate cid")
+        let cid2 = try envelope("generate cid")
+        XCTAssertNotEqual(cid1, cid2)
+        XCTAssertEqual(try UR(urString: cid1).type, "crypto-cid")
+    }
+    
+    func testGenerateSeed() throws {
+        let seed1 = try envelope("generate seed")
+        let seed2 = try envelope("generate seed")
+        XCTAssertNotEqual(seed1, seed2)
+        XCTAssertEqual(try UR(urString: seed1).type, "crypto-seed")
+    }
+
+    func testEncrypt() throws {
+        let encrypted = try envelope("encrypt \(aliceKnowsBobExample) \(keyExample)")
+        XCTAssertEqual(try envelope(encrypted),
+        """
+        EncryptedMessage [
+            "knows": "Bob"
+        ]
+        """
+        )
+        let decrypted = try envelope("decrypt \(encrypted) \(keyExample)")
+        XCTAssertEqual(decrypted, aliceKnowsBobExample)
     }
 }
