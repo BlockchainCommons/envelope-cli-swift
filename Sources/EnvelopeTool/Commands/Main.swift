@@ -17,6 +17,8 @@ struct Main: ParsableCommand {
             GenerateCommand.self,
             EncryptCommand.self,
             DecryptCommand.self,
+            SignCommand.self,
+            ValidateCommand.self,
         ],
         defaultSubcommand: FormatCommand.self
     )

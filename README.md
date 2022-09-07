@@ -308,3 +308,77 @@ $ envelope decrypt $WRAPPED_ENCRYPTED $KEY |   # Decrypt the envelope
     "knows": "Bob"
 ]
 ```
+
+### Signatures
+
+Similar to how you can encrypt an envelope's subject, you can also cryptographically sign the subject by adding an assertion. Since signing uses public key cryptography, we first need a private/public key pair known as a PrivateKeyBase. This can be used to sign and decrypt messages encrypted with the corresponding public key
+
+```
+$ envelope generate prvkeys
+ur:crypto-prvkeys/hdcxbekgntwpenryhdnybzvsltvepdgwtatovtyturylgrossekizezmlttdierfzcaslkgmlrla
+```
+
+The above generation is random. If you wish to use a `crypto-seed` as your starting point:
+
+```
+$ SEED=`ur:crypto-seed/oyadgdmdeefejoaonnatcycefxjedrfyaspkiakionamgl`
+$ PRVKEYS=`envelope generate prvkeys $SEED`
+$ echo $PRVKEYS
+ur:crypto-prvkeys/gdmdeefejoaonnatcycefxjedrfyaspkiawdioolhs
+```
+
+Of course, we'll also want to distribute the public key, so the signature can be verified:
+
+```
+$ PUBKEYS=`envelope generate pubkeys $PRVKEYS`
+
+$ echo $PUBKEYS
+ur:crypto-pubkeys/lftaaosehdcxbansurpspfeccabtbtjteopdwpwtsfskdretfewyktlssksflspmahpdjefpghwptpvahdcxrtuoiddkgsoxzegughnszmfzgobnvlkpjscyrokesgnnkslumshnrfgtgmsfcnfgbzmdvyvw
+```
+
+Now we can sign our envelope:
+
+```
+$ SIGNED=`envelope sign $ALICE_KNOWS_BOB $PRVKEYS`
+```
+
+Let's see what it looks like when formatted now:
+
+```
+$ envelope $SIGNED
+"Alice" [
+    "knows": "Bob"
+    verifiedBy: Signature
+]
+```
+
+OK... there's a signature there now, but it's a new assertion on the subject of the envelope, "Alice". This means that any of the assertions can still be altered without invalidating the signature on the subject. But what if we want to sign the *whole* envelope, including the fact that she knows Bob?
+
+Wrapping to the rescue again!
+
+```
+$ WRAPPED_SIGNED=`envelope subject --wrapped $ALICE_KNOWS_BOB | envelope sign $PRVKEYS`
+$ envelope $WRAPPED_SIGNED
+{
+    "Alice" [
+        "knows": "Bob"
+    ]
+} [
+    verifiedBy: Signature
+]
+```
+
+Now the entire contents of the envelope are signed, and if we send it to someone who has our public key, they can validate the signature:
+
+```
+$ envelope validate $WRAPPED_SIGNED $PUBKEYS
+```
+
+The `validate` command produces no output if the validation is successful, and exits with an error condition if it is unsuccessful. Lets produce some incorrect public keys and try this:
+
+```
+$ BAD_PUBKEYS=`envelope generate prvkeys | envelope generate pubkeys`
+
+$ envelope validate $WRAPPED_SIGNED $BAD_PUBKEYS
+Error: invalidSignature
+```

@@ -386,4 +386,61 @@ final class EnvelopeToolTests: XCTestCase {
         let decrypted = try envelope("decrypt \(encrypted) \(keyExample)")
         XCTAssertEqual(decrypted, aliceKnowsBobExample)
     }
+    
+    func testGeneratePrivateKeys1() throws {
+        let prvkeys = try envelope("generate prvkeys")
+        XCTAssertEqual(try UR(urString: prvkeys).type, "crypto-prvkeys")
+    }
+    
+    func testGeneratePrivateKeys2() throws {
+        let seed = "ur:crypto-seed/oyadhdcxhsinuesrennenlhfaopycnrfrkdmfnsrvltowmtbmyfwdafxvwmthersktcpetdweocfztrd"
+        let prvkeys1 = try envelope("generate prvkeys \(seed)")
+        XCTAssertEqual(prvkeys1, "ur:crypto-prvkeys/hdcxhsinuesrennenlhfaopycnrfrkdmfnsrvltowmtbmyfwdafxvwmthersktcpetdwfnbndeah")
+        let prvkeys2 = try envelope("generate prvkeys \(seed)")
+        XCTAssertEqual(prvkeys1, prvkeys2)
+        
+        let pubkeys = try envelope("generate pubkeys \(prvkeys1)")
+        XCTAssertEqual(pubkeys, "ur:crypto-pubkeys/lftaaosehdcxytcfntmtmsdagudmtpoymeatltcppduydevertkbayrontoejewmpsrtimpsadbbtpvahdcxqzvlprbehhwmflosnsehfgbemwfdpkcxlgkbuetoihqdkoischltiyjpbgfnchfrkirpfhdn")
+    }
+    
+    func testSign() throws {
+        let prvkeys = "ur:crypto-prvkeys/hdcxhsinuesrennenlhfaopycnrfrkdmfnsrvltowmtbmyfwdafxvwmthersktcpetdwfnbndeah"
+        let signed = try envelope("sign \(aliceKnowsBobExample) \(prvkeys)")
+        XCTAssertEqual(try envelope(signed),
+        """
+        "Alice" [
+            "knows": "Bob"
+            verifiedBy: Signature
+        ]
+        """
+        )
+        
+        let pubkeys = try envelope("generate pubkeys \(prvkeys)")
+
+        XCTAssertNoThrow(try envelope("validate \(signed) \(pubkeys)"))
+
+        XCTAssertThrowsError(try envelope("validate \(aliceKnowsBobExample) \(pubkeys)"))
+
+        let badPubkeys = try pipe(["generate prvkeys", "generate pubkeys"])
+        XCTAssertThrowsError(try envelope("validate \(signed) \(badPubkeys)"))
+    }
+    
+    func testSign2() throws {
+        let prvkeys = "ur:crypto-prvkeys/hdcxhsinuesrennenlhfaopycnrfrkdmfnsrvltowmtbmyfwdafxvwmthersktcpetdwfnbndeah"
+        let wrappedSigned = try pipe(["subject --wrapped \(aliceKnowsBobExample)", "sign \(prvkeys)"])
+        XCTAssertEqual(try envelope(wrappedSigned),
+        """
+        {
+            "Alice" [
+                "knows": "Bob"
+            ]
+        } [
+            verifiedBy: Signature
+        ]
+        """
+        )
+
+        let pubkeys = try envelope("generate pubkeys \(prvkeys)")
+        XCTAssertNoThrow(try envelope("validate \(wrappedSigned) \(pubkeys)"))
+    }
 }
