@@ -382,3 +382,5 @@ $ BAD_PUBKEYS=`envelope generate prvkeys | envelope generate pubkeys`
 $ envelope validate $WRAPPED_SIGNED $BAD_PUBKEYS
 Error: invalidSignature
 ```
+
+Note that like encryption, signing uses randomness. So even if you sign the same envelope twice with the same private key, the two resulting envelopes will not be the same although both signatures will validate against the same public key.

@@ -19,6 +19,7 @@ struct Main: ParsableCommand {
             DecryptCommand.self,
             SignCommand.self,
             ValidateCommand.self,
+            SSKRCommand.self,
         ],
         defaultSubcommand: FormatCommand.self
     )

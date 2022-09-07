@@ -17,4 +17,6 @@ enum EnvelopeToolError: Error {
     case indexOutOfRange(Range<Int>, Int)
     case sizeOutOfRange(ClosedRange<Int>, Int)
     case missingSearchCriteria
+    case invalidGroupThreshold(Int)
+    case invalidGroupSpecifier(String)
 }

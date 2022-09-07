@@ -13,6 +13,10 @@ func envelope(_ arguments: [String], inputLines: [String] = []) throws -> String
     return EnvelopeTool.outputText
 }
 
+func envelope(_ argument: String, inputLines: [String]) throws -> String {
+    return try envelope(argument.split(separator: " ").map { String($0) }, inputLines: inputLines)
+}
+
 func envelope(_ argument: String, inputLine: String? = nil) throws -> String {
     let inputLines: [String]
     if let inputLine {
