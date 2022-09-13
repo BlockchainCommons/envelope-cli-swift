@@ -2,6 +2,11 @@
 
 A command line tool for manipulating the `Envelope` data type.
 
+## Demos (Videos)
+
+1. **[Envelope-CLI](https://www.youtube.com/watch?v=JowheoEIGmE)**
+1. **[Envelope-CLI Q&A](https://www.youtube.com/watch?v=2MjcrKLEsSE)**
+
 ## Overview of the Commands
 
 ### Help
