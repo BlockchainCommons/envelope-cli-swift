@@ -15,6 +15,21 @@ let aliceKnowsBobExample = "ur:envelope/lftpsptpuoihfpjziniaihtpsptputlftpsptpuo
 let credentialExample = "ur:envelope/lstpsptpvtmntpsptpuotpsghdcxfgkoiahtjthnissawsfhzcmyyldsutfzcttefpaxjtmobsbwimcaleykvsdtgajntpsptputlftpsptpuoihjoisjljyjltpsptpuoksckghisinjkcxinjkcxgehsjnihjkcxgthsksktihjzjzdijkcxjoisjljyjldmtpsptputlftpsptpuoisjzhsjkjyglhsjnihtpsptpuoiogthsksktihjzjztpsptputlftpsptpuoininjkjkkpihfyhsjyihtpsptpuosecyhybdvyaetpsptputlftpsptpurattpsptpuoksdkfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpietpsptputlftpsptpuoiyjyjljoiniajktpsptpuolfingukpidimihiajycxehingukpidimihiajycxeytpsptputlftpsptpuraotpsptpuokscffxihjpjyiniyiniahsjyihcxjliycxfxjljnjojzihjyinjljttpsptputlftpsptpuokscsiajljtjyinjtkpinjtiofeiekpiahsjyinjljtgojtinjyjktpsptpuozofhyaaeaeaeaeaeaetpsptputlftpsptpurbttpsptpuoksdkfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpietpsptputlftpsptpuojtihksjoinjphsjyinjljtfyhsjyihtpsptpuosecyjncscxaetpsptputlftpsptpuojsiaihjpjyiniyiniahsjyihglkpjnidihjptpsptpuojeeheyeodpeeecendpemetestpsptputlftpsptpuoiniyinjpjkjyglhsjnihtpsptpuoihgehsjnihjktpsptputlftpsptpuoiojkkpidimihiajytpsptpuokscegmfgcxhsjtiecxgtiniajpjlkthskoihcxfejtioinjtihihjpinjtiotpsptputlftpsptpuokscejojpjliyihjkjkinjljthsjzfyihkoihjzjljojnihjtjyfdjlkpjpjktpsptpuobstpsptputlftpsptpuraxtpsptpuotpuehdfzftuyfsticwgdosgeswtswkbdosrecyesdeplqzjoghiogacedlqdsgtbpewtdroytlmdaavavsspiygmrflfgrkohtinvswykbkbpsyllbmhdyzerpemlsykvapkchbttpsptputlftpsptpuraatpsptpuoksdmguiniojtihiecxidkkcxfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpiejprdstpa"
 let keyExample = "ur:crypto-key/hdcxmszmjlfsgssrbzehsslphdlgtbwesofnlpehlftldwotpaiyfwbtzsykwttomsbatnzswlqd"
 
+let aliceCID = "ur:crypto-cid/hdcxtygshybkzcecfhflpfdlhdonotoentnydmzsidmkindlldjztdmoeyishknybtbswtgwwpdi"
+let aliceSeed = "ur:crypto-seed/oyadgdlfwfdwlphlfsghcphfcsaybekkkbaejkhphdfndy"
+let alicePrvkeys = "ur:crypto-prvkeys/gdlfwfdwlphlfsghcphfcsaybekkkbaejksfnynsct"
+let alicePubkeys = "ur:crypto-pubkeys/lftaaosehdcxwduymnadmebbgwlolfemsgotgdnlgdcljpntzocwmwolrpimdabgbaqzcscmzopftpvahdcxolgtwyjotsndgeechglgeypmoemtmdsnjzyncaidgrbklegopasbgmchidtdvsctwdpffsee"
+
+let bobCID = "ur:crypto-cid/hdcxdkreprfslewefgdwhtfnaosfgajpehhyrlcyjzheurrtamfsvolnaxwkioplgansesiabtdr"
+let bobSeed = "ur:crypto-seed/oyadgdcsknhkjkswgtecnslsjtrdfgimfyuykglfsfwtso"
+let bobPrvkeys = "ur:crypto-prvkeys/gdcsknhkjkswgtecnslsjtrdfgimfyuykgbzbagdva"
+let bobPubkeys = "ur:crypto-pubkeys/lftaaosehdcxpspsfsglwewlttrplbetmwaelkrkdeolylwsswchfshepycpzowkmojezmlehdentpvahdcxlaaybzfngdsbheeyvlwkrldpgocpgewpykneotlugaieidfplstacejpkgmhaxbkbswtmecm"
+
+let carolCID = "ur:crypto-cid/hdcxamstktdsdlplurgaoxfxdijyjysertlpehwstkwkskmnnsqdpfgwlbsertvatbbtcaryrdta"
+let carolSeed = "ur:crypto-seed/oyadgdlpjypepycsvodtihcecwvsyljlzevwcnmepllulo"
+let carolPrvkeys = "ur:crypto-prvkeys/gdlpjypepycsvodtihcecwvsyljlzevwcnamjzdnos"
+let carolPubkeys = "ur:crypto-pubkeys/lftaaosehdcxptwewyrttbfswnsonswdvweydkfxmwfejsmdlgbajyaymwhstotymyfwrosprhsstpvahdcxnnzeontnuechectylgjytbvlbkfnmsmyeohhvwbzftdwrplrpkptloctdtflwnguoyytemnn"
+
 final class EnvelopeToolTests: XCTestCase {
     static override func setUp() {
         setUpTest()
@@ -365,6 +380,9 @@ final class EnvelopeToolTests: XCTestCase {
         let cid2 = try envelope("generate cid")
         XCTAssertNotEqual(cid1, cid2)
         XCTAssertEqual(try UR(urString: cid1).type, "crypto-cid")
+        
+        let cid3 = try envelope("generate cid --hex d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f")
+        XCTAssertEqual(cid3, "ur:crypto-cid/hdcxtygshybkzcecfhflpfdlhdonotoentnydmzsidmkindlldjztdmoeyishknybtbswtgwwpdi")
     }
     
     func testGenerateSeed() throws {
@@ -372,10 +390,13 @@ final class EnvelopeToolTests: XCTestCase {
         let seed2 = try envelope("generate seed")
         XCTAssertNotEqual(seed1, seed2)
         XCTAssertEqual(try UR(urString: seed1).type, "crypto-seed")
+        
+        let seed3 = try envelope("generate seed --hex 187a5973c64d359c836eba466a44db7b")
+        XCTAssertEqual(seed3, "ur:crypto-seed/oyadgdcsknhkjkswgtecnslsjtrdfgimfyuykglfsfwtso")
     }
 
     func testEncrypt() throws {
-        let encrypted = try envelope("encrypt \(aliceKnowsBobExample) \(keyExample)")
+        let encrypted = try envelope("encrypt \(aliceKnowsBobExample) --key \(keyExample)")
         XCTAssertEqual(try envelope(encrypted),
         """
         EncryptedMessage [
@@ -383,7 +404,7 @@ final class EnvelopeToolTests: XCTestCase {
         ]
         """
         )
-        let decrypted = try envelope("decrypt \(encrypted) \(keyExample)")
+        let decrypted = try envelope("decrypt \(encrypted) --key \(keyExample)")
         XCTAssertEqual(decrypted, aliceKnowsBobExample)
     }
     
@@ -405,7 +426,7 @@ final class EnvelopeToolTests: XCTestCase {
     
     func testSign() throws {
         let prvkeys = "ur:crypto-prvkeys/hdcxhsinuesrennenlhfaopycnrfrkdmfnsrvltowmtbmyfwdafxvwmthersktcpetdwfnbndeah"
-        let signed = try envelope("sign \(aliceKnowsBobExample) \(prvkeys)")
+        let signed = try envelope("sign \(aliceKnowsBobExample) --prvkeys \(prvkeys)")
         XCTAssertEqual(try envelope(signed),
         """
         "Alice" [
@@ -417,17 +438,17 @@ final class EnvelopeToolTests: XCTestCase {
         
         let pubkeys = try envelope("generate pubkeys \(prvkeys)")
 
-        XCTAssertNoThrow(try envelope("validate \(signed) \(pubkeys)"))
+        XCTAssertNoThrow(try envelope("verify \(signed) --pubkeys \(pubkeys)"))
 
-        XCTAssertThrowsError(try envelope("validate \(aliceKnowsBobExample) \(pubkeys)"))
+        XCTAssertThrowsError(try envelope("verify \(aliceKnowsBobExample) --pubkeys \(pubkeys)"))
 
         let badPubkeys = try pipe(["generate prvkeys", "generate pubkeys"])
-        XCTAssertThrowsError(try envelope("validate \(signed) \(badPubkeys)"))
+        XCTAssertThrowsError(try envelope("verify \(signed) --pubkeys \(badPubkeys)"))
     }
     
     func testSign2() throws {
         let prvkeys = "ur:crypto-prvkeys/hdcxhsinuesrennenlhfaopycnrfrkdmfnsrvltowmtbmyfwdafxvwmthersktcpetdwfnbndeah"
-        let wrappedSigned = try pipe(["subject --wrapped \(aliceKnowsBobExample)", "sign \(prvkeys)"])
+        let wrappedSigned = try pipe(["subject --wrapped \(aliceKnowsBobExample)", "sign --prvkeys \(prvkeys)"])
         XCTAssertEqual(try envelope(wrappedSigned),
         """
         {
@@ -441,9 +462,21 @@ final class EnvelopeToolTests: XCTestCase {
         )
 
         let pubkeys = try envelope("generate pubkeys \(prvkeys)")
-        XCTAssertNoThrow(try envelope("validate \(wrappedSigned) \(pubkeys)"))
+        XCTAssertNoThrow(try envelope("verify \(wrappedSigned) --pubkeys \(pubkeys)"))
     }
     
+    func testSign3() throws {
+        let e = try pipe(["subject \(helloString)", "sign --prvkeys \(alicePrvkeys) --prvkeys \(carolPrvkeys)"])
+        XCTAssertEqual(try envelope(e),
+        """
+        "Hello." [
+            verifiedBy: Signature
+            verifiedBy: Signature
+        ]
+        """
+        )
+    }
+
     func testSSKR1() throws {
         let result = try envelope("sskr split \(aliceKnowsBobExample)")
         XCTAssertEqual(try envelope(result),

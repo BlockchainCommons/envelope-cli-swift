@@ -5,14 +5,12 @@ struct DecryptCommand: ParsableCommand {
     static var configuration = CommandConfiguration(commandName: "decrypt", abstract: "Decrypt the envelope's subject using the provided key.")
 
     @Argument var envelope: Envelope?
-    @Argument var key: SymmetricKey?
+    @Option var key: SymmetricKey?
+    @Option var recipient: PrivateKeyBase?
     
     mutating func fill() throws {
         if envelope == nil {
             envelope = try readIn(Envelope.self)
-        }
-        if key == nil {
-            key = try readIn(SymmetricKey.self)
         }
     }
 
@@ -22,9 +20,12 @@ struct DecryptCommand: ParsableCommand {
         guard let envelope else {
             throw EnvelopeToolError.missingArgument("envelope")
         }
-        guard let key else {
-            throw EnvelopeToolError.missingArgument("key")
+        if let key {
+            printOut(try envelope.decryptSubject(with: key).ur)
+        } else if let recipient {
+            printOut(try envelope.decrypt(to: recipient).ur)
+        } else {
+            throw EnvelopeToolError.missingArgument("key or recipient")
         }
-        printOut(try envelope.decryptSubject(with: key).ur)
     }
 }
