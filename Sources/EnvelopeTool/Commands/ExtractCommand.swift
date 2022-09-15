@@ -98,6 +98,11 @@ struct ExtractCommand: ParsableCommand {
             } else {
                 throw EnvelopeToolError.notCBOR
             }
+        case .uri:
+            guard let cbor = envelope.leaf else {
+                throw EnvelopeToolError.notCBOR
+            }
+            printOut(try URL(taggedCBOR: cbor).absoluteString)
         case .wrapped:
             printOut(try envelope.unwrap().ur)
         case .uuid:

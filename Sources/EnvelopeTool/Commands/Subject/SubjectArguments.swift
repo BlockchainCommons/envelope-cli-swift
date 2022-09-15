@@ -102,6 +102,11 @@ struct SubjectArguments: ParsableArguments {
                     let contentCBOR = CBOR.tagged(cborTag, cbor)
                     envelope = Envelope(contentCBOR)
                 }
+            case .uri:
+                guard let url = URL(string: value) else {
+                    throw EnvelopeToolError.invalidURL(value)
+                }
+                envelope = Envelope(url.taggedCBOR)
             case .uuid:
                 guard let uuid = UUID(uuidString: value) else {
                     throw EnvelopeToolError.invalidType(expectedType: "UUID")

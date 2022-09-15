@@ -20,4 +20,6 @@ enum EnvelopeToolError: Error {
     case missingSearchCriteria
     case invalidGroupThreshold(Int)
     case invalidGroupSpecifier(String)
+    case invalidParameters(String)
+    case invalidURL(String)
 }

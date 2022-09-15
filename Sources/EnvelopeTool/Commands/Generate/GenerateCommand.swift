@@ -6,12 +6,13 @@ struct GenerateCommand: ParsableCommand {
         commandName: "generate",
         abstract: "Utilities to generate and convert various objects.",
         subcommands: [
-            GenerateKeyCommand.self,
             GenerateCIDCommand.self,
-            GenerateSeedCommand.self,
+            GenerateDigestCommand.self,
+            GenerateKeyCommand.self,
+            GenerateNonceCommand.self,
             GeneratePrivateKeysCommand.self,
             GeneratePublicKeysCommand.self,
-            GenerateDigestCommand.self,
+            GenerateSeedCommand.self,
         ]
     )
 }

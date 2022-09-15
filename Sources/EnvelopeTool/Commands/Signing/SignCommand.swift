@@ -6,6 +6,7 @@ struct SignCommand: ParsableCommand {
 
     @Argument var envelope: Envelope?
     @Option var prvkeys: [PrivateKeyBase] = []
+    @Option var note: String?
     
     mutating func fill() throws {
         if envelope == nil {
@@ -29,6 +30,13 @@ struct SignCommand: ParsableCommand {
         guard !prvkeys.isEmpty else {
             throw EnvelopeToolError.missingArgument("prvkeys")
         }
-        printOut(envelope.sign(with: prvkeys).ur)
+        if let note {
+            guard prvkeys.count == 1 else {
+                throw EnvelopeToolError.invalidParameters("Can only add a note on a single signature.")
+            }
+            printOut(envelope.sign(with: prvkeys.first!, note: note).ur)
+        } else {
+            printOut(envelope.sign(with: prvkeys).ur)
+        }
     }
 }
