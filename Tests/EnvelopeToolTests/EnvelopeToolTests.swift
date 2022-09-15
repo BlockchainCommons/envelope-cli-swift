@@ -10,7 +10,7 @@ let uuidExample = "EB377E65-5774-410A-B9CB-510BFC73E6D9"
 let cidExample = "dec7e82893c32f7a4fcec633c02c0ec32a4361ca3ee3bc8758ae07742e940550"
 let dateExample = "2022-08-30T07:16:11Z"
 let digestExample = Digest(helloString).ur.string
-let customURExample = "ur:crypto-seed/oyadgdaawzwplrbdhdpabgrnvokorolnrtemksayyadmut"
+let seedURExample = "ur:crypto-seed/oyadgdaawzwplrbdhdpabgrnvokorolnrtemksayyadmut"
 let aliceKnowsBobExample = "ur:envelope/lftpsptpuoihfpjziniaihtpsptputlftpsptpuoihjejtjlktjktpsptpuoiafwjlidrdpdiesk"
 let credentialExample = "ur:envelope/lstpsptpvtmntpsptpuotpsghdcxfgkoiahtjthnissawsfhzcmyyldsutfzcttefpaxjtmobsbwimcaleykvsdtgajntpsptputlftpsptpuoihjoisjljyjltpsptpuoksckghisinjkcxinjkcxgehsjnihjkcxgthsksktihjzjzdijkcxjoisjljyjldmtpsptputlftpsptpuoisjzhsjkjyglhsjnihtpsptpuoiogthsksktihjzjztpsptputlftpsptpuoininjkjkkpihfyhsjyihtpsptpuosecyhybdvyaetpsptputlftpsptpurattpsptpuoksdkfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpietpsptputlftpsptpuoiyjyjljoiniajktpsptpuolfingukpidimihiajycxehingukpidimihiajycxeytpsptputlftpsptpuraotpsptpuokscffxihjpjyiniyiniahsjyihcxjliycxfxjljnjojzihjyinjljttpsptputlftpsptpuokscsiajljtjyinjtkpinjtiofeiekpiahsjyinjljtgojtinjyjktpsptpuozofhyaaeaeaeaeaeaetpsptputlftpsptpurbttpsptpuoksdkfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpietpsptputlftpsptpuojtihksjoinjphsjyinjljtfyhsjyihtpsptpuosecyjncscxaetpsptputlftpsptpuojsiaihjpjyiniyiniahsjyihglkpjnidihjptpsptpuojeeheyeodpeeecendpemetestpsptputlftpsptpuoiniyinjpjkjyglhsjnihtpsptpuoihgehsjnihjktpsptputlftpsptpuoiojkkpidimihiajytpsptpuokscegmfgcxhsjtiecxgtiniajpjlkthskoihcxfejtioinjtihihjpinjtiotpsptputlftpsptpuokscejojpjliyihjkjkinjljthsjzfyihkoihjzjljojnihjtjyfdjlkpjpjktpsptpuobstpsptputlftpsptpuraxtpsptpuotpuehdfzftuyfsticwgdosgeswtswkbdosrecyesdeplqzjoghiogacedlqdsgtbpewtdroytlmdaavavsspiygmrflfgrkohtinvswykbkbpsyllbmhdyzerpemlsykvapkchbttpsptputlftpsptpuraatpsptpuoksdmguiniojtihiecxidkkcxfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpiejprdstpa"
 let keyExample = "ur:crypto-key/hdcxmszmjlfsgssrbzehsslphdlgtbwesofnlpehlftldwotpaiyfwbtzsykwttomsbatnzswlqd"
@@ -189,17 +189,29 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(try envelope("extract --wrapped \(e)"), helloEnvelopeUR)
     }
     
-    func testCustomURSubject() throws {
-        let e = try envelope("subject --ur \(customURExample) --tag 300")
+    func testKnownURSubject() throws {
+        let e = try envelope("subject --ur \(seedURExample)")
         XCTAssertEqual(e, "ur:envelope/tpuotaaddwoyadgdaawzwplrbdhdpabgrnvokorolnrtemksjztypkmh")
         XCTAssertEqual(try envelope(e),
             """
-            CBOR
+            CBOR(crypto-seed)
             """
         )
-        XCTAssertEqual(try envelope("extract --ur \(e) --tag 300 --type crypto-seed"), customURExample)
+        XCTAssertEqual(try envelope("extract --ur \(e)"), seedURExample)
     }
     
+    func testUnknownURSubject() throws {
+        let unknownUR = "ur:unknown/oyadgdjlssmkcklgoskseodnyteofwwfylkiftjzamgrht"
+        let e = try envelope("subject --ur \(unknownUR) --tag 555")
+        XCTAssertEqual(e, "ur:envelope/tpuotaaodnoyadgdjlssmkcklgoskseodnyteofwwfylkiftmojowmio")
+        XCTAssertEqual(try envelope(e),
+            """
+            CBOR(555)
+            """
+        )
+        XCTAssertEqual(try envelope("extract --ur \(e) --type unknown"), unknownUR)
+    }
+
     func testUUIDSubject() throws {
         let e = try envelope("subject --uuid \(uuidExample)")
         XCTAssertEqual(e, "ur:envelope/tpuotpdagdwmemkbihhgjyfpbkrhsbgybdztjkvatatpsaztte")
@@ -393,6 +405,16 @@ final class EnvelopeToolTests: XCTestCase {
         
         let seed3 = try envelope("generate seed --hex 187a5973c64d359c836eba466a44db7b")
         XCTAssertEqual(seed3, "ur:crypto-seed/oyadgdcsknhkjkswgtecnslsjtrdfgimfyuykglfsfwtso")
+    }
+    
+    func testGenerateDigest() throws {
+        let expectedDigest = "ur:crypto-digest/hdcxfdurmtpygubelooyaowdrpglbakeuodanylrbbesimbnwlkgbywpmksgbbsajnlkcwmyahzs"
+        
+        let e = try envelope("generate digest \(helloString)")
+        XCTAssertEqual(e, expectedDigest)
+        
+        let e2 = try pipe(["generate digest"], inputLine: helloString)
+        XCTAssertEqual(e2, expectedDigest)
     }
 
     func testEncrypt() throws {

@@ -32,7 +32,7 @@ struct VerifyCommand: ParsableCommand {
         guard !pubkeys.isEmpty else {
             throw EnvelopeToolError.missingArgument("pubkeys")
         }
-        try envelope.validateSignatures(from: pubkeys, threshold: threshold)
+        try envelope.verifySignatures(from: pubkeys, threshold: threshold)
         print(envelope.ur)
     }
 }

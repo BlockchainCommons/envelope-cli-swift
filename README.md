@@ -404,7 +404,7 @@ To recover the original envelope we reverse the steps, first decrypting, then un
 ```bash
 $ envelope decrypt $WRAPPED_ENCRYPTED --key $KEY |\   # Decrypt the envelope
     envelope extract --wrapped |\                     # Unwrap the inner envelope
-    envelope                                          # Show the formatted contents
+ss    envelope                                          # Show the formatted contents
 ```
 
 ```
@@ -500,7 +500,7 @@ $ envelope verify $WRAPPED_SIGNED --pubkeys $BAD_PUBKEYS
 ```
 
 ```
-Error: invalidSignature
+Error: unverifiedSignature
 ```
 
 Note that like encryption, signing uses randomness. So even if you sign the same envelope twice with the same private key, the two resulting envelopes will not be the same although both signatures will verify against the same public key.

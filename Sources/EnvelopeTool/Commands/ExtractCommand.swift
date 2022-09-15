@@ -75,15 +75,14 @@ struct ExtractCommand: ParsableCommand {
         case .string:
             printOut(try envelope.extractSubject(String.self))
         case .ur:
+            addKnownTags()
             if let cbor = envelope.leaf {
-                guard let tag = urTag else {
-                    throw EnvelopeToolError.urTagRequired
+                guard case CBOR.tagged(let tag, let untaggedCBOR) = cbor else {
+                    throw EnvelopeToolError.urMissingTag
                 }
-                guard let type = urType else {
+                let knownTag = CBOR.Tag.knownTag(for: tag.rawValue)
+                guard let type = knownTag?.name ?? urType else {
                     throw EnvelopeToolError.urTypeRequired
-                }
-                guard case CBOR.tagged(CBOR.Tag(rawValue: tag), let untaggedCBOR) = cbor else {
-                    throw EnvelopeToolError.urTagMismatch
                 }
                 printOut(try! UR(type: type, cbor: untaggedCBOR))
             } else if envelope.isWrapped {

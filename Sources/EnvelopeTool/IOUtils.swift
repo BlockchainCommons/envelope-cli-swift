@@ -38,6 +38,15 @@ func readIn() -> String? {
     }
 }
 
+func readInData() throws -> Data? {
+    if readFromStdin {
+        return try FileHandle.standardInput.readToEnd()
+    } else {
+        defer { _inputLines.removeAll() }
+        return _inputLines.joined(separator: "\n").utf8Data
+    }
+}
+
 #else
 
 func resetOutput() { }
@@ -50,6 +59,10 @@ func printOut(
 
 func readIn() -> String? {
     readLine()
+}
+
+func readInData() throws -> Data? {
+    try FileHandle.standardInput.readToEnd()
 }
 
 #endif

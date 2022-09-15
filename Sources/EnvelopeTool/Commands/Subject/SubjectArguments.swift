@@ -82,15 +82,22 @@ struct SubjectArguments: ParsableArguments {
             case .string:
                 envelope = Envelope(value)
             case .ur:
+                addKnownTags()
                 let ur = try UR(urString: value)
                 if ur.type == "envelope" {
                     envelope = try Envelope(ur: ur)
                         .wrap()
                 } else {
-                    guard let tag else {
-                        throw EnvelopeToolError.urTagRequired
+                    var cborTag = CBOR.Tag.knownTag(for: ur.type)
+                    if
+                        cborTag == nil,
+                        let tag
+                    {
+                        cborTag = CBOR.Tag(rawValue: tag)
                     }
-                    let cborTag = CBOR.Tag(rawValue: tag)
+                    guard let cborTag else {
+                        throw EnvelopeToolError.urTagRequired(ur.type)
+                    }
                     let cbor = try CBOR(ur.cbor)
                     let contentCBOR = CBOR.tagged(cborTag, cbor)
                     envelope = Envelope(contentCBOR)

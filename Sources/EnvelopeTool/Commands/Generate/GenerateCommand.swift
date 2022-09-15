@@ -11,6 +11,7 @@ struct GenerateCommand: ParsableCommand {
             GenerateSeedCommand.self,
             GeneratePrivateKeysCommand.self,
             GeneratePublicKeysCommand.self,
+            GenerateDigestCommand.self,
         ]
     )
 }

@@ -13,6 +13,7 @@ struct FormatCommand: ParsableCommand {
     }
 
     mutating func run() throws {
+        addKnownTags()
         resetOutput()
         try fill()
         guard let envelope else {
