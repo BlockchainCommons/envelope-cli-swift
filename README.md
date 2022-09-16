@@ -581,7 +581,7 @@ envelope verify $WRAPPED_SIGNED --pubkeys $PUBKEYS
 ur:envelope/lftpsptpvtlftpsptpuoihfpjziniaihtpsptputlftpsptpuoihjejtjlktjktpsptpuoiafwjlidtpsptputlftpsptpuraxtpsptpuotpuehdfzespfiagsasyapsmtfzwpjerepfgttdisylbkttktbwuyjsleiayafneesrjzdtaskbhpglrtlkfyspmozoesdrsefdlkwkdtvteezendcljtbsjndwflndssvtrncsptnerngyeo
 ```
 
-To facilitate piping commands, the `verify` command prints the input envelope if the validation is successful, and exits with an error condition if it is unsuccessful. Lets produce some incorrect public keys and try this:
+To facilitate piping commands, the `verify` command prints the input envelope if the validation is successful (unless the `--silent` flag is provided), and exits with an error condition if it is unsuccessful. Lets produce some incorrect public keys and try this:
 
 ```bash
 👉
@@ -598,30 +598,26 @@ Note that like encryption, signing uses randomness. So even if you sign the same
 
 ### SSKR
 
-SSKR lets you split ("shard") an envelope into several shares, a threshold of which is necessary to recover the original message. If we shard our example envelope into 3 shares, we get:
+SSKR lets you split ("shard") an envelope into several shares, a threshold of which is necessary to recover the original message. If we shard our example envelope into 3 shares and assign them to a shell array, we get:
 
 ```bash
 👉
-SHARE_ENVELOPES=`envelope sskr split -g 2-of-3 $ALICE_KNOWS_BOB`
+SHARE_ENVELOPES=(`envelope sskr split -g 2-of-3 $ALICE_KNOWS_BOB`)
 echo $SHARE_ENVELOPES
 ```
 
 ```
 👈
-ur:envelope/lftpsptpsolrhddkoemtimttadbyntmozsvshlcfurjnbbgyrtrdpdhlhgmhfpjovsdkhtcwgttscadedatprkkkgsinoybkwkwzcwwtsavddtgubagdfddwkofdyalthpsfdejpqdgrtspfvlimhddktpsbhdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwditpsptputlftpsptpuramtpsptpuotaadechddactsraeadaejkrnwnbypauekkcstshymsbsptvthtpfeoylcfcpfrpsnthffpgsdtcxhtlufzzclunteode
-ur:envelope/lftpsptpsolrhddkoemtimttadbyntmozsvshlcfurjnbbgyrtrdpdhlhgmhfpjovsdkhtcwgttscadedatprkkkgsinoybkwkwzcwwtsavddtgubagdfddwkofdyalthpsfdejpqdgrtspfvlimhddktpsbhdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwditpsptputlftpsptpuramtpsptpuotaadechddactsraeadadgwfzkeaotatkmtaeoywmosqzjowtdntlsocfbgfgcmzccabyktluzooxvwfwioayspssongs
-ur:envelope/lftpsptpsolrhddkoemtimttadbyntmozsvshlcfurjnbbgyrtrdpdhlhgmhfpjovsdkhtcwgttscadedatprkkkgsinoybkwkwzcwwtsavddtgubagdfddwkofdyalthpsfdejpqdgrtspfvlimhddktpsbhdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwditpsptputlftpsptpuramtpsptpuotaadechddactsraeadaobdhkwtemhsztrfdefrdlylidaertroknuodybswdhsbalntpdptamteofhaobabnwfltdsvs
+ur:envelope/lftpsptpsolrhddklpwmdrdnuelbindetpvahkgminzmplfyvwdlytgheniswzfyykisbssagshdvdtesgltseoegscknybndpnehfdnyafgetgdwdgdtnsgbepmethhhpnnpyecgedecayatblohddktpsbhdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwditpsptputlftpsptpuramtpsptpuotaadechddawkcpaeadaemtgdhggtrsnsbdfyvwrflfkksalgrfntcaaasgrytkoswfwybekgutrlcadncppsmnbeplgt ur:envelope/lftpsptpsolrhddklpwmdrdnuelbindetpvahkgminzmplfyvwdlytgheniswzfyykisbssagshdvdtesgltseoegscknybndpnehfdnyafgetgdwdgdtnsgbepmethhhpnnpyecgedecayatblohddktpsbhdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwditpsptputlftpsptpuramtpsptpuotaadechddawkcpaeadadkisbntktcaqdpsvsndehhphlmsnehphnvtclytgyfhtenlglutvlroondrdptitleywsoxmn ur:envelope/lftpsptpsolrhddklpwmdrdnuelbindetpvahkgminzmplfyvwdlytgheniswzfyykisbssagshdvdtesgltseoegscknybndpnehfdnyafgetgdwdgdtnsgbepmethhhpnnpyecgedecayatblohddktpsbhdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwditpsptputlftpsptpuramtpsptpuotaadechddawkcpaeadaohpkitpesvtsahyatcfrydnehisptinkeztglpskbeegwdiremegdchmujkdiuthyeezsqzam
 ```
 
-We can use some shell magic to separate our three envelopes into three shell variables, `$SHARE_1`, `SHARE_2`, and `SHARE_3`:
+For brevity, we assign the elements of the array three shell variables: `$SHARE_1`, `SHARE_2`, and `SHARE_3`:
 
 ```bash
 👉
-echo $SHARE_ENVELOPES | IFS=$'\n' read -r -d '' -A SHARE_ENVELOPES_ARRAY < <( COMMAND && printf '\0' )
-# printf "%s\n" "${SHARE_ENVELOPES_ARRAY[@]}"
-SHARE_1=${SHARE_ENVELOPES_ARRAY[1]}
-SHARE_2=${SHARE_ENVELOPES_ARRAY[2]}
-SHARE_3=${SHARE_ENVELOPES_ARRAY[3]}
+SHARE_1=${SHARE_ENVELOPES[1]}
+SHARE_2=${SHARE_ENVELOPES[2]}
+SHARE_3=${SHARE_ENVELOPES[3]}
 ```
 
 If we format the first of those shares, we see that the subject is a symmetrically encrypted message, and its assertion is an SSKR share, which is one of the shares needed to decrypt the subject.

@@ -118,11 +118,11 @@ envelope $SIGNED_ENVELOPE
 ]
 ```
 
-Bob verifies Alice's signature. Note that no output is generated on success.
+Bob verifies Alice's signature. Note that the `--silent` flag is used to generate no output on success.
 
 ```bash
 👉
-envelope verify $SIGNED_ENVELOPE --pubkeys $ALICE_PUBKEYS
+envelope verify --silent $SIGNED_ENVELOPE --pubkeys $ALICE_PUBKEYS
 ```
 
 Bob extracts the message.
@@ -153,7 +153,7 @@ Confirm that it was signed by Alice OR Carol.
 
 ```bash
 👉
-envelope verify $SIGNED_ENVELOPE --threshold 1 --pubkeys $ALICE_PUBKEYS --pubkeys $CAROL_PUBKEYS
+envelope verify --silent $SIGNED_ENVELOPE --threshold 1 --pubkeys $ALICE_PUBKEYS --pubkeys $CAROL_PUBKEYS
 ```
 
 Confirm that it was not signed by Alice AND Carol.
@@ -596,11 +596,11 @@ envelope $DAN_ENVELOPE
 CBOR(crypto-seed)
 ```
 
-Dan splits the envelope into a single group 2-of-3. The output of the `envelope` tool contains one share envelope per line. He then pipes this output into some Shell magic (zsh in this case) that assigns the lines of output to a shell array.
+Dan splits the envelope into a single group 2-of-3. The output of the `envelope` tool contains the list of share envelopes separated by spaces. He then assigns this to a shell array.
 
 ```bash
 👉
-envelope sskr split -g 2-of-3 $DAN_ENVELOPE | IFS=$'\n' read -r -d '' -A SHARE_ENVELOPES < <( COMMAND && printf '\0' )
+SHARE_ENVELOPES=(`envelope sskr split -g 2-of-3 $DAN_ENVELOPE`)
 ```
 
 Dan sends one envelope to each of Alice, Bob, and Carol.
@@ -986,12 +986,7 @@ Finally, Bob uses Alice's public keys to validate the challenge he sent her.
 
 ```bash
 👉
-envelope verify $ALICE_RESPONSE --pubkeys $ALICE_PUBKEYS
-```
-
-```
-👈
-ur:envelope/lftpsptpvtlftpsptpvtlftpsptpuotaaosrgsnbfwsbnnoxgtrsotspnyvayntpsptputlftpsptpuraatpsptpuokscefxishsjzjzihjtioihcxjyjlcxfpjziniaihcxiyjpjljncxfwjliddmtpsptputlftpsptpurastpsptpuotpcxkshyisjyjyjojkftdldlihkshsjnjojzihjzihieioihjpdmiajljndliainiedlieeeeeiaecihdyhsiyieeoeceoiyeeemiddyeyiyecethsechseohseyesieeshseyihiyhseneyeseteneseyiyeteseniaieeyeseyeoeyeneteceseshsdyiedyiytpsptputlftpsptpuraxtpsplftpsptpuotpuehdfzrtpsvovytlahwzseprktaturdedlaamttdsfathehhcahyfmwnwebguraysesbaybsdllfammttotelnfnghpfftdsadnnwelspattoytpbtimktlbguchtydegthshptpsptputlftpsptpuraatpsptpuojtgthsieihcxidkkcxfpjziniaihdmmkfzbepd
+envelope verify --silent $ALICE_RESPONSE --pubkeys $ALICE_PUBKEYS
 ```
 
 ## Example 12: Verifiable Credential
@@ -1091,4 +1086,93 @@ envelope $JOHN_RESIDENT_CARD
         note: "Made by the State of Example."
     ]
 ]
+```
+
+John wishes to identify himself to a third party using his government-issued credential, but does not wish to reveal more than his name, his photo, and the fact that the state has verified his identity.
+
+Redaction is performed by building a set of digests that will be revealed. All digests not present in the reveal-set will be replaced with elision markers containing only the hash of what has been elided, thus preserving the hash tree including revealed signatures. If a higher-level object is elided, then everything it contains will also be elided, so if a deeper object is to be revealed, all of its parent objects also need to be revealed, even though not everything *about* the parent objects must be revealed.
+
+```bash
+👉
+# Start a target set.
+TARGET=()
+
+# Reveal the card. Without this, everything about the card would be elided.
+TARGET+=(`envelope digest $JOHN_RESIDENT_CARD`)
+
+# Reveal everything about the state's signature on the card
+TARGET+=(`envelope assertion find --known-predicate verifiedBy $JOHN_RESIDENT_CARD | envelope digest --deep`)
+
+# Reveal the top level of the card.
+TARGET+=(`envelope digest $JOHN_RESIDENT_CARD --shallow`)
+CARD=`envelope extract --wrapped $JOHN_RESIDENT_CARD`
+TARGET+=(`envelope digest $CARD`)
+TARGET+=(`envelope extract $CARD --envelope | envelope digest`)
+
+# Reveal everything about the `isA` and `issuer` assertions at the top level of the card.
+TARGET+=(`envelope assertion find --known-predicate isA $CARD | envelope digest --deep`)
+TARGET+=(`envelope assertion find --known-predicate issuer $CARD | envelope digest --deep`)
+
+# Reveal the `holder` assertion on the card, but not any of its sub-assertions.
+HOLDER=`envelope assertion find --known-predicate holder $CARD`
+TARGET+=(`envelope digest --shallow $HOLDER`)
+
+# Within the `holder` assertion, reveal everything about just the `givenName`, `familyName`, and `image` assertions.
+HOLDER_OBJECT=`envelope extract --object $HOLDER`
+TARGET+=(`envelope assertion find givenName $HOLDER_OBJECT | envelope digest --deep`)
+TARGET+=(`envelope assertion find familyName $HOLDER_OBJECT | envelope digest --deep`)
+TARGET+=(`envelope assertion find image $HOLDER_OBJECT | envelope digest --deep`)
+
+# Perform the elision
+ELIDED_CARD=`envelope elide revealing $JOHN_RESIDENT_CARD $TARGET`
+
+# Show the elided card
+envelope $ELIDED_CARD
+```
+
+```
+👈
+{
+    CID(78bc30004776a3905bccb9b8a032cf722ceaf0bbfb1a49eaf3185fab5808cadc) [
+        holder: CID(78bc30004776a3905bccb9b8a032cf722ceaf0bbfb1a49eaf3185fab5808cadc) [
+            "familyName": "SMITH"
+            "givenName": "JOHN"
+            "image": "John Smith Smiling" [
+                dereferenceVia: URI(https://exampleledger.com/digest/36be30726befb65ca13b136ae29d8081f64792c2702415eb60ad1c56ed33c999)
+                note: "This is an image of John Smith."
+            ]
+            ELIDED (7)
+        ]
+        isA: "credential"
+        issuer: CID(04363d5ff99733bc0f1577baba440af1cf344ad9e454fad9d128c00fef6505e8) [
+            dereferenceVia: URI(https://exampleledger.com/cid/04363d5ff99733bc0f1577baba440af1cf344ad9e454fad9d128c00fef6505e8)
+            note: "Issued by the State of Example"
+        ]
+        ELIDED (2)
+    ]
+} [
+    verifiedBy: Signature [
+        note: "Made by the State of Example."
+    ]
+]
+```
+
+Note that the original card and the elided card have the same digest.
+
+```bash
+👉
+envelope digest $JOHN_RESIDENT_CARD; envelope digest $ELIDED_CARD
+```
+
+```
+👈
+ur:crypto-digest/hdcxkilbmyntethdcpmntddrwfnnbdnbhynbqdbdgwnlylaoonmoleoyztfsnbasdyclmkpeoxgr
+ur:crypto-digest/hdcxkilbmyntethdcpmntddrwfnnbdnbhynbqdbdgwnlylaoonmoleoyztfsnbasdyclmkpeoxgr
+```
+
+Note that the state's signature on the elided card still verifies.
+
+```bash
+👉
+envelope verify --silent $ELIDED_CARD --pubkeys $STATE_PUBKEYS
 ```

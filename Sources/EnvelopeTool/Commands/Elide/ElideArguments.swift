@@ -12,11 +12,6 @@ struct ElideArguments: ParsableArguments {
         if envelope == nil {
             envelope = try readIn(Envelope.self)
         }
-        if target.isEmpty {
-            while let digest = try readIn(Digest.self) {
-                target.append(digest)
-            }
-        }
     }
     
     mutating func run(revealing: Bool) throws {

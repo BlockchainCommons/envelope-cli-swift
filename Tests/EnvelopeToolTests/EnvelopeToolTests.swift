@@ -514,7 +514,7 @@ final class EnvelopeToolTests: XCTestCase {
     
     func testSSKR2() throws {
         let result = try envelope("sskr split -t 2 -g 2-of-3 -g 2-of-3 \(aliceKnowsBobExample)")
-        let shares = result.split(separator: "\n").compactMap { $0.isEmpty ? nil : $0 }.map { String($0) }
+        let shares = result.split(separator: " ").compactMap { $0.isEmpty ? nil : $0 }.map { String($0) }
         let indexes = IndexSet([0, 1, 4, 5])
         let recoveredShares = indexes.map { shares[$0] }
         

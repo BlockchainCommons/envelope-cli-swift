@@ -9,6 +9,7 @@ struct VerifyCommand: ParsableCommand {
     
     @Argument var envelope: Envelope?
     @Option var pubkeys: [PublicKeyBase] = []
+    @Flag(help: "Don't output the envelope's UR on success.") var silent: Bool = false
     
     mutating func fill() throws {
         if envelope == nil {
@@ -33,6 +34,8 @@ struct VerifyCommand: ParsableCommand {
             throw EnvelopeToolError.missingArgument("pubkeys")
         }
         try envelope.verifySignatures(from: pubkeys, threshold: threshold)
-        print(envelope.ur)
+        if !silent {
+            print(envelope.ur)
+        }
     }
 }

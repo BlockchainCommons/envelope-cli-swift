@@ -50,8 +50,8 @@ struct SSKRSplitCommand: ParsableCommand {
         let encrypted = try wrapped.encryptSubject(with: contentKey)
         let groupedShares = encrypted.split(groupThreshold: groupThreshold, groups: groups, contentKey: contentKey)
         let flattenedShares = groupedShares.map {
-            $0.map({ $0.ur.string }).joined(separator: "\n")
-        }.joined(separator: "\n")
+            $0.map({ $0.ur.string }).joined(separator: " ")
+        }.joined(separator: " ")
         printOut(flattenedShares)
     }
 }
