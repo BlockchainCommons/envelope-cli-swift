@@ -1,10 +1,31 @@
 # envelope - Examples
 
+## Notation
+
+Throughout this document, commands entered into the shell are annotation with a right-pointing hand:
+
+```bash
+👉
+echo Hello.
+```
+
+Shell output is annotated with a left-pointing hand:
+
+```
+👈
+Hello.
+```
+
+Data sent through the Internet is annotated like this:
+
+Alice ➡️ ☁️ ➡️ Bob
+
 ## Common structures used by the examples
 
 These examples define a common plaintext, and `CID`s and `PrivateKeyBase` objects for *Alice*, *Bob*, *Carol*, *ExampleLedger*, and *The State of Example*, each with a corresponding `PublicKeyBase`.
 
 ```bash
+👉
 PLAINTEXT_HELLO="Hello."
 
 ALICE_CID="ur:crypto-cid/hdcxtygshybkzcecfhflpfdlhdonotoentnydmzsidmkindlldjztdmoeyishknybtbswtgwwpdi"
@@ -40,11 +61,13 @@ In this example no signing or encryption is performed.
 Alice sends a plaintext message to Bob.
 
 ```bash
-$ HELLO_ENVELOPE=`envelope subject $PLAINTEXT_HELLO`
-$ echo $HELLO_ENVELOPE
+👉
+HELLO_ENVELOPE=`envelope subject $PLAINTEXT_HELLO`
+echo $HELLO_ENVELOPE
 ```
 
 ```
+👈
 ur:envelope/tpuoiyfdihjzjzjldmgsgontio
 ```
 
@@ -53,10 +76,12 @@ Alice ➡️ ☁️ ➡️ Bob
 Bob receives the envelope and reads the message.
 
 ```bash
-$ envelope extract $HELLO_ENVELOPE
+👉
+envelope extract $HELLO_ENVELOPE
 ```
 
 ```
+👈
 Hello.
 ```
 
@@ -67,11 +92,13 @@ This example demonstrates the signature of a plaintext message.
 Alice sends a signed plaintext message to Bob.
 
 ```bash
-$ SIGNED_ENVELOPE=`envelope subject $PLAINTEXT_HELLO | envelope sign --prvkeys $ALICE_PRVKEYS`
-$ echo $SIGNED_ENVELOPE
+👉
+SIGNED_ENVELOPE=`envelope subject $PLAINTEXT_HELLO | envelope sign --prvkeys $ALICE_PRVKEYS`
+echo $SIGNED_ENVELOPE
 ```
 
 ```
+👈
 ur:envelope/lftpsptpuoiyfdihjzjzjldmtpsptputlftpsptpuraxtpsptpuotpuehdfzsbiyvtkomosbfnrftamhtegmkiwlgwnsmdctrsptmeltdeclkometyfxcmchfmtkchmyueckzepsjefdayayoevotddpatlrehuyvwwphhosehlphnsgwnksnefxsptbgrhtlrmo
 ```
 
@@ -80,10 +107,12 @@ Alice ➡️ ☁️ ➡️ Bob
 Bob receives the envelope and examines its contents.
 
 ```bash
-$ envelope $SIGNED_ENVELOPE
+👉
+envelope $SIGNED_ENVELOPE
 ```
 
 ```
+👈
 "Hello." [
     verifiedBy: Signature
 ]
@@ -92,42 +121,50 @@ $ envelope $SIGNED_ENVELOPE
 Bob verifies Alice's signature. Note that no output is generated on success.
 
 ```bash
-$ envelope verify $SIGNED_ENVELOPE --pubkeys $ALICE_PUBKEYS
+👉
+envelope verify $SIGNED_ENVELOPE --pubkeys $ALICE_PUBKEYS
 ```
 
 Bob extracts the message.
 
 ```bash
-$ envelope extract $SIGNED_ENVELOPE
+👉
+envelope extract $SIGNED_ENVELOPE
 ```
 
 ```
+👈
 Hello.
 ```
 
 Confirm that it wasn't signed by Carol. Note that a failed verification results in an error condition.
 
 ```bash
-$ envelope verify $SIGNED_ENVELOPE --pubkeys $CAROL_PUBKEYS
+👉
+envelope verify $SIGNED_ENVELOPE --pubkeys $CAROL_PUBKEYS
 ```
 
 ```
+👈
 Error: unverifiedSignature
 ```
 
 Confirm that it was signed by Alice OR Carol.
 
 ```bash
-$ envelope verify $SIGNED_ENVELOPE --threshold 1 --pubkeys $ALICE_PUBKEYS --pubkeys $CAROL_PUBKEYS
+👉
+envelope verify $SIGNED_ENVELOPE --threshold 1 --pubkeys $ALICE_PUBKEYS --pubkeys $CAROL_PUBKEYS
 ```
 
 Confirm that it was not signed by Alice AND Carol.
 
 ```bash
-$ envelope verify $SIGNED_ENVELOPE --threshold 2 --pubkeys $ALICE_PUBKEYS --pubkeys $CAROL_PUBKEYS
+👉
+envelope verify $SIGNED_ENVELOPE --threshold 2 --pubkeys $ALICE_PUBKEYS --pubkeys $CAROL_PUBKEYS
 ```
 
 ```
+👈
 Error: unverifiedSignature
 ```
 
@@ -138,23 +175,26 @@ This example demonstrates a plaintext message signed by more than one party.
 Alice and Carol jointly send a signed plaintext message to Bob.
 
 ```bash
-$ MULTISIGNED_ENVELOPE=`envelope subject $PLAINTEXT_HELLO | envelope sign --prvkeys $ALICE_PRVKEYS --prvkeys $CAROL_PRVKEYS`
-$ echo $MULTISIGNED_ENVELOPE
+👉
+MULTISIGNED_ENVELOPE=`envelope subject $PLAINTEXT_HELLO | envelope sign --prvkeys $ALICE_PRVKEYS --prvkeys $CAROL_PRVKEYS`
+echo $MULTISIGNED_ENVELOPE
 ```
 
 ```
+👈
 ur:envelope/lstpsptpuoiyfdihjzjzjldmtpsptputlftpsptpuraxtpsptpuotpuehdfzfrosjsspcprhgwvtzcuofxtskkwppmsgfretrdcshhylfnlssnfgfykssntkihjoltsthhtoatfelpprzthyiywntbbygurtinltlbemhhtspycwwfdiwpplfnfxdkimtpsptputlftpsptpuraxtpsptpuotpuehdfzhpfyetcsbnrljokbvyoyhfbyaskowlbzzmjoykatrftevazsrymtjytkjolndnaalsfzleeennmnemmudsmtaoclhhemotqzskzofhseutjttkwfbtwnihfxzoehhfbntdetsgns
 ```
 
 Alice & Carol ➡️ ☁️ ➡️ Bob
 
 Bob receives the envelope and examines its contents.
-
 ```bash
-$ envelope $MULTISIGNED_ENVELOPE
+👉
+envelope $MULTISIGNED_ENVELOPE
 ```
 
 ```
+👈
 "Hello." [
     verifiedBy: Signature
     verifiedBy: Signature
@@ -164,16 +204,19 @@ $ envelope $MULTISIGNED_ENVELOPE
 Bob verifies the message was signed by both Alice and Carol.
 
 ```bash
-$ envelope verify $MULTISIGNED_ENVELOPE --pubkeys $ALICE_PUBKEYS --pubkeys $CAROL_PUBKEYS
+👉
+envelope verify $MULTISIGNED_ENVELOPE --pubkeys $ALICE_PUBKEYS --pubkeys $CAROL_PUBKEYS
 ```
 
 Bob extracts the message.
 
 ```bash
-$ envelope extract $MULTISIGNED_ENVELOPE
+👉
+envelope extract $MULTISIGNED_ENVELOPE
 ```
 
 ```
+👈
 Hello.
 ```
 
@@ -184,22 +227,26 @@ This examples debuts the idea of an encrypted message, based on a symmetric key 
 Alice and Bob have agreed to use this key:
 
 ```bash
-$ KEY=`envelope generate key`
-$ echo $KEY
+👉
+KEY=`envelope generate key`
+echo $KEY
 ```
 
 ```
+👈
 ur:crypto-key/hdcxpldtfesnclpdzodttohtmsdedebezodsosmodpdrhtpfqdnlwkimlbcwtbzmteeezotaengs
 ```
 
 Alice sends a message encrypted with the key to Bob.
 
 ```bash
-$ ENCRYPTED_ENVELOPE=`envelope subject $PLAINTEXT_HELLO | envelope encrypt --key $KEY`
-$ echo $ENCRYPTED_ENVELOPE
+👉
+ENCRYPTED_ENVELOPE=`envelope subject $PLAINTEXT_HELLO | envelope encrypt --key $KEY`
+echo $ENCRYPTED_ENVELOPE
 ```
 
 ```
+👈
 ur:envelope/tpsolrgakoidaygmmtoyhggscmgshtfwtlvskirndswzvokslswdgdkorlndeegswdtkehnefsbngtmdykbefdhddktpsbhdcxloimbnlplsdloycftluoftcfguayrsbwghlbctcmplwteyynsawsnlbgsnhkmovwfysesnfl
 ```
 
@@ -208,31 +255,37 @@ Alice ➡️ ☁️ ➡️ Bob
 Bob receives the envelope and examines its contents.
 
 ```bash
-$ envelope $ENCRYPTED_ENVELOPE
+👉
+envelope $ENCRYPTED_ENVELOPE
 ```
 
 ```
+👈
 EncryptedMessage
 ```
 
 Bob decrypts the message and extracts its subject.
 
 ```bash
-$ DECRYPTED=`envelope decrypt $ENCRYPTED_ENVELOPE --key $KEY`
-$ envelope extract $DECRYPTED
+👉
+DECRYPTED=`envelope decrypt $ENCRYPTED_ENVELOPE --key $KEY`
+envelope extract $DECRYPTED
 ```
 
 ```
+👈
 Hello.
 ```
 
 Can't read with incorrect key.
 
 ```bash
-$ envelope decrypt $ENCRYPTED_ENVELOPE --key `envelope generate key`
+👉
+envelope decrypt $ENCRYPTED_ENVELOPE --key `envelope generate key`
 ```
 
 ```
+👈
 Error: invalidKey
 ```
 
@@ -241,21 +294,27 @@ Error: invalidKey
 This example combines the previous ones, first signing, then encrypting a message with a symmetric key.
 
 Alice and Bob have agreed to use this key.
-
 ```bash
-$ KEY=`envelope generate key`
-$ echo $KEY
+👉
+KEY=`envelope generate key`
+echo $KEY
 ```
 
 ```
+👈
 ur:crypto-key/hdcxpldtfesnclpdzodttohtmsdedebezodsosmodpdrhtpfqdnlwkimlbcwtbzmteeezotaengs
 ```
 
 Alice signs a plaintext message, wraps it so her signature will also be encrypted, then encrypts it.
 
 ```bash
-$ SIGNED_ENCRYPTED=`envelope subject $PLAINTEXT_HELLO | envelope sign --prvkeys $ALICE_PRVKEYS | envelope subject --wrapped | envelope encrypt --key $KEY`
-$ echo $SIGNED_ENCRYPTED
+👉
+SIGNED_ENCRYPTED=`envelope subject $PLAINTEXT_HELLO | envelope sign --prvkeys $ALICE_PRVKEYS | envelope subject --wrapped | envelope encrypt --key $KEY`
+echo $SIGNED_ENCRYPTED
+```
+
+```
+👈
 ur:envelope/tpsolrhdhngoimhylfqzeyiehfmketmtaetlfydihhknrkntldyanydeehbynsvolfzsgmjemsjpqdssmnsfsolbvllnpkguckhpktisytvlbaftahzsahktlnwpdrottecwihgsttvobwdyyamsremnrydtnbhlcyrlfstidacfdegdksztjlgultdirkrkrlwzvdwtwkgstezsemeniooerngdbbayqdykgdwkisidrogwrnghgrmolypktafdjokgonhddktpsbhdcxwfurtouypmlpbysnbwftrdghbypscwsohhmwcsnncwtyjnuowyfgkeadmdrpbncljypketpk
 ```
 
@@ -264,21 +323,25 @@ Alice ➡️ ☁️ ➡️ Bob
 Bob receives the envelope, and examines its contents.
 
 ```bash
-$ envelope $SIGNED_ENCRYPTED
+👉
+envelope $SIGNED_ENCRYPTED
 ```
 
 ```
+👈
 EncryptedMessage
 ```
 
 Bob decrypts it using the shared key, and then examines the decrypted envelope's contents.
 
 ```bash
-$ DECRYPTED=`envelope decrypt $SIGNED_ENCRYPTED --key $KEY`
-$ envelope $DECRYPTED
+👉
+DECRYPTED=`envelope decrypt $SIGNED_ENCRYPTED --key $KEY`
+envelope $DECRYPTED
 ```
 
 ```
+👈
 {
     "Hello." [
         verifiedBy: Signature
@@ -289,17 +352,24 @@ $ envelope $DECRYPTED
 Bob unwraps the inner envelope, verifies Alice's signature, and then extracts the message.
 
 ```bash
-$ envelope extract --wrapped $DECRYPTED | envelope verify --pubkeys $ALICE_PUBKEYS | envelope extract
+👉
+envelope extract --wrapped $DECRYPTED | envelope verify --pubkeys $ALICE_PUBKEYS | envelope extract
 ```
 
 ```
+👈
 Hello.
 ```
 
 Attempting to verify the wrong key exits with an error.
 
 ```bash
-$ envelope extract --wrapped $DECRYPTED | envelope verify --pubkeys $CAROL_PUBKEYS
+👉
+envelope extract --wrapped $DECRYPTED | envelope verify --pubkeys $CAROL_PUBKEYS
+```
+
+```
+👈
 Error: unverifiedSignature
 ```
 
@@ -316,19 +386,26 @@ The main difference between this order of operations and the sign-then-encrypt o
 Alice and Bob have agreed to use this key.
 
 ```bash
-$ KEY=`envelope generate key`
-$ echo $KEY
+👉
+KEY=`envelope generate key`
+echo $KEY
 ```
 
 ```
+👈
 ur:crypto-key/hdcxpldtfesnclpdzodttohtmsdedebezodsosmodpdrhtpfqdnlwkimlbcwtbzmteeezotaengs
 ```
 
 Alice encrypts a plaintext message, then signs it.
 
 ```bash
-$ ENCRYPTED_SIGNED=`envelope subject $PLAINTEXT_HELLO | envelope encrypt --key $KEY | envelope sign --prvkeys $ALICE_PRVKEYS`
-$ echo $ENCRYPTED_SIGNED
+👉
+ENCRYPTED_SIGNED=`envelope subject $PLAINTEXT_HELLO | envelope encrypt --key $KEY | envelope sign --prvkeys $ALICE_PRVKEYS`
+echo $ENCRYPTED_SIGNED
+```
+
+```
+👈
 ur:envelope/lftpsptpsolrgazeclldzttkhkinjpbzgsdewydyhsgmdihdzezmlgvwrlgdtlemtylekgpywttbssbwwktlgrbsytkbhddktpsbhdcxloimbnlplsdloycftluoftcfguayrsbwghlbctcmplwteyynsawsnlbgsnhkmovwtpsptputlftpsptpuraxtpsptpuotpuehdfznlrkpdsoahgsdmjtltsakgltnbjyjsbajlpyswhnguwlzsfnwmnbvopdeckbamrybtweolpyhlwdjptoethpgaolidkgbzhhuotbyagogubattstjytnehsebsgrnyytnbtpflox
 ```
 
@@ -337,10 +414,12 @@ Alice ➡️ ☁️ ➡️ Bob
 Bob receives the envelope and examines its contents.
 
 ```bash
-$ envelope $ENCRYPTED_SIGNED
+👉
+envelope $ENCRYPTED_SIGNED
 ```
 
 ```
+👈
 EncryptedMessage [
     verifiedBy: Signature
 ]
@@ -349,12 +428,14 @@ EncryptedMessage [
 Bob verifies Alice's signature, decrypts the message, then extracts the message.
 
 ```bash
-$ envelope verify $ENCRYPTED_SIGNED --pubkeys $ALICE_PUBKEYS |\
+👉
+envelope verify $ENCRYPTED_SIGNED --pubkeys $ALICE_PUBKEYS |\
     envelope decrypt --key $KEY |\
     envelope extract
 ```
 
 ```
+👈
 Hello.
 ```
 
@@ -365,11 +446,13 @@ This example demonstrates an encrypted message sent to multiple parties.
 Alice encrypts a message so that it can only be decrypted by Bob or Carol.
 
 ```bash
-$ ENVELOPE_TO=`envelope subject $PLAINTEXT_HELLO | envelope encrypt --recipient $BOB_PUBKEYS --recipient $CAROL_PUBKEYS`
-$ echo $ENVELOPE_TO
+👉
+ENVELOPE_TO=`envelope subject $PLAINTEXT_HELLO | envelope encrypt --recipient $BOB_PUBKEYS --recipient $CAROL_PUBKEYS`
+echo $ENVELOPE_TO
 ```
 
 ```
+👈
 ur:envelope/lstpsptpsolrgafdskfwckcehhfdbakkgsswdkadrldrhnprrnlrhnahcygdcecsskzslttldkvyrpdednbgpsgenyoxhddktpsbhdcxloimbnlplsdloycftluoftcfguayrsbwghlbctcmplwteyynsawsnlbgsnhkmovwtpsptputlftpsptpurahtpsptpuotptklftpsolshddksomdnsksjlktcfplislknstyfmfyvwwfkkvtsoiacffyutihbwcevondjteyenuoftmtjopfgskigdmsmsyaflflntjlrozefdgdfrrelsckbylsylmersqdiacehefdiylstpvahdcxsfldltynjyprvdadrnemdmbwrfkkcnbdluglrlghgyrsmomocsrpmkoymttaeyentpsptputlftpsptpurahtpsptpuotptklftpsolshddkmhndecotaekkchlscsvlfzrlmefdsrvehdgagsisfxgawzrdkgcwrlvdzocfhylewksscyksgsemgohgmsvsiafsspvovogwbtgdhkcpdnrlgltkylaxctwsoydimocnoemttpvahdcxktinfeidjkndgdykylbdnyiosgadknksrduevwiawlfpzctiwkldgwglmywfmwaerooltigo
 ```
 
@@ -380,10 +463,12 @@ Alice ➡️ ☁️ ➡️ Carol
 Bob receives the envelope and examines its structure:
 
 ```bash
-$ envelope $ENVELOPE_TO
+👉
+envelope $ENVELOPE_TO
 ```
 
 ```
+👈
 EncryptedMessage [
     hasRecipient: SealedMessage
     hasRecipient: SealedMessage
@@ -393,30 +478,36 @@ EncryptedMessage [
 Bob decrypts and reads the message.
 
 ```bash
-$ envelope decrypt $ENVELOPE_TO --recipient $BOB_PRVKEYS | envelope extract
+👉
+envelope decrypt $ENVELOPE_TO --recipient $BOB_PRVKEYS | envelope extract
 ```
 
 ```
+👈
 Hello.
 ```
 
 Carol decrypts and reads the message.
 
 ```bash
-$ envelope decrypt $ENVELOPE_TO --recipient $CAROL_PRVKEYS | envelope extract
+👉
+envelope decrypt $ENVELOPE_TO --recipient $CAROL_PRVKEYS | envelope extract
 ```
 
 ```
+👈
 Hello.
 ```
 
 Alice didn't encrypt it to herself, so she can't read it.
 
 ```bash
-$ envelope decrypt $ENVELOPE_TO --recipient $ALICE_PRVKEYS
+👉
+envelope decrypt $ENVELOPE_TO --recipient $ALICE_PRVKEYS
 ```
 
 ```
+👈
 Error: invalidRecipient
 ```
 
@@ -427,11 +518,13 @@ This example demonstrates a signed, then encrypted message, sent to multiple par
 Alice signs a message, and then encrypts it so that it can only be decrypted by Bob or Carol.
 
 ```bash
-$ ENVELOPE_SIGNED_TO=`envelope subject $PLAINTEXT_HELLO | envelope sign --prvkeys $ALICE_PRVKEYS | envelope encrypt --recipient $BOB_PUBKEYS --recipient $CAROL_PUBKEYS`
-$ echo $ENVELOPE_SIGNED_TO
+👉
+ENVELOPE_SIGNED_TO=`envelope subject $PLAINTEXT_HELLO | envelope sign --prvkeys $ALICE_PRVKEYS | envelope encrypt --recipient $BOB_PUBKEYS --recipient $CAROL_PUBKEYS`
+echo $ENVELOPE_SIGNED_TO
 ```
 
 ```
+👈
 ur:envelope/lrtpsptpsolrgrjtaodrenvetanskgmsgrvogsfhaecnnbvtjyrepmmsrnfthggdykwntpylvydsztiahnbdcfgtvykkbyimhddktpsbhdcxloimbnlplsdloycftluoftcfguayrsbwghlbctcmplwteyynsawsnlbgsnhkmovwtpsptputlftpsptpuraxtpsptpuotpuehdfzcfmtpyhpdslbltvlursgltaemyglcwjsrhonptsrfxvavefwvoeowmmsnbytbefmttdsiecylthkpkpmjkdypmsenewlltjkbaftlawllyrngtlaltbdrfgaqzztsrkitpsptputlftpsptpurahtpsptpuotptklftpsolshddklgbelgjpbsmuktsolkclehltcyynamenvybdkotdeybwnbskdmrnkegdhywmwnkobgfzcwltgsotcawlclfwidmwjepyztdpbtgdsgmhtbdispptvostaslbtemngsynrltotpvahdcxtdcmonmtbdzsgdhgfhbskgashylnrecastwpvladmkcmfzhyeniylrjpbahshsistpsptputlftpsptpurahtpsptpuotptklftpsolshddkskftrowdgyiohedpadfrayfnlgvsvyfdjtrklyuoamdeceimhfkbrhntbejsfhaybekpzcchgsotuynstepfroahknrtosuomhgdynrlfdfgtdbewpfzbwmnwmfhhhielpdrtpvahdcxaoyawdgtlejzfydettkssodnpksgvwpaztvdprsroetyfpdehdcxlpfmstoemtfrbspmqzlb
 ```
 
@@ -442,10 +535,12 @@ Alice ➡️ ☁️ ➡️ Carol
 Bob receives the envelope and examines its structure:
 
 ```bash
-$ envelope $ENVELOPE_SIGNED_TO
+👉
+envelope $ENVELOPE_SIGNED_TO
 ```
 
 ```
+👈
 EncryptedMessage [
     hasRecipient: SealedMessage
     hasRecipient: SealedMessage
@@ -456,10 +551,12 @@ EncryptedMessage [
 Bob verifies Alice's signature, then decrypts and reads the message
 
 ```bash
-$ envelope verify $ENVELOPE_SIGNED_TO --pubkeys $ALICE_PUBKEYS | envelope decrypt --recipient $BOB_PRVKEYS | envelope extract
+👉
+envelope verify $ENVELOPE_SIGNED_TO --pubkeys $ALICE_PUBKEYS | envelope decrypt --recipient $BOB_PRVKEYS | envelope extract
 ```
 
 ```
+👈
 Hello.
 ```
 
@@ -470,42 +567,49 @@ This example demonstrates the use of SSKR to shard a symmetric key that encrypte
 Dan has a cryptographic seed he wants to backup using a social recovery scheme. The seed includes metadata he wants to back up also, making it too large to fit into a basic SSKR share.
 
 ```bash
-$ DAN_SEED=ur:crypto-seed/oxadgdhkwzdtfthptokigtvwnnjsqzcxknsktdaosezofptpbtlnlyjzkefmaxkpfyhsjpjecxgdkpjpjojzihcxfpjskphscxgsjlkoihaakskggsjljpihjncxinjojkkpjncxiejljzjljpcxjkinjycxhsjnihjydwcxiajljtjkihiajyihjykpjpcxhsieinjoinjkiainjtiocxihjzinjydwcxjkihiecxiejlcxihinkpjkjnjliecxjyihjnjojljpcxinjtiainieiniekpjtjycxkpjycxjzhsidjljpihcxihjycxiejljzjljpihcxjnhsiojthscxhsjzinjskphsdmluwmoxny
+👉
+DAN_SEED=ur:crypto-seed/oxadgdhkwzdtfthptokigtvwnnjsqzcxknsktdaosezofptpbtlnlyjzkefmaxkpfyhsjpjecxgdkpjpjojzihcxfpjskphscxgsjlkoihaakskggsjljpihjncxinjojkkpjncxiejljzjljpcxjkinjycxhsjnihjydwcxiajljtjkihiajyihjykpjpcxhsieinjoinjkiainjtiocxihjzinjydwcxjkihiecxiejlcxihinkpjkjnjliecxjyihjnjojljpcxinjtiainieiniekpjtjycxkpjycxjzhsidjljpihcxihjycxiejljzjljpihcxjnhsiojthscxhsjzinjskphsdmluwmoxny
 ```
 
 Dan encloses his seed in an envelope.
 
 ```bash
-$ DAN_ENVELOPE=`envelope subject --ur $DAN_SEED`
-$ echo $DAN_ENVELOPE
+👉
+DAN_ENVELOPE=`envelope subject --ur $DAN_SEED`
+echo $DAN_ENVELOPE
 ```
 
 ```
+👈
 ur:envelope/tpuotaaddwoxadgdhkwzdtfthptokigtvwnnjsqzcxknsktdaosezofptpbtlnlyjzkefmaxkpfyhsjpjecxgdkpjpjojzihcxfpjskphscxgsjlkoihaakskggsjljpihjncxinjojkkpjncxiejljzjljpcxjkinjycxhsjnihjydwcxiajljtjkihiajyihjykpjpcxhsieinjoinjkiainjtiocxihjzinjydwcxjkihiecxiejlcxihinkpjkjnjliecxjyihjnjojljpcxinjtiainieiniekpjtjycxkpjycxjzhsidjljpihcxihjycxiejljzjljpihcxjnhsiojthscxhsjzinjskphsdmaygebzlg
 ```
 
 Dan examines the contents of his envelope.
 
 ```bash
-$ envelope $DAN_ENVELOPE
+👉
+envelope $DAN_ENVELOPE
 ```
 
 ```
+👈
 CBOR(crypto-seed)
 ```
 
 Dan splits the envelope into a single group 2-of-3. The output of the `envelope` tool contains one share envelope per line. He then pipes this output into some Shell magic (zsh in this case) that assigns the lines of output to a shell array.
 
 ```bash
-$ envelope sskr split -g 2-of-3 $DAN_ENVELOPE | IFS=$'\n' read -r -d '' -A SHARE_ENVELOPES < <( COMMAND && printf '\0' )
+👉
+envelope sskr split -g 2-of-3 $DAN_ENVELOPE | IFS=$'\n' read -r -d '' -A SHARE_ENVELOPES < <( COMMAND && printf '\0' )
 ```
 
 Dan sends one envelope to each of Alice, Bob, and Carol.
 
 ```bash
-$ SHARE_ENVELOPE_ALICE=${SHARE_ENVELOPES[1]}
-$ SHARE_ENVELOPE_BOB=${SHARE_ENVELOPES[2]}
-$ SHARE_ENVELOPE_CAROL=${SHARE_ENVELOPES[3]}
+👉
+SHARE_ENVELOPE_ALICE=${SHARE_ENVELOPES[1]}
+SHARE_ENVELOPE_BOB=${SHARE_ENVELOPES[2]}
+SHARE_ENVELOPE_CAROL=${SHARE_ENVELOPES[3]}
 ```
 
 Dan ➡️ ☁️ ➡️ Alice, Bob, Carol
@@ -513,10 +617,12 @@ Dan ➡️ ☁️ ➡️ Alice, Bob, Carol
 Bob examines the contents of his envelope, but can't recover the original seed.
 
 ```bash
-$ envelope $SHARE_ENVELOPE_BOB
+👉
+envelope $SHARE_ENVELOPE_BOB
 ```
 
 ```
+👈
 EncryptedMessage [
     sskrShare: SSKRShare
 ]
@@ -525,20 +631,24 @@ EncryptedMessage [
 By himself, Bob can't recover the seed.
 
 ```bash
-$ envelope sskr join $SHARE_ENVELOPE_BOB
+👉
+envelope sskr join $SHARE_ENVELOPE_BOB
 ```
 
 ```
+👈
 Error: invalidShares
 ```
 
 At some future point, Dan retrieves two of the three envelopes so he can recover his seed.
 
 ```bash
-$ envelope sskr join $SHARE_ENVELOPE_BOB $SHARE_ENVELOPE_CAROL | envelope extract --ur
+👉
+envelope sskr join $SHARE_ENVELOPE_BOB $SHARE_ENVELOPE_CAROL | envelope extract --ur
 ```
 
 ```
+👈
 ur:crypto-seed/oxadgdhkwzdtfthptokigtvwnnjsqzcxknsktdaosezofptpbtlnlyjzkefmaxkpfyhsjpjecxgdkpjpjojzihcxfpjskphscxgsjlkoihaakskggsjljpihjncxinjojkkpjncxiejljzjljpcxjkinjycxhsjnihjydwcxiajljtjkihiajyihjykpjpcxhsieinjoinjkiainjtiocxihjzinjydwcxjkihiecxiejlcxihinkpjkjnjliecxjyihjnjojljpcxinjtiainieiniekpjtjycxkpjycxjzhsidjljpihcxihjycxiejljzjljpihcxjnhsiojthscxhsjzinjskphsdmluwmoxny
 ```
 
@@ -553,14 +663,16 @@ In this example, we use CIDs to represent an author, whose known works may chang
 Start by creating an envelope that represents the author and what is known about her, including where to get more information using the author's CID.
 
 ```bash
-$ AUTHOR=`envelope generate cid --hex 9c747ace78a4c826392510dd6285551e7df4e5164729a1b36198e56e017666c8 | \
+👉
+AUTHOR=`envelope generate cid --hex 9c747ace78a4c826392510dd6285551e7df4e5164729a1b36198e56e017666c8 | \
     envelope subject --ur | \
     envelope assertion --known-predicate dereferenceVia LibraryOfCongress | \
     envelope assertion --known-predicate hasName "Ayn Rand"`
-$ envelope $AUTHOR
+envelope $AUTHOR
 ```
 
 ```
+👈
 CID(9c747ace78a4c826392510dd6285551e7df4e5164729a1b36198e56e017666c8) [
     dereferenceVia: "LibraryOfCongress"
     hasName: "Ayn Rand"
@@ -570,24 +682,28 @@ CID(9c747ace78a4c826392510dd6285551e7df4e5164729a1b36198e56e017666c8) [
 Create two envelopes representing the name of the novel in two different languages, annotated with assertions that specify the language.
 
 ```bash
-$ NAME_EN=`envelope subject "Atlas Shrugged" | \
+👉
+NAME_EN=`envelope subject "Atlas Shrugged" | \
     envelope assertion --known-predicate language en`
-$ envelope $NAME_EN
+envelope $NAME_EN
 ```
 
 ```
+👈
 "Atlas Shrugged" [
     language: "en"
 ]
 ```
 
 ```bash
-$ NAME_ES=`envelope subject "La rebelión de Atlas" | \
+👉
+NAME_ES=`envelope subject "La rebelión de Atlas" | \
     envelope assertion --known-predicate language es`
-$ envelope $NAME_ES
+envelope $NAME_ES
 ```
 
 ```
+👈
 "La rebelión de Atlas" [
     language: "es"
 ]
@@ -596,7 +712,8 @@ $ envelope $NAME_ES
 Create an envelope that specifies known information about the novel. This envelope embeds the previous envelopes we created for the author and the names of the work.
 
 ```bash
-$ WORK=`envelope generate cid --hex 7fb90a9d96c07f39f75ea6acf392d79f241fac4ec0be2120f7c82489711e3e80 | \
+👉
+WORK=`envelope generate cid --hex 7fb90a9d96c07f39f75ea6acf392d79f241fac4ec0be2120f7c82489711e3e80 | \
     envelope subject --ur | \
     envelope assertion --known-predicate isA novel | \
     envelope assertion isbn "9780451191144" | \
@@ -604,10 +721,11 @@ $ WORK=`envelope generate cid --hex 7fb90a9d96c07f39f75ea6acf392d79f241fac4ec0be
     envelope assertion --known-predicate dereferenceVia "LibraryOfCongress" | \
     envelope assertion --known-predicate hasName --envelope $NAME_EN | \
     envelope assertion --known-predicate hasName --envelope $NAME_ES`
-$ envelope $WORK
+envelope $WORK
 ```
 
 ```
+👈
 CID(7fb90a9d96c07f39f75ea6acf392d79f241fac4ec0be2120f7c82489711e3e80) [
     "author": CID(9c747ace78a4c826392510dd6285551e7df4e5164729a1b36198e56e017666c8) [
         dereferenceVia: "LibraryOfCongress"
@@ -628,26 +746,30 @@ CID(7fb90a9d96c07f39f75ea6acf392d79f241fac4ec0be2120f7c82489711e3e80) [
 Create an envelope that refers to the digest of a particular digital embodiment of the novel, in EPUB format. Unlike CIDs, which refer to mutable objects, this digest can only refer to exactly one unique digital object.
 
 ```bash
-$ BOOK_DATA="This is the entire book “Atlas Shrugged” in EPUB format."
-$ BOOK_DIGEST=`envelope generate digest $BOOK_DATA`
-$ echo $BOOK_DIGEST
+👉
+BOOK_DATA="This is the entire book “Atlas Shrugged” in EPUB format."
+BOOK_DIGEST=`envelope generate digest $BOOK_DATA`
+echo $BOOK_DIGEST
 ```
 
 ```
+👈
 ur:crypto-digest/hdcxvspkcxcaqzaafpistihpkttsqdiyfdzoknmsuydpfmjpykrdrkptlykkbyondeaslpinjljn
 ```
 
 Create the final metadata object, which provides information about the object to which it refers, both as a general work and as a specific digital embodiment of that work.
 
 ```bash
-$ BOOK_METADATA=`envelope subject --digest $BOOK_DIGEST | \
+👉
+BOOK_METADATA=`envelope subject --digest $BOOK_DIGEST | \
     envelope assertion --string "work" --envelope $WORK | \
     envelope assertion format EPUB | \
     envelope assertion --known-predicate dereferenceVia "IPFS"`
-$ envelope $BOOK_METADATA
+envelope $BOOK_METADATA
 ```
 
 ```
+👈
 Digest(e8aa201db4044168d05b77d7b36648fb7a97db2d3e72f5babba9817911a52809) [
     "format": "EPUB"
     "work": CID(7fb90a9d96c07f39f75ea6acf392d79f241fac4ec0be2120f7c82489711e3e80) [
@@ -674,15 +796,17 @@ Digest(e8aa201db4044168d05b77d7b36648fb7a97db2d3e72f5babba9817911a52809) [
 This example offers an analogue of a DID document, which identifies an entity. The document itself can be referred to by its CID, while the signed document can be referred to by its digest.
 
 ```bash
-$ ALICE_UNSIGNED_DOCUMENT=`envelope subject --ur $ALICE_CID | \
+👉
+ALICE_UNSIGNED_DOCUMENT=`envelope subject --ur $ALICE_CID | \
     envelope assertion --known-predicate controller --ur $ALICE_CID | \
     envelope assertion --known-predicate publicKeys --ur $ALICE_PUBKEYS`
-$ ALICE_SIGNED_DOCUMENT=`envelope subject --wrapped $ALICE_UNSIGNED_DOCUMENT | \
+ALICE_SIGNED_DOCUMENT=`envelope subject --wrapped $ALICE_UNSIGNED_DOCUMENT | \
     envelope sign --prvkeys $ALICE_PRVKEYS --note "Made by Alice."`
-$ envelope $ALICE_SIGNED_DOCUMENT
+envelope $ALICE_SIGNED_DOCUMENT
 ```
 
 ```
+👈
 {
     CID(d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f) [
         controller: CID(d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f)
@@ -700,29 +824,28 @@ $ envelope $ALICE_SIGNED_DOCUMENT
 A registrar checks the signature on Alice's submitted identifier document, performs any other necessary validity checks, and then extracts her CID from it.
 
 ```bash
-$ ALICE_UNWRAPPED=`envelope verify $ALICE_SIGNED_DOCUMENT --pubkeys $ALICE_PUBKEYS | \
+👉
+ALICE_UNWRAPPED=`envelope verify $ALICE_SIGNED_DOCUMENT --pubkeys $ALICE_PUBKEYS | \
     envelope extract --wrapped`
-$ ALICE_CID_UR=`envelope extract $ALICE_UNWRAPPED --ur`
-$ ALICE_CID_HEX=`envelope extract $ALICE_UNWRAPPED --cid`
-```
-
-```
-ur:crypto-cid/hdcxtygshybkzcecfhflpfdlhdonotoentnydmzsidmkindlldjztdmoeyishknybtbswtgwwpdi
+ALICE_CID_UR=`envelope extract $ALICE_UNWRAPPED --ur`
+ALICE_CID_HEX=`envelope extract $ALICE_UNWRAPPED --cid`
 ```
 
 The registrar creates its own registration document using Alice's CID as the subject, incorporating Alice's signed document, and adding its own signature.
 
 ```bash
-$ ALICE_URI="https://exampleledger.com/cid/$ALICE_CID_HEX"
-$ ALICE_REGISTRATION=`envelope subject --ur $ALICE_CID_UR | \
+👉
+ALICE_URI="https://exampleledger.com/cid/$ALICE_CID_HEX"
+ALICE_REGISTRATION=`envelope subject --ur $ALICE_CID_UR | \
     envelope assertion --known-predicate entity --envelope $ALICE_SIGNED_DOCUMENT | \
     envelope assertion --known-predicate dereferenceVia --uri $ALICE_URI | \
     envelope subject --wrapped | \
     envelope sign --prvkeys $LEDGER_PRVKEYS --note "Made by ExampleLedger."`
-$ envelope $ALICE_REGISTRATION
+envelope $ALICE_REGISTRATION
 ```
 
 ```
+👈
 {
     CID(d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f) [
         dereferenceVia: URI(https://exampleledger.com/cid/d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f)
@@ -747,36 +870,42 @@ $ envelope $ALICE_REGISTRATION
 Alice receives the registration document back, verifies its signature, and extracts the URI that now points to her record.
 
 ```bash
-$ ALICE_URI=`envelope verify $ALICE_REGISTRATION --pubkeys $LEDGER_PUBKEYS | \
+👉
+ALICE_URI=`envelope verify $ALICE_REGISTRATION --pubkeys $LEDGER_PUBKEYS | \
     envelope extract --wrapped | \
     envelope assertion find --known-predicate dereferenceVia | \
     envelope extract --object | \
     envelope extract --uri`
-$ echo $ALICE_URI
+echo $ALICE_URI
 ```
 
 ```
+👈
 https://exampleledger.com/cid/d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f
 ```
 
 Alice wants to introduce herself to Bob, so Bob needs to know she controls her identifier. Bob sends a challenge:
 
 ```bash
-$ ALICE_CHALLENGE=`envelope generate nonce | \
+👉
+ALICE_CHALLENGE=`envelope generate nonce | \
     envelope subject --ur | \
     envelope assertion --known-predicate note "Challenge to Alice from Bob."`
-$ echo $ALICE_CHALLENGE
+echo $ALICE_CHALLENGE
 ```
 
 ```
+👈
 ur:envelope/lftpsptpuotaaosrgsnbfwsbnnoxgtrsotspnyvayntpsptputlftpsptpuraatpsptpuokscefxishsjzjzihjtioihcxjyjlcxfpjziniaihcxiyjpjljncxfwjliddmhfkgiysr
 ```
 
 ```bash
-$ envelope $ALICE_CHALLENGE
+👉
+envelope $ALICE_CHALLENGE
 ```
 
 ```
+👈
 Nonce [
     note: "Challenge to Alice from Bob."
 ]
@@ -785,14 +914,16 @@ Nonce [
 Alice responds by adding her registered URI to the nonce, and signing it.
 
 ```bash
-$ ALICE_RESPONSE=`envelope subject --wrapped $ALICE_CHALLENGE | \
+👉
+ALICE_RESPONSE=`envelope subject --wrapped $ALICE_CHALLENGE | \
     envelope assertion --known-predicate dereferenceVia --uri $ALICE_URI | \
     envelope subject --wrapped | \
     envelope sign --prvkeys $ALICE_PRVKEYS --note "Made by Alice."`
-$ envelope $ALICE_RESPONSE
+envelope $ALICE_RESPONSE
 ```
 
 ```
+👈
 {
     {
         Nonce [
@@ -809,35 +940,39 @@ $ envelope $ALICE_RESPONSE
 ```
 
 Bob receives Alice's response, and first checks that the nonce is the once he sent.
-
 ```bash
-$ ALICE_CHALLENGE_2=`envelope extract --wrapped $ALICE_RESPONSE | \
+👉
+ALICE_CHALLENGE_2=`envelope extract --wrapped $ALICE_RESPONSE | \
     envelope extract --wrapped`
 echo $ALICE_CHALLENGE_2
 ```
 
 ```
+👈
 ur:envelope/lftpsptpuotaaosrgsnbfwsbnnoxgtrsotspnyvayntpsptputlftpsptpuraatpsptpuokscefxishsjzjzihjtioihcxjyjlcxfpjziniaihcxiyjpjljncxfwjliddmhfkgiysr
 ```
 
 `ALICE_CHALLENGE_2` is indeed the same as `ALICE_CHALLENGE`, above. Bob then extracts Alice's registered URI.
 
 ```bash
-$ ALICE_URI=`envelope extract --wrapped $ALICE_RESPONSE | \
+👉
+ALICE_URI=`envelope extract --wrapped $ALICE_RESPONSE | \
     envelope assertion find --known-predicate dereferenceVia | \
     envelope extract --object | \
     envelope extract --uri`
-$ echo $ALICE_URI
+echo $ALICE_URI
 ```
 
 ```
+👈
 https://exampleledger.com/cid/d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f
 ```
 
 Bob uses the URI to ask ExampleLedger for Alice's identifier document, then checks ExampleLedgers's signature. Bob trusts ExampleLedger's validation of Alice's original document, so doesn't bother to check it for internal consistency, and instead goes ahead and extracts Alice's public keys from it.
 
 ```bash
-$ ALICE_PUBKEYS=`envelope verify $ALICE_REGISTRATION --pubkeys $LEDGER_PUBKEYS | \
+👉
+ALICE_PUBKEYS=`envelope verify $ALICE_REGISTRATION --pubkeys $LEDGER_PUBKEYS | \
     envelope extract --wrapped | \
     envelope assertion find --known-predicate entity | \
     envelope extract --object | \
@@ -850,9 +985,110 @@ $ ALICE_PUBKEYS=`envelope verify $ALICE_REGISTRATION --pubkeys $LEDGER_PUBKEYS |
 Finally, Bob uses Alice's public keys to validate the challenge he sent her.
 
 ```bash
-$ envelope verify $ALICE_RESPONSE --pubkeys $ALICE_PUBKEYS
+👉
+envelope verify $ALICE_RESPONSE --pubkeys $ALICE_PUBKEYS
 ```
 
 ```
+👈
 ur:envelope/lftpsptpvtlftpsptpvtlftpsptpuotaaosrgsnbfwsbnnoxgtrsotspnyvayntpsptputlftpsptpuraatpsptpuokscefxishsjzjzihjtioihcxjyjlcxfpjziniaihcxiyjpjljncxfwjliddmtpsptputlftpsptpurastpsptpuotpcxkshyisjyjyjojkftdldlihkshsjnjojzihjzihieioihjpdmiajljndliainiedlieeeeeiaecihdyhsiyieeoeceoiyeeemiddyeyiyecethsechseohseyesieeshseyihiyhseneyeseteneseyiyeteseniaieeyeseyeoeyeneteceseshsdyiedyiytpsptputlftpsptpuraxtpsplftpsptpuotpuehdfzrtpsvovytlahwzseprktaturdedlaamttdsfathehhcahyfmwnwebguraysesbaybsdllfammttotelnfnghpfftdsadnnwelspattoytpbtimktlbguchtydegthshptpsptputlftpsptpuraatpsptpuojtgthsieihcxidkkcxfpjziniaihdmmkfzbepd
+```
+
+## Example 12: Verifiable Credential
+
+Envelopes can also be built to support verifiable credentials, supporting the core functionality of DIDs.
+
+John Smith's identifier:
+
+```bash
+👉
+JOHN_CID=`envelope generate cid --hex 78bc30004776a3905bccb9b8a032cf722ceaf0bbfb1a49eaf3185fab5808cadc`
+```
+
+A photo of John Smith:
+
+```bash
+👉
+JOHN_IMAGE=`envelope subject "John Smith Smiling" | \
+envelope assertion --known-predicate note "This is an image of John Smith." | \
+envelope assertion --known-predicate dereferenceVia --uri https://exampleledger.com/digest/36be30726befb65ca13b136ae29d8081f64792c2702415eb60ad1c56ed33c999`
+```
+
+```
+👈
+Digest(36be30726befb65ca13b136ae29d8081f64792c2702415eb60ad1c56ed33c999) [
+    dereferenceVia: URI(https://exampleledger.com/digest/36be30726befb65ca13b136ae29d8081f64792c2702415eb60ad1c56ed33c999)
+    note: "This is an image of John Smith."
+]
+```
+
+John Smith's Permanent Resident Card issued by the State of Example:
+
+```bash
+👉
+ISSUER=`envelope subject --ur $STATE_CID | \
+    envelope assertion --known-predicate note "Issued by the State of Example" | \
+    envelope assertion --known-predicate dereferenceVia --uri https://exampleledger.com/cid/04363d5ff99733bc0f1577baba440af1cf344ad9e454fad9d128c00fef6505e8`
+
+BIRTH_COUNTRY=`envelope subject bs | \
+    envelope assertion --known-predicate note "The Bahamas"`
+
+HOLDER=`envelope subject --ur $JOHN_CID | \
+    envelope assertion --known-predicate isA Person | \
+    envelope assertion --known-predicate isA "Permanent Resident" | \
+    envelope assertion givenName JOHN | \
+    envelope assertion familyName SMITH | \
+    envelope assertion sex MALE | \
+    envelope assertion --string birthDate --date 1974-02-18 | \
+    envelope assertion --string image --envelope $JOHN_IMAGE | \
+    envelope assertion lprCategory C09 | \
+    envelope assertion --string birthCountry --envelope $BIRTH_COUNTRY | \
+    envelope assertion --string residentSince --date 2018-01-07`
+
+JOHN_RESIDENT_CARD=`envelope subject --ur $JOHN_CID | \
+    envelope assertion --known-predicate isA "credential" | \
+    envelope assertion --string "dateIssued" --date 2022-04-27 | \
+    envelope assertion --known-predicate issuer --envelope $ISSUER | \
+    envelope assertion --known-predicate holder --envelope $HOLDER | \
+    envelope assertion --known-predicate note "The State of Example recognizes JOHN SMITH as a Permanent Resident." | \
+    envelope subject --wrapped | \
+    envelope sign --prvkeys $STATE_PRVKEYS --note "Made by the State of Example."`
+
+envelope $JOHN_RESIDENT_CARD
+```
+
+```
+👈
+{
+    CID(78bc30004776a3905bccb9b8a032cf722ceaf0bbfb1a49eaf3185fab5808cadc) [
+        "dateIssued": 2022-04-27
+        holder: CID(78bc30004776a3905bccb9b8a032cf722ceaf0bbfb1a49eaf3185fab5808cadc) [
+            "birthCountry": "bs" [
+                note: "The Bahamas"
+            ]
+            "birthDate": 1974-02-18
+            "familyName": "SMITH"
+            "givenName": "JOHN"
+            "image": "John Smith Smiling" [
+                dereferenceVia: URI(https://exampleledger.com/digest/36be30726befb65ca13b136ae29d8081f64792c2702415eb60ad1c56ed33c999)
+                note: "This is an image of John Smith."
+            ]
+            "lprCategory": "C09"
+            "residentSince": 2018-01-07
+            "sex": "MALE"
+            isA: "Permanent Resident"
+            isA: "Person"
+        ]
+        isA: "credential"
+        issuer: CID(04363d5ff99733bc0f1577baba440af1cf344ad9e454fad9d128c00fef6505e8) [
+            dereferenceVia: URI(https://exampleledger.com/cid/04363d5ff99733bc0f1577baba440af1cf344ad9e454fad9d128c00fef6505e8)
+            note: "Issued by the State of Example"
+        ]
+        note: "The State of Example recognizes JOHN SMITH as a Permanent Resident."
+    ]
+} [
+    verifiedBy: Signature [
+        note: "Made by the State of Example."
+    ]
+]
 ```

@@ -26,6 +26,13 @@ struct SubjectArguments: ParsableArguments {
         try validate()
     }
     
+    static let dateTimeFormatter = ISO8601DateFormatter()
+    static let dateFormatter = {
+        var formatter = ISO8601DateFormatter()
+        formatter.formatOptions = .withFullDate
+        return formatter
+    }()
+    
     var envelope: Envelope {
         get throws {
             guard let value else {
@@ -57,7 +64,10 @@ struct SubjectArguments: ParsableArguments {
                 }
                 envelope = Envelope(data)
             case .date:
-                guard let date = ISO8601DateFormatter().date(from: value) else {
+                guard let date =
+                        Self.dateTimeFormatter.date(from: value) ??
+                        Self.dateFormatter.date(from: value)
+                else {
                     throw EnvelopeToolError.invalidType(expectedType: "date")
                 }
                 envelope = Envelope(date)
