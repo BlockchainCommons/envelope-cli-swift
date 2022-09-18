@@ -421,7 +421,7 @@ final class EnvelopeToolTests: XCTestCase {
         let encrypted = try envelope("encrypt \(aliceKnowsBobExample) --key \(keyExample)")
         XCTAssertEqual(try envelope(encrypted),
         """
-        EncryptedMessage [
+        ENCRYPTED [
             "knows": "Bob"
         ]
         """
@@ -503,7 +503,7 @@ final class EnvelopeToolTests: XCTestCase {
         let result = try envelope("sskr split \(aliceKnowsBobExample)")
         XCTAssertEqual(try envelope(result),
         """
-        EncryptedMessage [
+        ENCRYPTED [
             sskrShare: SSKRShare
         ]
         """

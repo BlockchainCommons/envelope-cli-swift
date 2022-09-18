@@ -4,6 +4,12 @@ import ArgumentParser
 
 extension HexData: ExpressibleByArgument {
     public init?(argument: String) {
-        self.init(hex: argument)
+        let arg: String
+        if argument.hasPrefix("0x") {
+            arg = String(argument.dropFirst(2))
+        } else {
+            arg = argument
+        }
+        self.init(hex: arg)
     }
 }

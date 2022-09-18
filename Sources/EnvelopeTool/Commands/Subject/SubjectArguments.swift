@@ -1,5 +1,6 @@
 import ArgumentParser
 import BCFoundation
+import WolfBase
 
 struct SubjectArguments: ParsableArguments {
     init() { }
@@ -44,7 +45,7 @@ struct SubjectArguments: ParsableArguments {
                 throw EnvelopeToolError.useAssertionCommand
             case .cbor:
                 guard
-                    let data = value.hexData,
+                    let data = HexData(argument: value)?.data,
                     let cbor = try? CBOR(data)
                 else {
                     throw EnvelopeToolError.invalidType(expectedType: "hex-encoded CBOR")
@@ -78,6 +79,11 @@ struct SubjectArguments: ParsableArguments {
             case .int:
                 guard let n = Int(value) else {
                     throw EnvelopeToolError.invalidType(expectedType: "integer")
+                }
+                envelope = Envelope(n)
+            case .float:
+                guard let n = Double(value) else {
+                    throw EnvelopeToolError.invalidType(expectedType: "floating point")
                 }
                 envelope = Envelope(n)
             case .knownPredicate:

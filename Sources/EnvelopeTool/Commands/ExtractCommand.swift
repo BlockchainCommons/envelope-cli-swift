@@ -70,6 +70,8 @@ struct ExtractCommand: ParsableCommand {
             printOut(envelope.subject.ur)
         case .int:
             printOut(try envelope.extractSubject(Int.self))
+        case .float:
+            printOut(try envelope.extractSubject(Double.self))
         case .knownPredicate:
             printOut(try envelope.extractSubject(KnownPredicate.self))
         case .string:

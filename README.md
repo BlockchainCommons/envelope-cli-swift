@@ -28,18 +28,19 @@ OPTIONS:
   -h, --help              Show help information.
 
 SUBCOMMANDS:
-  format (default)        Print the envelope in Envelope Notation.
-  subject                 Create an envelope with the given subject.
-  extract                 Extract the subject of the input envelope.
   assertion               Work with the envelope's assertions.
   digest                  Print the envelope's digest.
-  elide                   Elide a subset of elements.
-  generate                Utilities to generate and convert various objects.
-  encrypt                 Encrypt the envelope's subject using the provided key.
   decrypt                 Decrypt the envelope's subject using the provided key.
+  elide                   Elide a subset of elements.
+  encrypt                 Encrypt the envelope's subject using the provided key.
+  extract                 Extract the subject of the input envelope.
+  format (default)        Print the envelope in Envelope Notation.
+  generate                Utilities to generate and convert various objects.
+  salt                    Add random salt to the envelope.
   sign                    Sign the envelope with the provided private key base.
-  verify                  Verify a signature on the envelope using the provided public key base.
   sskr                    Sharded Secret Key Reconstruction (SSKR).
+  subject                 Create an envelope with the given subject.
+  verify                  Verify a signature on the envelope using the provided public key base.
 
   See 'envelope help <subcommand>' for detailed help.
 ```
@@ -340,7 +341,7 @@ envelope $ENCRYPTED
 
 ```
 👈
-EncryptedMessage [
+ENCRYPTED [
     "knows": "Bob"
 ]
 ```
@@ -444,7 +445,7 @@ envelope $WRAPPED_ENCRYPTED
 
 ```
 👈
-EncryptedMessage
+ENCRYPTED
 ```
 
 This encrypted envelope still has the same digest as the wrapped but unencrypted version:
@@ -629,7 +630,7 @@ envelope $SHARE_1
 
 ```
 👈
-EncryptedMessage [
+ENCRYPTED [
     sskrShare: SSKRShare
 ]
 ```
@@ -659,4 +660,54 @@ envelope sskr join $SHARE_2
 ```
 👈
 Error: invalidShares
+```
+
+### Salt
+
+Envelopes with the same content produce the same digests, even when elided or encrypted. This can make identical or even similar envelopes *correlatable*.
+
+Here we compare the digests produced by the plaintext and encrypted versions of the same envelope:
+
+```bash
+👉
+KEY=`envelope generate key`
+WRAPPED=`envelope subject --wrapped $ALICE_KNOWS_BOB`
+ENCRYPTED=`envelope encrypt $WRAPPED --key $KEY`
+envelope digest $WRAPPED; envelope digest $ENCRYPTED
+```
+
+```
+👈
+ur:crypto-digest/hdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwdigsimfets
+ur:crypto-digest/hdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwdigsimfets
+```
+
+The `salt` command lets us add an assertion with random data. If we do this before encrypting, the unencrypted subject will be the same, but the digest will be different:
+
+```bash
+👉
+SALTED_WRAPPED=`envelope salt $ALICE_KNOWS_BOB | envelope subject --wrapped`
+envelope $SALTED_WRAPPED
+```
+
+```
+👈
+{
+    "Alice" [
+        "knows": "Bob"
+        salt: Salt
+    ]
+}
+```
+
+```bash
+👉
+SALTED_ENCRYPTED=`envelope encrypt $SALTED_WRAPPED --key $KEY`
+envelope digest $ENCRYPTED; envelope digest $SALTED_ENCRYPTED
+```
+
+```
+👈
+ur:crypto-digest/hdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwdigsimfets
+ur:crypto-digest/hdcxvslfhezekitdiyhpbyjoisbycldrgstlndbksrhdioetreaxlpiycyhfztcmfrehpaspostd
 ```

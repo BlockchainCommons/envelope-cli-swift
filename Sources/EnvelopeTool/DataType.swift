@@ -9,6 +9,7 @@ enum DataType: EnumerableFlag {
     case date
     case digest
     case envelope
+    case float
     case int
     case knownPredicate
     case object
