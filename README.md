@@ -22,10 +22,17 @@ Written by [Wolf McNally](https://wolfmcnally.com) for [Blockchain Commons](http
 * [Verifiable Credential Example](Docs/6-VC-RESIDENT-EXAMPLE.md)
 * [Verifiable Credential with Detailed Elision Example](Docs/7-VC-ELISION-EXAMPLE.md)
 
-## Demos (Videos)
+## Videos
 
-* [Envelope-CLI](https://www.youtube.com/watch?v=JowheoEIGmE)
-* [Envelope-CLI Q&A](https://www.youtube.com/watch?v=2MjcrKLEsSE)
+* [Envelope CLI - 1 - Overview](https://youtu.be/K2gFTyjbiYk)
+* [Envelope CLI - 2 - Examples](https://youtu.be/K2gFTyjbiYk)
+* [Envelope CLI - 3 - Elision in Detail](https://youtu.be/K2gFTyjbiYk)
+* [Envelope CLI - 4 - Distributed Identifier](https://youtu.be/K2gFTyjbiYk)
+
+## Older Videos
+
+* [Envelope CLI Talk](https://www.youtube.com/watch?v=JowheoEIGmE)
+* [Envelope CLI Q&A](https://www.youtube.com/watch?v=2MjcrKLEsSE)
 
 ## Building
 

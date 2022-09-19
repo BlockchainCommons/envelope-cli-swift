@@ -219,14 +219,12 @@ TARGET+=`envelope extract --envelope $CONTENT | envelope digest`
 
 ## Revealing the Claims
 
-The only actual assertions we want to reveal are `firstName`, `lastName`, `isA`, `issuer`, `subject` and `expirationDate`, so we do this by finding those specific assertions by their predicate. The `envelope digest --shallow` command returns just a necessary set of attributes to reveal the assertion, its predicate, and its object (yes, all three of them need to be revealed) but *not* any deeper assertions on them.
+The only actual assertions we want to reveal are, `isA`, `issuer`, `subject` and `expirationDate`, so we do this by finding those specific assertions by their predicate. The `envelope digest --shallow` command returns just a necessary set of attributes to reveal the assertion, its predicate, and its object (yes, all three of them need to be revealed) but *not* any deeper assertions on them.
 
 ```bash
 👉
 TARGET+=(`envelope assertion find --known-predicate isA $CONTENT | envelope digest --shallow`)
 TARGET+=(`envelope assertion find --known-predicate issuer $CONTENT | envelope digest --shallow`)
-TARGET+=(`envelope assertion find "firstName" $CONTENT | envelope digest --shallow`)
-TARGET+=(`envelope assertion find "lastName" $CONTENT | envelope digest --shallow`)
 TARGET+=(`envelope assertion find "subject" $CONTENT | envelope digest --shallow`)
 TARGET+=(`envelope assertion find "expirationDate" $CONTENT | envelope digest --shallow`)
 ```
