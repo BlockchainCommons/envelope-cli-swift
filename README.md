@@ -24,6 +24,10 @@ Written by [Wolf McNally](https://wolfmcnally.com) for [Blockchain Commons](http
 
 ## Videos
 
+* [YouTube Playlist](https://www.youtube.com/playlist?list=PLCkrqxOY1FbooYwJ7ZhpJ_QQk8Az1aCnG)
+
+* [Introduction to Envelopes](https://www.youtube.com/watch?v=tQ9SPek0mnI)
+
 * [Envelope CLI - 1 - Overview](https://youtu.be/K2gFTyjbiYk)
 * [Envelope CLI - 2 - Examples](https://youtu.be/K2gFTyjbiYk)
 * [Envelope CLI - 3 - Elision in Detail](https://youtu.be/K2gFTyjbiYk)
@@ -31,8 +35,11 @@ Written by [Wolf McNally](https://wolfmcnally.com) for [Blockchain Commons](http
 
 ## Older Videos
 
+* [Envelope MVA (Minimal Viable Architecture) & Cryptographic Choices](https://www.youtube.com/watch?v=S0deyIHXukk)
+* [Envelope Privacy Requirements for Non-Correlation & Support Elision](https://www.youtube.com/watch?v=ubqKJAizayU)
 * [Envelope CLI Talk](https://www.youtube.com/watch?v=JowheoEIGmE)
 * [Envelope CLI Q&A](https://www.youtube.com/watch?v=2MjcrKLEsSE)
+
 
 ## Building
 
