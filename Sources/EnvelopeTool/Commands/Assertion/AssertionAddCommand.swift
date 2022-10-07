@@ -10,6 +10,9 @@ struct AssertionAddCommand: ParsableCommand {
     @Argument
     var envelope: Envelope?
     
+    @Flag(help: "Add salt to the assertion.")
+    var salted: Bool = false
+
     mutating func fill() throws {
         try arguments.fill()
         if envelope == nil {
@@ -23,6 +26,6 @@ struct AssertionAddCommand: ParsableCommand {
         guard let envelope else {
             throw EnvelopeToolError.missingArgument("envelope")
         }
-        printOut(try envelope.addAssertion(arguments.assertion).ur)
+        printOut(try envelope.addAssertion(arguments.assertion, salted: salted).ur)
     }
 }

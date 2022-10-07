@@ -16,6 +16,7 @@ struct Main: ParsableCommand {
             ExtractCommand.self,
             FormatCommand.self,
             GenerateCommand.self,
+            ProofCommand.self,
             SaltCommand.self,
             SignCommand.self,
             SSKRCommand.self,

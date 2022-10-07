@@ -22,4 +22,5 @@ enum EnvelopeToolError: Error {
     case invalidGroupSpecifier(String)
     case invalidParameters(String)
     case invalidURL(String)
+    case invalidProof
 }

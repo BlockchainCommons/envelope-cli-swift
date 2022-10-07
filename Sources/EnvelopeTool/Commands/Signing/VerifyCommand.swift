@@ -35,7 +35,7 @@ struct VerifyCommand: ParsableCommand {
         }
         try envelope.verifySignatures(from: pubkeys, threshold: threshold)
         if !silent {
-            print(envelope.ur)
+            printOut(envelope.ur)
         }
     }
 }
