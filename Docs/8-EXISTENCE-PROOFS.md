@@ -2,6 +2,10 @@
 
 ## Introduction
 
+An *existence proof* is a method of showing that particular information exists in a document without revealing more than is necessary about the document in which it exists.
+
+In a previous chapter we discussed elision, which is a method whereby information can be removed from an envelope without changing its digest tree structure.
+
 Because each element of an envelope provides a unique digest, and because changing an element in an envelope changes the digest of all elements upwards towards its root, the structure of an envelope is comparable to a [Merkle tree](https://en.wikipedia.org/wiki/Merkle_tree).
 
 In a Merkle Tree, all semantically significant information is carried by the tree's leaves (for example, the transactions in a block of Bitcoin transactions) while the internal nodes of the tree are nothing but digests computed from combinations of pairs of lower nodes, all the way up to the root of the tree (the "Merkle root".)
@@ -266,3 +270,5 @@ Now we confirm the contents of both fields with a single command.
 👉
 envelope proof confirm --silent $CREDENTIAL_ROOT $NAME_PROOF $FIRST_NAME_DIGEST $LAST_NAME_DIGEST
 ```
+
+Existence proofs are a way to confirm the existence of a digest or set of digests within an envelope using minimal disclosure, but they are only one tool in the toolbox of techniques that Envelope provides. Real-life applications are likely to employ several of these tools. In the example above, we're assuming certain things such as the credential root being trusted and the signature on the envelope having been validated; these aren't provided for by the existence proof mechanism on its own. In addition, it's possible for a specific digest to appear in more than one place in the structure of an envelope, so proving that it exists in a single place where it's expected to exist also needs to be part of the process. Using tools that incorporate randomness, like salting, signing, and encryption, as well as the tree structure of the envelope provide a variety of ways to ensure that a specific digest occurs in exactly one place.
