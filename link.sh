@@ -1,9 +1,9 @@
 #!/bin/bash
 
 LOCAL=/usr/local
-BIN={$LOCAL}/bin
+BIN=${LOCAL}/bin
 TOOL=${BIN}/envelope
-BUILD={$PWD}/.build/release
+BUILD=${PWD}/.build/release
 
 sudo rm -f ${TOOL}
 sudo ln -s ${BUILD}/EnvelopeTool ${TOOL}
