@@ -608,9 +608,9 @@ For brevity, we assign the elements of the array three shell variables: `$SHARE_
 
 ```bash
 👉
-SHARE_1=${SHARE_ENVELOPES[1]}
-SHARE_2=${SHARE_ENVELOPES[2]}
-SHARE_3=${SHARE_ENVELOPES[3]}
+SHARE_1=${SHARE_ENVELOPES[0]}
+SHARE_2=${SHARE_ENVELOPES[1]}
+SHARE_3=${SHARE_ENVELOPES[2]}
 ```
 
 If we format the first of those shares, we see that the subject is a symmetrically encrypted message, and its assertion is an SSKR share, which is one of the shares needed to decrypt the subject.
