@@ -21,6 +21,7 @@ Written by [Wolf McNally](https://wolfmcnally.com) for [Blockchain Commons](http
 * [DID Document Example](Docs/5-DID-EXAMPLE.md)
 * [Verifiable Credential Example](Docs/6-VC-RESIDENT-EXAMPLE.md)
 * [Verifiable Credential with Detailed Elision Example](Docs/7-VC-ELISION-EXAMPLE.md)
+* [Existence Proofs](Docs/8-EXISTENCE-PROOFS.md)
 
 ## Videos
 
