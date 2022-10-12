@@ -637,12 +637,13 @@ Notice this is a `ur:envelope` and there's a space and another UR envelope and t
 
 Let's make this a little bit simpler. We're going to use three commands to assign elements of that array to three separate shell variables. 
 ```
-$ SHARE_1=${SHARE_ENVELOPES[0]}
-$ SHARE_2=${SHARE_ENVELOPES[1]}
-$ SHARE_3=${SHARE_ENVELOPES[2]}
+$ SHARE_1=${SHARE_ENVELOPES[1]}
+$ SHARE_2=${SHARE_ENVELOPES[2]}
+$ SHARE_3=${SHARE_ENVELOPES[3]}
 $ echo $SHARE_1
 ur:envelope/lftpsptpsolrhddkwngmhehnldwlbwsejsrnlesbjkhhcmcxlnnblrgyjlmsfywktotpqzsakbdwashtdnfyrlplgststyvsldhltidltdgmfsonaxgdvwkthkkgfplsfytssrnbbksaonnnmnfwhddktpsbhdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwditpsptputlftpsptpuramtpsptpuotaadechddafmjeaeadaefmtndtaacwpavanlflltwzbavsnyjomhuemhhfdwnyjpctjosouokogsemyabyjtgmtepyen
 ```
+> 🔥 **WARNING:** The above arrays assume you are using `zsh` on your Mac, which has been the default shell since 2019. However, if you have a user account that was created before Catalina (2019), and you've never upgraded your shell, then you're still using `bash`. In this case, the arrays will be numbered [0], [1], and [2].
 
 Now if I just echo share one, that's just a single envelope and share two and three are the same — or similar, they're obviously not the same envelope. But each of them only has part of the key in it — not even a part it's mathematically sharded so that you can't even determine anything about the original secret from any of the parts.
 
