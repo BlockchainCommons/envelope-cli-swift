@@ -30,12 +30,12 @@ This video offers an overview of the Gordian Envelope-CLI (command line interfac
 * [03:49](https://youtu.be/K2gFTyjbiYk?t=229) envelope datatypes
 * [04:40](https://youtu.be/K2gFTyjbiYk?t=280)`envelope extract —envelope`
 * [05:09](https://youtu.be/K2gFTyjbiYk?t=309)`envelope assertion`
-* [06:12](https://youtu.be/K2gFTyjbiYk?t=372) `envelope digest` (a blake3 hash encoded in ur:crypto-digest)
+* [06:12](https://youtu.be/K2gFTyjbiYk?t=372) `envelope digest` encode a blake3 hash in ur:crypto-digest
 * [07:13](https://youtu.be/K2gFTyjbiYk?t=433) extracting digest of an assertion
-* [08:03](https://youtu.be/K2gFTyjbiYk?t=483) elision (remove parts of an envelope for redaction)
+* [08:03](https://youtu.be/K2gFTyjbiYk?t=483) elision allows removal of parts of an envelope for redaction
 * [08:38](https://youtu.be/K2gFTyjbiYk?t=518)`envelope elide removing` redact one or more digests
 * [10:13](https://youtu.be/K2gFTyjbiYk?t=613) elided envelopes have same digest as the original
-* [10:54](https://youtu.be/K2gFTyjbiYk?t=654) 10:54 symmetric key encryption
+* [10:54](https://youtu.be/K2gFTyjbiYk?t=654) symmetric key encryption
 * [11:22](https://youtu.be/K2gFTyjbiYk?t=682) `envelope generate key` create a random encryption key
 * [11:38](https://youtu.be/K2gFTyjbiYk?t=698) `envelope encrypt` symmetric encrypt subject of an envelope
 * [13:20](https://youtu.be/K2gFTyjbiYk?t=800) wrap an envelope to prepare for symmetric encryption
@@ -46,19 +46,19 @@ This video offers an overview of the Gordian Envelope-CLI (command line interfac
 * [16:12](https://youtu.be/K2gFTyjbiYk?t=972) `envelope generate pubkeys` to generate public key encoded as ur:crypto-pubkeys
 * [16:43](https://youtu.be/K2gFTyjbiYk?t=1003) `envelope sign` with —prvkeys adds assertion to subject
 * [17:06](https://youtu.be/K2gFTyjbiYk?t=1026) PROBLEM: `envelope sign` signs only the subject, not good enough
-* [17:40](https://youtu.be/K2gFTyjbiYk?t=1060) 17:40 SOLUTION: wrap before signing
+* [17:40](https://youtu.be/K2gFTyjbiYk?t=1060) SOLUTION: wrap before signing
 * [18:14](https://youtu.be/K2gFTyjbiYk?t=1094) verify a signature
-* [18:25](https://youtu.be/K2gFTyjbiYk?t=1105) 18:24 verify TRUE returns original envelope so you can pipe otherwise ERROR
+* [18:25](https://youtu.be/K2gFTyjbiYk?t=1105) verify returns original envelope if true so you can pipe otherwise ERROR
 * [18:37](https://youtu.be/K2gFTyjbiYk?t=1117) option for verify —silent
 * [18:49](https://youtu.be/K2gFTyjbiYk?t=1129) example of bad signature `Error: unverified signature`
 * [19:17](https://youtu.be/K2gFTyjbiYk?t=1157) shard an envelope with SSKR (Sharded Secret Key Reconstruction) to create an encrypted share
-* [19:49](https://youtu.be/K2gFTyjbiYk?t=1189) 19:49 `envelope sskr split` to create 3 shares
+* [19:49](https://youtu.be/K2gFTyjbiYk?t=1189) `envelope sskr split` to create 3 shares
 * [20:30](https://youtu.be/K2gFTyjbiYk?t=1230) separate into array of shares
 * [21:00](https://youtu.be/K2gFTyjbiYk?t=1260) inspect an SSKR share's format
 * [21:24](https://youtu.be/K2gFTyjbiYk?t=1284) `envelope sskr join` to recover 2 of 3 shares to restore unencrypted envelope
 * [22:02](https://youtu.be/K2gFTyjbiYk?t=1322) many flexible SSKR options
 * [22:12](https://youtu.be/K2gFTyjbiYk?t=1332) using salts to avoid correlation
-* [22:59](https://youtu.be/K2gFTyjbiYk?t=1379) 22:59 `envelope salt` make envelope hashes different
+* [22:59](https://youtu.be/K2gFTyjbiYk?t=1379) `envelope salt` make envelope hashes different
 * [23:29](https://youtu.be/K2gFTyjbiYk?t=1409) Comparing original with salted encrypted envelope
 
 ## Edited Transcript
