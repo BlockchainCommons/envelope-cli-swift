@@ -27,7 +27,7 @@ Written by [Wolf McNally](https://wolfmcnally.com) for [Blockchain Commons](http
 
 * [Envelope CLI Playlist (YouTube)](https://www.youtube.com/playlist?list=PLCkrqxOY1FbooYwJ7ZhpJ_QQk8Az1aCnG)
   * [Introduction to Envelopes](https://www.youtube.com/watch?v=tQ9SPek0mnI)
-  * [Envelope CLI - 1 - Overview](https://youtu.be/K2gFTyjbiYk) / [Transcript with Examples](Docs/1-OVERVIEW-TRANSCRIPT.md)
+  * [Envelope CLI - 1 - Overview](https://youtu.be/K2gFTyjbiYk) / [Transcript with Examples](Transcripts/1-OVERVIEW-TRANSCRIPT.md)
   * [Envelope CLI - 2 - Examples](https://youtu.be/K2gFTyjbiYk)
   * [Envelope CLI - 3 - Elision in Detail](https://youtu.be/K2gFTyjbiYk)
   * [Envelope CLI - 4 - Distributed Identifier](https://youtu.be/K2gFTyjbiYk)
