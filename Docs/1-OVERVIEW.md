@@ -612,6 +612,7 @@ SHARE_1=${SHARE_ENVELOPES[1]}
 SHARE_2=${SHARE_ENVELOPES[2]}
 SHARE_3=${SHARE_ENVELOPES[3]}
 ```
+> 🔥 **WARNING:** The above arrays assume you are using `zsh` on your Mac, which has been the default shell since 2019. However, if you have a user account that was created before Catalina (2019), and you've never upgraded your shell, then you're still using `bash`. In this case, the arrays will be numbered [0], [1], and [2].
 
 If we format the first of those shares, we see that the subject is a symmetrically encrypted message, and its assertion is an SSKR share, which is one of the shares needed to decrypt the subject.
 
