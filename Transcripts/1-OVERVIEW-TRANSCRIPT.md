@@ -741,4 +741,4 @@ Even when it encrypted, it doesn't match because we added the salt. So salting i
 
 Remember encryption uses random data to perform the actual encryption without disturbing the original data, but the digest remains the same in an envelope. So you add salt if you don't want either of those to be correlatable.
 
-Next transcript is on [2-EXAMPLES-TRANSCRIPT.md](Examples).
+Next transcript is on [Examples](2-EXAMPLES-TRANSCRIPT.md).
