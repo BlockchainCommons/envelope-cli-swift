@@ -132,3 +132,6 @@ So this is a recap here. I just paste all those commands in one fell swoop here.
 Add that top level digest. Again, you have to add the top level digest envelope, and then you have to add the digest of the subject, which is what we're doing here. Extract, extracts the subject, and then we're finding the assertions we want to reveal, either as known predicates or as custom strings. And then we're adding those digests all the digests necessary to show them, but without going deep on them, and then we're finally redacting the credential with our target. And then we're taking that redacted credential, wrapping that, adding our assertions to it wrapping that and then signing it, and that's creating the entire warranty. So again, if I print that out, that's what our final warranty looks like. 
 
 I'm really looking forward to the community's feedback on this work we're doing, I'm very excited about it. 
+
+Next transcript is on [DIDs](4-DID-TRANSCRIPT.md).
+
