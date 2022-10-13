@@ -30,7 +30,8 @@ Written by [Wolf McNally](https://wolfmcnally.com) for [Blockchain Commons](http
   * [Envelope CLI - 1 - Overview](https://youtu.be/K2gFTyjbiYk) [ [Transcript with Examples](Transcripts/1-OVERVIEW-TRANSCRIPT.md) ]
   * [Envelope CLI - 2 - Examples](https://youtu.be/K2gFTyjbiYk) [ [Rough Transcript](Transcripts/2-EXAMPLES-TRANSCRIPT.md) ]
   * [Envelope CLI - 3 - Elision in Detail](https://youtu.be/K2gFTyjbiYk) [ [Rough Transcript](Transcripts/3-ELISION-TRANSCRIPT.md) ]
-  * [Envelope CLI - 4 - Distributed Identifier](https://youtu.be/K2gFTyjbiYk)
+  * [Envelope CLI - 4 - Distributed Identifier](https://youtu.be/K2gFTyjbiYk) [ [Rough Transcript](Transcripts/4-DID-TRANSCRIPT.md) ]
+  * [Envelope CLI - 5 - Existence Proofs](https://www.youtube.com/watch?v=LUQ-n9EZa0U)[ [Rough Transcript](Transcripts/5-EXISTENCE-PROOFS-TRANSCRIPT.md) ]
   * Older videos
     * [Envelope MVA (Minimal Viable Architecture) & Cryptographic Choices](https://www.youtube.com/watch?v=S0deyIHXukk)
     * [Envelope Privacy Requirements for Non-Correlation & Support Elision](https://www.youtube.com/watch?v=ubqKJAizayU)
