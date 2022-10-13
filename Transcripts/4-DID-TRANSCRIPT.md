@@ -80,3 +80,6 @@ So he's verifying Alice's registration document. Getting Ledger's public keys an
 And so there's a crypto pubkeys. This is her public keybase. So now he knows that this is Alice he's actually talking to. So now he needs to make sure that her signature on it is actually good. So now, since he has her public keys, now he can say verify the Alice response, public keys, Alice public keys that he just got back and it works.
 
 So now he can correspond with Alice knowing that she is in fact, the entity, that Example Ledger has on record. 
+
+Next transcript is on [Existence Proofs](5-EXISTENCE-PROOFS-TRANSCRIPT.md).
+
