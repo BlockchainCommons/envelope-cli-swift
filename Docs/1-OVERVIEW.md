@@ -128,14 +128,14 @@ graph LR
     3 -->|pred| 4
     3 -->|obj| 5
     style 1 stroke:red,stroke-width:3.0px
-    style 2 stroke:blue,stroke-width:3.0px
+    style 2 stroke:#55f,stroke-width:3.0px
     style 3 stroke:red,stroke-width:3.0px
-    style 4 stroke:blue,stroke-width:3.0px
-    style 5 stroke:blue,stroke-width:3.0px
+    style 4 stroke:#55f,stroke-width:3.0px
+    style 5 stroke:#55f,stroke-width:3.0px
     linkStyle 0 stroke:red,stroke-width:2.0px
     linkStyle 1 stroke-width:2.0px
     linkStyle 2 stroke:green,stroke-width:2.0px
-    linkStyle 3 stroke:blue,stroke-width:2.0px
+    linkStyle 3 stroke:#55f,stroke-width:2.0px
 ```
 
 ### Subject
