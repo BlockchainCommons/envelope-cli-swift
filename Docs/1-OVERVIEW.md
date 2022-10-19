@@ -60,17 +60,21 @@ envelope $ALICE_KNOWS_BOB    # Equivalent to `envelope format $ALICE_KNOWS_BOB`
 ]
 ```
 
+#### Hex CBOR Output
+
 The `format` command has several output format options. For example, you can output the hexadecimal of the raw CBOR for the envelope:
 
 ```
 👉
-envelope --cbor $ALICE_KNOWS_BO
+envelope --cbor $ALICE_KNOWS_BOB
 ```
 
 ```
 👈
 d8c882d8c8d8dc65416c696365d8c8d8dd82d8c8d8dc656b6e6f7773d8c8d8dc63426f62
 ```
+
+#### CBOR Diagnostic Notation Output
 
 Or your can output the annotated CBOR diagnostic annotation of the envelope:
 
@@ -100,6 +104,38 @@ envelope --diag $ALICE_KNOWS_BOB
       )
    ]
 )
+```
+
+#### Mermaid Output
+
+Or you can output your envelope in [Mermaid](https://mermaid-js.github.io/) format, which resolves to a graphical representation of the envelope hierarchy when placed in a markdown file (like this one.) Each element in the graph shows an abbreviated version of its digest.
+
+```
+👉
+envelope --mermaid $ALICE_KNOWS_BOB
+```
+
+👈
+```mermaid
+graph LR
+    1(("e54d6fd3<br/>NODE"))
+    2["27840350<br/>#quot;Alice#quot;"]
+    3(["55560bdf<br/>ASSERTION"])
+    4["7092d620<br/>#quot;knows#quot;"]
+    5["9a771715<br/>#quot;Bob#quot;"]
+    1 -->|subj| 2
+    1 --> 3
+    3 -->|pred| 4
+    3 -->|obj| 5
+    style 1 stroke:red,stroke-width:3.0px
+    style 2 stroke:blue,stroke-width:3.0px
+    style 3 stroke:red,stroke-width:3.0px
+    style 4 stroke:blue,stroke-width:3.0px
+    style 5 stroke:blue,stroke-width:3.0px
+    linkStyle 0 stroke:red,stroke-width:2.0px
+    linkStyle 1 stroke-width:2.0px
+    linkStyle 2 stroke:green,stroke-width:2.0px
+    linkStyle 3 stroke:blue,stroke-width:2.0px
 ```
 
 ### Subject

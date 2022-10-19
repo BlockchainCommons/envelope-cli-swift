@@ -10,7 +10,7 @@ struct FormatCommand: ParsableCommand {
         case envelope, cbor, diag, mermaid
     }
     
-    enum Layout: EnumerableFlag {
+    enum Layout: String, ExpressibleByArgument {
         case lr
         case tb
         
@@ -27,7 +27,7 @@ struct FormatCommand: ParsableCommand {
     @Flag(exclusivity: .exclusive, help: "Whether to output the envelope in envelope notation (envelope), or as tagged CBOR hex (cbor), as CBOR diagnostic notation (diag), or as Mermaid (mermaid).")
     var output: Output = .envelope
     
-    @Flag(exclusivity: .exclusive, help: "For Mermaid output, whether the layout should be left-to-right (lr) or top-to-bottom (tb).")
+    @Option(help: "For Mermaid output, whether the layout should be left-to-right (lr) or top-to-bottom (tb).")
     var layout: Layout = .lr
     
     mutating func fill() throws {
