@@ -93,7 +93,7 @@ final class EnvelopeToolTests: XCTestCase {
     func testCIDSubject() throws {
         let e = try envelope("subject --cid \(cidExample)")
         XCTAssertEqual(e, "ur:envelope/tpuotpsghdcxuestvsdemusrdlkngwtosweortdwbasrdrfxhssgfmvlrflthdplatjydmmwahgdrytleywm")
-        XCTAssertEqual(try envelope(e), "CID(\(cidExample))")
+        XCTAssertEqual(try envelope(e), "CID(\(cidExample.prefix(8)))")
         XCTAssertEqual(try envelope("extract --cid \(e)"), cidExample)
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "d8ca5820dec7e82893c32f7a4fcec633c02c0ec32a4361ca3ee3bc8758ae07742e940550")
     }
@@ -117,7 +117,7 @@ final class EnvelopeToolTests: XCTestCase {
         let value = "cafebabe"
         let e = try envelope("subject --data \(value)")
         XCTAssertEqual(e, "ur:envelope/tpuofysgzerdrnhkmtetla")
-        XCTAssertEqual(try envelope(e), "Data")
+        XCTAssertEqual(try envelope(e), "Data(4)")
         XCTAssertEqual(try envelope("extract --data \(e)"), value)
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "44cafebabe")
     }
@@ -133,7 +133,7 @@ final class EnvelopeToolTests: XCTestCase {
     func testDigestSubject() throws {
         let e = try envelope("subject --digest \(digestExample)")
         XCTAssertEqual(e, "ur:envelope/tpuotpsbhdcxfdurmtpygubelooyaowdrpglbakeuodanylrbbesimbnwlkgbywpmksgbbsajnlklalsjkjn")
-        XCTAssertEqual(try envelope(e), "Digest(48df96ab531088a102eab64e0e7cdc259a8414396a0ce97b11ec98ca14c26d8c)")
+        XCTAssertEqual(try envelope(e), "Digest(48df96ab)")
         XCTAssertEqual(try envelope("extract --digest \(e)"), digestExample)
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "d8cb582048df96ab531088a102eab64e0e7cdc259a8414396a0ce97b11ec98ca14c26d8c")
     }

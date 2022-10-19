@@ -60,6 +60,48 @@ envelope $ALICE_KNOWS_BOB    # Equivalent to `envelope format $ALICE_KNOWS_BOB`
 ]
 ```
 
+The `format` command has several output format options. For example, you can output the hexadecimal of the raw CBOR for the envelope:
+
+```
+👉
+envelope --cbor $ALICE_KNOWS_BO
+```
+
+```
+👈
+d8c882d8c8d8dc65416c696365d8c8d8dd82d8c8d8dc656b6e6f7773d8c8d8dc63426f62
+```
+
+Or your can output the annotated CBOR diagnostic annotation of the envelope:
+
+```
+👉
+envelope --diag $ALICE_KNOWS_BOB
+```
+
+```
+👈
+200(   ; envelope
+   [
+      200(   ; envelope
+         220("Alice")   ; leaf
+      ),
+      200(   ; envelope
+         221(   ; assertion
+            [
+               200(   ; envelope
+                  220("knows")   ; leaf
+               ),
+               200(   ; envelope
+                  220("Bob")   ; leaf
+               )
+            ]
+         )
+      )
+   ]
+)
+```
+
 ### Subject
 
 The `subject` command creates a new envelope with the given subject. You can specify the data type of the subject; `string` is the default.

@@ -3,15 +3,32 @@ import BCFoundation
 
 struct FormatCommand: ParsableCommand {
     static var configuration = CommandConfiguration(commandName: "format", abstract: "Print the envelope in Envelope Notation.")
-
+    
     @Argument var envelope: Envelope?
     
     enum Output: EnumerableFlag {
-        case envelope, cbor, diag
+        case envelope, cbor, diag, mermaid
     }
     
-    @Flag(exclusivity: .exclusive, help: "Whether to output the envelope in envelope notation (envelope), or as tagged CBOR hex (cbor), or as CBOR diagnostic notation (diag).")
+    enum Layout: EnumerableFlag {
+        case lr
+        case tb
+        
+        var mermaidLayout: EnvelopeMermaidLayoutDirection {
+            switch self {
+            case .lr:
+                return .leftToRight
+            case .tb:
+                return .topToBottom
+            }
+        }
+    }
+    
+    @Flag(exclusivity: .exclusive, help: "Whether to output the envelope in envelope notation (envelope), or as tagged CBOR hex (cbor), as CBOR diagnostic notation (diag), or as Mermaid (mermaid).")
     var output: Output = .envelope
+    
+    @Flag(exclusivity: .exclusive, help: "For Mermaid output, whether the layout should be left-to-right (lr) or top-to-bottom (tb).")
+    var layout: Layout = .lr
     
     mutating func fill() throws {
         if envelope == nil {
@@ -33,6 +50,8 @@ struct FormatCommand: ParsableCommand {
             printOut(envelope.taggedCBOR.hex)
         case .diag:
             printOut(envelope.diagAnnotated)
+        case .mermaid:
+            printOut(envelope.mermaidFormat(layoutDirection: layout.mermaidLayout))
         }
     }
 }
