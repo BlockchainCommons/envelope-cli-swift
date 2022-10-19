@@ -1,5 +1,9 @@
 # envelope - Existence Proofs
 
+**See Associated Video:**
+
+[![Gordian Envelope CLI - 5 - Existence Proofs](https://img.youtube.com/vi/LUQ-n9EZa0U/mqdefault.jpg)](https://www.youtube.com/watch?v=LUQ-n9EZa0U)
+
 ## Introduction
 
 An *existence proof* is a method of showing that particular information exists in a document without revealing more than is necessary about the document in which it exists.

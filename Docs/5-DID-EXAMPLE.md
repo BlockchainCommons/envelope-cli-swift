@@ -2,6 +2,11 @@
 
 This example offers an analogue of a DID document, which identifies an entity. The document itself can be referred to by its CID, while the signed document can be referred to by its digest.
 
+**See Associated Video:**
+
+[![Gordian Envelope CLI - 4 - DID Example](https://img.youtube.com/vi/Dvs2CT60_uI/mqdefault.jpg)](https://www.youtube.com/watch?v=Dvs2CT60_uI)
+
+
 ```bash
 👉
 ALICE_UNSIGNED_DOCUMENT=`envelope subject --ur $ALICE_CID | \
