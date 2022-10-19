@@ -2,6 +2,7 @@
 ## Overview of the Commands
 
 **See Associated Video:**
+
 [![Gordian Envelope CLI - 1 - Commands Overview](https://img.youtube.com/vi/K2gFTyjbiYk/mqdefault.jpg)](https://youtu.be/K2gFTyjbiYk)
 
 ### Help
