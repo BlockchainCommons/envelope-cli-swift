@@ -14,19 +14,20 @@ Written by [Wolf McNally](https://wolfmcnally.com) for [Blockchain Commons](http
 
 ## Documentation and Examples
 
-* [Overview of Commands](Docs/1-Overview.md)
+* [Overview of Commands](Docs/1-OVERVIEW.md)
 * [Basic Examples](Docs/2-BASIC-EXAMPLES.md)
 * [SSKR Example](Docs/3-SSKR-EXAMPLE.md)
 * [Complex Metadata Example](Docs/4-METADATA-EXAMPLE.md)
 * [DID Document Example](Docs/5-DID-EXAMPLE.md)
 * [Verifiable Credential Example](Docs/6-VC-RESIDENT-EXAMPLE.md)
 * [Verifiable Credential with Detailed Elision Example](Docs/7-VC-ELISION-EXAMPLE.md)
+* [Existence Proofs](Docs/8-EXISTENCE-PROOFS.md)
 
 ## Videos
 
 * [Envelope CLI Playlist (YouTube)](https://www.youtube.com/playlist?list=PLCkrqxOY1FbooYwJ7ZhpJ_QQk8Az1aCnG)
   * [Introduction to Envelopes](https://www.youtube.com/watch?v=tQ9SPek0mnI)
-  * [Envelope CLI - 1 - Overview](https://youtu.be/K2gFTyjbiYk)
+  * [Envelope CLI - 1 - Overview](https://youtu.be/K2gFTyjbiYk) / [Transcript with Examples](Transcripts/1-OVERVIEW-TRANSCRIPT.md)
   * [Envelope CLI - 2 - Examples](https://youtu.be/K2gFTyjbiYk)
   * [Envelope CLI - 3 - Elision in Detail](https://youtu.be/K2gFTyjbiYk)
   * [Envelope CLI - 4 - Distributed Identifier](https://youtu.be/K2gFTyjbiYk)
