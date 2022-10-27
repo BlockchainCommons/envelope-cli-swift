@@ -7,14 +7,14 @@ struct FormatCommand: ParsableCommand {
     @Argument var envelope: Envelope?
     
     enum Output: EnumerableFlag {
-        case envelope, cbor, diag, mermaid
+        case envelope, cbor, diag, tree, mermaid
     }
     
     enum Layout: String, ExpressibleByArgument {
         case lr
         case tb
         
-        var mermaidLayout: EnvelopeMermaidLayoutDirection {
+        var mermaidLayout: MermaidOptions.LayoutDirection {
             switch self {
             case .lr:
                 return .leftToRight
@@ -50,6 +50,8 @@ struct FormatCommand: ParsableCommand {
             printOut(envelope.taggedCBOR.hex)
         case .diag:
             printOut(envelope.diagAnnotated)
+        case .tree:
+            printOut(envelope.treeFormat)
         case .mermaid:
             printOut(envelope.mermaidFormat(layoutDirection: layout.mermaidLayout))
         }
