@@ -2,6 +2,10 @@
 
 This document walks you through a set of basic examples using the `envelope` command line tool. There are several companion documents that contain more complex examples.
 
+**See Associated Video:**
+
+[![Gordian Envelope CLI - 2 - Examples](https://img.youtube.com/vi/LYjtuBO1Sgw/mqdefault.jpg)](https://www.youtube.com/watch?v=LYjtuBO1Sgw)
+
 ## Notation
 
 Throughout this document, commands entered into the shell are annotation with a right-pointing hand:

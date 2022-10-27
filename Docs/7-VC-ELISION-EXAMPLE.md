@@ -4,6 +4,10 @@ In this example, The employer of an employee with a continuing education credent
 
 This example goes into detail about creating the target set for elision, building it up piece by piece.
 
+**See Associated Video:**
+
+[![Gordian Envelope CLI - 3 - Elision in Detail](https://img.youtube.com/vi/3G70mUYQB18/mqdefault.jpg)](https://www.youtube.com/watch?v=3G70mUYQB18)
+
 First we need keys that represent the Example Electrical Engineering Board.
 
 ```bash
