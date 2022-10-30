@@ -209,7 +209,7 @@ ARGUMENTS:
   <value>                 The value for the Envelope's subject.
 
 OPTIONS:
-  --assertion/--cbor/--cid/--data/--date/--digest/--envelope/--float/--int/--known-predicate/--object/--predicate/--string/--ur/--uri/--uuid/--wrapped
+  --assertion/--cbor/--cid/--data/--date/--digest/--envelope/--float/--int/--known/--object/--predicate/--string/--ur/--uri/--uuid/--wrapped
                           The data type of the subject. (default: string)
   --tag <tag>             The integer tag for an enclosed UR.
   -h, --help              Show help information.

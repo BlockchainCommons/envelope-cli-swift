@@ -16,8 +16,8 @@ A photo of John Smith:
 ```bash
 👉
 JOHN_IMAGE=`envelope subject "John Smith Smiling" | \
-envelope assertion --known-predicate note "This is an image of John Smith." | \
-envelope assertion --known-predicate dereferenceVia --uri https://exampleledger.com/digest/36be30726befb65ca13b136ae29d8081f64792c2702415eb60ad1c56ed33c999`
+envelope assertion --known note "This is an image of John Smith." | \
+envelope assertion --known dereferenceVia --uri https://exampleledger.com/digest/36be30726befb65ca13b136ae29d8081f64792c2702415eb60ad1c56ed33c999`
 ```
 
 ```
@@ -33,15 +33,15 @@ John Smith's Permanent Resident Card issued by the State of Example:
 ```bash
 👉
 ISSUER=`envelope subject --ur $STATE_CID | \
-    envelope assertion --known-predicate note "Issued by the State of Example" | \
-    envelope assertion --known-predicate dereferenceVia --uri https://exampleledger.com/cid/04363d5ff99733bc0f1577baba440af1cf344ad9e454fad9d128c00fef6505e8`
+    envelope assertion --known note "Issued by the State of Example" | \
+    envelope assertion --known dereferenceVia --uri https://exampleledger.com/cid/04363d5ff99733bc0f1577baba440af1cf344ad9e454fad9d128c00fef6505e8`
 
 BIRTH_COUNTRY=`envelope subject bs | \
-    envelope assertion --known-predicate note "The Bahamas"`
+    envelope assertion --known note "The Bahamas"`
 
 HOLDER=`envelope subject --ur $JOHN_CID | \
-    envelope assertion --known-predicate isA Person | \
-    envelope assertion --known-predicate isA "Permanent Resident" | \
+    envelope assertion --known isA Person | \
+    envelope assertion --known isA "Permanent Resident" | \
     envelope assertion givenName JOHN | \
     envelope assertion familyName SMITH | \
     envelope assertion sex MALE | \
@@ -52,11 +52,11 @@ HOLDER=`envelope subject --ur $JOHN_CID | \
     envelope assertion --string residentSince --date 2018-01-07`
 
 JOHN_RESIDENT_CARD=`envelope subject --ur $JOHN_CID | \
-    envelope assertion --known-predicate isA "credential" | \
+    envelope assertion --known isA "credential" | \
     envelope assertion --string "dateIssued" --date 2022-04-27 | \
-    envelope assertion --known-predicate issuer --envelope $ISSUER | \
-    envelope assertion --known-predicate holder --envelope $HOLDER | \
-    envelope assertion --known-predicate note "The State of Example recognizes JOHN SMITH as a Permanent Resident." | \
+    envelope assertion --known issuer --envelope $ISSUER | \
+    envelope assertion --known holder --envelope $HOLDER | \
+    envelope assertion --known note "The State of Example recognizes JOHN SMITH as a Permanent Resident." | \
     envelope subject --wrapped | \
     envelope sign --prvkeys $STATE_PRVKEYS --note "Made by the State of Example."`
 
@@ -112,7 +112,7 @@ TARGET=()
 TARGET+=(`envelope digest $JOHN_RESIDENT_CARD`)
 
 # Reveal everything about the state's signature on the card
-TARGET+=(`envelope assertion find --known-predicate verifiedBy $JOHN_RESIDENT_CARD | envelope digest --deep`)
+TARGET+=(`envelope assertion find --known verifiedBy $JOHN_RESIDENT_CARD | envelope digest --deep`)
 
 # Reveal the top level of the card.
 TARGET+=(`envelope digest $JOHN_RESIDENT_CARD --shallow`)
@@ -121,11 +121,11 @@ TARGET+=(`envelope digest $CARD`)
 TARGET+=(`envelope extract $CARD --envelope | envelope digest`)
 
 # Reveal everything about the `isA` and `issuer` assertions at the top level of the card.
-TARGET+=(`envelope assertion find --known-predicate isA $CARD | envelope digest --deep`)
-TARGET+=(`envelope assertion find --known-predicate issuer $CARD | envelope digest --deep`)
+TARGET+=(`envelope assertion find --known isA $CARD | envelope digest --deep`)
+TARGET+=(`envelope assertion find --known issuer $CARD | envelope digest --deep`)
 
 # Reveal the `holder` assertion on the card, but not any of its sub-assertions.
-HOLDER=`envelope assertion find --known-predicate holder $CARD`
+HOLDER=`envelope assertion find --known holder $CARD`
 TARGET+=(`envelope digest --shallow $HOLDER`)
 
 # Within the `holder` assertion, reveal everything about just the `givenName`, `familyName`, and `image` assertions.

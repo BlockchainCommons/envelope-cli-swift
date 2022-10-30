@@ -8,7 +8,7 @@ enum EnvelopeToolError: Error {
     case urTypeRequired
     case urTagMismatch
     case urTypeMismatch
-    case unknownPredicate(String)
+    case notAKnownValue(String)
     case useAssertionCommand
     case notAssertion
     case missingArgument(String)

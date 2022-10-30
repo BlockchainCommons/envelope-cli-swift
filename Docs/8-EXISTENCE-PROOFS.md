@@ -104,9 +104,9 @@ A verifiable credential is constructed such that elements that might be elided a
 👉
 BOARD_PRVKEYS="ur:crypto-prvkeys/hdcxynlntpsbfrbgjkcetpzorohgsafsihcnhyrtoebzwegtvyzolbgtdaskcsldfgadtldmrkld"
 CREDENTIAL=`envelope subject --cid 4676635a6e6068c2ef3ffd8ff726dd401fd341036e920f136a1d8af5e829496d |
-    envelope assertion --known-predicate isA "Certificate of Completion" |
-    envelope assertion --known-predicate issuer "Example Electrical Engineering Board" |
-    envelope assertion --known-predicate controller "Example Electrical Engineering Board" |
+    envelope assertion --known isA "Certificate of Completion" |
+    envelope assertion --known issuer "Example Electrical Engineering Board" |
+    envelope assertion --known controller "Example Electrical Engineering Board" |
     envelope assertion --salted firstName James |
     envelope assertion --salted lastName Maxwell |
     envelope assertion --salted --string issueDate --date 2020-01-01 |
@@ -119,7 +119,7 @@ CREDENTIAL=`envelope subject --cid 4676635a6e6068c2ef3ffd8ff726dd401fd341036e920
     envelope assertion --string topics --cbor 0x82695375626a6563742031695375626a6563742032 |
     envelope subject --wrapped |
     envelope sign --prvkeys $BOARD_PRVKEYS |
-    envelope assertion --known-predicate note "Signed by Example Electrical Engineering Board"`
+    envelope assertion --known note "Signed by Example Electrical Engineering Board"`
 envelope $CREDENTIAL
 ```
 
@@ -222,7 +222,7 @@ Assertions without salt can be guessed at, and confirmed if the the guess is cor
 
 ```bash
 👉
-ISSUER_DIGEST=`envelope subject assertion --known-predicate issuer --string "Example Electrical Engineering Board" | envelope digest`
+ISSUER_DIGEST=`envelope subject assertion --known issuer --string "Example Electrical Engineering Board" | envelope digest`
 envelope proof confirm --silent $CREDENTIAL_ROOT $SUBJECT_PROOF $ISSUER_DIGEST
 ```
 

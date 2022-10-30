@@ -36,9 +36,9 @@ We use the CBOR hex with the `topics` assertion below:
 ```bash
 👉
 CREDENTIAL=`envelope subject --cid 4676635a6e6068c2ef3ffd8ff726dd401fd341036e920f136a1d8af5e829496d |
-    envelope assertion --known-predicate isA "Certificate of Completion" |
-    envelope assertion --known-predicate issuer "Example Electrical Engineering Board" |
-    envelope assertion --known-predicate controller "Example Electrical Engineering Board" |
+    envelope assertion --known isA "Certificate of Completion" |
+    envelope assertion --known issuer "Example Electrical Engineering Board" |
+    envelope assertion --known controller "Example Electrical Engineering Board" |
     envelope assertion firstName James |
     envelope assertion lastName Maxwell |
     envelope assertion --string issueDate --date 2020-01-01 |
@@ -51,7 +51,7 @@ CREDENTIAL=`envelope subject --cid 4676635a6e6068c2ef3ffd8ff726dd401fd341036e920
     envelope assertion --string topics --cbor 0x82695375626a6563742031695375626a6563742032 |
     envelope subject --wrapped |
     envelope sign --prvkeys $BOARD_PRVKEYS |
-    envelope assertion --known-predicate note "Signed by Example Electrical Engineering Board"`
+    envelope assertion --known note "Signed by Example Electrical Engineering Board"`
 envelope $CREDENTIAL
 ```
 
@@ -146,7 +146,7 @@ There are two important things to note in the above commands, one dealing with t
 
 Regarding the shell, in the above commands we needed the outer parentheses to ensure that the shell adds each of the digests to the array as a separate element, instead of adding them all as a single element.
 
-Regarding the envelope type, the `assertion at N` command will retrieve the assertion at the index it is stored in the envelope structure, *not* the order it prints in envelope notation. In envelope notation, the assertions are in lexicographic order with known predicates coming last. But in the envelope structure itself, assertions are always in lexicographic order by *digest*. So if you use the `envelope format` command to print an envelope, you usually won't get the same assertion at a given index using the `assertion at N` command. Generally the `assertion at N` command is for when you want to iterate through all assertions. If you want to work with a specific assertion, use the `assertion find` to locate it by the content of its predicate or object.
+Regarding the envelope type, the `assertion at N` command will retrieve the assertion at the index it is stored in the envelope structure, *not* the order it prints in envelope notation. In envelope notation, the assertions are in lexicographic order with known values coming last. But in the envelope structure itself, assertions are always in lexicographic order by *digest*. So if you use the `envelope format` command to print an envelope, you usually won't get the same assertion at a given index using the `assertion at N` command. Generally the `assertion at N` command is for when you want to iterate through all assertions. If you want to work with a specific assertion, use the `assertion find` to locate it by the content of its predicate or object.
 
 At this point, if one had the proper public keys, the receiver of this redacted credential could verify the signature, even without knowing anything else about the contents of the credential.
 
@@ -227,8 +227,8 @@ The only actual assertions we want to reveal are, `isA`, `issuer`, `subject` and
 
 ```bash
 👉
-TARGET+=(`envelope assertion find --known-predicate isA $CONTENT | envelope digest --shallow`)
-TARGET+=(`envelope assertion find --known-predicate issuer $CONTENT | envelope digest --shallow`)
+TARGET+=(`envelope assertion find --known isA $CONTENT | envelope digest --shallow`)
+TARGET+=(`envelope assertion find --known issuer $CONTENT | envelope digest --shallow`)
 TARGET+=(`envelope assertion find "subject" $CONTENT | envelope digest --shallow`)
 TARGET+=(`envelope assertion find "expirationDate" $CONTENT | envelope digest --shallow`)
 ```
@@ -259,7 +259,7 @@ WARRANTY=`envelope subject --wrapped $REDACTED_CREDENTIAL |
     envelope assertion --string employeeHiredDate --date 2022-01-01 |
     envelope assertion employeeStatus active |
     envelope subject --wrapped |
-    envelope assertion --known-predicate note "Signed by Employer Corp." |
+    envelope assertion --known note "Signed by Employer Corp." |
     envelope sign --prvkeys $EMPLOYER_PRVKEYS`
 envelope $WARRANTY
 ```
@@ -304,8 +304,8 @@ TARGET+=`envelope extract $CREDENTIAL --envelope | envelope digest`
 CONTENT=`envelope extract --wrapped $CREDENTIAL`
 TARGET+=`envelope digest $CONTENT`
 TARGET+=`envelope extract --envelope $CONTENT | envelope digest`
-TARGET+=(`envelope assertion find --known-predicate isA $CONTENT | envelope digest --shallow`)
-TARGET+=(`envelope assertion find --known-predicate issuer $CONTENT | envelope digest --shallow`)
+TARGET+=(`envelope assertion find --known isA $CONTENT | envelope digest --shallow`)
+TARGET+=(`envelope assertion find --known issuer $CONTENT | envelope digest --shallow`)
 TARGET+=(`envelope assertion find "firstName" $CONTENT | envelope digest --shallow`)
 TARGET+=(`envelope assertion find "lastName" $CONTENT | envelope digest --shallow`)
 TARGET+=(`envelope assertion find "subject" $CONTENT | envelope digest --shallow`)
@@ -315,6 +315,6 @@ WARRANTY=`envelope subject --wrapped $REDACTED_CREDENTIAL |
     envelope assertion --string employeeHiredDate --date 2022-01-01 |
     envelope assertion employeeStatus active |
     envelope subject --wrapped |
-    envelope assertion --known-predicate note "Signed by Employer Corp." |
+    envelope assertion --known note "Signed by Employer Corp." |
     envelope sign --prvkeys $EMPLOYER_PRVKEYS`
 ```

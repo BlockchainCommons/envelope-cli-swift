@@ -12,8 +12,8 @@ Start by creating an envelope that represents the author and what is known about
 ```bash
 👉
 AUTHOR=`envelope subject --cid 9c747ace78a4c826392510dd6285551e7df4e5164729a1b36198e56e017666c8 | \
-    envelope assertion --known-predicate dereferenceVia LibraryOfCongress | \
-    envelope assertion --known-predicate hasName "Ayn Rand"`
+    envelope assertion --known dereferenceVia LibraryOfCongress | \
+    envelope assertion --known hasName "Ayn Rand"`
 envelope $AUTHOR
 ```
 
@@ -30,7 +30,7 @@ Create two envelopes representing the name of the novel in two different languag
 ```bash
 👉
 NAME_EN=`envelope subject "Atlas Shrugged" | \
-    envelope assertion --known-predicate language en`
+    envelope assertion --known language en`
 envelope $NAME_EN
 ```
 
@@ -44,7 +44,7 @@ envelope $NAME_EN
 ```bash
 👉
 NAME_ES=`envelope subject "La rebelión de Atlas" | \
-    envelope assertion --known-predicate language es`
+    envelope assertion --known language es`
 envelope $NAME_ES
 ```
 
@@ -60,12 +60,12 @@ Create an envelope that specifies known information about the novel. This envelo
 ```bash
 👉
 WORK=`envelope subject --cid 7fb90a9d96c07f39f75ea6acf392d79f241fac4ec0be2120f7c82489711e3e80 | \
-    envelope assertion --known-predicate isA novel | \
+    envelope assertion --known isA novel | \
     envelope assertion isbn "9780451191144" | \
     envelope assertion --string author --envelope $AUTHOR | \
-    envelope assertion --known-predicate dereferenceVia "LibraryOfCongress" | \
-    envelope assertion --known-predicate hasName --envelope $NAME_EN | \
-    envelope assertion --known-predicate hasName --envelope $NAME_ES`
+    envelope assertion --known dereferenceVia "LibraryOfCongress" | \
+    envelope assertion --known hasName --envelope $NAME_EN | \
+    envelope assertion --known hasName --envelope $NAME_ES`
 envelope $WORK
 ```
 
@@ -109,7 +109,7 @@ Create the final metadata object, which provides information about the object to
 BOOK_METADATA=`envelope subject --digest $BOOK_DIGEST | \
     envelope assertion --string "work" --envelope $WORK | \
     envelope assertion format EPUB | \
-    envelope assertion --known-predicate dereferenceVia "IPFS"`
+    envelope assertion --known dereferenceVia "IPFS"`
 envelope $BOOK_METADATA
 ```
 

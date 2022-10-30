@@ -128,19 +128,19 @@ In this example, we're going to use common identifiers or CIDs to represent, str
 
 This is going to create the actual CID we're going to pipe that to envelope subject. And the subject is a UR, which is the CID. Trust me, this'll make sense in a moment. And we're going to add two assertions to it: dereferenceVia and hasName. 
 
-Now, these are "known predicates." This is the type of data we're using here. And they basically encode to a single bite because they're well known. They're predefined the envelope tool knows them. You can always create your own predicates from strings or anything else actually, but there's also a set of known predicates, and this is a still growing and still very open to additions and suggestions by the community. So we'd like to know what you think ought to be, the canonical set of known predicates, and there'll be a process for adopting new ones as we go. 
+Now, these are "known values." This is the type of data we're using here. And they basically encode to a single byte because they're well known. They're predefined the envelope tool knows them. You can always create your own predicates from strings or anything else actually, but there's also a set of known values, and this is a still growing and still very open to additions and suggestions by the community. So we'd like to know what you think ought to be, the canonical set of known values, and there'll be a process for adopting new ones as we go. 
 
 We're going to create this envelope here in this multi-step process. And when we run that through the envelope formatting command, this is the envelope. The subject is our CID, and it's got two assertions: dereferenceVia and hasName. Now you notice that in the envelope notation, these are surrounded by quotes: that means these are actual strings. Whereas these are not surrounded by quotes, which means they're basically encoded known byte sequences.
 
 But this basically says that whatever this thing is, you can find out more from the Library of Congress, but this thing has a name: Ayn Rand. So this is actually referring to the author.
 
-So now we're going to create some more envelopes representing the name of a novel she wrote in two different languages, annotated with assertions that specify the language. So here's the first one. So NAME_EN for English envelope subject "Atlas Shrugged", piped to envelope, assertion, known predicate, language.
+So now we're going to create some more envelopes representing the name of a novel she wrote in two different languages, annotated with assertions that specify the language. So here's the first one. So NAME_EN for English envelope subject "Atlas Shrugged", piped to envelope, assertion, known value, language.
 
 And then EN. So we're basically specifying the language of this string.
 
 And that's what that envelope looks like. It's just a subject "Atlas Shrugged" with an annotation on it that says this name is in English. So now let's do the same thing for Spanish.
 
-Envelope, subject, "La rebelión de Atlas" envelope, assertion, known predicate, language. "es": español.
+Envelope, subject, "La rebelión de Atlas" envelope, assertion, known value, language. "es": español.
 
 Okay. So our strings can self-describe what language they are actually written in. So now we're going to create a large envelope that specifies known information about the novel. So this envelope embeds the previous envelopes we created for the author and the names of the work.
 
@@ -148,7 +148,7 @@ Let's go up here and edit this.
 
 Here we go.  It's supposed to be called "work", not "ork". All right, so we're taking another CID and we're creating a UR from it to feed into the subject UR command. And again, this is because this work has a known identifier. And then we have a, "isA" novel, it has an ISBN number, and two of these predicates here are custom predicates, which are strings. The reason why I had to annotate string here is because I use the second annotation here, but by default, they're both strings. So if you're going to use, say envelope on the second one, because I want to embed this envelope here, you need to specify the first one as well.
 
-In this case, I'm using several known predicates dereferenceVia, hasName. And I'm also using implicit strings here and here, but here I'm using explicit strings here and envelope type here. So anyway, the result of this is probably the most complex envelope we've seen so far. This represents the work. This is the common identifier of the work. It has a field called author. This is a custom predicate, which is made from a string, which this is the author's identifier. So if I want to look at more things by this author, I could use that identifier, how to find more information about the author, what her name is, then the ISBN of the work, where to find more information about the work, and then the two names. These are two different name assertions: hasName assertions. Remember, they're different. So they're okay. If they're identical, they wouldn't be allowed, but they're both different in terms of their subject as well as the assertions on them. So it's fine. And finally, an isA assertion to say what kind of work this is.
+In this case, I'm using several known values dereferenceVia, hasName. And I'm also using implicit strings here and here, but here I'm using explicit strings here and envelope type here. So anyway, the result of this is probably the most complex envelope we've seen so far. This represents the work. This is the common identifier of the work. It has a field called author. This is a custom predicate, which is made from a string, which this is the author's identifier. So if I want to look at more things by this author, I could use that identifier, how to find more information about the author, what her name is, then the ISBN of the work, where to find more information about the work, and then the two names. These are two different name assertions: hasName assertions. Remember, they're different. So they're okay. If they're identical, they wouldn't be allowed, but they're both different in terms of their subject as well as the assertions on them. So it's fine. And finally, an isA assertion to say what kind of work this is.
 
 So now we have a a much more complex envelope, but we're not done yet.
 

@@ -51,8 +51,8 @@ struct ExtractCommand: ParsableCommand {
                 printOut(cbor.hex)
             } else if envelope.isWrapped {
                 printOut(try envelope.unwrap().cbor.hex)
-            } else if let knownPredicate = envelope.knownPredicate {
-                printOut(knownPredicate.cbor.hex)
+            } else if let knownValue = envelope.knownValue {
+                printOut(knownValue.cbor.hex)
             } else {
                 throw EnvelopeToolError.notCBOR
             }
@@ -72,8 +72,8 @@ struct ExtractCommand: ParsableCommand {
             printOut(try envelope.extractSubject(Int.self))
         case .float:
             printOut(try envelope.extractSubject(Double.self))
-        case .knownPredicate:
-            printOut(try envelope.extractSubject(KnownPredicate.self))
+        case .known:
+            printOut(try envelope.extractSubject(KnownValue.self))
         case .string:
             printOut(try envelope.extractSubject(String.self))
         case .ur:

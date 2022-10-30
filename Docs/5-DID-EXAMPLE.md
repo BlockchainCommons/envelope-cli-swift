@@ -10,8 +10,8 @@ This example offers an analogue of a DID document, which identifies an entity. T
 ```bash
 👉
 ALICE_UNSIGNED_DOCUMENT=`envelope subject --ur $ALICE_CID | \
-    envelope assertion --known-predicate controller --ur $ALICE_CID | \
-    envelope assertion --known-predicate publicKeys --ur $ALICE_PUBKEYS`
+    envelope assertion --known controller --ur $ALICE_CID | \
+    envelope assertion --known publicKeys --ur $ALICE_PUBKEYS`
 ALICE_SIGNED_DOCUMENT=`envelope subject --wrapped $ALICE_UNSIGNED_DOCUMENT | \
     envelope sign --prvkeys $ALICE_PRVKEYS --note "Made by Alice."`
 envelope $ALICE_SIGNED_DOCUMENT
@@ -49,8 +49,8 @@ The registrar creates its own registration document using Alice's CID as the sub
 👉
 ALICE_URI="https://exampleledger.com/cid/$ALICE_CID_HEX"
 ALICE_REGISTRATION=`envelope subject --ur $ALICE_CID_UR | \
-    envelope assertion --known-predicate entity --envelope $ALICE_SIGNED_DOCUMENT | \
-    envelope assertion --known-predicate dereferenceVia --uri $ALICE_URI | \
+    envelope assertion --known entity --envelope $ALICE_SIGNED_DOCUMENT | \
+    envelope assertion --known dereferenceVia --uri $ALICE_URI | \
     envelope subject --wrapped | \
     envelope sign --prvkeys $LEDGER_PRVKEYS --note "Made by ExampleLedger."`
 envelope $ALICE_REGISTRATION
@@ -85,7 +85,7 @@ Alice receives the registration document back, verifies its signature, and extra
 👉
 ALICE_URI=`envelope verify $ALICE_REGISTRATION --pubkeys $LEDGER_PUBKEYS | \
     envelope extract --wrapped | \
-    envelope assertion find --known-predicate dereferenceVia | \
+    envelope assertion find --known dereferenceVia | \
     envelope extract --object | \
     envelope extract --uri`
 echo $ALICE_URI
@@ -102,7 +102,7 @@ Alice wants to introduce herself to Bob, so Bob needs to know she controls her i
 👉
 ALICE_CHALLENGE=`envelope generate nonce | \
     envelope subject --ur | \
-    envelope assertion --known-predicate note "Challenge to Alice from Bob."`
+    envelope assertion --known note "Challenge to Alice from Bob."`
 echo $ALICE_CHALLENGE
 ```
 
@@ -128,7 +128,7 @@ Alice responds by adding her registered URI to the nonce, and signing it.
 ```bash
 👉
 ALICE_RESPONSE=`envelope subject --wrapped $ALICE_CHALLENGE | \
-    envelope assertion --known-predicate dereferenceVia --uri $ALICE_URI | \
+    envelope assertion --known dereferenceVia --uri $ALICE_URI | \
     envelope subject --wrapped | \
     envelope sign --prvkeys $ALICE_PRVKEYS --note "Made by Alice."`
 envelope $ALICE_RESPONSE
@@ -169,7 +169,7 @@ ur:envelope/lftpsptpuotaaosrgsnbfwsbnnoxgtrsotspnyvayntpsptputlftpsptpuraatpsptp
 ```bash
 👉
 ALICE_URI=`envelope extract --wrapped $ALICE_RESPONSE | \
-    envelope assertion find --known-predicate dereferenceVia | \
+    envelope assertion find --known dereferenceVia | \
     envelope extract --object | \
     envelope extract --uri`
 echo $ALICE_URI
@@ -186,10 +186,10 @@ Bob uses the URI to ask ExampleLedger for Alice's identifier document, then chec
 👉
 ALICE_PUBKEYS=`envelope verify $ALICE_REGISTRATION --pubkeys $LEDGER_PUBKEYS | \
     envelope extract --wrapped | \
-    envelope assertion find --known-predicate entity | \
+    envelope assertion find --known entity | \
     envelope extract --object | \
     envelope extract --wrapped | \
-    envelope assertion find --known-predicate publicKeys | \
+    envelope assertion find --known publicKeys | \
     envelope extract --object | \
     envelope extract --ur`
 ```

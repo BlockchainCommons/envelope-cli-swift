@@ -24,12 +24,29 @@ struct FormatCommand: ParsableCommand {
         }
     }
     
+    enum Theme: String, ExpressibleByArgument {
+        case color
+        case monochrome
+        
+        var mermaidTheme: MermaidOptions.Theme {
+            switch self {
+            case .color:
+                return .color
+            case .monochrome:
+                return .monochrome
+            }
+        }
+    }
+    
     @Flag(exclusivity: .exclusive, help: "Whether to output the envelope in envelope notation (envelope), or as tagged CBOR hex (cbor), as CBOR diagnostic notation (diag), or as Mermaid (mermaid).")
     var output: Output = .envelope
     
     @Option(help: "For Mermaid output, whether the layout should be left-to-right (lr) or top-to-bottom (tb).")
     var layout: Layout = .lr
     
+    @Option(help: "For Mermaid output, whether the layout should in color or monochrome.")
+    var theme: Theme = .color
+
     mutating func fill() throws {
         if envelope == nil {
             envelope = try readIn(Envelope.self)
@@ -53,7 +70,7 @@ struct FormatCommand: ParsableCommand {
         case .tree:
             printOut(envelope.treeFormat)
         case .mermaid:
-            printOut(envelope.mermaidFormat(layoutDirection: layout.mermaidLayout))
+            printOut(envelope.mermaidFormat(layoutDirection: layout.mermaidLayout, theme: theme.mermaidTheme))
         }
     }
 }

@@ -11,7 +11,7 @@ enum DataType: EnumerableFlag {
     case envelope
     case float
     case int
-    case knownPredicate
+    case known
     case object
     case predicate
     case string

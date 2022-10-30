@@ -86,14 +86,14 @@ struct SubjectArguments: ParsableArguments {
                     throw EnvelopeToolError.invalidType(expectedType: "floating point")
                 }
                 envelope = Envelope(n)
-            case .knownPredicate:
+            case .known:
                 if let n = UInt64(value) {
-                    let p = KnownPredicate(rawValue: n)
+                    let p = KnownValue(rawValue: n)
                     envelope = Envelope(p)
-                } else if let p = KnownPredicate(name: value) {
+                } else if let p = KnownValue(name: value) {
                     envelope = Envelope(p)
                 } else {
-                    throw EnvelopeToolError.unknownPredicate(value)
+                    throw EnvelopeToolError.notAKnownValue(value)
                 }
             case .string:
                 envelope = Envelope(value)

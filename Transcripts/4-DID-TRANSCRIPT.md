@@ -75,7 +75,7 @@ Here's how he does that: he calculates the digest of his original challenge and 
 
 So Bob uses the URI that Alice has provided to ask Example Ledger for Alice's identifier document, and then checks Example Ledger's signature on that. So Bob trusts Example Ledger's validation of Alice's original document. So he doesn't bother to check it for internal consistency because he presumes Example Ledger's done that already, but instead he goes and extracts Alice's public keys from it.
 
-So he's verifying Alice's registration document. Getting Ledger's public keys and verifying that and that passes. Then he unwraps, he finds the known predicate called entity. Remember, this is Alice's original document. He extracts the object of that. He unwraps that, he finds the known predicate called public keys. He extracts the object of that and finally extracts the UR of that. And after all that, so let's look at Alice's public keys now.
+So he's verifying Alice's registration document. Getting Ledger's public keys and verifying that and that passes. Then he unwraps, he finds the known value called entity. Remember, this is Alice's original document. He extracts the object of that. He unwraps that, he finds the known value called public keys. He extracts the object of that and finally extracts the UR of that. And after all that, so let's look at Alice's public keys now.
 
 And so there's a crypto pubkeys. This is her public keybase. So now he knows that this is Alice he's actually talking to. So now he needs to make sure that her signature on it is actually good. So now, since he has her public keys, now he can say verify the Alice response, public keys, Alice public keys that he just got back and it works.
 

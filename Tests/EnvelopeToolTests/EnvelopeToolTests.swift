@@ -157,12 +157,12 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "3829")
     }
     
-    func testKnownPredicateSubject() throws {
+    func testKnownValueSubject() throws {
         let value = "note"
-        let e = try envelope("subject --known-predicate \(value)")
+        let e = try envelope("subject --known \(value)")
         XCTAssertEqual(e, "ur:envelope/tpuraakicmnbgu")
         XCTAssertEqual(try envelope(e), "note")
-        XCTAssertEqual(try envelope("extract --known-predicate \(e)"), "note")
+        XCTAssertEqual(try envelope("extract --known \(e)"), "note")
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "d8df04")
     }
 
@@ -233,7 +233,7 @@ final class EnvelopeToolTests: XCTestCase {
     }
     
     func testAssertion3() throws {
-        let e = try envelope("subject assertion --known-predicate note ThisIsANote.")
+        let e = try envelope("subject assertion --known note ThisIsANote.")
         XCTAssertEqual(e, "ur:envelope/tputlftpsptpuraatpsptpcsjzghisinjkgajkfpgljljyihdmgltlksfe")
         XCTAssertEqual(try envelope(e), #"note: "ThisIsANote.""#)
     }
@@ -324,7 +324,7 @@ final class EnvelopeToolTests: XCTestCase {
     }
     
     func testAssertionPredicateFind2() throws {
-        let e = try pipe(["extract --wrapped", "assertion find predicate --known-predicate isA"], inputLine: credentialExample)
+        let e = try pipe(["extract --wrapped", "assertion find predicate --known isA"], inputLine: credentialExample)
         XCTAssertEqual(e, "ur:envelope/tputlftpsptpuraotpsptpcskscffxihjpjyiniyiniahsjyihcxjliycxfxjljnjojzihjyinjljtgrvardbg")
         XCTAssertEqual(try envelope(e), #"isA: "Certificate of Completion""#)
     }
