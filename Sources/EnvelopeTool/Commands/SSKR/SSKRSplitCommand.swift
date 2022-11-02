@@ -14,6 +14,12 @@ struct SSKRSplitCommand: ParsableCommand {
     @Option(name: .customShort("g"), help: "The group specification.")
     var group: [String] = ["1-of-1"]
 
+    @Option(help: "The symmetric key to use for encryption. If not provided, an ephemeral key is generated.")
+    var key: SymmetricKey?
+
+    @Option
+    var recipient: [PublicKeyBase] = []
+
     mutating func fill() throws {
         if envelope == nil {
             envelope = try readIn(Envelope.self)
@@ -45,13 +51,23 @@ struct SSKRSplitCommand: ParsableCommand {
             return (m, n)
         }
         
-        let contentKey = SymmetricKey()
+        let contentKey = key ?? SymmetricKey()
         let wrapped = envelope.wrap()
         let encrypted = try wrapped.encryptSubject(with: contentKey)
         let groupedShares = encrypted.split(groupThreshold: groupThreshold, groups: groups, contentKey: contentKey)
-        let flattenedShares = groupedShares.map {
-            $0.map({ $0.ur.string }).joined(separator: " ")
+        var flattenedShares = groupedShares.flatMap { $0 }
+        if !recipient.isEmpty {
+            flattenedShares = flattenedShares.map {
+                var share = $0
+                for recipientPubliKey in recipient {
+                    share = share.addRecipient(recipientPubliKey, contentKey: contentKey)
+                }
+                return share
+            }
+        }
+        let outputShares = flattenedShares.map {
+            $0.ur.string
         }.joined(separator: " ")
-        printOut(flattenedShares)
+        printOut(outputShares)
     }
 }
