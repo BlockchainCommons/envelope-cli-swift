@@ -7,6 +7,8 @@ struct AssertionCommand: ParsableCommand {
         abstract: "Work with the envelope's assertions.",
         subcommands: [
             AssertionAddCommand.self,
+            AssertionCreateCommand.self,
+            AssertionRemoveCommand.self,
             AssertionCountCommand.self,
             AssertionAtCommand.self,
             AssertionAllCommand.self,
