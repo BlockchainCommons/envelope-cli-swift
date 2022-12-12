@@ -53,7 +53,7 @@ struct AssertionArguments: ParsableArguments {
             let predicate = try SubjectArguments(type: types[0], value: predicateValue, tag: predicateTag).envelope
             let object = try SubjectArguments(type: types[1], value: objectValue, tag: objectTag).envelope
 
-            return Envelope(predicate: predicate, object: object)
+            return Envelope(predicate, object)
         }
     }
 }

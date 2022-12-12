@@ -29,7 +29,7 @@ struct AssertionFindObjectCommand: ParsableCommand {
 
         let object = try arguments.envelope
         
-        let result = envelope.assertions.filter { $0.object?.subject == object }
+        let result = envelope.assertions.filter { $0.object?.subject.digest == object.digest }
         
         for assertion in result {
             printOut(assertion.ur)

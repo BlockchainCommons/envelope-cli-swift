@@ -56,7 +56,7 @@ final class EnvelopeToolTests: XCTestCase {
     }
     
     func testExtractAssertionSubject() throws {
-        let e = Envelope(predicate: .note, object: "This is a note.")
+        let e = Envelope(.note, "This is a note.")
         let ur = e.ur.string
 
         let predicateEnvelope = "ur:envelope/tpuraakicmnbgu"
@@ -83,7 +83,7 @@ final class EnvelopeToolTests: XCTestCase {
     func testCBORSubject() throws {
         let e = try envelope("subject --cbor \(cborArrayExample)")
         XCTAssertEqual(e, "ur:envelope/tpcslsadaoaxgedmotks")
-        XCTAssertEqual(try envelope(e), "CBOR")
+        XCTAssertEqual(try envelope(e), "[1, 2, 3]")
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "83010203")
         
         let e2 = try envelope("subject --cbor", inputLine: cborArrayExample)
@@ -194,7 +194,7 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(e, "ur:envelope/tpcstaaddwoyadgdaawzwplrbdhdpabgrnvokorolnrtemksidtbcxgu")
         XCTAssertEqual(try envelope(e),
             """
-            CBOR(crypto-seed)
+            crypto-seed(CBOR)
             """
         )
         XCTAssertEqual(try envelope("extract --ur \(e)"), seedURExample)
@@ -206,7 +206,7 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(e, "ur:envelope/tpcstaaodnoyadgdjlssmkcklgoskseodnyteofwwfylkiftnsjphsox")
         XCTAssertEqual(try envelope(e),
             """
-            CBOR(555)
+            555(CBOR)
             """
         )
         XCTAssertEqual(try envelope("extract --ur \(e) --type unknown"), unknownUR)

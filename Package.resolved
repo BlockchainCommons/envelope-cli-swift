@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftFoundation.git",
       "state" : {
-        "revision" : "938e35e7fe8106f1c463939e39f7e0b469fe5369",
-        "version" : "4.5.0"
+        "branch" : "master",
+        "revision" : "ff203762bc7a24ee75d44d085eaac304bfa791bd"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftSecureComponents.git",
       "state" : {
-        "revision" : "928ffb24d354120e0ca394d7ad437057228656b3",
-        "version" : "0.36.0"
+        "branch" : "master",
+        "revision" : "4609b4dd30c165c6a393df5929de60e29e2333d4"
       }
     },
     {
@@ -68,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/WolfMcNally/Graph.git",
       "state" : {
-        "revision" : "b745a5a1318fc0f789702d5a95ee425041378b6c",
-        "version" : "0.4.0"
+        "branch" : "master",
+        "revision" : "243181ba08bc8d1044a93c5372bf0cee7643543d"
       }
     },
     {
@@ -77,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/WolfMcNally/GraphDot.git",
       "state" : {
-        "revision" : "e5d213eb21b3b1f38e839e251c2b822445349328",
-        "version" : "0.3.0"
+        "branch" : "master",
+        "revision" : "536c079ba9ea1988050854a7710cbb62c702d75a"
       }
     },
     {
@@ -86,8 +86,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/WolfMcNally/GraphMermaid.git",
       "state" : {
-        "revision" : "4e4592836db43116e9a86c30b2c2da5f36d96627",
-        "version" : "0.3.0"
+        "branch" : "master",
+        "revision" : "7fb2f93e18a72dc8e7f2d451921f2b83e1dbb291"
       }
     },
     {
@@ -113,8 +113,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-argument-parser",
       "state" : {
-        "revision" : "9f39744e025c7d377987f30b03770805dcb0bcd1",
-        "version" : "1.1.4"
+        "revision" : "fddd1c00396eed152c45a46bea9f47b98e59301d",
+        "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "swift-collections",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-collections",
+      "state" : {
+        "branch" : "main",
+        "revision" : "53a8adc54374f620002a3b6401d39e0feb3c57ae"
       }
     },
     {
@@ -124,6 +133,15 @@
       "state" : {
         "revision" : "0a5bc04095a675662cf24757cc0640aa2204253b",
         "version" : "1.0.2"
+      }
+    },
+    {
+      "identity" : "treedistance",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/WolfMcNally/TreeDistance.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "70c61c96c4db96ed6ebf7ef16fb0f0ca60d048a9"
       }
     },
     {
@@ -140,8 +158,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/WolfMcNally/WolfBase",
       "state" : {
-        "revision" : "51846810911c51dfe38514a5b5454220c59b4a79",
-        "version" : "4.5.2"
+        "revision" : "883d3e868ab61b2001f2cbf4566bb5e72ab10603",
+        "version" : "4.7.0"
       }
     }
   ],

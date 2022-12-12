@@ -29,7 +29,7 @@ struct AssertionFindPredicateCommand: ParsableCommand {
 
         let predicate = try arguments.envelope
         
-        let result = envelope.assertions.filter { $0.predicate?.subject == predicate }
+        let result = envelope.assertions.filter { $0.predicate?.subject.digest == predicate.digest }
         
         for assertion in result {
             printOut(assertion.ur)
