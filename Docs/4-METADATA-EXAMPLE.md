@@ -19,7 +19,7 @@ envelope $AUTHOR
 
 ```
 👈
-CID(9c747ace78a4c826392510dd6285551e7df4e5164729a1b36198e56e017666c8) [
+CID(9c747ace) [
     dereferenceVia: "LibraryOfCongress"
     hasName: "Ayn Rand"
 ]
@@ -71,8 +71,8 @@ envelope $WORK
 
 ```
 👈
-CID(7fb90a9d96c07f39f75ea6acf392d79f241fac4ec0be2120f7c82489711e3e80) [
-    "author": CID(9c747ace78a4c826392510dd6285551e7df4e5164729a1b36198e56e017666c8) [
+CID(7fb90a9d) [
+    "author": CID(9c747ace) [
         dereferenceVia: "LibraryOfCongress"
         hasName: "Ayn Rand"
     ]
@@ -115,10 +115,10 @@ envelope $BOOK_METADATA
 
 ```
 👈
-Digest(e8aa201db4044168d05b77d7b36648fb7a97db2d3e72f5babba9817911a52809) [
+Digest(e8aa201d) [
     "format": "EPUB"
-    "work": CID(7fb90a9d96c07f39f75ea6acf392d79f241fac4ec0be2120f7c82489711e3e80) [
-        "author": CID(9c747ace78a4c826392510dd6285551e7df4e5164729a1b36198e56e017666c8) [
+    "work": CID(7fb90a9d) [
+        "author": CID(9c747ace) [
             dereferenceVia: "LibraryOfCongress"
             hasName: "Ayn Rand"
         ]

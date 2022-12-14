@@ -18,11 +18,12 @@ A photo of John Smith:
 JOHN_IMAGE=`envelope subject "John Smith Smiling" | \
 envelope assertion --known note "This is an image of John Smith." | \
 envelope assertion --known dereferenceVia --uri https://exampleledger.com/digest/36be30726befb65ca13b136ae29d8081f64792c2702415eb60ad1c56ed33c999`
+envelope $JOHN_IMAGE
 ```
 
 ```
 👈
-Digest(36be30726befb65ca13b136ae29d8081f64792c2702415eb60ad1c56ed33c999) [
+"John Smith Smiling" [
     dereferenceVia: URI(https://exampleledger.com/digest/36be30726befb65ca13b136ae29d8081f64792c2702415eb60ad1c56ed33c999)
     note: "This is an image of John Smith."
 ]
@@ -66,9 +67,9 @@ envelope $JOHN_RESIDENT_CARD
 ```
 👈
 {
-    CID(78bc30004776a3905bccb9b8a032cf722ceaf0bbfb1a49eaf3185fab5808cadc) [
+    CID(78bc3000) [
         "dateIssued": 2022-04-27
-        holder: CID(78bc30004776a3905bccb9b8a032cf722ceaf0bbfb1a49eaf3185fab5808cadc) [
+        holder: CID(78bc3000) [
             "birthCountry": "bs" [
                 note: "The Bahamas"
             ]
@@ -86,7 +87,7 @@ envelope $JOHN_RESIDENT_CARD
             isA: "Person"
         ]
         isA: "credential"
-        issuer: CID(04363d5ff99733bc0f1577baba440af1cf344ad9e454fad9d128c00fef6505e8) [
+        issuer: CID(04363d5f) [
             dereferenceVia: URI(https://exampleledger.com/cid/04363d5ff99733bc0f1577baba440af1cf344ad9e454fad9d128c00fef6505e8)
             note: "Issued by the State of Example"
         ]
@@ -144,8 +145,8 @@ envelope $ELIDED_CARD
 ```
 👈
 {
-    CID(78bc30004776a3905bccb9b8a032cf722ceaf0bbfb1a49eaf3185fab5808cadc) [
-        holder: CID(78bc30004776a3905bccb9b8a032cf722ceaf0bbfb1a49eaf3185fab5808cadc) [
+    CID(78bc3000) [
+        holder: CID(78bc3000) [
             "familyName": "SMITH"
             "givenName": "JOHN"
             "image": "John Smith Smiling" [
@@ -155,7 +156,7 @@ envelope $ELIDED_CARD
             ELIDED (7)
         ]
         isA: "credential"
-        issuer: CID(04363d5ff99733bc0f1577baba440af1cf344ad9e454fad9d128c00fef6505e8) [
+        issuer: CID(04363d5f) [
             dereferenceVia: URI(https://exampleledger.com/cid/04363d5ff99733bc0f1577baba440af1cf344ad9e454fad9d128c00fef6505e8)
             note: "Issued by the State of Example"
         ]
@@ -202,8 +203,8 @@ envelope digest $JOHN_RESIDENT_CARD; envelope digest $ELIDED_CARD
 
 ```
 👈
-ur:crypto-digest/hdcxkilbmyntethdcpmntddrwfnnbdnbhynbqdbdgwnlylaoonmoleoyztfsnbasdyclmkpeoxgr
-ur:crypto-digest/hdcxkilbmyntethdcpmntddrwfnnbdnbhynbqdbdgwnlylaoonmoleoyztfsnbasdyclmkpeoxgr
+ur:crypto-digest/hdcxcaoteeiobwbnkghfgydlfecaamrfcwqzhgoltsenjodkiewluefslpdwntgdtbpddsnlhffh
+ur:crypto-digest/hdcxcaoteeiobwbnkghfgydlfecaamrfcwqzhgoltsenjodkiewluefslpdwntgdtbpddsnlhffh
 ```
 
 Note that the state's signature on the elided card still verifies.

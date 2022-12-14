@@ -58,7 +58,7 @@ envelope $CREDENTIAL
 ```
 👈
 {
-    CID(4676635a6e6068c2ef3ffd8ff726dd401fd341036e920f136a1d8af5e829496d) [
+    CID(4676635a) [
         "certificateNumber": "123-456-789"
         "continuingEducationUnits": 1.5
         "expirationDate": 2028-01-01
@@ -68,7 +68,7 @@ envelope $CREDENTIAL
         "photo": "This is James Maxwell's photo."
         "professionalDevelopmentHours": 15
         "subject": "RF and Microwave Engineering"
-        "topics": CBOR
+        "topics": ["Subject 1", "Subject 2"]
         controller: "Example Electrical Engineering Board"
         isA: "Certificate of Completion"
         issuer: "Example Electrical Engineering Board"
@@ -212,7 +212,7 @@ TARGET+=`envelope extract --envelope $CONTENT | envelope digest`
 ```
 👈
 {
-    CID(4676635a6e6068c2ef3ffd8ff726dd401fd341036e920f136a1d8af5e829496d) [
+    CID(4676635a) [
         ELIDED (13)
     ]
 } [
@@ -236,7 +236,7 @@ TARGET+=(`envelope assertion find "expirationDate" $CONTENT | envelope digest --
 ```
 👈
 {
-    CID(4676635a6e6068c2ef3ffd8ff726dd401fd341036e920f136a1d8af5e829496d) [
+    CID(4676635a) [
         "expirationDate": 2028-01-01
         "firstName": "James"
         "lastName": "Maxwell"
@@ -269,7 +269,7 @@ envelope $WARRANTY
 {
     {
         {
-            CID(4676635a6e6068c2ef3ffd8ff726dd401fd341036e920f136a1d8af5e829496d) [
+            CID(4676635a) [
                 "expirationDate": 2028-01-01
                 "firstName": "James"
                 "lastName": "Maxwell"

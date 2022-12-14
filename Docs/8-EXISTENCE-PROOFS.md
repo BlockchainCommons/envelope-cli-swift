@@ -126,7 +126,7 @@ envelope $CREDENTIAL
 ```
 👈
 {
-    CID(4676635a6e6068c2ef3ffd8ff726dd401fd341036e920f136a1d8af5e829496d) [
+    CID(4676635a) [
         {
             "certificateNumber": "123-456-789"
         } [

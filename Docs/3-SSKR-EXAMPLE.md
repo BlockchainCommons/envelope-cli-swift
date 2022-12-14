@@ -31,7 +31,7 @@ envelope $DAN_ENVELOPE
 
 ```
 👈
-CBOR(crypto-seed)
+crypto-seed(CBOR)
 ```
 
 Dan generates a public/private key pair that will allow him to recover his seed from any single share if he retains his private key.

@@ -20,8 +20,8 @@ envelope $ALICE_SIGNED_DOCUMENT
 ```
 👈
 {
-    CID(d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f) [
-        controller: CID(d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f)
+    CID(d44c5e0a) [
+        controller: CID(d44c5e0a)
         publicKeys: PublicKeyBase
     ]
 } [
@@ -59,11 +59,11 @@ envelope $ALICE_REGISTRATION
 ```
 👈
 {
-    CID(d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f) [
+    CID(d44c5e0a) [
         dereferenceVia: URI(https://exampleledger.com/cid/d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f)
         entity: {
-            CID(d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f) [
-                controller: CID(d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f)
+            CID(d44c5e0a) [
+                controller: CID(d44c5e0a)
                 publicKeys: PublicKeyBase
             ]
         } [
@@ -108,7 +108,7 @@ echo $ALICE_CHALLENGE
 
 ```
 👈
-ur:envelope/lftpsptpuotaaosrgsnbfwsbnnoxgtrsotspnyvayntpsptputlftpsptpuraatpsptpuokscefxishsjzjzihjtioihcxjyjlcxfpjziniaihcxiyjpjljncxfwjliddmhfkgiysr
+ur:envelope/lftpsptpcstaaosrgslorsbapmvokswnlgiyksmknntpsptputlftpsptpuraatpsptpcskscefxishsjzjzihjtioihcxjyjlcxfpjziniaihcxiyjpjljncxfwjliddmutrpltds
 ```
 
 ```bash
@@ -161,7 +161,7 @@ echo $ALICE_CHALLENGE_2
 
 ```
 👈
-ur:envelope/lftpsptpuotaaosrgsnbfwsbnnoxgtrsotspnyvayntpsptputlftpsptpuraatpsptpuokscefxishsjzjzihjtioihcxjyjlcxfpjziniaihcxiyjpjljncxfwjliddmhfkgiysr
+ur:envelope/lftpsptpcstaaosrgslorsbapmvokswnlgiyksmknntpsptputlftpsptpuraatpsptpcskscefxishsjzjzihjtioihcxjyjlcxfpjziniaihcxiyjpjljncxfwjliddmutrpltds
 ```
 
 `ALICE_CHALLENGE_2` is indeed the same as `ALICE_CHALLENGE`, above. Bob then extracts Alice's registered URI.

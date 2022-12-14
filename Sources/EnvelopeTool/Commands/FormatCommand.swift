@@ -6,6 +6,8 @@ struct FormatCommand: ParsableCommand {
     
     @Argument var envelope: Envelope?
     
+    @Flag(help: "For --tree and --mermaid, hides the NODE case, which provides a more semantically readable tree output.") var hideNodes: Bool = false
+    
     enum Output: EnumerableFlag {
         case envelope, cbor, diag, tree, mermaid
     }
@@ -68,9 +70,9 @@ struct FormatCommand: ParsableCommand {
         case .diag:
             printOut(envelope.diagAnnotated)
         case .tree:
-            printOut(envelope.treeFormat)
+            printOut(envelope.treeFormat(hideNodes: hideNodes))
         case .mermaid:
-            printOut(envelope.mermaidFormat(layoutDirection: layout.mermaidLayout, theme: theme.mermaidTheme))
+            printOut(envelope.mermaidFormat(hideNodes: hideNodes, layoutDirection: layout.mermaidLayout, theme: theme.mermaidTheme))
         }
     }
 }
