@@ -88,9 +88,9 @@ struct SubjectArguments: ParsableArguments {
                 envelope = Envelope(n)
             case .known:
                 if let n = UInt64(value) {
-                    let p = KnownValue(rawValue: n)
+                    let p = Envelope.KnownValue(rawValue: n)
                     envelope = Envelope(p)
-                } else if let p = KnownValue(name: value) {
+                } else if let p = Envelope.KnownValue(name: value) {
                     envelope = Envelope(p)
                 } else {
                     throw EnvelopeToolError.notAKnownValue(value)

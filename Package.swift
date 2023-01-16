@@ -8,9 +8,9 @@ let package = Package(
         .macOS(.v13)
     ],
     dependencies: [
-        .package(url: "https://github.com/BlockchainCommons/BCSwiftFoundation.git", branch: "master"),
+        .package(url: "https://github.com/BlockchainCommons/BCSwiftFoundation.git", from: "4.6.0"),
         .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.0"),
-        .package(url: "https://github.com/WolfMcNally/WolfBase", from: "4.0.0"),
+        .package(url: "https://github.com/WolfMcNally/WolfBase", from: "5.0.0"),
     ],
     targets: [
         .executableTarget(

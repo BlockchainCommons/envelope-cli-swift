@@ -16,7 +16,7 @@ struct FormatCommand: ParsableCommand {
         case lr
         case tb
         
-        var mermaidLayout: MermaidOptions.LayoutDirection {
+        var mermaidLayout: Envelope.MermaidOptions.LayoutDirection {
             switch self {
             case .lr:
                 return .leftToRight
@@ -30,7 +30,7 @@ struct FormatCommand: ParsableCommand {
         case color
         case monochrome
         
-        var mermaidTheme: MermaidOptions.Theme {
+        var mermaidTheme: Envelope.MermaidOptions.Theme {
             switch self {
             case .color:
                 return .color
