@@ -6,7 +6,8 @@ Written by [Wolf McNally](https://wolfmcnally.com) for [Blockchain Commons](http
 
 ## Dependencies and Resources
 
-* [Introduction to Envelope](https://github.com/BlockchainCommons/BCSwiftSecureComponents/blob/master/Docs/02-ENVELOPE.md) (In the Secure Components repository.)
+* [Introduction to Envelope](https://www.blockchaincommons.com/introduction/Envelope-Intro/) 
+* [Envelope Docs](https://github.com/BlockchainCommons/Gordian/tree/master/Envelope#articles)
 * [BC Secure Components](https://github.com/BlockchainCommons/BCSwiftSecureComponents) - A collection of useful primitives for cryptography, semantic graphs, and cryptocurrency in Swift. Includes the reference implementation of the `Envelope` type.
 * [BC Foundation](https://github.com/BlockchainCommons/BCSwiftFoundation) - A collection of useful primitives for cryptocurrency wallets.
 * [URKit](https://github.com/BlockchainCommons/URKit) - An iOS framework for encoding and decoding URs (Uniform Resources).
