@@ -65,4 +65,4 @@ envelope help
 
 **NOTE:** Removing or renaming the cloned repository directory will break the links established by `link.sh` so you will need to re-run it. If you wish to install the tool directly, run the `install.sh` script, after which you can remove the cloned repository directory. There is also an `uninstall.sh` script if you wish to remove the tool.
 
-From here, visit the [Overview of Commands](Docs/1-Overview.md) to start learning how to use the tool. If you are unfamiliar with the `Envelope` type, we suggest starting with the [Introduction to Envelope](https://github.com/BlockchainCommons/BCSwiftSecureComponents/blob/master/Docs/02-ENVELOPE.md) in the Secure Components repository.
+From here, visit the [Overview of Commands](Docs/1-Overview.md) to start learning how to use the tool. If you are unfamiliar with the `Envelope` type, we suggest starting with the [Introduction to Envelope](https://www.blockchaincommons.com/introduction/Envelope-Intro/).
