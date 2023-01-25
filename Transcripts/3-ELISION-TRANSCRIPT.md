@@ -16,8 +16,9 @@ Envelopes are a new type of “smart document” to support the storage, backup,
 **Other Overview Docs:**
 
 * [Gordian Envelope-CLI — Repo for the CLI program](https://github.com/BlockchainCommons/envelope-cli-swift)
-* [Gordian Envelope Docs — Swift Library and Specs](https://github.com/BlockchainCommons/BCSwiftSecureComponents/tree/master/Docs)
-* [Gordian Architecture — Overview of Entire Design](https://github.com/BlockchainCommons/Gordian/blob/master/Docs/Overview-Architecture.md)
+* [Gordian Envelope Intro](https://www.blockchaincommons.com/introduction/Envelope-Intro/)
+* [Gordian Envelope Docs — Swift Library and Specs](https://github.com/BlockchainCommons/Gordian/tree/master/Envelope#articles)
+* [Gordian Architecture — Overview of Entire Design](https://github.com/BlockchainCommons/Gordian/blob/master/Architecture/README.md)
 
 ## Unedited Transcript
 
