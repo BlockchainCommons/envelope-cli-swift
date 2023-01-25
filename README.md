@@ -14,16 +14,21 @@ Written by [Wolf McNally](https://wolfmcnally.com) for [Blockchain Commons](http
 
 ## Documentation and Examples
 
-* [Overview of Commands](Docs/1-OVERVIEW.md)
-* [Basic Examples](Docs/2-BASIC-EXAMPLES.md)
-* [SSKR Example](Docs/3-SSKR-EXAMPLE.md)
-* [Complex Metadata Example](Docs/4-METADATA-EXAMPLE.md)
-* [DID Document Example](Docs/5-DID-EXAMPLE.md)
-* [Verifiable Credential Example](Docs/6-VC-RESIDENT-EXAMPLE.md)
-* [Verifiable Credential with Detailed Elision Example](Docs/7-VC-ELISION-EXAMPLE.md)
-* [Existence Proofs](Docs/8-EXISTENCE-PROOFS.md)
+The following docs exemplify the basic functionality of the `envelope-cli` app. 
+
+* [1: Overview of Commands](Docs/1-OVERVIEW.md) — Adding subjects, assertions, signatures, and salt.
+* [2: Basic Examples](Docs/2-BASIC-EXAMPLES.md) — Demonstrating standard methodologies for entry, encryption, and signing.
+* [3: SSKR Example](Docs/3-SSKR-EXAMPLE.md) — Using Shamir's Secret Sharing to lock envelopes.
+* [4: Complex Metadata Example](Docs/4-METADATA-EXAMPLE.md) — Creating envelopes with layered, structured data.
+* [5: DID Document Example](Docs/5-DID-EXAMPLE.md) — Creating and wrapping identifiers.
+* [6: Verifiable Credential Example](Docs/6-VC-RESIDENT-EXAMPLE.md) — Building complex credentials around an identifier.
+* [7: Verifiable Credential with Detailed Elision Example](Docs/7-VC-ELISION-EXAMPLE.md) — Eliding some of a credential.
+* [8: Existence Proofs](Docs/8-EXISTENCE-PROOFS.md) — Proving the existence of an elided credential.
+* [9: Diffing](Docs/9-DIFFING.md) — Showing the differences between two envelopes.
 
 ## Videos
+
+For more examples of `envelope-cli` usage, see the [envelope-cli videos](https://github.com/BlockchainCommons/envelope-cli-swift#videos) and their transcripts.
 
 * [Envelope CLI Playlist (YouTube)](https://www.youtube.com/playlist?list=PLCkrqxOY1FbooYwJ7ZhpJ_QQk8Az1aCnG)
   * [Introduction to Gordian Envelopes](https://www.youtube.com/watch?v=OcnpYqHn8NQ)
