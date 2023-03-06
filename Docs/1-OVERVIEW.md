@@ -21,6 +21,7 @@ OVERVIEW: A tool for manipulating the Envelope data type.
 USAGE: envelope <subcommand>
 
 OPTIONS:
+  --version               Show the version.
   -h, --help              Show help information.
 
 SUBCOMMANDS:
@@ -32,6 +33,8 @@ SUBCOMMANDS:
   extract                 Extract the subject of the input envelope.
   format (default)        Print the envelope in Envelope Notation.
   generate                Utilities to generate and convert various objects.
+  proof                   Work with existence proofs.
+  diff                    Work with envelope diffs.
   salt                    Add random salt to the envelope.
   sign                    Sign the envelope with the provided private key base.
   sskr                    Sharded Secret Key Reconstruction (SSKR).
@@ -45,7 +48,7 @@ Here is an example envelope we'll use in many of the examples below. The `envelo
 
 ```bash
 👉
-ALICE_KNOWS_BOB=ur:envelope/lftpsptpuoihfpjziniaihtpsptputlftpsptpuoihjejtjlktjktpsptpuoiafwjlidrdpdiesk
+ALICE_KNOWS_BOB=ur:envelope/lftpsptpcsihfpjziniaihtpsptputlftpsptpcsihjejtjlktjktpsptpcsiafwjlidjoztgmla
 ```
 
 ### Format
@@ -92,16 +95,16 @@ envelope --diag $ALICE_KNOWS_BOB
 200(   ; envelope
    [
       200(   ; envelope
-         220("Alice")   ; leaf
+         24("Alice")   ; leaf
       ),
       200(   ; envelope
          221(   ; assertion
             [
                200(   ; envelope
-                  220("knows")   ; leaf
+                  24("knows")   ; leaf
                ),
                200(   ; envelope
-                  220("Bob")   ; leaf
+                  24("Bob")   ; leaf
                )
             ]
          )
@@ -122,11 +125,11 @@ envelope --mermaid $ALICE_KNOWS_BOB
 👈
 ```mermaid
 graph LR
-    1(("e54d6fd3<br/>NODE"))
-    2["27840350<br/>#quot;Alice#quot;"]
-    3(["55560bdf<br/>ASSERTION"])
-    4["7092d620<br/>#quot;knows#quot;"]
-    5["9a771715<br/>#quot;Bob#quot;"]
+    1(("8955db5e<br/>NODE"))
+    2["13941b48<br/>#quot;Alice#quot;"]
+    3(["78d666eb<br/>ASSERTION"])
+    4["db7dd21c<br/>#quot;knows#quot;"]
+    5["13b74194<br/>#quot;Bob#quot;"]
     1 -->|subj| 2
     1 --> 3
     3 -->|pred| 4
@@ -154,14 +157,14 @@ envelope subject "Hello."
 
 ```
 👈
-ur:envelope/tpuoiyfdihjzjzjldmgsgontio
+ur:envelope/tpcsiyfdihjzjzjldmprrhtypk
 ```
 
 When we feed this envelope back into the default `format` comand, we get the envelope printed in Envelope Notation. This is why `"Hello."` is printed with quotes around it:
 
 ```bash
 👉
-envelope ur:envelope/tpuoiyfdihjzjzjldmgsgontio
+envelope ur:envelope/tpcsiyfdihjzjzjldmprrhtypk
 ```
 
 ```
@@ -174,9 +177,9 @@ envelope ur:envelope/tpuoiyfdihjzjzjldmgsgontio
 To extract the actual data of the envelope's subject, use the `extract` command:
 
 ```bash
-# Equivalent to `envelope extract --string ur:envelope/tpuoiyfdihjzjzjldmgsgontio`
+# Equivalent to `envelope extract --string ur:envelope/tpcsiyfdihjzjzjldmprrhtypk`
 👉
-envelope extract ur:envelope/tpuoiyfdihjzjzjldmgsgontio
+envelope extract ur:envelope/tpcsiyfdihjzjzjldmprrhtypk
 ```
 
 ```
@@ -205,12 +208,12 @@ envelope extract --envelope $ALICE_KNOWS_BOB
 
 ```
 👈
-ur:envelope/tpuoihfpjziniaihoxweclfg
+ur:envelope/tpcsihfpjziniaihnsrsnyue
 ```
 
 ```bash
 👉
-envelope ur:envelope/tpuoihfpjziniaihoxweclfg
+envelope ur:envelope/tpcsihfpjziniaihnsrsnyue
 ```
 
 ```
@@ -229,7 +232,7 @@ envelope subject "Alice" | envelope assertion "knows" "Bob"
 
 ```
 👈
-ur:envelope/lftpsptpuoihfpjziniaihtpsptputlftpsptpuoihjejtjlktjktpsptpuoiafwjlidrdpdiesk
+ur:envelope/lftpsptpcsihfpjziniaihtpsptputlftpsptpcsihjejtjlktjktpsptpcsiafwjlidjoztgmla
 ```
 
 Note that we have just constructed the `$ALICE_KNOWS_BOB` example envelope from scratch!
@@ -248,10 +251,13 @@ OVERVIEW: Work with the envelope's assertions.
 USAGE: envelope assertion <subcommand>
 
 OPTIONS:
+  --version               Show the version.
   -h, --help              Show help information.
 
 SUBCOMMANDS:
   add (default)           Add an assertion to the given envelope.
+  create                  Create a bare assertion with the given predicate and object.
+  remove                  Remove an assertion from the given envelope.
   count                   Print the count of the envelope's assertions.
   at                      Retrieve the assertion at the given index.
   all                     Retrieve all the envelope's assertions.
@@ -273,7 +279,7 @@ envelope digest $ALICE_KNOWS_BOB
 
 ```
 👈
-ur:crypto-digest/hdcxvwgtjltemnnlgmwttslynblpgamugszmtdlkmnckwkatmelbpdwljnynnehedrmhnnlfmthl
+ur:crypto-digest/hdcxldgouyhyadimzmpaeourhfsectvaskspdlotaxidiatbgydejnbwgskbhfrtwlwzneroatds
 ```
 
 While this prints the digest of the *subject* of the envelope:
@@ -285,7 +291,7 @@ envelope extract --envelope $ALICE_KNOWS_BOB | envelope digest
 
 ```
 👈
-ur:crypto-digest/hdcxdilraxgdgeteptptsagscwecotiofmwycmhthlgmfhlgdrhhyktojntdhtemwnbeoscxeonl
+ur:crypto-digest/hdcxbwmwcwfdkecauerfvsdirpwpfhfgtalfmulesnstvlrpoyfzuyenamdpmdcfutdlstyaqzrk
 ```
 
 Note that the two digests above are different.
@@ -299,7 +305,7 @@ envelope assertion at 0 $ALICE_KNOWS_BOB | envelope digest
 
 ```
 👈
-ur:crypto-digest/hdcxgohfbdurambsbgcxcfnsltvsgldttotoytjtyabyuegwesntpydluemwdatitycstattsrre
+ur:crypto-digest/hdcxkstbiywmmygsasktnbfwhtrppkclwdcmmugejesokejlbnftrdwspsmdcechbboerhzebtws
 ```
 
 Finally, let's print the digest of the object of the envelope's assertion:
@@ -313,7 +319,7 @@ envelope assertion at 0 $ALICE_KNOWS_BOB |    # Gets the assertion
 
 ```
 👈
-ur:crypto-digest/hdcxnyktchbzfsknehpfesaebyfpfrurmdaezmgtlojosfwnaoplehwdoyihpydaurcybzaaqzko
+ur:crypto-digest/hdcxbwrlfpmwnsemrovtnssrtnotcfgshdvezcjedlbbtypatiwtecoxjnjnhtcafhbysptsnsnl
 ```
 
 ### Elision
@@ -330,7 +336,7 @@ echo $SUBJECT_DIGEST
 
 ```
 👈
-ur:crypto-digest/hdcxdilraxgdgeteptptsagscwecotiofmwycmhthlgmfhlgdrhhyktojntdhtemwnbeoscxeonl
+ur:crypto-digest/hdcxbwmwcwfdkecauerfvsdirpwpfhfgtalfmulesnstvlrpoyfzuyenamdpmdcfutdlstyaqzrk
 ```
 
 Now if we want to produce a version of the envelope with its subject elided, we provide that digest to the `elide removing` command. Here we do the elision then immediately pipe the resulting envelope to the `format` command:
@@ -353,7 +359,7 @@ Here we provide two digests: the first for the subject as above, and the digest 
 
 ```bash
 👉
-BOB_DIGEST=ur:crypto-digest/hdcxnyktchbzfsknehpfesaebyfpfrurmdaezmgtlojosfwnaoplehwdoyihpydaurcybzaaqzko
+BOB_DIGEST=ur:crypto-digest/hdcxbwrlfpmwnsemrovtnssrtnotcfgshdvezcjedlbbtypatiwtecoxjnjnhtcafhbysptsnsnl
 envelope elide removing $ALICE_KNOWS_BOB $SUBJECT_DIGEST $BOB_DIGEST | envelope
 ```
 
@@ -375,7 +381,7 @@ envelope digest $ALICE_KNOWS_BOB
 
 ```
 👈
-ur:crypto-digest/hdcxvwgtjltemnnlgmwttslynblpgamugszmtdlkmnckwkatmelbpdwljnynnehedrmhnnlfmthl
+ur:crypto-digest/hdcxldgouyhyadimzmpaeourhfsectvaskspdlotaxidiatbgydejnbwgskbhfrtwlwzneroatds
 ```
 
 ```bash
@@ -385,7 +391,7 @@ envelope elide removing $ALICE_KNOWS_BOB $SUBJECT_DIGEST $BOB_DIGEST | envelope 
 
 ```
 👈
-ur:crypto-digest/hdcxvwgtjltemnnlgmwttslynblpgamugszmtdlkmnckwkatmelbpdwljnynnehedrmhnnlfmthl
+ur:crypto-digest/hdcxldgouyhyadimzmpaeourhfsectvaskspdlotaxidiatbgydejnbwgskbhfrtwlwzneroatds
 ```
 
 So even though the original and elided versions are in fact *different envelopes*, their digests are *exactly the same!*
@@ -402,7 +408,7 @@ echo $KEY
 
 ```
 👈
-ur:crypto-key/hdcxmszmjlfsgssrbzehsslphdlgtbwesofnlpehlftldwotpaiyfwbtzsykwttomsbatnzswlqd
+ur:crypto-key/hdcxkkjlwlzccaneztlohndpgawfonrfswamuymuuejsjyotykbeiygrwmurcnrfhkchynhtvaax
 ```
 
 Once we have this, we can produce a version of our example envelope that has its subject encrypted:
@@ -429,7 +435,7 @@ envelope encrypt $ALICE_KNOWS_BOB --key $KEY
 
 ```
 👈
-ur:envelope/lftpsptpsolrgejottrtttrofshdtafddtgsmhhsyaksmtuygwfxvtwlcntsgdgrwksfotbgbejsnsioleprwlfxplcxdlhddktpsbhdcxdilraxgdgeteptptsagscwecotiofmwycmhthlgmfhlgdrhhyktojntdhtemwnbetpsptputlftpsptpuoihjejtjlktjktpsptpuoiafwjlidcktipmwn
+ur:envelope/lftpsptpsolrgegltnswbzwpjklyprkgwpgsjpjznlnluowfvegyueveiybtgdpdguinimvelkswlusoiywfjlglhycxhghddktpsbhdcxbwmwcwfdkecauerfvsdirpwpfhfgtalfmulesnstvlrpoyfzuyenamdpmdcfutdltpsptputlftpsptpcsihjejtjlktjktpsptpcsiafwjlidgeiymomu
 ```
 
 ```bash
@@ -439,7 +445,7 @@ envelope encrypt $ALICE_KNOWS_BOB --key $KEY
 
 ```
 👈
-ur:envelope/lftpsptpsolrgehppfhsgwjodtgesrcewtgsropldieywlzsgabdlodaenqzgdlpcsiskibzvafgdkttdewybnstsrqzdshddktpsbhdcxdilraxgdgeteptptsagscwecotiofmwycmhthlgmfhlgdrhhyktojntdhtemwnbetpsptputlftpsptpuoihjejtjlktjktpsptpuoiafwjlidchnewzad
+ur:envelope/lftpsptpsolrgegdjymkwnbwjlfelsckbwgsdauomemeahempadsttecrhsngdpdnldniadwpdbnzegtesmudmvocndsoyhddktpsbhdcxbwmwcwfdkecauerfvsdirpwpfhfgtalfmulesnstvlrpoyfzuyenamdpmdcfutdltpsptputlftpsptpcsihjejtjlktjktpsptpcsiafwjlidwmfpksgr
 ```
 
 But notice! When you encrypt parts of an envelope, its *digest* remains the same as the unencrypted version:
@@ -451,7 +457,7 @@ envelope digest $ALICE_KNOWS_BOB
 
 ```
 👈
-ur:crypto-digest/hdcxvwgtjltemnnlgmwttslynblpgamugszmtdlkmnckwkatmelbpdwljnynnehedrmhnnlfmthl
+ur:crypto-digest/hdcxldgouyhyadimzmpaeourhfsectvaskspdlotaxidiatbgydejnbwgskbhfrtwlwzneroatds
 ```
 
 ```bash
@@ -461,7 +467,7 @@ envelope encrypt $ALICE_KNOWS_BOB --key $KEY | envelope digest
 
 ```
 👈
-ur:crypto-digest/hdcxvwgtjltemnnlgmwttslynblpgamugszmtdlkmnckwkatmelbpdwljnynnehedrmhnnlfmthl
+ur:crypto-digest/hdcxldgouyhyadimzmpaeourhfsectvaskspdlotaxidiatbgydejnbwgskbhfrtwlwzneroatds
 ```
 
 If you want the digest to be different each time you encrypt, you can add random salt to the envelope; see below.
@@ -498,7 +504,7 @@ envelope digest $ALICE_KNOWS_BOB
 
 ```
 👈
-ur:crypto-digest/hdcxvwgtjltemnnlgmwttslynblpgamugszmtdlkmnckwkatmelbpdwljnynnehedrmhnnlfmthl
+ur:crypto-digest/hdcxldgouyhyadimzmpaeourhfsectvaskspdlotaxidiatbgydejnbwgskbhfrtwlwzneroatds
 ```
 
 ```bash
@@ -508,7 +514,7 @@ envelope digest $WRAPPED
 
 ```
 👈
-ur:crypto-digest/hdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwdigsimfets
+ur:crypto-digest/hdcxzclocydkrespdwwygrldbyvabyplolrdfgfnsolnjkgwledyvwhtghlncylkhgdnltdkjest
 ```
 
 ```bash
@@ -531,7 +537,7 @@ envelope digest $WRAPPED
 
 ```
 👈
-ur:crypto-digest/hdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwdigsimfets
+ur:crypto-digest/hdcxzclocydkrespdwwygrldbyvabyplolrdfgfnsolnjkgwledyvwhtghlncylkhgdnltdkjest
 ```
 
 ```bash
@@ -541,7 +547,7 @@ envelope digest $WRAPPED_ENCRYPTED
 
 ```
 👈
-ur:crypto-digest/hdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwdigsimfets
+ur:crypto-digest/hdcxzclocydkrespdwwygrldbyvabyplolrdfgfnsolnjkgwledyvwhtghlncylkhgdnltdkjest
 ```
 
 To recover the original envelope we reverse the steps, first decrypting, then unwrapping:
@@ -571,7 +577,7 @@ envelope generate prvkeys
 
 ```
 👈
-ur:crypto-prvkeys/hdcxbekgntwpenryhdnybzvsltvepdgwtatovtyturylgrossekizezmlttdierfzcaslkgmlrla
+ur:crypto-prvkeys/hdcxckckasqdtddasecpzoflrsgshfdytadapsecsokoksrklafhsocmhntknnhdpyhsfytbjydy
 ```
 
 The above generation is random. If you wish to use a `crypto-seed` as your starting point:
@@ -598,7 +604,7 @@ echo $PUBKEYS
 
 ```
 👈
-ur:crypto-pubkeys/lftaaosehdcxbansurpspfeccabtbtjteopdwpwtsfskdretfewyktlssksflspmahpdjefpghwptpvahdcxrtuoiddkgsoxzegughnszmfzgobnvlkpjscyrokesgnnkslumshnrfgtgmsfcnfgbzmdvyvw
+ur:crypto-pubkeys/lftaaosehdcxweplrnkpsruepkaeahnetppsteaojtdlgudetlyksrlbzoiduoglpemujydnsrattpvahdcximbgoskbjpgtluwededpjywdlkfwksjpglsrfdcaurdahycfasmtylihpfrsfgkbvogyfeec
 ```
 
 Now we can sign our envelope:
@@ -653,7 +659,7 @@ envelope verify $WRAPPED_SIGNED --pubkeys $PUBKEYS
 
 ```
 👈
-ur:envelope/lftpsptpvtlftpsptpuoihfpjziniaihtpsptputlftpsptpuoihjejtjlktjktpsptpuoiafwjlidtpsptputlftpsptpuraxtpsptpuotpuehdfzespfiagsasyapsmtfzwpjerepfgttdisylbkttktbwuyjsleiayafneesrjzdtaskbhpglrtlkfyspmozoesdrsefdlkwkdtvteezendcljtbsjndwflndssvtrncsptnerngyeo
+ur:envelope/lftpsptpvtlftpsptpcsihfpjziniaihtpsptputlftpsptpcsihjejtjlktjktpsptpcsiafwjlidtpsptputlftpsptpuraxtpsptpcstpuehdfzzsosfpadetihmsihhtdyutgubzwyhfclveplestdvtutfhtigopewkchsbchrolngdwtutchmtytyljyqdwkrnzowsmhgrjljopdvyrkvowpwetboelrdttdyabbdksopstbbbjl
 ```
 
 To facilitate piping commands, the `verify` command prints the input envelope if the validation is successful (unless the `--silent` flag is provided), and exits with an error condition if it is unsuccessful. Lets produce some incorrect public keys and try this:
@@ -683,7 +689,7 @@ echo $SHARE_ENVELOPES
 
 ```
 👈
-ur:envelope/lftpsptpsolrhddklpwmdrdnuelbindetpvahkgminzmplfyvwdlytgheniswzfyykisbssagshdvdtesgltseoegscknybndpnehfdnyafgetgdwdgdtnsgbepmethhhpnnpyecgedecayatblohddktpsbhdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwditpsptputlftpsptpuramtpsptpuotaadechddawkcpaeadaemtgdhggtrsnsbdfyvwrflfkksalgrfntcaaasgrytkoswfwybekgutrlcadncppsmnbeplgt ur:envelope/lftpsptpsolrhddklpwmdrdnuelbindetpvahkgminzmplfyvwdlytgheniswzfyykisbssagshdvdtesgltseoegscknybndpnehfdnyafgetgdwdgdtnsgbepmethhhpnnpyecgedecayatblohddktpsbhdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwditpsptputlftpsptpuramtpsptpuotaadechddawkcpaeadadkisbntktcaqdpsvsndehhphlmsnehphnvtclytgyfhtenlglutvlroondrdptitleywsoxmn ur:envelope/lftpsptpsolrhddklpwmdrdnuelbindetpvahkgminzmplfyvwdlytgheniswzfyykisbssagshdvdtesgltseoegscknybndpnehfdnyafgetgdwdgdtnsgbepmethhhpnnpyecgedecayatblohddktpsbhdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwditpsptputlftpsptpuramtpsptpuotaadechddawkcpaeadaohpkitpesvtsahyatcfrydnehisptinkeztglpskbeegwdiremegdchmujkdiuthyeezsqzam
+ur:envelope/lftpsptpsolrhddktnhgwyeomnrnkkdauyvsvwgacawnwdcsgwqdwzmelkcstekiechymsjpzsdarlpehefnrnhggsdyqzndlomkckjnutbwvtotbkgdgsgafhmdlnrlbkhsaegsbweyaheygumhhddktpsbhdcxzclocydkrespdwwygrldbyvabyplolrdfgfnsolnjkgwledyvwhtghlncylkhgdntpsptputlftpsptpuramtpsptpcstaadechddajepsaeadaecfpsgdhygurhdreycfchfnsgbsrfzocwytsozottvojojlnyoxksuepeenpyntdkfptljyre ur:envelope/lftpsptpsolrhddktnhgwyeomnrnkkdauyvsvwgacawnwdcsgwqdwzmelkcstekiechymsjpzsdarlpehefnrnhggsdyqzndlomkckjnutbwvtotbkgdgsgafhmdlnrlbkhsaegsbweyaheygumhhddktpsbhdcxzclocydkrespdwwygrldbyvabyplolrdfgfnsolnjkgwledyvwhtghlncylkhgdntpsptputlftpsptpuramtpsptpcstaadechddajepsaeadadmhplmshepkgybtolzsonkplopmoxkbbgcwmnimwnurnlmnaagatbaytozmkntbdmhkhpotry ur:envelope/lftpsptpsolrhddktnhgwyeomnrnkkdauyvsvwgacawnwdcsgwqdwzmelkcstekiechymsjpzsdarlpehefnrnhggsdyqzndlomkckjnutbwvtotbkgdgsgafhmdlnrlbkhsaegsbweyaheygumhhddktpsbhdcxzclocydkrespdwwygrldbyvabyplolrdfgfnsolnjkgwledyvwhtghlncylkhgdntpsptputlftpsptpuramtpsptpcstaadechddajepsaeadaobepdskhhrdjpieadssisplglgdlkwdasdsflsamemkrhrpryihfhinjnrsbgbddyfzdajndy
 ```
 
 For brevity, we assign the elements of the array three shell variables: `$SHARE_1`, `SHARE_2`, and `SHARE_3`:
@@ -753,8 +759,8 @@ envelope digest $WRAPPED; envelope digest $ENCRYPTED
 
 ```
 👈
-ur:crypto-digest/hdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwdigsimfets
-ur:crypto-digest/hdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwdigsimfets
+ur:crypto-digest/hdcxzclocydkrespdwwygrldbyvabyplolrdfgfnsolnjkgwledyvwhtghlncylkhgdnltdkjest
+ur:crypto-digest/hdcxzclocydkrespdwwygrldbyvabyplolrdfgfnsolnjkgwledyvwhtghlncylkhgdnltdkjest
 ```
 
 The `salt` command lets us add an assertion with random data. If we do this before encrypting, the unencrypted subject will be the same, but the digest will be different:
@@ -783,6 +789,6 @@ envelope digest $ENCRYPTED; envelope digest $SALTED_ENCRYPTED
 
 ```
 👈
-ur:crypto-digest/hdcxdsdacwememuoztpkmsamkbkolbutoxjztagmjymdjsmkdinlrnmokbjtttemdwdigsimfets
-ur:crypto-digest/hdcxvslfhezekitdiyhpbyjoisbycldrgstlndbksrhdioetreaxlpiycyhfztcmfrehpaspostd
+ur:crypto-digest/hdcxzclocydkrespdwwygrldbyvabyplolrdfgfnsolnjkgwledyvwhtghlncylkhgdnltdkjest
+ur:crypto-digest/hdcxlnmnnnetbzsbwyencnhscafnuespvlsgtalbpycwdawdemdpiattwkamlbvscypeiyfgnbzm
 ```

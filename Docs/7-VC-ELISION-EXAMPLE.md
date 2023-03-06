@@ -13,11 +13,10 @@ First we need keys that represent the Example Electrical Engineering Board.
 ```bash
 👉
 BOARD_PRVKEYS="ur:crypto-prvkeys/hdcxynlntpsbfrbgjkcetpzorohgsafsihcnhyrtoebzwegtvyzolbgtdaskcsldfgadtldmrkld"
-BOARD_PUBKEYS="ur:crypto-pubkeys/lftaaosehdcxwypfzmrfghtbbzmkiaryhydpbdwevsktclgsaywsaykiientrtkpmhckztdalrkbtpvahdcxamwspytlztzcyllawkkssbltknsnvesaiozoswstbwcxmhrklfidzcoytkynssihdslfhnfe"
+BOARD_PUBKEYS="ur:crypto-pubkeys/lftaaosehdcxzcjpcycfstoyengahyzecppefwvtghmstkyklsoeiovtfzasbdbakepdseaehsiatpvahdcxkelsaetygrwtdtwzytkoielytschleptdsmwahwtvlwlwdpmadoydwltmsasidfrdlganbbs"
 
 EMPLOYER_PRVKEYS="ur:crypto-prvkeys/hdcxpkyneedreyhyvshfmygwplrfrhclfwenkoetwnvagyescezsnnsobyfhtkghgypsrhdmjnko"
-EMPLOYER_PUBKEYS="ur:crypto-prvkeys/hdcxpkyneedreyhyvshfmygwplrfrhclfwenkoetwnvagyescezsnnsobyfhtkghgypsrhdmjnko
-ur:crypto-pubkeys/lftaaosehdcxctjopfkefdprsoplbsatkemsyladvanlbghlzmtptlylcarokoierosrwfvdpmswtpvahdcxihwfndlnvsoslfcahpgrfhoenlpdrswdrsdikipkvekocyatkblnhdtybzvlgshnnlmumuaa"
+EMPLOYER_PUBKEYS="ur:crypto-pubkeys/lftaaosehdcxdnknjkmsmstypasfonchmyrktpgdesdasarlpyselbhnfenesofmplkopsntnnmotpvahdcxbwwtrpwfvdjnhlrhlejolgwfhykpndknswdwlflgotiofdtpcsgmdljnihsgbwksfzmeplvo"
 ```
 
 Now we can compose the credential.
@@ -238,12 +237,10 @@ TARGET+=(`envelope assertion find "expirationDate" $CONTENT | envelope digest --
 {
     CID(4676635a) [
         "expirationDate": 2028-01-01
-        "firstName": "James"
-        "lastName": "Maxwell"
         "subject": "RF and Microwave Engineering"
         isA: "Certificate of Completion"
         issuer: "Example Electrical Engineering Board"
-        ELIDED (7)
+        ELIDED (9)
     ]
 } [
     note: "Signed by Example Electrical Engineering Board"
@@ -271,12 +268,10 @@ envelope $WARRANTY
         {
             CID(4676635a) [
                 "expirationDate": 2028-01-01
-                "firstName": "James"
-                "lastName": "Maxwell"
                 "subject": "RF and Microwave Engineering"
                 isA: "Certificate of Completion"
                 issuer: "Example Electrical Engineering Board"
-                ELIDED (7)
+                ELIDED (9)
             ]
         } [
             note: "Signed by Example Electrical Engineering Board"

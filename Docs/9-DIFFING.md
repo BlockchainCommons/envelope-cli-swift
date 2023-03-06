@@ -57,6 +57,10 @@ envelope $E3
 ```bash
 👉
 echo $E2; echo $E3
+```
+
+```
+👈
 ur:envelope/lftpsptpcsihfxhsjpjljztpsptputlftpsptpcsihjejtjlktjktpsptpcsiafwjlidemimbzut
 ur:envelope/lftpsptpcsihfxhsjpjljztpsptputlftpsptpcsihjejtjlktjktpsptpcsiafwjlidemimbzut
 ```
@@ -142,7 +146,7 @@ envelope $DIFF
 
 ```
 👈
-edits: [1, 5, 4, 3, [10, [1]], [1, [0, "Frank"]], [7, [2, verifiedBy]], [8, [0, Signature]], [21, [0, "Alice"], 10, 0, 2, [2, 0, 1, 6, 22]], [22, [5, Digest(71a30690)], 21, 2, 3]]
+edits: [1, 5, 4, [10, [1]], [1, [0, "frank"]], [3, [5, Digest(4012caf2)]], [7, [2, verifiedBy]], [8, [0, Signature]], [21, [0, "Alice"], 10, 0, 2, [2, 0, 1, 3, 6]]]
 ```
 
 ```bash
@@ -171,6 +175,6 @@ echo $E2; echo $E3
 
 ```
 👈
-ur:envelope/lftpsptpvtlrtpsptpcsihfpjziniaihtpsptputlftpsptpcsihjejtjlktjktpsptpcsihiyjphsjtjetpsptpsolrgosoheosetdkbwhyplhfsarkrknlykknamqzlpplfpfggsesgewkjpbslbglfdzsecwliegdmeztgelgknfnldfzmnjkheghfpenjewshddktpsbhdcxgohfbdurambsbgcxcfnsltvsgldttotoytjtyabyuegwesntpydluemwdatitycstpsptpsbhdcxjsotammhloswcemomyghwpgdlpnefhasrhehmnnsoljkglimfrhektpkehhkosbytpsptputlftpsptpuraxtpsptpcstpuehdfzfseoktwmztdehnjentgaahdtztlnsgvwtkhtcavtbsgsryfnmhjoberdlsgahnnecetbihsslptktiledlidpssgfzuoghjtsnhhyapscyguyalkbykgahhdcwbzdslnhpktswlb
-ur:envelope/lftpsptpvtlrtpsptpcsihfpjziniaihtpsptputlftpsptpcsihjejtjlktjktpsptpcsihiyjphsjtjetpsptpsolrgosoheosetdkbwhyplhfsarkrknlykknamqzlpplfpfggsesgewkjpbslbglfdzsecwliegdmeztgelgknfnldfzmnjkheghfpenjewshddktpsbhdcxgohfbdurambsbgcxcfnsltvsgldttotoytjtyabyuegwesntpydluemwdatitycstpsptpsbhdcxjsotammhloswcemomyghwpgdlpnefhasrhehmnnsoljkglimfrhektpkehhkosbytpsptputlftpsptpuraxtpsptpcstpuehdfzfseoktwmztdehnjentgaahdtztlnsgvwtkhtcavtbsgsryfnmhjoberdlsgahnnecetbihsslptktiledlidpssgfzuoghjtsnhhyapscyguyalkbykgahhdcwbzdslnhpktswlb
+ur:envelope/lftpsptpvtlrtpsptpcsihfpjziniaihtpsptputlftpsptpcsihjejtjlktjktpsptpcsihiyjphsjtjetpsptpsbhdcxfzbgsgwztajewfmtdabbrfzctklgtsbnecchecuestdwlpjtsksntkdmvlhlimmetpsptpsolrgoswwdlpbdnnmscseohfteimpybnfyhyurecfzsbmyutgspywfnbzmhnsfurqdtlfwksasgdsreozeksosneatqzadcscmhplovefzgshddktpsbhdcxkstbiywmmygsasktnbfwhtrppkclwdcmmugejesokejlbnftrdwspsmdcechbboetpsptputlftpsptpuraxtpsptpcstpuehdfzgentjllbdesrimwdsfvoeykbdsuylehkimlbeeztfyfydtgrwkfryaptcykotnhppfzsticegmsteowstnwdgwidmhmyylvsvtastpieytemwncsiavtdesoyngwinylmsmeeyeh
+ur:envelope/lftpsptpvtlrtpsptpcsihfpjziniaihtpsptputlftpsptpcsihjejtjlktjktpsptpcsihiyjphsjtjetpsptpsbhdcxfzbgsgwztajewfmtdabbrfzctklgtsbnecchecuestdwlpjtsksntkdmvlhlimmetpsptpsolrgoswwdlpbdnnmscseohfteimpybnfyhyurecfzsbmyutgspywfnbzmhnsfurqdtlfwksasgdsreozeksosneatqzadcscmhplovefzgshddktpsbhdcxkstbiywmmygsasktnbfwhtrppkclwdcmmugejesokejlbnftrdwspsmdcechbboetpsptputlftpsptpuraxtpsptpcstpuehdfzgentjllbdesrimwdsfvoeykbdsuylehkimlbeeztfyfydtgrwkfryaptcykotnhppfzsticegmsteowstnwdgwidmhmyylvsvtastpieytemwncsiavtdesoyngwinylmsmeeyeh
 ```

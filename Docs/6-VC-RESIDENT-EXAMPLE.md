@@ -203,8 +203,8 @@ envelope digest $JOHN_RESIDENT_CARD; envelope digest $ELIDED_CARD
 
 ```
 👈
-ur:crypto-digest/hdcxcaoteeiobwbnkghfgydlfecaamrfcwqzhgoltsenjodkiewluefslpdwntgdtbpddsnlhffh
-ur:crypto-digest/hdcxcaoteeiobwbnkghfgydlfecaamrfcwqzhgoltsenjodkiewluefslpdwntgdtbpddsnlhffh
+ur:crypto-digest/hdcxdweylsmhadtluehemsnbyleowypdoyztsbgortnscxkowpdpdtfdzssktnayfpsbvtdlmugl
+ur:crypto-digest/hdcxdweylsmhadtluehemsnbyleowypdoyztsbgortnscxkowpdpdtfdzssktnayfpsbvtdlmugl
 ```
 
 Note that the state's signature on the elided card still verifies.

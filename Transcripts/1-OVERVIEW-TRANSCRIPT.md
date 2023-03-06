@@ -124,7 +124,7 @@ The first thing I'm going to show you is how you would create a basic envelope a
 [**▶️ envelope subject:**](https://youtu.be/K2gFTyjbiYk?t=89)
 ```
 $ envelope subject "Hello."
-ur:envelope/tpuoiyfdihjzjzjldmgsgontio
+ur:envelope/tpcsiyfdihjzjzjldmprrhtypk
 ```
 
 As you can see, the output of this is a `ur:`. UR stands for uniform resource. It has a type, and then it has a string of characters after it, which are an ASCII encoded version of the CBOR object. If you just need binary, you can use CBOR directly. However, if you ever want to transmit these things, either in text or as QR codes (because URs are especially optimized for use with QR codes, but they can be used for all kinds of other things, too), then UR is a great format for this because it's human readable. It is also a well-formed URI. You're probably familiar with the most common form of URIs, which are URLs.
@@ -159,7 +159,7 @@ This is called "envelope notation." And this case you see  this is the subject, 
 Now the first envelope I created up here has no assertions on it: it's just the subject. So if I type envelope and then enter the envelope directly on the command line, I get back just the subject. Hello.
 
 ```
-$ envelope ur:envelope/tpuoiyfdihjzjzjldmgsgontio
+$ envelope ur:envelope/tpcsiyfdihjzjzjldmprrhtypk
 "Hello."
 ```
 

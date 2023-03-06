@@ -99,7 +99,7 @@ echo $BOOK_DIGEST
 
 ```
 👈
-ur:crypto-digest/hdcxvspkcxcaqzaafpistihpkttsqdiyfdzoknmsuydpfmjpykrdrkptlykkbyondeaslpinjljn
+ur:crypto-digest/hdcxdstihtykswvlcmamsrcwdtgdwscmtyemfdcyprclhtjzsameimtdbedidspkmuvtgdwzplwn
 ```
 
 Create the final metadata object, which provides information about the object to which it refers, both as a general work and as a specific digital embodiment of that work.
@@ -115,7 +115,7 @@ envelope $BOOK_METADATA
 
 ```
 👈
-Digest(e8aa201d) [
+Digest(26d05af5) [
     "format": "EPUB"
     "work": CID(7fb90a9d) [
         "author": CID(9c747ace) [
