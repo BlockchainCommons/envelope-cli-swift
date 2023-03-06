@@ -56,19 +56,19 @@ struct FormatCommand: ParsableCommand {
     }
 
     mutating func run() throws {
-        addKnownTags()
         resetOutput()
         try fill()
         guard let envelope else {
             throw EnvelopeToolError.missingArgument("envelope")
         }
+        let context = FormatContext(tags: knownTags, functions: knownFunctions, parameters: knownParameters)
         switch output {
         case .envelope:
-            printOut(envelope.format)
+            printOut(envelope.format(context: context))
         case .cbor:
             printOut(envelope.taggedCBOR.hex)
         case .diag:
-            printOut(envelope.diagAnnotated)
+            printOut(envelope.diagnostic(annotate: true, context: context))
         case .tree:
             printOut(envelope.treeFormat(hideNodes: hideNodes))
         case .mermaid:

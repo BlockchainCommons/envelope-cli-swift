@@ -88,9 +88,9 @@ struct SubjectArguments: ParsableArguments {
                 envelope = Envelope(n)
             case .known:
                 if let n = UInt64(value) {
-                    let p = Envelope.KnownValue(rawValue: n)
+                    let p = KnownValue(rawValue: n)
                     envelope = Envelope(p)
-                } else if let p = Envelope.KnownValue(name: value) {
+                } else if let p = KnownValue(name: value) {
                     envelope = Envelope(p)
                 } else {
                     throw EnvelopeToolError.notAKnownValue(value)
@@ -98,23 +98,22 @@ struct SubjectArguments: ParsableArguments {
             case .string:
                 envelope = Envelope(value)
             case .ur:
-                addKnownTags()
                 let ur = try UR(urString: value)
                 if ur.type == "envelope" {
                     envelope = try Envelope(ur: ur)
                         .wrap()
                 } else {
-                    var cborTag = CBOR.Tag.knownTag(for: ur.type)
+                    var cborTag = knownTags.tag(for: ur.type)
                     if
                         cborTag == nil,
-                        let tag
+                        let tagValue = tag
                     {
-                        cborTag = CBOR.Tag(rawValue: tag)
+                        cborTag = Tag(tagValue)
                     }
                     guard let cborTag else {
                         throw EnvelopeToolError.urTagRequired(ur.type)
                     }
-                    let cbor = try CBOR(ur.cbor)
+                    let cbor = ur.cbor
                     let contentCBOR = CBOR.tagged(cborTag, cbor)
                     envelope = Envelope(contentCBOR)
                 }
