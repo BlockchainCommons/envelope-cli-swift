@@ -164,7 +164,7 @@ envelope $CREDENTIAL
         ]
         "continuingEducationUnits": 1.5
         "professionalDevelopmentHours": 15
-        "topics": CBOR
+        "topics": ["Subject 1", "Subject 2"]
         controller: "Example Electrical Engineering Board"
         isA: "Certificate of Completion"
         issuer: "Example Electrical Engineering Board"
@@ -204,7 +204,7 @@ The proof includes digests from all the elided assertions.
         ELIDED [
             ELIDED
         ]
-        ELIDED (9)
+        ELIDED (12)
     ]
 } [
     ELIDED (2)

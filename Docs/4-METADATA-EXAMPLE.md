@@ -99,7 +99,7 @@ echo $BOOK_DIGEST
 
 ```
 👈
-ur:crypto-digest/hdcxdstihtykswvlcmamsrcwdtgdwscmtyemfdcyprclhtjzsameimtdbedidspkmuvtgdwzplwn
+ur:digest/hdcxdstihtykswvlcmamsrcwdtgdwscmtyemfdcyprclhtjzsameimtdbedidspkmuvtgdwzplwn
 ```
 
 Create the final metadata object, which provides information about the object to which it refers, both as a general work and as a specific digital embodiment of that work.

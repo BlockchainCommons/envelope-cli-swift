@@ -13,10 +13,10 @@ First we need keys that represent the Example Electrical Engineering Board.
 ```bash
 👉
 BOARD_PRVKEYS="ur:crypto-prvkeys/hdcxynlntpsbfrbgjkcetpzorohgsafsihcnhyrtoebzwegtvyzolbgtdaskcsldfgadtldmrkld"
-BOARD_PUBKEYS="ur:crypto-pubkeys/lftaaosehdcxzcjpcycfstoyengahyzecppefwvtghmstkyklsoeiovtfzasbdbakepdseaehsiatpvahdcxkelsaetygrwtdtwzytkoielytschleptdsmwahwtvlwlwdpmadoydwltmsasidfrdlganbbs"
+BOARD_PUBKEYS="ur:crypto-pubkeys/lftaadfwhdcxzcjpcycfstoyengahyzecppefwvtghmstkyklsoeiovtfzasbdbakepdseaehsiataaddmhdcxkelsaetygrwtdtwzytkoielytschleptdsmwahwtvlwlwdpmadoydwltmsasidfrghgeyapt"
 
 EMPLOYER_PRVKEYS="ur:crypto-prvkeys/hdcxpkyneedreyhyvshfmygwplrfrhclfwenkoetwnvagyescezsnnsobyfhtkghgypsrhdmjnko"
-EMPLOYER_PUBKEYS="ur:crypto-pubkeys/lftaaosehdcxdnknjkmsmstypasfonchmyrktpgdesdasarlpyselbhnfenesofmplkopsntnnmotpvahdcxbwwtrpwfvdjnhlrhlejolgwfhykpndknswdwlflgotiofdtpcsgmdljnihsgbwksfzmeplvo"
+EMPLOYER_PUBKEYS="ur:crypto-pubkeys/lftaadfwhdcxdnknjkmsmstypasfonchmyrktpgdesdasarlpyselbhnfenesofmplkopsntnnmotaaddmhdcxbwwtrpwfvdjnhlrhlejolgwfhykpndknswdwlflgotiofdtpcsgmdljnihsgbwkseocfzmta"
 ```
 
 Now we can compose the credential.
@@ -312,4 +312,56 @@ WARRANTY=`envelope subject --wrapped $REDACTED_CREDENTIAL |
     envelope subject --wrapped |
     envelope assertion --known note "Signed by Employer Corp." |
     envelope sign --prvkeys $EMPLOYER_PRVKEYS`
+```
+
+## Compression and Encryption
+
+The same command that is used to elide a target set of digests can also be used to compress or encrypt the target:
+
+```
+👉
+envelope elide revealing --compress $CREDENTIAL $TARGET | envelope
+```
+
+```
+👈
+{
+    CID(4676635a) [
+        "expirationDate": 2028-01-01
+        "firstName": "James"
+        "lastName": "Maxwell"
+        "subject": "RF and Microwave Engineering"
+        isA: "Certificate of Completion"
+        issuer: "Example Electrical Engineering Board"
+        COMPRESSED (7)
+    ]
+} [
+    note: "Signed by Example Electrical Engineering Board"
+    verifiedBy: Signature
+]
+```
+
+When you encrypt, you must also supply a symmetric key with the `--key` option.
+
+```
+👉
+envelope elide revealing --encrypt --key ur:crypto-key/hdcxcnqzoeuobzdksphpfxonrlkemsislfloahurgygojnkblfktrkvdpyrklykbiawynncmtlpl $CREDENTIAL $TARGET | envelope
+```
+
+```
+👈
+{
+    CID(4676635a) [
+        "expirationDate": 2028-01-01
+        "firstName": "James"
+        "lastName": "Maxwell"
+        "subject": "RF and Microwave Engineering"
+        isA: "Certificate of Completion"
+        issuer: "Example Electrical Engineering Board"
+        ENCRYPTED (7)
+    ]
+} [
+    note: "Signed by Example Electrical Engineering Board"
+    verifiedBy: Signature
+]
 ```

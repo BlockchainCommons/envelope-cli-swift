@@ -6,10 +6,11 @@ struct Main: ParsableCommand {
     static var configuration = CommandConfiguration(
         commandName: "envelope",
         abstract: "A tool for manipulating the Envelope data type.",
-        version: "0.5.0",
+        version: "0.6.0",
         shouldDisplay: false,
         subcommands: [
             AssertionCommand.self,
+            CompressCommand.self,
             DigestCommand.self,
             DecryptCommand.self,
             ElideCommand.self,
@@ -23,6 +24,7 @@ struct Main: ParsableCommand {
             SignCommand.self,
             SSKRCommand.self,
             SubjectCommand.self,
+            UncompressCommand.self,
             VerifyCommand.self,
         ],
         defaultSubcommand: FormatCommand.self

@@ -61,8 +61,8 @@ echo $E2; echo $E3
 
 ```
 👈
-ur:envelope/lftpsptpcsihfxhsjpjljztpsptputlftpsptpcsihjejtjlktjktpsptpcsiafwjlidemimbzut
-ur:envelope/lftpsptpcsihfxhsjpjljztpsptputlftpsptpcsihjejtjlktjktpsptpcsiafwjlidemimbzut
+ur:envelope/lftpsptpcsihfxhsjpjljztpsptpsolftpsptpcsihjejtjlktjktpsptpcsiafwjlidnlfpgooy
+ur:envelope/lftpsptpcsihfxhsjpjljztpsptpsolftpsptpcsihjejtjlktjktpsptpcsiafwjlidnlfpgooy
 ```
 
 Envelopes `E1` and `E2` are the source and target, `edits` is the list of edits needed, and `E3` is the result of applying the edits to `E1`. The last command line prints `E2` and `E3` together to show they are the same.
@@ -146,7 +146,7 @@ envelope $DIFF
 
 ```
 👈
-edits: [1, 5, 4, [10, [1]], [1, [0, "frank"]], [3, [5, Digest(4012caf2)]], [7, [2, verifiedBy]], [8, [0, Signature]], [21, [0, "Alice"], 10, 0, 2, [2, 0, 1, 3, 6]]]
+edits: [1, 5, 4, [10, [1]], [1, [0, "frank"]], [3, [6, Digest(4012caf2)]], [7, [2, verifiedBy]], [8, [0, Signature]], [21, [0, "Alice"], 10, 0, 2, [2, 0, 1, 3, 6]]]
 ```
 
 ```bash
@@ -175,6 +175,6 @@ echo $E2; echo $E3
 
 ```
 👈
-ur:envelope/lftpsptpvtlrtpsptpcsihfpjziniaihtpsptputlftpsptpcsihjejtjlktjktpsptpcsihiyjphsjtjetpsptpsbhdcxfzbgsgwztajewfmtdabbrfzctklgtsbnecchecuestdwlpjtsksntkdmvlhlimmetpsptpsolrgoswwdlpbdnnmscseohfteimpybnfyhyurecfzsbmyutgspywfnbzmhnsfurqdtlfwksasgdsreozeksosneatqzadcscmhplovefzgshddktpsbhdcxkstbiywmmygsasktnbfwhtrppkclwdcmmugejesokejlbnftrdwspsmdcechbboetpsptputlftpsptpuraxtpsptpcstpuehdfzgentjllbdesrimwdsfvoeykbdsuylehkimlbeeztfyfydtgrwkfryaptcykotnhppfzsticegmsteowstnwdgwidmhmyylvsvtastpieytemwncsiavtdesoyngwinylmsmeeyeh
-ur:envelope/lftpsptpvtlrtpsptpcsihfpjziniaihtpsptputlftpsptpcsihjejtjlktjktpsptpcsihiyjphsjtjetpsptpsbhdcxfzbgsgwztajewfmtdabbrfzctklgtsbnecchecuestdwlpjtsksntkdmvlhlimmetpsptpsolrgoswwdlpbdnnmscseohfteimpybnfyhyurecfzsbmyutgspywfnbzmhnsfurqdtlfwksasgdsreozeksosneatqzadcscmhplovefzgshddktpsbhdcxkstbiywmmygsasktnbfwhtrppkclwdcmmugejesokejlbnftrdwspsmdcechbboetpsptputlftpsptpuraxtpsptpcstpuehdfzgentjllbdesrimwdsfvoeykbdsuylehkimlbeeztfyfydtgrwkfryaptcykotnhppfzsticegmsteowstnwdgwidmhmyylvsvtastpieytemwncsiavtdesoyngwinylmsmeeyeh
+ur:envelope/lftpsptpsblrtpsptpcsihfpjziniaihtpsptpsolftpsptpcsihjejtjlktjktpsptpcsihiyjphsjtjetpsptpsfhdcxfzbgsgwztajewfmtdabbrfzctklgtsbnecchecuestdwlpjtsksntkdmvlhlimmetpsptpsnlrgokgvacteecpndghkirpbkhfcphsuomdjzvlkpfljoflgsbaftkgrdmnwfdyolhpgacyhpgdmsoycsgtfzhpndlyctjyfskebdfecxfxhddktpsfhdcxkstbiywmmygsasktnbfwhtrppkclwdcmmugejesokejlbnftrdwspsmdcechbboetpsptpsolftpsptpsgaxtpsptpcstaadfzhdfzkshfrobnihctnnurknpaclbebgpasrjtaecxwmhlsnjssehplghljtgometppftsurldayvdcmktsfwldefxkgcfjlmsiecsgowysnlansltemwkbskkutnthpcnfxihbdotrdmy
+ur:envelope/lftpsptpsblrtpsptpcsihfpjziniaihtpsptpsolftpsptpcsihjejtjlktjktpsptpcsihiyjphsjtjetpsptpsfhdcxfzbgsgwztajewfmtdabbrfzctklgtsbnecchecuestdwlpjtsksntkdmvlhlimmetpsptpsnlrgokgvacteecpndghkirpbkhfcphsuomdjzvlkpfljoflgsbaftkgrdmnwfdyolhpgacyhpgdmsoycsgtfzhpndlyctjyfskebdfecxfxhddktpsfhdcxkstbiywmmygsasktnbfwhtrppkclwdcmmugejesokejlbnftrdwspsmdcechbboetpsptpsolftpsptpsgaxtpsptpcstaadfzhdfzkshfrobnihctnnurknpaclbebgpasrjtaecxwmhlsnjssehplghljtgometppftsurldayvdcmktsfwldefxkgcfjlmsiecsgowysnlansltemwkbskkutnthpcnfxihbdotrdmy
 ```

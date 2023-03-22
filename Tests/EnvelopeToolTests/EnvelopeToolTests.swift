@@ -11,8 +11,8 @@ let cidExample = "dec7e82893c32f7a4fcec633c02c0ec32a4361ca3ee3bc8758ae07742e9405
 let dateExample = "2022-08-30T07:16:11Z"
 let digestExample = Digest(helloString).ur.string
 let seedURExample = "ur:crypto-seed/oyadgdaawzwplrbdhdpabgrnvokorolnrtemksayyadmut"
-let aliceKnowsBobExample = "ur:envelope/lftpsptpcsihfpjziniaihtpsptputlftpsptpcsihjejtjlktjktpsptpcsiafwjlidjoztgmla"
-let credentialExample = "ur:envelope/lstpsptpvtmntpsptpcstpsghdcxfgkoiahtjthnissawsfhzcmyyldsutfzcttefpaxjtmobsbwimcaleykvsdtgajntpsptputlftpsptpurattpsptpcsksdkfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpietpsptputlftpsptpcsjsiaihjpjyiniyiniahsjyihglkpjnidihjptpsptpcsjeeheyeodpeeecendpemetestpsptputlftpsptpcsjtihksjoinjphsjyinjljtfyhsjyihtpsptpcssecyjncscxaetpsptputlftpsptpcsisjzhsjkjyglhsjnihtpsptpcsiogthsksktihjzjztpsptputlftpsptpcsininjkjkkpihfyhsjyihtpsptpcssecyhybdvyaetpsptputlftpsptpcsihjoisjljyjltpsptpcsksckghisinjkcxinjkcxgehsjnihjkcxgthsksktihjzjzdijkcxjoisjljyjldmtpsptputlftpsptpcskscejojpjliyihjkjkinjljthsjzfyihkoihjzjljojnihjtjyfdjlkpjpjktpsptpcsbstpsptputlftpsptpcsiniyinjpjkjyglhsjnihtpsptpcsihgehsjnihjktpsptputlftpsptpcsiyjyjljoiniajktpsptpcslfingukpidimihiajycxehingukpidimihiajycxeytpsptputlftpsptpcskscsiajljtjyinjtkpinjtiofeiekpiahsjyinjljtgojtinjyjktpsptpcsadtpsptputlftpsptpurbttpsptpcsksdkfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpietpsptputlftpsptpcsiojkkpidimihiajytpsptpcskscegmfgcxhsjtiecxgtiniajpjlkthskoihcxfejtioinjtihihjpinjtiotpsptputlftpsptpuraotpsptpcskscffxihjpjyiniyiniahsjyihcxjliycxfxjljnjojzihjyinjljttpsptputlftpsptpuraxtpsptpcstpuehdfzmkembyrhbsskcfqdgsjljzlnmupedsckhtvdgwnyaakbzctiinwyeszmrtfddlrtnnlrcmpachpabznshklrynuegdhfsbctoxadktkoiawyahstioaxhtjtdpfpihbztpsptputlftpsptpuraatpsptpcsksdmguiniojtihiecxidkkcxfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpieclindslo"
+let aliceKnowsBobExample = "ur:envelope/lftpsptpcsihfpjziniaihtpsptpsolftpsptpcsihjejtjlktjktpsptpcsiafwjliduetsbgzt"
+let credentialExample = "ur:envelope/lstpsptpsbmntpsptpcstaadethdcxfgkoiahtjthnissawsfhzcmyyldsutfzcttefpaxjtmobsbwimcaleykvsdtgajntpsptpsolftpsptpcsjsiaihjpjyiniyiniahsjyihglkpjnidihjptpsptpcsjeeheyeodpeeecendpemetestpsptpsolftpsptpcsjtihksjoinjphsjyinjljtfyhsjyihtpsptpcssecyjncscxaetpsptpsolftpsptpcsisjzhsjkjyglhsjnihtpsptpcsiogthsksktihjzjztpsptpsolftpsptpcsininjkjkkpihfyhsjyihtpsptpcssecyhybdvyaetpsptpsolftpsptpcsihjoisjljyjltpsptpcsksckghisinjkcxinjkcxgehsjnihjkcxgthsksktihjzjzdijkcxjoisjljyjldmtpsptpsolftpsptpcskscejojpjliyihjkjkinjljthsjzfyihkoihjzjljojnihjtjyfdjlkpjpjktpsptpcsbstpsptpsolftpsptpcsiniyinjpjkjyglhsjnihtpsptpcsihgehsjnihjktpsptpsolftpsptpcsiyjyjljoiniajktpsptpcslfingukpidimihiajycxehingukpidimihiajycxeytpsptpsolftpsptpcskscsiajljtjyinjtkpinjtiofeiekpiahsjyinjljtgojtinjyjktpsptpcsadtpsptpsolftpsptpsgaotpsptpcskscffxihjpjyiniyiniahsjyihcxjliycxfxjljnjojzihjyinjljttpsptpsolftpsptpcsiojkkpidimihiajytpsptpcskscegmfgcxhsjtiecxgtiniajpjlkthskoihcxfejtioinjtihihjpinjtiotpsptpsolftpsptpsgattpsptpcsksdkfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpietpsptpsolftpsptpsgbttpsptpcsksdkfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpietpsptpsolftpsptpsgaxtpsptpcstaadfzhdfzinglfpkbcyamyladcacnbzcmidwkjehezeispahnpliasbwkpfcwwzgwolrhguzoryntynbynepshljnfhbaghpfaaiyftfwhkdyknrhoelntlnnwmhloyssntskktuotpsptpsolftpsptpsgaatpsptpcsksdmguiniojtihiecxidkkcxfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpietesfkbfd"
 let keyExample = "ur:crypto-key/hdcxmszmjlfsgssrbzehsslphdlgtbwesofnlpehlftldwotpaiyfwbtzsykwttomsbatnzswlqd"
 
 let aliceCID = "ur:crypto-cid/hdcxtygshybkzcecfhflpfdlhdonotoentnydmzsidmkindlldjztdmoeyishknybtbswtgwwpdi"
@@ -59,7 +59,7 @@ final class EnvelopeToolTests: XCTestCase {
         let e = Envelope(.note, "This is a note.")
         let ur = e.ur.string
 
-        let predicateEnvelope = "ur:envelope/tpuraakicmnbgu"
+        let predicateEnvelope = "ur:envelope/tpsgaageotfgfl"
         let objectEnvelope = "ur:envelope/tpcsjlghisinjkcxinjkcxhscxjtjljyihdmbamnatmn"
 
         let predObj = try envelope("extract --assertion \(ur)")
@@ -92,15 +92,15 @@ final class EnvelopeToolTests: XCTestCase {
     
     func testCIDSubject() throws {
         let e = try envelope("subject --cid \(cidExample)")
-        XCTAssertEqual(e, "ur:envelope/tpcstpsghdcxuestvsdemusrdlkngwtosweortdwbasrdrfxhssgfmvlrflthdplatjydmmwahgddiamytlu")
+        XCTAssertEqual(e, "ur:envelope/tpcstaadethdcxuestvsdemusrdlkngwtosweortdwbasrdrfxhssgfmvlrflthdplatjydmmwahgdsnreftfh")
         XCTAssertEqual(try envelope(e), "CID(\(cidExample.prefix(8)))")
         XCTAssertEqual(try envelope("extract --cid \(e)"), cidExample)
-        XCTAssertEqual(try envelope("extract --cbor \(e)"), "d8ca5820dec7e82893c32f7a4fcec633c02c0ec32a4361ca3ee3bc8758ae07742e940550")
+        XCTAssertEqual(try envelope("extract --cbor \(e)"), "d901385820dec7e82893c32f7a4fcec633c02c0ec32a4361ca3ee3bc8758ae07742e940550")
     }
     
     func testWrappedEnvelopeSubject() throws {
         let e = try envelope("subject --wrapped \(helloEnvelopeUR)")
-        XCTAssertEqual(e, "ur:envelope/tpvttpcsiyfdihjzjzjldmrygakpio")
+        XCTAssertEqual(e, "ur:envelope/tpsbtpcsiyfdihjzjzjldmbkwklgfz")
         XCTAssertEqual(try envelope(e),
         """
         {
@@ -132,10 +132,10 @@ final class EnvelopeToolTests: XCTestCase {
     
     func testDigestSubject() throws {
         let e = try envelope("subject --digest \(digestExample)")
-        XCTAssertEqual(e, "ur:envelope/tpcstpsbhdcxdplutstarkhelprdiefhadbetlbnreamoyzefxnnkonycpgdehmuwdhnfgrkltylrhfmldwl")
+        XCTAssertEqual(e, "ur:envelope/tpcstpsfhdcxdplutstarkhelprdiefhadbetlbnreamoyzefxnnkonycpgdehmuwdhnfgrkltylrdktvegm")
         XCTAssertEqual(try envelope(e), "Digest(2d8bd7d9)")
         XCTAssertEqual(try envelope("extract --digest \(e)"), digestExample)
-        XCTAssertEqual(try envelope("extract --cbor \(e)"), "d8cb58202d8bd7d9bb5f85ba643f0110d50cb506a1fe439e769a22503193ea6046bb87f7")
+        XCTAssertEqual(try envelope("extract --cbor \(e)"), "d8cc58202d8bd7d9bb5f85ba643f0110d50cb506a1fe439e769a22503193ea6046bb87f7")
     }
 
     func testIntSubject() throws {
@@ -160,10 +160,10 @@ final class EnvelopeToolTests: XCTestCase {
     func testKnownValueSubject() throws {
         let value = "note"
         let e = try envelope("subject --known \(value)")
-        XCTAssertEqual(e, "ur:envelope/tpuraakicmnbgu")
+        XCTAssertEqual(e, "ur:envelope/tpsgaageotfgfl")
         XCTAssertEqual(try envelope(e), "note")
         XCTAssertEqual(try envelope("extract --known \(e)"), "note")
-        XCTAssertEqual(try envelope("extract --cbor \(e)"), "d8df04")
+        XCTAssertEqual(try envelope("extract --cbor \(e)"), "d8ca04")
     }
 
     func testStringSubject() throws {
@@ -177,7 +177,7 @@ final class EnvelopeToolTests: XCTestCase {
     
     func testEnvelopeURSubject() throws {
         let e = try envelope("subject --ur \(helloEnvelopeUR)")
-        XCTAssertEqual(e, "ur:envelope/tpvttpcsiyfdihjzjzjldmrygakpio")
+        XCTAssertEqual(e, "ur:envelope/tpsbtpcsiyfdihjzjzjldmbkwklgfz")
         XCTAssertEqual(try envelope(e),
             """
             {
@@ -222,19 +222,19 @@ final class EnvelopeToolTests: XCTestCase {
     
     func testAssertion() throws {
         let e = try envelope("subject assertion Alpha Beta")
-        XCTAssertEqual(e, "ur:envelope/tputlftpsptpcsihfpjzjoishstpsptpcsiefwihjyhsdmsgynva")
+        XCTAssertEqual(e, "ur:envelope/tpsolftpsptpcsihfpjzjoishstpsptpcsiefwihjyhskttsvtpa")
         XCTAssertEqual(try envelope(e), #""Alpha": "Beta""#)
     }
     
     func testAssertion2() throws {
         let e = try envelope("subject assertion --int 1 --int 2")
-        XCTAssertEqual(e, "ur:envelope/tputlftpsptpcsadtpsptpcsaownrpgmby")
+        XCTAssertEqual(e, "ur:envelope/tpsolftpsptpcsadtpsptpcsaozepdlrmo")
         XCTAssertEqual(try envelope(e), "1: 2")
     }
     
     func testAssertion3() throws {
         let e = try envelope("subject assertion --known note ThisIsANote.")
-        XCTAssertEqual(e, "ur:envelope/tputlftpsptpuraatpsptpcsjzghisinjkgajkfpgljljyihdmgltlksfe")
+        XCTAssertEqual(e, "ur:envelope/tpsolftpsptpsgaatpsptpcsjzghisinjkgajkfpgljljyihdmkpjodlms")
         XCTAssertEqual(try envelope(e), #"note: "ThisIsANote.""#)
     }
     
@@ -282,62 +282,62 @@ final class EnvelopeToolTests: XCTestCase {
 
     func testAssertionAt() throws {
         let e = try envelope("assertion at 0 \(aliceKnowsBobExample)")
-        XCTAssertEqual(e, "ur:envelope/tputlftpsptpcsihjejtjlktjktpsptpcsiafwjlidwyzsfplu")
+        XCTAssertEqual(e, "ur:envelope/tpsolftpsptpcsihjejtjlktjktpsptpcsiafwjlidfzttadyl")
         XCTAssertEqual(try envelope(e), #""knows": "Bob""#)
     }
 
     func testAssertionAt2() throws {
         let e = try pipe(["extract --wrapped", "assertion at 12"], inputLine: credentialExample)
-        XCTAssertEqual(try envelope(e), #"isA: "Certificate of Completion""#)
+        XCTAssertEqual(try envelope(e), #"issuer: "Example Electrical Engineering Board""#)
     }
 
     func testAssertionAt3() throws {
         let e = try pipe(["extract --wrapped", "assertion at 12", "extract --object", "extract"], inputLine: credentialExample)
-        XCTAssertEqual(e, "Certificate of Completion")
+        XCTAssertEqual(e, "Example Electrical Engineering Board")
     }
 
     func testAssertionAll() throws {
         let assertions = try pipe(["extract --wrapped", "assertion all"], inputLine: credentialExample)
         XCTAssertEqual(assertions,
         """
-        ur:envelope/tputlftpsptpurattpsptpcsksdkfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpiewngdhnhl
-        ur:envelope/tputlftpsptpcsjsiaihjpjyiniyiniahsjyihglkpjnidihjptpsptpcsjeeheyeodpeeecendpemetespslepyie
-        ur:envelope/tputlftpsptpcsjtihksjoinjphsjyinjljtfyhsjyihtpsptpcssecyjncscxaeckteiopl
-        ur:envelope/tputlftpsptpcsisjzhsjkjyglhsjnihtpsptpcsiogthsksktihjzjzetclpffy
-        ur:envelope/tputlftpsptpcsininjkjkkpihfyhsjyihtpsptpcssecyhybdvyaehsskkpuo
-        ur:envelope/tputlftpsptpcsihjoisjljyjltpsptpcsksckghisinjkcxinjkcxgehsjnihjkcxgthsksktihjzjzdijkcxjoisjljyjldmrotnvwwz
-        ur:envelope/tputlftpsptpcskscejojpjliyihjkjkinjljthsjzfyihkoihjzjljojnihjtjyfdjlkpjpjktpsptpcsbsialkrhmd
-        ur:envelope/tputlftpsptpcsiniyinjpjkjyglhsjnihtpsptpcsihgehsjnihjkrffrdlwp
-        ur:envelope/tputlftpsptpcsiyjyjljoiniajktpsptpcslfingukpidimihiajycxehingukpidimihiajycxeyfhktfezm
-        ur:envelope/tputlftpsptpcskscsiajljtjyinjtkpinjtiofeiekpiahsjyinjljtgojtinjyjktpsptpcsadldtdlntk
-        ur:envelope/tputlftpsptpurbttpsptpcsksdkfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpiedrkgdypf
-        ur:envelope/tputlftpsptpcsiojkkpidimihiajytpsptpcskscegmfgcxhsjtiecxgtiniajpjlkthskoihcxfejtioinjtihihjpinjtiotpremhfl
-        ur:envelope/tputlftpsptpuraotpsptpcskscffxihjpjyiniyiniahsjyihcxjliycxfxjljnjojzihjyinjljtgrvardbg
+        ur:envelope/tpsolftpsptpcsjsiaihjpjyiniyiniahsjyihglkpjnidihjptpsptpcsjeeheyeodpeeecendpemeteslowpwmfe
+        ur:envelope/tpsolftpsptpcsjtihksjoinjphsjyinjljtfyhsjyihtpsptpcssecyjncscxaesbeygazs
+        ur:envelope/tpsolftpsptpcsisjzhsjkjyglhsjnihtpsptpcsiogthsksktihjzjzatbbjogh
+        ur:envelope/tpsolftpsptpcsininjkjkkpihfyhsjyihtpsptpcssecyhybdvyaevyaxrokn
+        ur:envelope/tpsolftpsptpcsihjoisjljyjltpsptpcsksckghisinjkcxinjkcxgehsjnihjkcxgthsksktihjzjzdijkcxjoisjljyjldmcnvymsrt
+        ur:envelope/tpsolftpsptpcskscejojpjliyihjkjkinjljthsjzfyihkoihjzjljojnihjtjyfdjlkpjpjktpsptpcsbsdlsetklu
+        ur:envelope/tpsolftpsptpcsiniyinjpjkjyglhsjnihtpsptpcsihgehsjnihjkfnzcvoge
+        ur:envelope/tpsolftpsptpcsiyjyjljoiniajktpsptpcslfingukpidimihiajycxehingukpidimihiajycxeyttkpgrta
+        ur:envelope/tpsolftpsptpcskscsiajljtjyinjtkpinjtiofeiekpiahsjyinjljtgojtinjyjktpsptpcsadlprylksn
+        ur:envelope/tpsolftpsptpsgaotpsptpcskscffxihjpjyiniyiniahsjyihcxjliycxfxjljnjojzihjyinjljtmechierh
+        ur:envelope/tpsolftpsptpcsiojkkpidimihiajytpsptpcskscegmfgcxhsjtiecxgtiniajpjlkthskoihcxfejtioinjtihihjpinjtiofxmnvokp
+        ur:envelope/tpsolftpsptpsgattpsptpcsksdkfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpiejylrheol
+        ur:envelope/tpsolftpsptpsgbttpsptpcsksdkfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpiepepebsgr
         """
         )
     }
     
     func testAssertionPredicateFind1() throws {
         let e = try pipe(["extract --wrapped", "assertion find predicate photo"], inputLine: credentialExample)
-        XCTAssertEqual(e, "ur:envelope/tputlftpsptpcsihjoisjljyjltpsptpcsksckghisinjkcxinjkcxgehsjnihjkcxgthsksktihjzjzdijkcxjoisjljyjldmrotnvwwz")
+        XCTAssertEqual(e, "ur:envelope/tpsolftpsptpcsihjoisjljyjltpsptpcsksckghisinjkcxinjkcxgehsjnihjkcxgthsksktihjzjzdijkcxjoisjljyjldmcnvymsrt")
         XCTAssertEqual(try envelope(e), #""photo": "This is James Maxwell's photo.""#)
     }
     
     func testAssertionPredicateFind2() throws {
         let e = try pipe(["extract --wrapped", "assertion find predicate --known isA"], inputLine: credentialExample)
-        XCTAssertEqual(e, "ur:envelope/tputlftpsptpuraotpsptpcskscffxihjpjyiniyiniahsjyihcxjliycxfxjljnjojzihjyinjljtgrvardbg")
+        XCTAssertEqual(e, "ur:envelope/tpsolftpsptpsgaotpsptpcskscffxihjpjyiniyiniahsjyihcxjliycxfxjljnjojzihjyinjljtmechierh")
         XCTAssertEqual(try envelope(e), #"isA: "Certificate of Completion""#)
     }
     
     func testAssertionObjectFind1() throws {
         let e = try pipe(["extract --wrapped", "assertion find object Maxwell"], inputLine: credentialExample)
-        XCTAssertEqual(e, "ur:envelope/tputlftpsptpcsisjzhsjkjyglhsjnihtpsptpcsiogthsksktihjzjzetclpffy")
+        XCTAssertEqual(e, "ur:envelope/tpsolftpsptpcsisjzhsjkjyglhsjnihtpsptpcsiogthsksktihjzjzatbbjogh")
         XCTAssertEqual(try envelope(e), #""lastName": "Maxwell""#)
     }
 
     func testEnvelopeDigest() throws {
         let d = try envelope("digest \(aliceKnowsBobExample)")
-        XCTAssertEqual(d, "ur:crypto-digest/hdcxldgouyhyadimzmpaeourhfsectvaskspdlotaxidiatbgydejnbwgskbhfrtwlwzneroatds")
+        XCTAssertEqual(d, "ur:digest/hdcxldgouyhyadimzmpaeourhfsectvaskspdlotaxidiatbgydejnbwgskbhfrtwlwzneroatds")
     }
     
     func testElide1() throws {
@@ -355,7 +355,7 @@ final class EnvelopeToolTests: XCTestCase {
 
         let digests = target.joined(separator: " ")
         let elided = try envelope("elide \(aliceKnowsBobExample) \(digests)")
-        XCTAssertEqual(elided, "ur:envelope/lftpsptpcsihfpjziniaihtpsptputlftpsptpsbhdcxuykitdcegyinqzlrlgdrcwsbbkihcemtchsntabdpldtbzjepkwsrkdrlernykrdtpsptpcsiafwjlidceaeenao")
+        XCTAssertEqual(elided, "ur:envelope/lftpsptpcsihfpjziniaihtpsptpsolftpsptpsfhdcxuykitdcegyinqzlrlgdrcwsbbkihcemtchsntabdpldtbzjepkwsrkdrlernykrdtpsptpcsiafwjlidldehlfmh")
         XCTAssertEqual(try envelope(elided),
         """
         "Alice" [
@@ -370,7 +370,7 @@ final class EnvelopeToolTests: XCTestCase {
         target.append(try pipe(["subject knows", "digest"]))
         let digests = target.joined(separator: " ")
         let elided = try envelope("elide removing \(aliceKnowsBobExample) \(digests)")
-        XCTAssertEqual(elided, "ur:envelope/lftpsptpcsihfpjziniaihtpsptputlftpsptpsbhdcxuykitdcegyinqzlrlgdrcwsbbkihcemtchsntabdpldtbzjepkwsrkdrlernykrdtpsptpcsiafwjlidceaeenao")
+        XCTAssertEqual(elided, "ur:envelope/lftpsptpcsihfpjziniaihtpsptpsolftpsptpsfhdcxuykitdcegyinqzlrlgdrcwsbbkihcemtchsntabdpldtbzjepkwsrkdrlernykrdtpsptpcsiafwjlidldehlfmh")
         XCTAssertEqual(try envelope(elided),
         """
         "Alice" [
@@ -391,10 +391,10 @@ final class EnvelopeToolTests: XCTestCase {
         let cid1 = try envelope("generate cid")
         let cid2 = try envelope("generate cid")
         XCTAssertNotEqual(cid1, cid2)
-        XCTAssertEqual(try UR(urString: cid1).type, "crypto-cid")
+        XCTAssertEqual(try UR(urString: cid1).type, "cid")
         
         let cid3 = try envelope("generate cid --hex d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f")
-        XCTAssertEqual(cid3, "ur:crypto-cid/hdcxtygshybkzcecfhflpfdlhdonotoentnydmzsidmkindlldjztdmoeyishknybtbswtgwwpdi")
+        XCTAssertEqual(cid3, "ur:cid/hdcxtygshybkzcecfhflpfdlhdonotoentnydmzsidmkindlldjztdmoeyishknybtbswtgwwpdi")
     }
     
     func testGenerateSeed() throws {
@@ -408,7 +408,7 @@ final class EnvelopeToolTests: XCTestCase {
     }
     
     func testGenerateDigest() throws {
-        let expectedDigest = "ur:crypto-digest/hdcxdplutstarkhelprdiefhadbetlbnreamoyzefxnnkonycpgdehmuwdhnfgrkltylrovyeeck"
+        let expectedDigest = "ur:digest/hdcxdplutstarkhelprdiefhadbetlbnreamoyzefxnnkonycpgdehmuwdhnfgrkltylrovyeeck"
         
         let e = try envelope("generate digest \(helloString)")
         XCTAssertEqual(e, expectedDigest)
@@ -443,7 +443,7 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(prvkeys1, prvkeys2)
         
         let pubkeys = try envelope("generate pubkeys \(prvkeys1)")
-        XCTAssertEqual(pubkeys, "ur:crypto-pubkeys/lftaaosehdcxayvazmflzsfrotemfxvoghtbynbsgywztlheisvapypmidzmaoldisdybkvdlerytpvahdcxfdgwgacloxsrmupdcybdchfylewsdilrbestjodpwnknndjoztjprfkkjopkdejoetjeahue")
+        XCTAssertEqual(pubkeys, "ur:crypto-pubkeys/lftaadfwhdcxayvazmflzsfrotemfxvoghtbynbsgywztlheisvapypmidzmaoldisdybkvdlerytaaddmhdcxfdgwgacloxsrmupdcybdchfylewsdilrbestjodpwnknndjoztjprfkkjopkdejodkglkbot")
     }
     
     func testSign() throws {
