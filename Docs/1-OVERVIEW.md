@@ -832,7 +832,7 @@ envelope digest $COMPRESSED
 ```
 
 ```
-316
+314
 ur:digest/hdcxknvtclvdwfcsfnfelgjpzsseurjkuecpvyjsparhlthstkhhdlpametngtkbemswbkieeyrk
 ```
 
@@ -889,7 +889,7 @@ env_cbor_count $ALICE_COMPRESSED
 ```
 👈
 36
-88
+84
 ```
 
 Finally, note that compressing an already-compressed envelope, or uncompressing an already uncompressed envelope, has no effect.
