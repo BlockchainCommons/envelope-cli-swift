@@ -76,14 +76,9 @@ struct SubjectArguments: ParsableArguments {
                 envelope = Envelope(try Digest(urString: value))
             case .envelope:
                 envelope = try Envelope(urString: value)
-            case .int:
-                guard let n = Int(value) else {
-                    throw EnvelopeToolError.invalidType(expectedType: "integer")
-                }
-                envelope = Envelope(n)
-            case .float:
+            case .number:
                 guard let n = Double(value) else {
-                    throw EnvelopeToolError.invalidType(expectedType: "floating point")
+                    throw EnvelopeToolError.invalidType(expectedType: "number")
                 }
                 envelope = Envelope(n)
             case .known:

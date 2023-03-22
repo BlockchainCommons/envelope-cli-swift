@@ -93,10 +93,12 @@ OVERVIEW: A tool for manipulating the Envelope data type.
 USAGE: envelope <subcommand>
 
 OPTIONS:
+  --version               Show the version.
   -h, --help              Show help information.
 
 SUBCOMMANDS:
   assertion               Work with the envelope's assertions.
+  compress                Compress the envelope or its subject.
   digest                  Print the envelope's digest.
   decrypt                 Decrypt the envelope's subject using the provided key.
   elide                   Elide a subset of elements.
@@ -105,12 +107,13 @@ SUBCOMMANDS:
   format (default)        Print the envelope in Envelope Notation.
   generate                Utilities to generate and convert various objects.
   proof                   Work with existence proofs.
+  diff                    Work with envelope diffs.
   salt                    Add random salt to the envelope.
   sign                    Sign the envelope with the provided private key base.
   sskr                    Sharded Secret Key Reconstruction (SSKR).
   subject                 Create an envelope with the given subject.
-  verify                  Verify a signature on the envelope using the provided
-                          public key base.
+  uncompress              Uncompress the envelope or its subject.
+  verify                  Verify a signature on the envelope using the provided public key base.
 
   See 'envelope help <subcommand>' for detailed help.
 ```
@@ -186,12 +189,12 @@ OVERVIEW: Create an envelope with the given subject.
 USAGE: envelope subject <subcommand>
 
 OPTIONS:
+  --version               Show the version.
   -h, --help              Show help information.
 
 SUBCOMMANDS:
   single (default)        Create an envelope with the given subject.
-  assertion               Create an envelope with the given assertion
-                          (predicate and object).
+  assertion               Create an envelope with the given assertion (predicate and object).
 
   See 'envelope help subject <subcommand>' for detailed help.
 ```
@@ -210,9 +213,10 @@ ARGUMENTS:
   <value>                 The value for the Envelope's subject.
 
 OPTIONS:
-  --assertion/--cbor/--cid/--data/--date/--digest/--envelope/--float/--int/--known/--object/--predicate/--string/--ur/--uri/--uuid/--wrapped
-                          The data type of the subject. (default: string)
+  --assertion/--cbor/--cid/--data/--date/--digest/--envelope/--number/--known/--object/--predicate/--string/--ur/--uri/--uuid/--wrapped
+                          The data type of the subject. (default: --string)
   --tag <tag>             The integer tag for an enclosed UR.
+  --version               Show the version.
   -h, --help              Show help information.
 ```
 
@@ -269,17 +273,19 @@ OVERVIEW: Work with the envelope's assertions.
 USAGE: envelope assertion <subcommand>
 
 OPTIONS:
+  --version               Show the version.
   -h, --help              Show help information.
 
 SUBCOMMANDS:
   add (default)           Add an assertion to the given envelope.
+  create                  Create a bare assertion with the given predicate and object.
+  remove                  Remove an assertion from the given envelope.
   count                   Print the count of the envelope's assertions.
   at                      Retrieve the assertion at the given index.
   all                     Retrieve all the envelope's assertions.
   find                    Find all assertions matching the given criteria.
 
   See 'envelope help assertion <subcommand>' for detailed help.
-
 ```
 It's got `add`, which is what we've already used, as it's the default. It also got: `add`; you can `count` the assertions; you can retrieve the assertion at a particular index; you can return all the assertions; or you can find an assertion matching particular criteria. We'll talk about that a little bit later. 
 
@@ -389,6 +395,7 @@ OVERVIEW: Utilities to generate and convert various objects.
 USAGE: envelope generate <subcommand>
 
 OPTIONS:
+  --version               Show the version.
   -h, --help              Show help information.
 
 SUBCOMMANDS:
@@ -396,13 +403,12 @@ SUBCOMMANDS:
   digest                  Generate a digest from the input data.
   key                     Generate a symmetric encryption key.
   nonce                   Generate a Number Used One (Nonce).
-  prvkeys                 Generate a private key base. Generated randomly, or
-                          deterministically if a seed is provided.
+  prvkeys                 Generate a private key base. Generated randomly, or deterministically if a seed is provided.
   pubkeys                 Generate a public key base from a public key base.
   seed                    Generate a seed.
 
-  See 'envelope help generate <subcommand>' for detailed help
-  ```
+  See 'envelope help generate <subcommand>' for detailed help.
+```
 
 You can generate: a common identifier; digest; symmetric encryption keys; nonce; private key; public key; bases; and seeds. For now let's just generate a random symmetric encryption key. I'm going to `envelope generate key` and store that in a variable.
 

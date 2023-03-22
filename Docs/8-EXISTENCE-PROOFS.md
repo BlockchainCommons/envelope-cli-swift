@@ -114,8 +114,8 @@ CREDENTIAL=`envelope subject --cid 4676635a6e6068c2ef3ffd8ff726dd401fd341036e920
     envelope assertion --salted photo "This is James Maxwell's photo." |
     envelope assertion --salted certificateNumber 123-456-789 |
     envelope assertion --salted subject "RF and Microwave Engineering" |
-    envelope assertion --string continuingEducationUnits --float 1.5 |
-    envelope assertion --string professionalDevelopmentHours --int 15 |
+    envelope assertion --string continuingEducationUnits --number 1.5 |
+    envelope assertion --string professionalDevelopmentHours --number 15 |
     envelope assertion --string topics --cbor 0x82695375626a6563742031695375626a6563742032 |
     envelope subject --wrapped |
     envelope sign --prvkeys $BOARD_PRVKEYS |

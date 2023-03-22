@@ -1,5 +1,6 @@
 import ArgumentParser
 import BCFoundation
+import WolfBase
 
 struct ExtractCommand: ParsableCommand {
     static var configuration = CommandConfiguration(commandName: "extract", abstract: "Extract the subject of the input envelope.")
@@ -68,10 +69,15 @@ struct ExtractCommand: ParsableCommand {
             printOut(try envelope.extractSubject(Digest.self).ur)
         case .envelope:
             printOut(envelope.subject.ur)
-        case .int:
-            printOut(try envelope.extractSubject(Int.self))
-        case .float:
-            printOut(try envelope.extractSubject(Double.self))
+        case .number:
+            let number = try envelope.extractSubject(Double.self)
+            let formatter = NumberFormatter()
+            formatter.minimumFractionDigits = 0
+            // check if the number has a non-zero fractional part
+            formatter.maximumFractionDigits = number.truncatingRemainder(dividingBy: 1) == 0 ? 0 : 1
+            formatter.decimalSeparator = "."
+            let formattedNumber = formatter.string(from: number as NSNumber) ?? "?"
+            printOut(formattedNumber)
         case .known:
             printOut(try envelope.extractSubject(KnownValue.self))
         case .string:

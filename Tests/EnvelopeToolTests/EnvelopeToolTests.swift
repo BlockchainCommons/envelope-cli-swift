@@ -138,22 +138,31 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "d8cc58202d8bd7d9bb5f85ba643f0110d50cb506a1fe439e769a22503193ea6046bb87f7")
     }
 
+    func testFloatSubject() throws {
+        let value = "42.5"
+        let e = try envelope("subject --number \(value)")
+        XCTAssertEqual(e, "ur:envelope/tpcsytgygdmktysogr")
+        XCTAssertEqual(try envelope(e), value)
+        XCTAssertEqual(try envelope("extract --number \(e)"), value)
+        XCTAssertEqual(try envelope("extract --cbor \(e)"), "f95150")
+    }
+
     func testIntSubject() throws {
         let value = "42"
-        let e = try envelope("subject --int \(value)")
+        let e = try envelope("subject --number \(value)")
         XCTAssertEqual(e, "ur:envelope/tpcscsdrldehwedp")
         XCTAssertEqual(try envelope(e), value)
-        XCTAssertEqual(try envelope("extract --int \(e)"), value)
+        XCTAssertEqual(try envelope("extract --number \(e)"), value)
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "182a")
     }
 
     func testNegativeIntSubject() throws {
         // https://github.com/apple/swift-argument-parser/issues/31#issuecomment-593563022
         let value = "-42"
-        let e = try envelope("subject --int -- \(value)")
+        let e = try envelope("subject --number -- \(value)")
         XCTAssertEqual(e, "ur:envelope/tpcsetdtlprfmkec")
         XCTAssertEqual(try envelope(e), value)
-        XCTAssertEqual(try envelope("extract --int \(e)"), value)
+        XCTAssertEqual(try envelope("extract --number \(e)"), value)
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "3829")
     }
     
@@ -227,7 +236,7 @@ final class EnvelopeToolTests: XCTestCase {
     }
     
     func testAssertion2() throws {
-        let e = try envelope("subject assertion --int 1 --int 2")
+        let e = try envelope("subject assertion --number 1 --number 2")
         XCTAssertEqual(e, "ur:envelope/tpsolftpsptpcsadtpsptpcsaozepdlrmo")
         XCTAssertEqual(try envelope(e), "1: 2")
     }
