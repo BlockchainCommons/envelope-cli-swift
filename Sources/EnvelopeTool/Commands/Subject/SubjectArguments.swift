@@ -1,4 +1,5 @@
 import ArgumentParser
+import Foundation
 import BCFoundation
 import WolfBase
 
@@ -83,9 +84,9 @@ struct SubjectArguments: ParsableArguments {
                 envelope = Envelope(n)
             case .known:
                 if let n = UInt64(value) {
-                    let p = KnownValue(rawValue: n)
+                    let p = KnownValue(n)
                     envelope = Envelope(p)
-                } else if let p = KnownValue(name: value) {
+                } else if let p = knownValues.knownValue(named: value) {
                     envelope = Envelope(p)
                 } else {
                     throw EnvelopeToolError.notAKnownValue(value)

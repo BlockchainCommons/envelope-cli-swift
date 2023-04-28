@@ -5,7 +5,8 @@ import PackageDescription
 let package = Package(
     name: "envelope",
     platforms: [
-        .macOS(.v13)
+        .macOS(.v13),
+        .macCatalyst(.v15)
     ],
     dependencies: [
         .package(url: "https://github.com/BlockchainCommons/BCSwiftFoundation.git", from: "7.0.2"),

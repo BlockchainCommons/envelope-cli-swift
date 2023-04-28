@@ -1,4 +1,5 @@
 import ArgumentParser
+import Foundation
 import BCFoundation
 import WolfBase
 
@@ -79,7 +80,8 @@ struct ExtractCommand: ParsableCommand {
             let formattedNumber = formatter.string(from: number as NSNumber) ?? "?"
             printOut(formattedNumber)
         case .known:
-            printOut(try envelope.extractSubject(KnownValue.self))
+            let knownValue = try envelope.extractSubject(KnownValue.self)
+            printOut(knownValues.name(for: knownValue))
         case .string:
             printOut(try envelope.extractSubject(String.self))
         case .ur:

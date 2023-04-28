@@ -1,4 +1,5 @@
 import ArgumentParser
+import Foundation
 import BCFoundation
 
 struct GenerateDigestCommand: ParsableCommand {
