@@ -9,3 +9,4 @@ DerivedData/
 .netrc
 .swiftpm/xcode
 envelope-cli.xcworkspace/
+.vscode
