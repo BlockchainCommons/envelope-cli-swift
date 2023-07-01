@@ -127,6 +127,7 @@ envelope $CREDENTIAL
 👈
 {
     CID(4676635a) [
+        isA: "Certificate of Completion"
         {
             "certificateNumber": "123-456-789"
         } [
@@ -166,7 +167,6 @@ envelope $CREDENTIAL
         "professionalDevelopmentHours": 15
         "topics": ["Subject 1", "Subject 2"]
         controller: "Example Electrical Engineering Board"
-        isA: "Certificate of Completion"
         issuer: "Example Electrical Engineering Board"
     ]
 } [

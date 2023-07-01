@@ -47,7 +47,7 @@ struct ElideArguments: ParsableArguments {
         }
 
         let targetSet = Set(target)
-        let result = try revealing ? envelope.elideRevealing(targetSet, action: obscureAction) : envelope.elideRemoving(targetSet, action: obscureAction)
+        let result = revealing ? envelope.elideRevealing(targetSet, action: obscureAction) : envelope.elideRemoving(targetSet, action: obscureAction)
         printOut(result.ur)
     }
 }

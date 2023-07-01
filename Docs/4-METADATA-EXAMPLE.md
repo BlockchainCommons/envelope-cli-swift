@@ -72,6 +72,7 @@ envelope $WORK
 ```
 👈
 CID(7fb90a9d) [
+    isA: "novel"
     "author": CID(9c747ace) [
         dereferenceVia: "LibraryOfCongress"
         hasName: "Ayn Rand"
@@ -84,7 +85,6 @@ CID(7fb90a9d) [
     hasName: "La rebelión de Atlas" [
         language: "es"
     ]
-    isA: "novel"
 ]
 ```
 
@@ -118,6 +118,7 @@ envelope $BOOK_METADATA
 Digest(26d05af5) [
     "format": "EPUB"
     "work": CID(7fb90a9d) [
+        isA: "novel"
         "author": CID(9c747ace) [
             dereferenceVia: "LibraryOfCongress"
             hasName: "Ayn Rand"
@@ -130,8 +131,8 @@ Digest(26d05af5) [
         hasName: "La rebelión de Atlas" [
             language: "es"
         ]
-        isA: "novel"
     ]
     dereferenceVia: "IPFS"
 ]
+
 ```

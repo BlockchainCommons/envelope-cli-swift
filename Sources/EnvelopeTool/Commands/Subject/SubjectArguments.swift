@@ -86,7 +86,7 @@ struct SubjectArguments: ParsableArguments {
                 if let n = UInt64(value) {
                     let p = KnownValue(n)
                     envelope = Envelope(p)
-                } else if let p = knownValues.knownValue(named: value) {
+                } else if let p = globalKnownValues.knownValue(named: value) {
                     envelope = Envelope(p)
                 } else {
                     throw EnvelopeToolError.notAKnownValue(value)
@@ -99,7 +99,7 @@ struct SubjectArguments: ParsableArguments {
                     envelope = try Envelope(ur: ur)
                         .wrap()
                 } else {
-                    var cborTag = knownTags.tag(for: ur.type)
+                    var cborTag = globalTags.tag(for: ur.type)
                     if
                         cborTag == nil,
                         let tagValue = tag

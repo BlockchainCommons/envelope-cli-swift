@@ -58,6 +58,7 @@ envelope $CREDENTIAL
 👈
 {
     CID(4676635a) [
+        isA: "Certificate of Completion"
         "certificateNumber": "123-456-789"
         "continuingEducationUnits": 1.5
         "expirationDate": 2028-01-01
@@ -69,7 +70,6 @@ envelope $CREDENTIAL
         "subject": "RF and Microwave Engineering"
         "topics": ["Subject 1", "Subject 2"]
         controller: "Example Electrical Engineering Board"
-        isA: "Certificate of Completion"
         issuer: "Example Electrical Engineering Board"
     ]
 } [
@@ -236,9 +236,9 @@ TARGET+=(`envelope assertion find "expirationDate" $CONTENT | envelope digest --
 👈
 {
     CID(4676635a) [
+        isA: "Certificate of Completion"
         "expirationDate": 2028-01-01
         "subject": "RF and Microwave Engineering"
-        isA: "Certificate of Completion"
         issuer: "Example Electrical Engineering Board"
         ELIDED (9)
     ]
@@ -267,9 +267,9 @@ envelope $WARRANTY
     {
         {
             CID(4676635a) [
+                isA: "Certificate of Completion"
                 "expirationDate": 2028-01-01
                 "subject": "RF and Microwave Engineering"
-                isA: "Certificate of Completion"
                 issuer: "Example Electrical Engineering Board"
                 ELIDED (9)
             ]
@@ -327,11 +327,11 @@ envelope elide revealing --compress $CREDENTIAL $TARGET | envelope
 👈
 {
     CID(4676635a) [
+        isA: "Certificate of Completion"
         "expirationDate": 2028-01-01
         "firstName": "James"
         "lastName": "Maxwell"
         "subject": "RF and Microwave Engineering"
-        isA: "Certificate of Completion"
         issuer: "Example Electrical Engineering Board"
         COMPRESSED (7)
     ]
@@ -352,11 +352,11 @@ envelope elide revealing --encrypt --key ur:crypto-key/hdcxcnqzoeuobzdksphpfxonr
 👈
 {
     CID(4676635a) [
+        isA: "Certificate of Completion"
         "expirationDate": 2028-01-01
         "firstName": "James"
         "lastName": "Maxwell"
         "subject": "RF and Microwave Engineering"
-        isA: "Certificate of Completion"
         issuer: "Example Electrical Engineering Board"
         ENCRYPTED (7)
     ]
@@ -364,4 +364,5 @@ envelope elide revealing --encrypt --key ur:crypto-key/hdcxcnqzoeuobzdksphpfxonr
     note: "Signed by Example Electrical Engineering Board"
     verifiedBy: Signature
 ]
+
 ```

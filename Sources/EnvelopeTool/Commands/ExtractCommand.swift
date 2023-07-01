@@ -81,7 +81,7 @@ struct ExtractCommand: ParsableCommand {
             printOut(formattedNumber)
         case .known:
             let knownValue = try envelope.extractSubject(KnownValue.self)
-            printOut(knownValues.name(for: knownValue))
+            printOut(globalKnownValues.name(for: knownValue))
         case .string:
             printOut(try envelope.extractSubject(String.self))
         case .ur:
@@ -89,7 +89,7 @@ struct ExtractCommand: ParsableCommand {
                 guard case CBOR.tagged(let tag, let untaggedCBOR) = cbor else {
                     throw EnvelopeToolError.urMissingTag
                 }
-                let knownTag = knownTags.tag(for: tag.value)
+                let knownTag = globalTags.tag(for: tag.value)
                 guard let type = knownTag?.name ?? urType else {
                     throw EnvelopeToolError.urTypeRequired
                 }

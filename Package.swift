@@ -9,7 +9,7 @@ let package = Package(
         .macCatalyst(.v15)
     ],
     dependencies: [
-        .package(url: "https://github.com/BlockchainCommons/BCSwiftFoundation.git", from: "7.0.2"),
+        .package(url: "https://github.com/BlockchainCommons/BCSwiftFoundation.git", from: "8.0.0"),
         .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.0"),
         .package(url: "https://github.com/WolfMcNally/WolfBase", from: "5.0.0"),
     ],

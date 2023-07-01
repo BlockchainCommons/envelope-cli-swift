@@ -68,8 +68,11 @@ envelope $JOHN_RESIDENT_CARD
 👈
 {
     CID(78bc3000) [
+        isA: "credential"
         "dateIssued": 2022-04-27
         holder: CID(78bc3000) [
+            isA: "Permanent Resident"
+            isA: "Person"
             "birthCountry": "bs" [
                 note: "The Bahamas"
             ]
@@ -83,10 +86,7 @@ envelope $JOHN_RESIDENT_CARD
             "lprCategory": "C09"
             "residentSince": 2018-01-07
             "sex": "MALE"
-            isA: "Permanent Resident"
-            isA: "Person"
         ]
-        isA: "credential"
         issuer: CID(04363d5f) [
             dereferenceVia: URI(https://exampleledger.com/cid/04363d5ff99733bc0f1577baba440af1cf344ad9e454fad9d128c00fef6505e8)
             note: "Issued by the State of Example"
@@ -146,6 +146,7 @@ envelope $ELIDED_CARD
 👈
 {
     CID(78bc3000) [
+        isA: "credential"
         holder: CID(78bc3000) [
             "familyName": "SMITH"
             "givenName": "JOHN"
@@ -155,7 +156,6 @@ envelope $ELIDED_CARD
             ]
             ELIDED (7)
         ]
-        isA: "credential"
         issuer: CID(04363d5f) [
             dereferenceVia: URI(https://exampleledger.com/cid/04363d5ff99733bc0f1577baba440af1cf344ad9e454fad9d128c00fef6505e8)
             note: "Issued by the State of Example"
@@ -203,8 +203,8 @@ envelope digest $JOHN_RESIDENT_CARD; envelope digest $ELIDED_CARD
 
 ```
 👈
-ur:digest/hdcxhpgwghgumdhlcpkndpghbnrfbgjszsoxheiazmbesnbyreiypmfesnktimromwnscsolstia
-ur:digest/hdcxhpgwghgumdhlcpkndpghbnrfbgjszsoxheiazmbesnbyreiypmfesnktimromwnscsolstia
+ur:digest/hdcxkornswprjoesykrywnplhfyloxfnhfdarehfaocwltdlbywfykatjszszsbsishppelakebg
+ur:digest/hdcxkornswprjoesykrywnplhfyloxfnhfdarehfaocwltdlbywfykatjszszsbsishppelakebg
 ```
 
 Note that the state's signature on the elided card still verifies.
