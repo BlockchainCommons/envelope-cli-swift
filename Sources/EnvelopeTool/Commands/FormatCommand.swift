@@ -61,6 +61,7 @@ struct FormatCommand: ParsableCommand {
         guard let envelope else {
             throw EnvelopeToolError.missingArgument("envelope")
         }
+        addKnownFunctionExtensions()
         let context = FormatContext(tags: globalTags, knownValues: globalKnownValues, functions: globalFunctions, parameters: globalParameters)
         switch output {
         case .envelope:
