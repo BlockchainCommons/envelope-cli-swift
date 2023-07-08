@@ -13,5 +13,6 @@ sudo mkdir ${TOOL_DIR}
 sudo cp -f ${BUILD}/EnvelopeTool ${TOOL_DIR}/
 sudo cp -Rf ${BUILD}/BCWally.framework ${TOOL_DIR}/
 sudo cp -Rf ${BUILD}/SSKR.framework ${TOOL_DIR}/
+sudo cp -Rf ${BUILD}/CryptoBase.framework ${TOOL_DIR}/
 sudo rm -f ${TOOL}
 sudo ln -s ${TOOL_DIR}/EnvelopeTool ${TOOL}

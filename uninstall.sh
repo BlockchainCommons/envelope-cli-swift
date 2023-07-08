@@ -1,7 +1,7 @@
 #!/bin/bash
 
 LOCAL=/usr/local
-BIN={$LOCAL}/bin
+BIN=${LOCAL}/bin
 TOOL_DIR=${LOCAL}/EnvelopeTool
 TOOL=${BIN}/envelope
 
