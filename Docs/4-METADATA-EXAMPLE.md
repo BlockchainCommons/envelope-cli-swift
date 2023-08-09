@@ -134,5 +134,4 @@ Digest(26d05af5) [
     ]
     dereferenceVia: "IPFS"
 ]
-
 ```

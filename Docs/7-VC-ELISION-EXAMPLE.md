@@ -13,10 +13,10 @@ First we need keys that represent the Example Electrical Engineering Board.
 ```bash
 👉
 BOARD_PRVKEYS="ur:crypto-prvkeys/hdcxynlntpsbfrbgjkcetpzorohgsafsihcnhyrtoebzwegtvyzolbgtdaskcsldfgadtldmrkld"
-BOARD_PUBKEYS="ur:crypto-pubkeys/lftaadfwhdcxzcjpcycfstoyengahyzecppefwvtghmstkyklsoeiovtfzasbdbakepdseaehsiataaddmhdcxkelsaetygrwtdtwzytkoielytschleptdsmwahwtvlwlwdpmadoydwltmsasidfrghgeyapt"
+BOARD_PUBKEYS="ur:crypto-pubkeys/lftanshfhdcxzcjpcycfstoyengahyzecppefwvtghmstkyklsoeiovtfzasbdbakepdseaehsiatansgrhdcxkelsaetygrwtdtwzytkoielytschleptdsmwahwtvlwlwdpmadoydwltmsasidfrhnasptgm"
 
 EMPLOYER_PRVKEYS="ur:crypto-prvkeys/hdcxpkyneedreyhyvshfmygwplrfrhclfwenkoetwnvagyescezsnnsobyfhtkghgypsrhdmjnko"
-EMPLOYER_PUBKEYS="ur:crypto-pubkeys/lftaadfwhdcxdnknjkmsmstypasfonchmyrktpgdesdasarlpyselbhnfenesofmplkopsntnnmotaaddmhdcxbwwtrpwfvdjnhlrhlejolgwfhykpndknswdwlflgotiofdtpcsgmdljnihsgbwkseocfzmta"
+EMPLOYER_PUBKEYS="ur:crypto-pubkeys/lftanshfhdcxdnknjkmsmstypasfonchmyrktpgdesdasarlpyselbhnfenesofmplkopsntnnmotansgrhdcxbwwtrpwfvdjnhlrhlejolgwfhykpndknswdwlflgotiofdtpcsgmdljnihsgbwksathtplcp"
 ```
 
 Now we can compose the credential.
@@ -364,5 +364,4 @@ envelope elide revealing --encrypt --key ur:crypto-key/hdcxcnqzoeuobzdksphpfxonr
     note: "Signed by Example Electrical Engineering Board"
     verifiedBy: Signature
 ]
-
 ```
