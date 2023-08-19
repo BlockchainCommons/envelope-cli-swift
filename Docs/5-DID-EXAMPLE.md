@@ -77,7 +77,7 @@ envelope $ALICE_REGISTRATION
         note: "Made by ExampleLedger."
     ]
 ]
-```
+
 
 Alice receives the registration document back, verifies its signature, and extracts the URI that now points to her record.
 
@@ -108,7 +108,7 @@ echo $ALICE_CHALLENGE
 
 ```
 👈
-ur:envelope/lftpsptpcstansglgsgordssdpuysrhpgtprkspthstpspoytpspaatpsptpcskscefxishsjzjzihjtioihcxjyjlcxfpjziniaihcxiyjpjljncxfwjliddmpsmwuops
+ur:envelope/lftpcstansglgspygwfrjzjpiewlwtinwyhpmkoyaatpcskscefxishsjzjzihjtioihcxjyjlcxfpjziniaihcxiyjpjljncxfwjliddmqdetdsta
 ```
 
 ```bash
@@ -161,7 +161,7 @@ echo $ALICE_CHALLENGE_2
 
 ```
 👈
-ur:envelope/lftpsptpcstansglgsgordssdpuysrhpgtprkspthstpspoytpspaatpsptpcskscefxishsjzjzihjtioihcxjyjlcxfpjziniaihcxiyjpjljncxfwjliddmpsmwuops
+ur:envelope/lftpcstansglgspygwfrjzjpiewlwtinwyhpmkoyaatpcskscefxishsjzjzihjtioihcxjyjlcxfpjziniaihcxiyjpjljncxfwjliddmqdetdsta
 ```
 
 `ALICE_CHALLENGE_2` is indeed the same as `ALICE_CHALLENGE`, above. Bob then extracts Alice's registered URI.

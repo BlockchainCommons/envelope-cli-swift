@@ -107,11 +107,10 @@ We've essentially said, "Elide everything." Obviously this isn't very useful, so
 
 The first digest we need is the top-level digest of the envelope. This reveals the "macro structure" of the envelope.
 
-(From here on we'll just show the code that adds digests to the target, and the result of performing the elision on the original credential using that target.
-
 ```bash
 👉
 TARGET+=`envelope digest $CREDENTIAL`
+REDACTED_CREDENTIAL=`envelope elide revealing $CREDENTIAL $TARGET`; envelope $REDACTED_CREDENTIAL
 ```
 
 ```
@@ -131,6 +130,7 @@ To reveal the two assertions, we iterate through them and add their "deep digest
 👉
 TARGET+=(`envelope assertion at 0 $CREDENTIAL | envelope digest --deep`)
 TARGET+=(`envelope assertion at 1 $CREDENTIAL | envelope digest --deep`)
+REDACTED_CREDENTIAL=`envelope elide revealing $CREDENTIAL $TARGET`; envelope $REDACTED_CREDENTIAL
 ```
 
 ```
@@ -152,6 +152,7 @@ At this point, if one had the proper public keys, the receiver of this redacted 
 ```bash
 👉
 envelope verify --silent $REDACTED_CREDENTIAL --pubkeys $BOARD_PUBKEYS
+REDACTED_CREDENTIAL=`envelope elide revealing $CREDENTIAL $TARGET`; envelope $REDACTED_CREDENTIAL
 ```
 
 ## Revealing the Subject
@@ -161,6 +162,7 @@ The subject of the envelope, containing all the holder's information is still el
 ```bash
 👉
 TARGET+=`envelope extract $CREDENTIAL --envelope | envelope digest`
+REDACTED_CREDENTIAL=`envelope elide revealing $CREDENTIAL $TARGET`; envelope $REDACTED_CREDENTIAL
 ```
 
 ```
@@ -183,6 +185,7 @@ So now we need to reveal the unwrapped content:
 👉
 CONTENT=`envelope extract --wrapped $CREDENTIAL`
 TARGET+=`envelope digest $CONTENT`
+REDACTED_CREDENTIAL=`envelope elide revealing $CREDENTIAL $TARGET`; envelope $REDACTED_CREDENTIAL
 ```
 
 ```
@@ -206,6 +209,7 @@ We want to reveal the CID representing the issuing authority's unique reference 
 ```bash
 👉
 TARGET+=`envelope extract --envelope $CONTENT | envelope digest`
+REDACTED_CREDENTIAL=`envelope elide revealing $CREDENTIAL $TARGET`; envelope $REDACTED_CREDENTIAL
 ```
 
 ```
@@ -230,6 +234,7 @@ TARGET+=(`envelope assertion find --known isA $CONTENT | envelope digest --shall
 TARGET+=(`envelope assertion find --known issuer $CONTENT | envelope digest --shallow`)
 TARGET+=(`envelope assertion find "subject" $CONTENT | envelope digest --shallow`)
 TARGET+=(`envelope assertion find "expirationDate" $CONTENT | envelope digest --shallow`)
+REDACTED_CREDENTIAL=`envelope elide revealing $CREDENTIAL $TARGET`; envelope $REDACTED_CREDENTIAL
 ```
 
 ```
