@@ -60,7 +60,7 @@ Create an envelope that specifies known information about the novel. This envelo
 ```bash
 👉
 WORK=`envelope subject --cid 7fb90a9d96c07f39f75ea6acf392d79f241fac4ec0be2120f7c82489711e3e80 | \
-    envelope assertion --known isA novel | \
+    envelope assertion --known isA Novel | \
     envelope assertion isbn "9780451191144" | \
     envelope assertion --string author --envelope $AUTHOR | \
     envelope assertion --known dereferenceVia "LibraryOfCongress" | \
@@ -72,7 +72,7 @@ envelope $WORK
 ```
 👈
 CID(7fb90a9d) [
-    isA: "novel"
+    isA: "Novel"
     "author": CID(9c747ace) [
         dereferenceVia: "LibraryOfCongress"
         hasName: "Ayn Rand"
@@ -118,7 +118,7 @@ envelope $BOOK_METADATA
 Digest(26d05af5) [
     "format": "EPUB"
     "work": CID(7fb90a9d) [
-        isA: "novel"
+        isA: "Novel"
         "author": CID(9c747ace) [
             dereferenceVia: "LibraryOfCongress"
             hasName: "Ayn Rand"
