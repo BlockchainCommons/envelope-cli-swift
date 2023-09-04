@@ -32,7 +32,7 @@ In this video, I'm going to give you an example that is inspired by the W3C DID 
 
 In this case, we have an entity, Alice, who wants to create a way of identifying herself to other people on the internet. And so the first thing she's going to do is create a self-signed certificate, a document that describes herself.
 
-Obviously there'll probably be a lot more information in a document like this, but this is the unsigned version of the document: it has a subject, which is her CID. In the previous video at the beginning, you saw me pasted a whole bunch of other things.
+Obviously there'll probably be a lot more information in a document like this, but this is the unsigned version of the document: it has a subject, which is her ARID. In the previous video at the beginning, you saw me pasted a whole bunch of other things.
 
 There's an an Alice common identifier that's already available. But that's going to be the subject of the envelope. And then we're going to add two assertions: the controller, who controls this document, which is Alice again, and then her public keys. So she's saying that, if you want to talk to me, you can send me private information using my public keys that only I can decrypt.
 
@@ -44,15 +44,15 @@ So if we actually go ahead and look at this, now we see here's the wrapped envel
 
 ### Registering Alice
 
-Okay. So the next step is that Alice wants to take this document and wants to register it with a registrar: a third party who will verify her identity or do whatever else is necessary, maybe just even host the document. She's going to send this signed document to the registrar. So once it's at the registrar, the registrar has to check the signature and perform any other validity checks, like making sure that her public keys are correct or whatever. They're going to verify and then extract the wrapped envelope. And then they're also going to just get her common identifier and extract that as both a UR and as a hex CID. And you'll see why in a moment, because they're going to create a URL from it that anybody can access. The registrar now creates their own registration document using Alice's CID as the subject and incorporating Alice's signed document and adding its own signature.
+Okay. So the next step is that Alice wants to take this document and wants to register it with a registrar: a third party who will verify her identity or do whatever else is necessary, maybe just even host the document. She's going to send this signed document to the registrar. So once it's at the registrar, the registrar has to check the signature and perform any other validity checks, like making sure that her public keys are correct or whatever. They're going to verify and then extract the wrapped envelope. And then they're also going to just get her common identifier and extract that as both a UR and as a hex ARID. And you'll see why in a moment, because they're going to create a URL from it that anybody can access. The registrar now creates their own registration document using Alice's ARID as the subject and incorporating Alice's signed document and adding its own signature.
 
-And so this is the that they're going to create using Alice's signature. So anybody will be able to, if they know Alice's CID they'll be able to use Example Ledger database to look it up using this URI.
+And so this is the that they're going to create using Alice's signature. So anybody will be able to, if they know Alice's ARID they'll be able to use Example Ledger database to look it up using this URI.
 
-So now let's look at how Example Ledger creates its own registration document. So envelope subject, UR Alice CID you are that's the subject. Then the added assertion, which is the entity that they're registering, which is the envelope of Alice's signed document. And then another assertion, how to get more information about that entity, which is the actual URI that we just generated above here and then wrap that and then sign that with Ledger's private keys and they add their own little note to say they're made by Example Ledger. 
+So now let's look at how Example Ledger creates its own registration document. So envelope subject, UR Alice ARID you are that's the subject. Then the added assertion, which is the entity that they're registering, which is the envelope of Alice's signed document. And then another assertion, how to get more information about that entity, which is the actual URI that we just generated above here and then wrap that and then sign that with Ledger's private keys and they add their own little note to say they're made by Example Ledger. 
 
 So now if we actually look at the registration document, Here it is, now you see Alice's original signed document is now embedded in this here, but it's also got the other information that has been added by Example Ledger, including the, how to dereference it using their database.
 
-This is going to Alice's CID up here, occurs here and here in the URI and here in the CID and here in the controller of the CID. 
+This is going to Alice's ARID up here, occurs here and here in the URI and here in the ARID and here in the controller of the ARID. 
 
 Once they've got this all registered, then they're going to send this back to Alice, and Alice is going to be able use this URI to get her own record back.
 

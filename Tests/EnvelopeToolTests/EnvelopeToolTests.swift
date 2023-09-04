@@ -7,7 +7,7 @@ let helloString = "Hello."
 let helloEnvelopeUR = "ur:envelope/tpcsiyfdihjzjzjldmprrhtypk"
 let cborArrayExample = CBOR.array([1, 2, 3]).cborData.hex
 let uuidExample = "EB377E65-5774-410A-B9CB-510BFC73E6D9"
-let cidExample = "dec7e82893c32f7a4fcec633c02c0ec32a4361ca3ee3bc8758ae07742e940550"
+let aridExample = "dec7e82893c32f7a4fcec633c02c0ec32a4361ca3ee3bc8758ae07742e940550"
 let dateExample = "2022-08-30T07:16:11Z"
 let digestExample = Digest(helloString).ur.string
 let seedURExample = "ur:crypto-seed/oyadgdaawzwplrbdhdpabgrnvokorolnrtemksayyadmut"
@@ -15,17 +15,17 @@ let aliceKnowsBobExample = "ur:envelope/lftpcsihfpjziniaihoytpcsihjejtjlktjktpcs
 let credentialExample = "ur:envelope/lstpspmntpcstansgshdcxfgkoiahtjthnissawsfhzcmyyldsutfzcttefpaxjtmobsbwimcaleykvsdtgajnoytpcsjsiaihjpjyiniyiniahsjyihglkpjnidihjptpcsjeeheyeodpeeecendpemetesoytpcsjtihksjoinjphsjyinjljtfyhsjyihtpcssecyjncscxaeoytpcsisjzhsjkjyglhsjnihtpcsiogthsksktihjzjzoytpcsininjkjkkpihfyhsjyihtpcssecyhybdvyaeoyadtpcskscffxihjpjyiniyiniahsjyihcxjliycxfxjljnjojzihjyinjljtoytpcsihjoisjljyjltpcsksckghisinjkcxinjkcxgehsjnihjkcxgthsksktihjzjzdijkcxjoisjljyjldmoytpcskscejojpjliyihjkjkinjljthsjzfyihkoihjzjljojnihjtjyfdjlkpjpjktpcsbsoytpcsiniyinjpjkjyglhsjnihtpcsihgehsjnihjkoytpcsiyjyjljoiniajktpcslfingukpidimihiajycxehingukpidimihiajycxeyoytpcskscsiajljtjyinjtkpinjtiofeiekpiahsjyinjljtgojtinjyjktpcsadoyattpcsksdkfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpieoytpcsiojkkpidimihiajytpcskscegmfgcxhsjtiecxgtiniajpjlkthskoihcxfejtioinjtihihjpinjtiooybttpcsksdkfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpieoyaxtpcstansghhdfzdlmunbknwymowslbwfkidawyastikibksfhdosgslulecpwktysphprdheingyckvlrtjlrdhswnkbdereotdryapyhddpmnahcsmymnlsmtpdadsptyptmdbyosdllooyaatpcsksdmguiniojtihiecxidkkcxfekshsjnjojzihcxfejzihiajyjpiniahsjzcxfejtioinjtihihjpinjtiocxfwjlhsjpielabtrdda"
 let keyExample = "ur:crypto-key/hdcxmszmjlfsgssrbzehsslphdlgtbwesofnlpehlftldwotpaiyfwbtzsykwttomsbatnzswlqd"
 
-let aliceCID = "ur:crypto-cid/hdcxtygshybkzcecfhflpfdlhdonotoentnydmzsidmkindlldjztdmoeyishknybtbswtgwwpdi"
+let aliceARID = "ur:crypto-arid/hdcxtygshybkzcecfhflpfdlhdonotoentnydmzsidmkindlldjztdmoeyishknybtbswtgwwpdi"
 let aliceSeed = "ur:crypto-seed/oyadgdlfwfdwlphlfsghcphfcsaybekkkbaejkhphdfndy"
 let alicePrvkeys = "ur:crypto-prvkeys/gdlfwfdwlphlfsghcphfcsaybekkkbaejksfnynsct"
 let alicePubkeys = "ur:crypto-pubkeys/lftaaosehdcxwduymnadmebbgwlolfemsgotgdnlgdcljpntzocwmwolrpimdabgbaqzcscmzopftpvahdcxolgtwyjotsndgeechglgeypmoemtmdsnjzyncaidgrbklegopasbgmchidtdvsctwdpffsee"
 
-let bobCID = "ur:crypto-cid/hdcxdkreprfslewefgdwhtfnaosfgajpehhyrlcyjzheurrtamfsvolnaxwkioplgansesiabtdr"
+let bobARID = "ur:crypto-arid/hdcxdkreprfslewefgdwhtfnaosfgajpehhyrlcyjzheurrtamfsvolnaxwkioplgansesiabtdr"
 let bobSeed = "ur:crypto-seed/oyadgdcsknhkjkswgtecnslsjtrdfgimfyuykglfsfwtso"
 let bobPrvkeys = "ur:crypto-prvkeys/gdcsknhkjkswgtecnslsjtrdfgimfyuykgbzbagdva"
 let bobPubkeys = "ur:crypto-pubkeys/lftaaosehdcxpspsfsglwewlttrplbetmwaelkrkdeolylwsswchfshepycpzowkmojezmlehdentpvahdcxlaaybzfngdsbheeyvlwkrldpgocpgewpykneotlugaieidfplstacejpkgmhaxbkbswtmecm"
 
-let carolCID = "ur:crypto-cid/hdcxamstktdsdlplurgaoxfxdijyjysertlpehwstkwkskmnnsqdpfgwlbsertvatbbtcaryrdta"
+let carolARID = "ur:crypto-arid/hdcxamstktdsdlplurgaoxfxdijyjysertlpehwstkwkskmnnsqdpfgwlbsertvatbbtcaryrdta"
 let carolSeed = "ur:crypto-seed/oyadgdlpjypepycsvodtihcecwvsyljlzevwcnmepllulo"
 let carolPrvkeys = "ur:crypto-prvkeys/gdlpjypepycsvodtihcecwvsyljlzevwcnamjzdnos"
 let carolPubkeys = "ur:crypto-pubkeys/lftaaosehdcxptwewyrttbfswnsonswdvweydkfxmwfejsmdlgbajyaymwhstotymyfwrosprhsstpvahdcxnnzeontnuechectylgjytbvlbkfnmsmyeohhvwbzftdwrplrpkptloctdtflwnguoyytemnn"
@@ -90,11 +90,11 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(e, e2)
     }
     
-    func testCIDSubject() throws {
-        let e = try envelope("subject --cid \(cidExample)")
+    func testARIDSubject() throws {
+        let e = try envelope("subject --arid \(aridExample)")
         XCTAssertEqual(e, "ur:envelope/tpcstansgshdcxuestvsdemusrdlkngwtosweortdwbasrdrfxhssgfmvlrflthdplatjydmmwahgddrrlvarh")
-        XCTAssertEqual(try envelope(e), "CID(\(cidExample.prefix(8)))")
-        XCTAssertEqual(try envelope("extract --cid \(e)"), cidExample)
+        XCTAssertEqual(try envelope(e), "ARID(\(aridExample.prefix(8)))")
+        XCTAssertEqual(try envelope("extract --arid \(e)"), aridExample)
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "d99c4c5820dec7e82893c32f7a4fcec633c02c0ec32a4361ca3ee3bc8758ae07742e940550")
     }
     
@@ -397,14 +397,14 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(try UR(urString: key1).type, "crypto-key")
     }
     
-    func testGenerateCID() throws {
-        let cid1 = try envelope("generate cid")
-        let cid2 = try envelope("generate cid")
-        XCTAssertNotEqual(cid1, cid2)
-        XCTAssertEqual(try UR(urString: cid1).type, "cid")
+    func testGenerateARID() throws {
+        let arid1 = try envelope("generate arid")
+        let arid2 = try envelope("generate arid")
+        XCTAssertNotEqual(arid1, arid2)
+        XCTAssertEqual(try UR(urString: arid1).type, "arid")
         
-        let cid3 = try envelope("generate cid --hex d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f")
-        XCTAssertEqual(cid3, "ur:cid/hdcxtygshybkzcecfhflpfdlhdonotoentnydmzsidmkindlldjztdmoeyishknybtbswtgwwpdi")
+        let arid3 = try envelope("generate arid --hex d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f")
+        XCTAssertEqual(arid3, "ur:arid/hdcxtygshybkzcecfhflpfdlhdonotoentnydmzsidmkindlldjztdmoeyishknybtbswtgwwpdi")
     }
     
     func testGenerateSeed() throws {

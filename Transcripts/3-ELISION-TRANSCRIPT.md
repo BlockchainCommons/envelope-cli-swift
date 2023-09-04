@@ -92,13 +92,13 @@ And then we're going to re-redact and print. Now we have two new curly braces he
 
 We're going to assign this to a new shell variable envelope extract, wrapped credential. So we're not getting the digest now we're actually extracting that specific envelope, because we're going to start looking at digests inside it, and then we're going to add the target of the content to that.
 
-And now we're going to re-redact and print, and now we see the macro structure of the inner envelope here. It has a subject which is still elided. That's the CID, and then we have 13 elided assertions. And our target set is getting bigger and bigger, in the end you'll probably have about 30 digests in it.
+And now we're going to re-redact and print, and now we see the macro structure of the inner envelope here. It has a subject which is still elided. That's the ARID, and then we have 13 elided assertions. And our target set is getting bigger and bigger, in the end you'll probably have about 30 digests in it.
 
-But it looks like we're actually getting somewhere here. The wrapped envelope has is still elided a bunch of assertions. So now we're going to decide what are these we want to reveal? We want to reveal the CID because that's the record locator for the board.
+But it looks like we're actually getting somewhere here. The wrapped envelope has is still elided a bunch of assertions. So now we're going to decide what are these we want to reveal? We want to reveal the ARID because that's the record locator for the board.
 
-So we want to reveal the CID representing the issuing authority's unique reference to the credential holder. And this is because the warranty, the employer's making is that a specific identifiable employee has the credential without actually revealing their identity. And this allows the entire document to be identified and unredacted should the dispute ever occur.
+So we want to reveal the ARID representing the issuing authority's unique reference to the credential holder. And this is because the warranty, the employer's making is that a specific identifiable employee has the credential without actually revealing their identity. And this allows the entire document to be identified and unredacted should the dispute ever occur.
 
-So now we're saying envelope extract, this is the actual subject of the content envelope. And that's this right here. This is the CID, and we're asking for its digest and we're adding that to the target. And now we're going to re-redact and print, and you see the only difference between this and this is now the CID is visible.
+So now we're saying envelope extract, this is the actual subject of the content envelope. And that's this right here. This is the ARID, and we're asking for its digest and we're adding that to the target. And now we're going to re-redact and print, and you see the only difference between this and this is now the ARID is visible.
 
 Okay. In the content here of these elided assertions, there's only four that we actually want to reveal "isA", which is the It's a certificate of completion, the issuer, which is the board of engineering the subject, which is what was studied and the expiration date. So we're going to do this by finding those specific assertions by their predicate.
 

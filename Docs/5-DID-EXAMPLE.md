@@ -1,6 +1,6 @@
 # envelope - Distributed Identifier Example
 
-This example offers an analogue of a DID document, which identifies an entity. The document itself can be referred to by its CID, while the signed document can be referred to by its digest.
+This example offers an analogue of a DID document, which identifies an entity. The document itself can be referred to by its ARID, while the signed document can be referred to by its digest.
 
 **See Associated Video:**
 
@@ -9,8 +9,8 @@ This example offers an analogue of a DID document, which identifies an entity. T
 
 ```bash
 👉
-ALICE_UNSIGNED_DOCUMENT=`envelope subject --ur $ALICE_CID | \
-    envelope assertion --known controller --ur $ALICE_CID | \
+ALICE_UNSIGNED_DOCUMENT=`envelope subject --ur $ALICE_ARID | \
+    envelope assertion --known controller --ur $ALICE_ARID | \
     envelope assertion --known publicKeys --ur $ALICE_PUBKEYS`
 ALICE_SIGNED_DOCUMENT=`envelope subject --wrapped $ALICE_UNSIGNED_DOCUMENT | \
     envelope sign --prvkeys $ALICE_PRVKEYS --note "Made by Alice."`
@@ -20,8 +20,8 @@ envelope $ALICE_SIGNED_DOCUMENT
 ```
 👈
 {
-    CID(d44c5e0a) [
-        controller: CID(d44c5e0a)
+    ARID(d44c5e0a) [
+        controller: ARID(d44c5e0a)
         publicKeys: PublicKeyBase
     ]
 } [
@@ -33,22 +33,22 @@ envelope $ALICE_SIGNED_DOCUMENT
 
 ➡️ ☁️ ➡️
 
-A registrar checks the signature on Alice's submitted identifier document, performs any other necessary validity checks, and then extracts her CID from it.
+A registrar checks the signature on Alice's submitted identifier document, performs any other necessary validity checks, and then extracts her ARID from it.
 
 ```bash
 👉
 ALICE_UNWRAPPED=`envelope verify $ALICE_SIGNED_DOCUMENT --pubkeys $ALICE_PUBKEYS | \
     envelope extract --wrapped`
-ALICE_CID_UR=`envelope extract $ALICE_UNWRAPPED --ur`
-ALICE_CID_HEX=`envelope extract $ALICE_UNWRAPPED --cid`
+ALICE_ARID_UR=`envelope extract $ALICE_UNWRAPPED --ur`
+ALICE_ARID_HEX=`envelope extract $ALICE_UNWRAPPED --arid`
 ```
 
-The registrar creates its own registration document using Alice's CID as the subject, incorporating Alice's signed document, and adding its own signature.
+The registrar creates its own registration document using Alice's ARID as the subject, incorporating Alice's signed document, and adding its own signature.
 
 ```bash
 👉
-ALICE_URI="https://exampleledger.com/cid/$ALICE_CID_HEX"
-ALICE_REGISTRATION=`envelope subject --ur $ALICE_CID_UR | \
+ALICE_URI="https://exampleledger.com/arid/$ALICE_ARID_HEX"
+ALICE_REGISTRATION=`envelope subject --ur $ALICE_ARID_UR | \
     envelope assertion --known entity --envelope $ALICE_SIGNED_DOCUMENT | \
     envelope assertion --known dereferenceVia --uri $ALICE_URI | \
     envelope subject --wrapped | \
@@ -59,11 +59,11 @@ envelope $ALICE_REGISTRATION
 ```
 👈
 {
-    CID(d44c5e0a) [
-        dereferenceVia: URI(https://exampleledger.com/cid/d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f)
+    ARID(d44c5e0a) [
+        dereferenceVia: URI(https://exampleledger.com/arid/d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f)
         entity: {
-            CID(d44c5e0a) [
-                controller: CID(d44c5e0a)
+            ARID(d44c5e0a) [
+                controller: ARID(d44c5e0a)
                 publicKeys: PublicKeyBase
             ]
         } [
@@ -93,7 +93,7 @@ echo $ALICE_URI
 
 ```
 👈
-https://exampleledger.com/cid/d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f
+https://exampleledger.com/arid/d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f
 ```
 
 Alice wants to introduce herself to Bob, so Bob needs to know she controls her identifier. Bob sends a challenge:
@@ -142,7 +142,7 @@ envelope $ALICE_RESPONSE
             note: "Challenge to Alice from Bob."
         ]
     } [
-        dereferenceVia: URI(https://exampleledger.com/cid/d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f)
+        dereferenceVia: URI(https://exampleledger.com/arid/d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f)
     ]
 } [
     verifiedBy: Signature [
@@ -177,7 +177,7 @@ echo $ALICE_URI
 
 ```
 👈
-https://exampleledger.com/cid/d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f
+https://exampleledger.com/arid/d44c5e0afd353f47b02f58a5a3a29d9a2efa6298692f896cd2923268599a0d0f
 ```
 
 Bob uses the URI to ask ExampleLedger for Alice's identifier document, then checks ExampleLedgers's signature. Bob trusts ExampleLedger's validation of Alice's original document, so doesn't bother to check it for internal consistency, and instead goes ahead and extracts Alice's public keys from it.

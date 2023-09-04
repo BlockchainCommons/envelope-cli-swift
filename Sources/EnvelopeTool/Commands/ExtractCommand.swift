@@ -58,8 +58,8 @@ struct ExtractCommand: ParsableCommand {
             } else {
                 throw EnvelopeToolError.notCBOR
             }
-        case .cid:
-            printOut(try envelope.extractSubject(CID.self).hex)
+        case .arid:
+            printOut(try envelope.extractSubject(ARID.self).hex)
         case .data:
             printOut(try envelope.extractSubject(Data.self).hex)
         case .date:

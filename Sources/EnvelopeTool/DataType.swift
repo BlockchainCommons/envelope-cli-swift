@@ -4,7 +4,7 @@ import ArgumentParser
 enum DataType: EnumerableFlag {
     case assertion
     case cbor
-    case cid
+    case arid
     case data
     case date
     case digest

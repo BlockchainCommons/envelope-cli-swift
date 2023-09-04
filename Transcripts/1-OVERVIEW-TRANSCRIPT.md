@@ -213,7 +213,7 @@ ARGUMENTS:
   <value>                 The value for the Envelope's subject.
 
 OPTIONS:
-  --assertion/--cbor/--cid/--data/--date/--digest/--envelope/--number/--known/--object/--predicate/--string/--ur/--uri/--uuid/--wrapped
+  --assertion/--cbor/--arid/--data/--date/--digest/--envelope/--number/--known/--object/--predicate/--string/--ur/--uri/--uuid/--wrapped
                           The data type of the subject. (default: --string)
   --tag <tag>             The integer tag for an enclosed UR.
   --version               Show the version.
@@ -399,7 +399,7 @@ OPTIONS:
   -h, --help              Show help information.
 
 SUBCOMMANDS:
-  cid                     Generate a Common Identifer (CID).
+  arid                     Generate a Apparently Random Identifer (ARID).
   digest                  Generate a digest from the input data.
   key                     Generate a symmetric encryption key.
   nonce                   Generate a Number Used One (Nonce).

@@ -52,14 +52,14 @@ struct SubjectArguments: ParsableArguments {
                     throw EnvelopeToolError.invalidType(expectedType: "hex-encoded CBOR")
                 }
                 envelope = Envelope(cbor)
-            case .cid:
+            case .arid:
                 guard
                     let data = value.hexData,
-                    let cid = CID(data)
+                    let arid = ARID(data)
                 else {
-                    throw EnvelopeToolError.invalidType(expectedType: "CID")
+                    throw EnvelopeToolError.invalidType(expectedType: "ARID")
                 }
-                envelope = Envelope(cid)
+                envelope = Envelope(arid)
             case .data:
                 guard let data = value.hexData else {
                     throw EnvelopeToolError.invalidType(expectedType: "hex")

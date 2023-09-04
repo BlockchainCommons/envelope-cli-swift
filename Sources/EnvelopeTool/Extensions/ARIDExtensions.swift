@@ -2,7 +2,7 @@ import Foundation
 import ArgumentParser
 import BCFoundation
 
-extension CID: ExpressibleByArgument {
+extension ARID: ExpressibleByArgument {
     public init?(argument: String) {
         try? self.init(urString: argument)
     }

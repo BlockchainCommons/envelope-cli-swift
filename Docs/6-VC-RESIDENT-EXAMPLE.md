@@ -8,7 +8,7 @@ John Smith's identifier:
 
 ```bash
 👉
-JOHN_CID=`envelope generate cid --hex 78bc30004776a3905bccb9b8a032cf722ceaf0bbfb1a49eaf3185fab5808cadc`
+JOHN_ARID=`envelope generate arid --hex 78bc30004776a3905bccb9b8a032cf722ceaf0bbfb1a49eaf3185fab5808cadc`
 ```
 
 A photo of John Smith:
@@ -33,14 +33,14 @@ John Smith's Permanent Resident Card issued by the State of Example:
 
 ```bash
 👉
-ISSUER=`envelope subject --ur $STATE_CID | \
+ISSUER=`envelope subject --ur $STATE_ARID | \
     envelope assertion --known note "Issued by the State of Example" | \
-    envelope assertion --known dereferenceVia --uri https://exampleledger.com/cid/04363d5ff99733bc0f1577baba440af1cf344ad9e454fad9d128c00fef6505e8`
+    envelope assertion --known dereferenceVia --uri https://exampleledger.com/arid/04363d5ff99733bc0f1577baba440af1cf344ad9e454fad9d128c00fef6505e8`
 
 BIRTH_COUNTRY=`envelope subject bs | \
     envelope assertion --known note "The Bahamas"`
 
-HOLDER=`envelope subject --ur $JOHN_CID | \
+HOLDER=`envelope subject --ur $JOHN_ARID | \
     envelope assertion --known isA Person | \
     envelope assertion --known isA "Permanent Resident" | \
     envelope assertion givenName JOHN | \
@@ -52,7 +52,7 @@ HOLDER=`envelope subject --ur $JOHN_CID | \
     envelope assertion --string birthCountry --envelope $BIRTH_COUNTRY | \
     envelope assertion --string residentSince --date 2018-01-07`
 
-JOHN_RESIDENT_CARD=`envelope subject --ur $JOHN_CID | \
+JOHN_RESIDENT_CARD=`envelope subject --ur $JOHN_ARID | \
     envelope assertion --known isA "credential" | \
     envelope assertion --string "dateIssued" --date 2022-04-27 | \
     envelope assertion --known issuer --envelope $ISSUER | \
@@ -67,10 +67,10 @@ envelope $JOHN_RESIDENT_CARD
 ```
 👈
 {
-    CID(78bc3000) [
+    ARID(78bc3000) [
         isA: "credential"
         "dateIssued": 2022-04-27
-        holder: CID(78bc3000) [
+        holder: ARID(78bc3000) [
             isA: "Permanent Resident"
             isA: "Person"
             "birthCountry": "bs" [
@@ -87,8 +87,8 @@ envelope $JOHN_RESIDENT_CARD
             "residentSince": 2018-01-07
             "sex": "MALE"
         ]
-        issuer: CID(04363d5f) [
-            dereferenceVia: URI(https://exampleledger.com/cid/04363d5ff99733bc0f1577baba440af1cf344ad9e454fad9d128c00fef6505e8)
+        issuer: ARID(04363d5f) [
+            dereferenceVia: URI(https://exampleledger.com/arid/04363d5ff99733bc0f1577baba440af1cf344ad9e454fad9d128c00fef6505e8)
             note: "Issued by the State of Example"
         ]
         note: "The State of Example recognizes JOHN SMITH as a Permanent Resident."
@@ -145,9 +145,9 @@ envelope $ELIDED_CARD
 ```
 👈
 {
-    CID(78bc3000) [
+    ARID(78bc3000) [
         isA: "credential"
-        holder: CID(78bc3000) [
+        holder: ARID(78bc3000) [
             "familyName": "SMITH"
             "givenName": "JOHN"
             "image": "John Smith Smiling" [
@@ -156,8 +156,8 @@ envelope $ELIDED_CARD
             ]
             ELIDED (7)
         ]
-        issuer: CID(04363d5f) [
-            dereferenceVia: URI(https://exampleledger.com/cid/04363d5ff99733bc0f1577baba440af1cf344ad9e454fad9d128c00fef6505e8)
+        issuer: ARID(04363d5f) [
+            dereferenceVia: URI(https://exampleledger.com/arid/04363d5ff99733bc0f1577baba440af1cf344ad9e454fad9d128c00fef6505e8)
             note: "Issued by the State of Example"
         ]
         ELIDED (2)

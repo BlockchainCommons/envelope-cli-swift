@@ -34,7 +34,7 @@ We use the CBOR hex with the `topics` assertion below:
 
 ```bash
 👉
-CREDENTIAL=`envelope subject --cid 4676635a6e6068c2ef3ffd8ff726dd401fd341036e920f136a1d8af5e829496d |
+CREDENTIAL=`envelope subject --arid 4676635a6e6068c2ef3ffd8ff726dd401fd341036e920f136a1d8af5e829496d |
     envelope assertion --known isA "Certificate of Completion" |
     envelope assertion --known issuer "Example Electrical Engineering Board" |
     envelope assertion --known controller "Example Electrical Engineering Board" |
@@ -57,7 +57,7 @@ envelope $CREDENTIAL
 ```
 👈
 {
-    CID(4676635a) [
+    ARID(4676635a) [
         isA: "Certificate of Completion"
         "certificateNumber": "123-456-789"
         "continuingEducationUnits": 1.5
@@ -200,11 +200,11 @@ REDACTED_CREDENTIAL=`envelope elide revealing $CREDENTIAL $TARGET`; envelope $RE
 ]
 ```
 
-Now it looks like we're getting somewhere! The wrapped envelope has a still-elided subject (the holder's CID) and ten assertions, all of which are still currently elided.
+Now it looks like we're getting somewhere! The wrapped envelope has a still-elided subject (the holder's ARID) and ten assertions, all of which are still currently elided.
 
-## Revealing the CID
+## Revealing the ARID
 
-We want to reveal the CID representing the issuing authority's unique reference to the credential holder. This is because the warranty the employer is making is that a specific identifiable employee has the credential, *without* actually revealing their identity. This allows the entire document to be identified and unredacted should a dispute ever arise.
+We want to reveal the ARID representing the issuing authority's unique reference to the credential holder. This is because the warranty the employer is making is that a specific identifiable employee has the credential, *without* actually revealing their identity. This allows the entire document to be identified and unredacted should a dispute ever arise.
 
 ```bash
 👉
@@ -215,7 +215,7 @@ REDACTED_CREDENTIAL=`envelope elide revealing $CREDENTIAL $TARGET`; envelope $RE
 ```
 👈
 {
-    CID(4676635a) [
+    ARID(4676635a) [
         ELIDED (13)
     ]
 } [
@@ -240,7 +240,7 @@ REDACTED_CREDENTIAL=`envelope elide revealing $CREDENTIAL $TARGET`; envelope $RE
 ```
 👈
 {
-    CID(4676635a) [
+    ARID(4676635a) [
         isA: "Certificate of Completion"
         "expirationDate": 2028-01-01
         "subject": "RF and Microwave Engineering"
@@ -271,7 +271,7 @@ envelope $WARRANTY
 {
     {
         {
-            CID(4676635a) [
+            ARID(4676635a) [
                 isA: "Certificate of Completion"
                 "expirationDate": 2028-01-01
                 "subject": "RF and Microwave Engineering"
@@ -331,7 +331,7 @@ envelope elide revealing --compress $CREDENTIAL $TARGET | envelope
 ```
 👈
 {
-    CID(4676635a) [
+    ARID(4676635a) [
         isA: "Certificate of Completion"
         "expirationDate": 2028-01-01
         "firstName": "James"
@@ -356,7 +356,7 @@ envelope elide revealing --encrypt --key ur:crypto-key/hdcxcnqzoeuobzdksphpfxonr
 ```
 👈
 {
-    CID(4676635a) [
+    ARID(4676635a) [
         isA: "Certificate of Completion"
         "expirationDate": 2028-01-01
         "firstName": "James"

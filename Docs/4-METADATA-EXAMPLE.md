@@ -1,17 +1,17 @@
 # envelope - Complex Metadata Example
 
-In this example, we use CIDs to represent an author, whose known works may change over time, and a particular novel written by her, the data returned about which may change over time.
+In this example, we use ARIDs to represent an author, whose known works may change over time, and a particular novel written by her, the data returned about which may change over time.
 
 Complex, tiered metadata can be added to an envelope.
 
-Assertions made about an CID are considered part of a distributed set. Which assertions are returned depends on who resolves the CID and when it is resolved. In other words, the referent of a CID is mutable.
+Assertions made about an ARID are considered part of a distributed set. Which assertions are returned depends on who resolves the ARID and when it is resolved. In other words, the referent of a ARID is mutable.
 
 
-Start by creating an envelope that represents the author and what is known about her, including where to get more information using the author's CID.
+Start by creating an envelope that represents the author and what is known about her, including where to get more information using the author's ARID.
 
 ```bash
 👉
-AUTHOR=`envelope subject --cid 9c747ace78a4c826392510dd6285551e7df4e5164729a1b36198e56e017666c8 | \
+AUTHOR=`envelope subject --arid 9c747ace78a4c826392510dd6285551e7df4e5164729a1b36198e56e017666c8 | \
     envelope assertion --known dereferenceVia LibraryOfCongress | \
     envelope assertion --known hasName "Ayn Rand"`
 envelope $AUTHOR
@@ -19,7 +19,7 @@ envelope $AUTHOR
 
 ```
 👈
-CID(9c747ace) [
+ARID(9c747ace) [
     dereferenceVia: "LibraryOfCongress"
     hasName: "Ayn Rand"
 ]
@@ -59,7 +59,7 @@ Create an envelope that specifies known information about the novel. This envelo
 
 ```bash
 👉
-WORK=`envelope subject --cid 7fb90a9d96c07f39f75ea6acf392d79f241fac4ec0be2120f7c82489711e3e80 | \
+WORK=`envelope subject --arid 7fb90a9d96c07f39f75ea6acf392d79f241fac4ec0be2120f7c82489711e3e80 | \
     envelope assertion --known isA Novel | \
     envelope assertion isbn "9780451191144" | \
     envelope assertion --string author --envelope $AUTHOR | \
@@ -71,9 +71,9 @@ envelope $WORK
 
 ```
 👈
-CID(7fb90a9d) [
+ARID(7fb90a9d) [
     isA: "Novel"
-    "author": CID(9c747ace) [
+    "author": ARID(9c747ace) [
         dereferenceVia: "LibraryOfCongress"
         hasName: "Ayn Rand"
     ]
@@ -88,7 +88,7 @@ CID(7fb90a9d) [
 ]
 ```
 
-Create an envelope that refers to the digest of a particular digital embodiment of the novel, in EPUB format. Unlike CIDs, which refer to mutable objects, this digest can only refer to exactly one unique digital object.
+Create an envelope that refers to the digest of a particular digital embodiment of the novel, in EPUB format. Unlike ARIDs, which refer to mutable objects, this digest can only refer to exactly one unique digital object.
 
 ```bash
 👉
@@ -117,9 +117,9 @@ envelope $BOOK_METADATA
 👈
 Digest(26d05af5) [
     "format": "EPUB"
-    "work": CID(7fb90a9d) [
+    "work": ARID(7fb90a9d) [
         isA: "Novel"
-        "author": CID(9c747ace) [
+        "author": ARID(9c747ace) [
             dereferenceVia: "LibraryOfCongress"
             hasName: "Ayn Rand"
         ]

@@ -103,7 +103,7 @@ A verifiable credential is constructed such that elements that might be elided a
 ```bash
 👉
 BOARD_PRVKEYS="ur:crypto-prvkeys/hdcxynlntpsbfrbgjkcetpzorohgsafsihcnhyrtoebzwegtvyzolbgtdaskcsldfgadtldmrkld"
-CREDENTIAL=`envelope subject --cid 4676635a6e6068c2ef3ffd8ff726dd401fd341036e920f136a1d8af5e829496d |
+CREDENTIAL=`envelope subject --arid 4676635a6e6068c2ef3ffd8ff726dd401fd341036e920f136a1d8af5e829496d |
     envelope assertion --known isA "Certificate of Completion" |
     envelope assertion --known issuer "Example Electrical Engineering Board" |
     envelope assertion --known controller "Example Electrical Engineering Board" |
@@ -126,7 +126,7 @@ envelope $CREDENTIAL
 ```
 👈
 {
-    CID(4676635a) [
+    ARID(4676635a) [
         isA: "Certificate of Completion"
         {
             "certificateNumber": "123-456-789"

@@ -31,7 +31,7 @@ Because each element of an envelope provides a unique digest, and because changi
 
 So for example, this envelope you're seeing right now is actually a nested envelope, which is the subject, and then two additional assertions, the note and the verified by signature at the end. But the subject of the envelope itself is an envelope. So if we look at just the inner envelope, we see that this inner envelope yields a digest.
 
-And then the subject, which is just the CID, also has its own unique digest. Each of the assertions in this envelope has its own unique digest, and the predicate and object of each assertion has its own unique digest. And each of these things together, each of these elements — the envelope, its subject, the assertion, and the predicate and objects — they are all envelopes as well.
+And then the subject, which is just the ARID, also has its own unique digest. Each of the assertions in this envelope has its own unique digest, and the predicate and object of each assertion has its own unique digest. And each of these things together, each of these elements — the envelope, its subject, the assertion, and the predicate and objects — they are all envelopes as well.
 
 This highlighted object right here. This object to this of this assertion is itself actually an envelope. It's an envelope whose subject is the string 1, 2, 3, 4, 5, 6, 7, 8, 9, and it has no assertions. If it did have assertions, then this printout in envelope notation would show them. So I'm going to walk you through a set of scenarios where I show you how the envelope command line interface tool is capable of generating proofs for what exists inside the envelope without revealing anything else about the envelope except what is absolutely necessary. So let's start with creating an envelope here. This is just the commands necessary to create an envelope called Alice's Friends or Alice Friends. We're gonna echo that. Okay. That's just an envelope. That's the UR of the envelope.
 
@@ -67,7 +67,7 @@ And as you can see, nothing happened. And that's a good thing because that means
 
 So if we take a slightly more sophisticated example here we're going to use a modified version of a verifiable credential we used in a previous video. And in this case, we're creating our credential certificate here. So we've created some private keys for the electrical engineering board, and then we've created a credential.
 
-It has a subject, which is a CID, it's basically the same as the previous scenario. We are using the salted flag on a number of things, and in a moment I'll actually show you why that's important. This will also seem familiar if I print out the credential itself.
+It has a subject, which is a ARID, it's basically the same as the previous scenario. We are using the salted flag on a number of things, and in a moment I'll actually show you why that's important. This will also seem familiar if I print out the credential itself.
 
 As you can see a number of these things have salt and some of them don't. And the reason why we would add salt is because this makes them impossible to guess unless they're deliberately revealed. Here we're going to do the same thing we do with the previous envelope. We're gonna create the credential root, so we're gonna say, envelope elide revealing credential, and nothing more. And that will look totally elided. And so in this case, the holder of the credential wants to reveal a single assertion from it: the subject. And the subject is in this case, RF and microwave engineering.
 
