@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftEnvelope.git",
       "state" : {
-        "revision" : "7aa0c841e308c1e29ebf6324ad956b777bdf3aea",
-        "version" : "0.19.1"
+        "revision" : "43b63aeb6bd0796bca9d8c02706d29210df8787d",
+        "version" : "0.19.2"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/krzyzanowskim/CryptoSwift.git",
       "state" : {
-        "revision" : "32f641cf24fc7abc1c591a2025e9f2f572648b0f",
-        "version" : "1.7.2"
+        "revision" : "db51c407d3be4a051484a141bf0bff36c43d3b1e",
+        "version" : "1.8.0"
       }
     },
     {
@@ -122,8 +122,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-argument-parser",
       "state" : {
-        "revision" : "fee6933f37fde9a5e12a1e4aeaa93fe60116ff2a",
-        "version" : "1.2.2"
+        "revision" : "8f4d2753f0e4778c76d5f05ad16c74f707390531",
+        "version" : "1.2.3"
       }
     },
     {

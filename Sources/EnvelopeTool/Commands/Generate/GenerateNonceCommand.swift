@@ -3,7 +3,7 @@ import BCFoundation
 import WolfBase
 
 struct GenerateNonceCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "nonce", abstract: "Generate a Number Used One (Nonce).")
+    static var configuration = CommandConfiguration(commandName: "nonce", abstract: "Generate a Number Used Once (Nonce).")
 
     @Option(help: "Raw hex data for the nonce.")
     var hex: HexData?

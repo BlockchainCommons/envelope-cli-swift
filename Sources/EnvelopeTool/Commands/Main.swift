@@ -5,8 +5,8 @@ import BCFoundation
 struct Main: ParsableCommand {
     static var configuration = CommandConfiguration(
         commandName: "envelope",
-        abstract: "A tool for manipulating the Envelope data type.",
-        version: "0.12.1",
+        abstract: "A tool for manipulating the Gordian Envelope data type.",
+        version: "0.13.0",
         shouldDisplay: false,
         subcommands: [
             AssertionCommand.self,

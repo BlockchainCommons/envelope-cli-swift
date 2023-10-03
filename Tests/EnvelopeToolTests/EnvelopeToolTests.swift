@@ -6,7 +6,7 @@ import EnvelopeTool
 let helloString = "Hello."
 let helloEnvelopeUR = "ur:envelope/tpcsiyfdihjzjzjldmprrhtypk"
 let cborArrayExample = CBOR.array([1, 2, 3]).cborData.hex
-let uuidExample = "EB377E65-5774-410A-B9CB-510BFC73E6D9"
+let uuidExample = "eb377e65-5774-410a-b9cb-510bfc73e6d9"
 let aridExample = "dec7e82893c32f7a4fcec633c02c0ec32a4361ca3ee3bc8758ae07742e940550"
 let dateExample = "2022-08-30T07:16:11Z"
 let digestExample = Digest(helloString).ur.string
@@ -170,7 +170,7 @@ final class EnvelopeToolTests: XCTestCase {
         let value = "note"
         let e = try envelope("subject --known \(value)")
         XCTAssertEqual(e, "ur:envelope/aatljldnmw")
-        XCTAssertEqual(try envelope(e), "note")
+        XCTAssertEqual(try envelope(e), "'note'")
         XCTAssertEqual(try envelope("extract --known \(e)"), "note")
         XCTAssertEqual(try envelope("extract --cbor \(e)"), "d99c4004")
     }
@@ -244,7 +244,7 @@ final class EnvelopeToolTests: XCTestCase {
     func testAssertion3() throws {
         let e = try envelope("subject assertion --known note ThisIsANote.")
         XCTAssertEqual(e, "ur:envelope/oyaatpcsjzghisinjkgajkfpgljljyihdmsnnbgahp")
-        XCTAssertEqual(try envelope(e), #"note: "ThisIsANote.""#)
+        XCTAssertEqual(try envelope(e), #"'note': "ThisIsANote.""#)
     }
     
     func testAssertionAdd() throws {
@@ -297,7 +297,7 @@ final class EnvelopeToolTests: XCTestCase {
 
     func testAssertionAt2() throws {
         let e = try pipe(["extract --wrapped", "assertion at 12"], inputLine: credentialExample)
-        XCTAssertEqual(try envelope(e), #"issuer: "Example Electrical Engineering Board""#)
+        XCTAssertEqual(try envelope(e), #"'issuer': "Example Electrical Engineering Board""#)
     }
 
     func testAssertionAt3() throws {
@@ -336,7 +336,7 @@ final class EnvelopeToolTests: XCTestCase {
     func testAssertionPredicateFind2() throws {
         let e = try pipe(["extract --wrapped", "assertion find predicate --known isA"], inputLine: credentialExample)
         XCTAssertEqual(e, "ur:envelope/oyadtpcskscffxihjpjyiniyiniahsjyihcxjliycxfxjljnjojzihjyinjljtwdiyftes")
-        XCTAssertEqual(try envelope(e), #"isA: "Certificate of Completion""#)
+        XCTAssertEqual(try envelope(e), #"'isA': "Certificate of Completion""#)
     }
     
     func testAssertionObjectFind1() throws {
@@ -463,7 +463,7 @@ final class EnvelopeToolTests: XCTestCase {
         """
         "Alice" [
             "knows": "Bob"
-            verifiedBy: Signature
+            'verifiedBy': Signature
         ]
         """
         )
@@ -488,7 +488,7 @@ final class EnvelopeToolTests: XCTestCase {
                 "knows": "Bob"
             ]
         } [
-            verifiedBy: Signature
+            'verifiedBy': Signature
         ]
         """
         )
@@ -502,8 +502,8 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(try envelope(e),
         """
         "Hello." [
-            verifiedBy: Signature
-            verifiedBy: Signature
+            'verifiedBy': Signature
+            'verifiedBy': Signature
         ]
         """
         )
@@ -514,7 +514,7 @@ final class EnvelopeToolTests: XCTestCase {
         XCTAssertEqual(try envelope(result),
         """
         ENCRYPTED [
-            sskrShare: SSKRShare
+            'sskrShare': SSKRShare
         ]
         """
         )

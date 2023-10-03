@@ -41,16 +41,13 @@ struct AssertionRemovePredicateObjectCommand: ParsableCommand {
 }
 
 struct AssertionRemoveEnvelopeCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "envelope", abstract: "Add an assertion to the given envelope. The assertion must be a single envelope containing the entire assertion.")
+    static var configuration = CommandConfiguration(commandName: "envelope", abstract: "Remove an assertion from the given envelope. The assertion must be a single envelope containing the entire assertion.")
     
     @Argument
     var assertion: Envelope
     
     @Argument
     var envelope: Envelope?
-    
-    @Flag(help: "Add salt to the assertion.")
-    var salted: Bool = false
     
     mutating func fill() throws {
         if envelope == nil {

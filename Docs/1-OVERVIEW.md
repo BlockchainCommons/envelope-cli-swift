@@ -16,7 +16,7 @@ envelope help
 
 ```
 👈
-OVERVIEW: A tool for manipulating the Envelope data type.
+OVERVIEW: A tool for manipulating the Gordian Envelope data type.
 
 USAGE: envelope <subcommand>
 
@@ -73,7 +73,7 @@ envelope $ALICE_KNOWS_BOB    # Equivalent to `envelope format $ALICE_KNOWS_BOB`
 
 The `format` command has several output format options. For example, you can output the hexadecimal of the raw CBOR for the envelope:
 
-```
+```bash
 👉
 envelope --cbor $ALICE_KNOWS_BOB
 ```
@@ -87,29 +87,58 @@ d8c882d81865416c696365a1d818656b6e6f7773d81863426f62
 
 Or your can output the annotated CBOR diagnostic annotation of the envelope:
 
-```
+```bash
 👉
 envelope --diag $ALICE_KNOWS_BOB
 ```
 
 ```
 👈
-200(   ; envelope
+200(   / envelope /
    [
-      24("Alice"),   ; leaf
+      24("Alice"),   / leaf /
       {
-         24("knows"):   ; leaf
-         24("Bob")   ; leaf
+         24("knows"):   / leaf /
+         24("Bob")   / leaf /
       }
    ]
 )
+```
+
+### Tree Output
+
+The Envelope Tree Notation shows the structure of the envelope as a tree:
+
+```bash
+envelope format --tree $ALICE_KNOWS_BOB
+```
+
+```
+8955db5e NODE
+    13941b48 subj "Alice"
+    78d666eb ASSERTION
+        db7dd21c pred "knows"
+        13b74194 obj "Bob"
+```
+
+With the `--hide-nodes` option, the semantic structure of the envelope is shown without digests:
+
+```bash
+envelope format --tree --hide-nodes $ALICE_KNOWS_BOB
+```
+
+```
+"Alice"
+    ASSERTION
+        "knows"
+        "Bob"
 ```
 
 #### Mermaid Output
 
 Or you can output your envelope in [Mermaid](https://mermaid-js.github.io/) format, which resolves to a graphical representation of the envelope hierarchy when placed in a markdown file (like this one.) Each element in the graph shows an abbreviated version of its digest.
 
-```
+```bash
 👉
 envelope --mermaid $ALICE_KNOWS_BOB
 ```
@@ -617,7 +646,7 @@ envelope $SIGNED
 👈
 "Alice" [
     "knows": "Bob"
-    verifiedBy: Signature
+    'verifiedBy': Signature
 ]
 ```
 
@@ -638,7 +667,7 @@ envelope $WRAPPED_SIGNED
         "knows": "Bob"
     ]
 } [
-    verifiedBy: Signature
+    'verifiedBy': Signature
 ]
 ```
 
@@ -704,7 +733,7 @@ envelope $SHARE_1
 ```
 👈
 ENCRYPTED [
-    sskrShare: SSKRShare
+    'sskrShare': SSKRShare
 ]
 ```
 
@@ -768,7 +797,7 @@ envelope $SALTED_WRAPPED
 {
     "Alice" [
         "knows": "Bob"
-        salt: Salt
+        'salt': Salt
     ]
 }
 ```
@@ -798,7 +827,7 @@ function env_cbor_count { envelope format --cbor "$1" | wc -c | bc -l <<< "($(ca
 
 In this example, we create an envelope with a long text note then print the number of bytes it takes to encode as CBOR and the envelope's digest.
 
-```
+```bash
 👈
 NOTE='Lorem ipsum dolor sit amet consectetur adipiscing elit mi nibh ornare proin blandit diam ridiculus, faucibus mus dui eu vehicula nam donec dictumst sed vivamus bibendum aliquet efficitur. Felis imperdiet sodales dictum morbi vivamus augue dis duis aliquet velit ullamcorper porttitor, lobortis dapibus hac purus aliquam natoque iaculis blandit montes nunc pretium.'
 ENVELOPE=`envelope subject "Alice" | envelope assertion --known note --string "${NOTE}${NOTE}${NOTE}"`
@@ -806,7 +835,7 @@ env_cbor_count $ENVELOPE
 envelope digest $ENVELOPE
 ```
 
-```
+```bash
 👉
 1110
 ur:digest/hdcxykfgenetdppftsuyhngwglrdiopsmtgshpteprchcaasvyiasbjldaqzcpfhzmcfcarkjepf
@@ -814,21 +843,21 @@ ur:digest/hdcxykfgenetdppftsuyhngwglrdiopsmtgshpteprchcaasvyiasbjldaqzcpfhzmcfca
 
 Now we compress the envelope, and again print the number of bytes it takes to encode and its digest. Note that although the number of bytes has gone down significantly, the digest remains the same.
 
-```
-👈
+```bash
+👉
 COMPRESSED=`envelope compress $ENVELOPE`
 env_cbor_count $COMPRESSED
 envelope digest $COMPRESSED
 ```
 
 ```
-316
+312
 ur:digest/hdcxykfgenetdppftsuyhngwglrdiopsmtgshpteprchcaasvyiasbjldaqzcpfhzmcfcarkjepf
 ```
 
 When an envelope is compressed, you treat it like any other envelope (add assertions to it, use it as the object of an assertion, etc.) but you can't access its contents until it's been uncompressed.
 
-```
+```bash
 👉
 envelope $COMPRESSED
 ```
@@ -840,7 +869,7 @@ COMPRESSED
 
 When the envelope is uncompressed, it returns to its original size.
 
-```
+```bash
 👉
 UNCOMPRESSED=`envelope uncompress $COMPRESSED`
 env_cbor_count $UNCOMPRESSED
@@ -855,7 +884,7 @@ ur:digest/hdcxykfgenetdppftsuyhngwglrdiopsmtgshpteprchcaasvyiasbjldaqzcpfhzmcfca
 
 The above technique compresses the entire envelope. You can also compress or uncompress just the subject of an envelope by adding the `--subject` flag:
 
-```
+```bash
 👉
 ALICE_COMPRESSED=`envelope compress --subject $ALICE_KNOWS_BOB`
 envelope $ALICE_COMPRESSED
@@ -870,7 +899,7 @@ COMPRESSED [
 
 Note that compression (like encryption) has a fixed storage overhead. So very short envelopes, like the subject of this envelope may actually become longer when compressed.
 
-```
+```bash
 👉
 env_cbor_count $ALICE_KNOWS_BOB
 env_cbor_count $ALICE_COMPRESSED

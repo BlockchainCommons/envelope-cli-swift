@@ -3,16 +3,18 @@ import ArgumentParser
 
 enum DataType: EnumerableFlag {
     case assertion
-    case cbor
+    case predicate
+    case object
+
     case arid
+    case bool
+    case cbor
     case data
     case date
     case digest
     case envelope
-    case number
     case known
-    case object
-    case predicate
+    case number
     case string
     case ur
     case uri
