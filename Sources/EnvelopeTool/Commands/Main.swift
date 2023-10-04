@@ -6,7 +6,7 @@ struct Main: ParsableCommand {
     static var configuration = CommandConfiguration(
         commandName: "envelope",
         abstract: "A tool for manipulating the Gordian Envelope data type.",
-        version: "0.13.0",
+        version: "0.13.1",
         shouldDisplay: false,
         subcommands: [
             AssertionCommand.self,

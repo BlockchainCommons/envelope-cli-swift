@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 LOCAL=/usr/local
 BIN=${LOCAL}/bin
 TOOL=${BIN}/envelope
