@@ -7,16 +7,16 @@ struct AttachmentAddComponentsCommand: ParsableCommand {
         abstract: "Add an attachment to the given envelope.",
         discussion: "The components of the attachment are provided as separate arguments.")
     
-    @Argument
+    @Argument(help: "The vendor that adds this attachment. Usually a reverse domain name.")
     var vendor: String
     
-    @Option
+    @Option(help: "The spec to which this attachment conforms. Usually a URI.")
     var conformsTo: String?
 
-    @Argument
+    @Argument(help: "The payload of the attachment. Entirely specified by the vendor.")
     var payload: Envelope
 
-    @Argument
+    @Argument(help: "The envelope to which to add the attachment.")
     var subject: Envelope?
     
     mutating func fill() throws {

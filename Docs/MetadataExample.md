@@ -1,4 +1,4 @@
-# envelope - Complex Metadata Example
+# `envelope` - Complex Metadata Example
 
 In this example, we use ARIDs to represent an author, whose known works may change over time, and a particular novel written by her, the data returned about which may change over time.
 

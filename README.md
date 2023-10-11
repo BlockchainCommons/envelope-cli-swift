@@ -1,6 +1,6 @@
 # envelope
 
-A command line tool for manipulating the `Envelope` data type.
+A Swift command line tool for manipulating the Gordian Envelope data type.
 
 Written by [Wolf McNally](https://wolfmcnally.com) for [Blockchain Commons](https://blockchaincommons.com/).
 
@@ -46,13 +46,12 @@ For more examples of `envelope-cli` usage, see the [envelope-cli videos](https:/
 
 ## Building
 
-You will need Xcode 14 or later installed.
+You will need Xcode 15 or later installed.
 
-From the cloned repository directory, the following commands will compile the tool and link it to the `/usr/local/bin/` directory so it is available from the command line. the `link.sh` script will require you to enter your password.
+From the cloned repository directory, the following command will compile the tool and install it in the `/usr/local/bin/` directory so it is available from the command line. The `install.sh` script will require you to enter your password to complete the install.
 
 ```bash
-./build.sh
-./link.sh
+./install.sh
 ```
 
 To check your installation, run:
@@ -61,8 +60,15 @@ To check your installation, run:
 envelope help
 ```
 
-**NOTE:** If you run `envelope` by itself, it will begin waiting on input from stdin and you will need to press `^C` to exit it.
+If you only want to run the tool from the command line without installing it:
 
-**NOTE:** Removing or renaming the cloned repository directory will break the links established by `link.sh` so you will need to re-run it. If you wish to install the tool directly, run the `install.sh` script, after which you can remove the cloned repository directory. There is also an `uninstall.sh` script if you wish to remove the tool.
+```bash
+./build.sh
+swift run --run EnvelopeTool help
+```
+
+**NOTE:** If you run `envelope` with no arguments, it will begin waiting on input from stdin and you will need to press `^C` to exit it.
+
+**NOTE:** There is an `uninstall.sh` script if you wish to remove the tool.
 
 From here, visit the [Overview of Commands](Docs/1-Overview.md) to start learning how to use the tool. If you are unfamiliar with the `Envelope` type, we suggest starting with the [Introduction to Envelope](https://www.blockchaincommons.com/introduction/Envelope-Intro/).

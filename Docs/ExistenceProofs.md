@@ -1,4 +1,4 @@
-# envelope - Existence Proofs
+# `envelope` - Existence Proofs
 
 **See Associated Video:**
 

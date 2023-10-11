@@ -1,4 +1,4 @@
-# envelope - diffing
+# `envelope` - diffing
 
 ## Introduction
 
