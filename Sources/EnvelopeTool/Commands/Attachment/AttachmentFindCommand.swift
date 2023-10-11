@@ -8,10 +8,10 @@ struct AttachmentFindCommand: ParsableCommand {
         discussion: "If no attributes are specified, all attachments are returned."
     )
 
-    @Option var vendor: String?
-    @Option var conformsTo: String?
+    @Option(help: "The vendor that adds this attachment. Usually a reverse domain name.") var vendor: String?
+    @Option(help: "The spec to which this attachment conforms. Usually a URI.") var conformsTo: String?
     
-    @Argument var envelope: Envelope?
+    @Argument(help: "The envelope in which to search for matching attachments.") var envelope: Envelope?
     
     mutating func fill() throws {
         if envelope == nil {

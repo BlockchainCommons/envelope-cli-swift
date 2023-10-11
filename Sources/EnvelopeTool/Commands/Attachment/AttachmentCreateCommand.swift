@@ -7,13 +7,13 @@ struct AttachmentCreateCommand: ParsableCommand {
         abstract: "Create an attachment."
     )
     
-    @Argument
+    @Argument(help: "The vendor that adds this attachment. Usually a reverse domain name.")
     var vendor: String
     
-    @Option
+    @Option(help: "The spec to which this attachment conforms. Usually a URI.")
     var conformsTo: String?
 
-    @Argument
+    @Argument(help: "The payload of the attachment. Entirely specified by the vendor.")
     var payload: Envelope?
 
     mutating func fill() throws {

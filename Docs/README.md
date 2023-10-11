@@ -1,6 +1,6 @@
 # `envelope` Swift Command Line Tool Documentation
 
-The following docs exemplify the basic functionality of the `envelope-cli` app.
+The following docs exemplify the basic functionality of the `envelope` command line tool.
 
 * [Overview of Commands](Overview.md) — Adding subjects, assertions, signatures, and salt.
 * [Basic Examples](BasicExamples.md) — Demonstrating standard methodologies for entry, encryption, and signing.
