@@ -1,10 +1,10 @@
 import ArgumentParser
 import BCFoundation
 
-struct AssertionAllCommand: ParsableCommand {
+struct AttachmentAllCommand: ParsableCommand {
     static var configuration = CommandConfiguration(
         commandName: "all",
-        abstract: "Retrieve all the envelope's assertions."
+        abstract: "Retrieve all the envelope's attachments."
     )
     
     @Argument var envelope: Envelope?
@@ -21,6 +21,6 @@ struct AssertionAllCommand: ParsableCommand {
         guard let envelope else {
             throw EnvelopeToolError.missingArgument("envelope")
         }
-        printOut(envelope.assertions.map { $0.ur.string }.joined(separator: "\n"))
+        try printOut(envelope.attachments().map { $0.ur.string }.joined(separator: "\n"))
     }
 }

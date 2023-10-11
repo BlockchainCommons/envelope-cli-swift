@@ -2,7 +2,10 @@ import ArgumentParser
 import BCFoundation
 
 struct GeneratePublicKeysCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "pubkeys", abstract: "Generate a public key base from a private key base.")
+    static var configuration = CommandConfiguration(
+        commandName: "pubkeys",
+        abstract: "Generate a public key base from a private key base."
+    )
 
     @Argument
     var prvkeys: PrivateKeyBase?

@@ -2,7 +2,11 @@ import ArgumentParser
 import BCFoundation
 
 struct VerifyCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "verify", abstract: "Verify a signature on the envelope using the provided public key base.", usage: "On success, print the original envelope so it can be piped to the next operation. On failure, exit with an error condition.")
+    static var configuration = CommandConfiguration(
+        commandName: "verify",
+        abstract: "Verify a signature on the envelope using the provided public key base.",
+        usage: "On success, print the original envelope so it can be piped to the next operation. On failure, exit with an error condition."
+    )
 
     @Option(help: "The minimum number of valid signatures.")
     var threshold: Int?

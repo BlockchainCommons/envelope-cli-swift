@@ -2,7 +2,10 @@ import ArgumentParser
 import BCFoundation
 
 struct EncryptCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "encrypt", abstract: "Encrypt the envelope's subject using the provided key.")
+    static var configuration = CommandConfiguration(
+        commandName: "encrypt",
+        abstract: "Encrypt the envelope's subject using the provided key."
+    )
 
     @Argument var envelope: Envelope?
     @Option var key: SymmetricKey?

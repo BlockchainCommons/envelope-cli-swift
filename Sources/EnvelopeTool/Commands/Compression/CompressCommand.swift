@@ -2,7 +2,10 @@ import ArgumentParser
 import BCFoundation
 
 struct CompressCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "compress", abstract: "Compress the envelope or its subject.")
+    static var configuration = CommandConfiguration(
+        commandName: "compress",
+        abstract: "Compress the envelope or its subject."
+    )
     
     @Argument var envelope: Envelope?
     @Flag(help: "Compress only the envelope's subject.") var subject: Bool = false

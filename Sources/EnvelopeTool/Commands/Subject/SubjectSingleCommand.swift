@@ -2,7 +2,10 @@ import ArgumentParser
 import BCFoundation
 
 struct SubjectSingleCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "single", abstract: "Create an envelope with the given subject.")
+    static var configuration = CommandConfiguration(
+        commandName: "single",
+        abstract: "Create an envelope with the given subject."
+    )
 
     @OptionGroup
     var arguments: SubjectArguments

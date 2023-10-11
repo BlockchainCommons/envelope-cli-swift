@@ -2,7 +2,10 @@ import ArgumentParser
 import BCFoundation
 
 struct FormatCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "format", abstract: "Print the envelope in Envelope Notation.")
+    static var configuration = CommandConfiguration(
+        commandName: "format",
+        abstract: "Print the envelope in Envelope Notation."
+    )
     
     @Argument var envelope: Envelope?
     

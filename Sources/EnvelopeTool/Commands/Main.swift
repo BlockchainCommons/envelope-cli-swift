@@ -10,6 +10,7 @@ struct Main: ParsableCommand {
         shouldDisplay: false,
         subcommands: [
             AssertionCommand.self,
+            AttachmentCommand.self,
             CompressCommand.self,
             DigestCommand.self,
             DecryptCommand.self,

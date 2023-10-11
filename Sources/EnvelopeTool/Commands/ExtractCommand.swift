@@ -4,7 +4,10 @@ import BCFoundation
 import WolfBase
 
 struct ExtractCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "extract", abstract: "Extract the subject of the input envelope.")
+    static var configuration = CommandConfiguration(
+        commandName: "extract",
+        abstract: "Extract the subject of the input envelope."
+    )
     
     @Flag(help: "The data type of the subject.")
     var type: DataType = .string

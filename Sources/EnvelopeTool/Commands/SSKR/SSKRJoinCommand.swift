@@ -2,7 +2,10 @@ import ArgumentParser
 import BCFoundation
 
 struct SSKRJoinCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "join", abstract: "Join a set of SSKR shares back into the original envelope.")
+    static var configuration = CommandConfiguration(
+        commandName: "join",
+        abstract: "Join a set of SSKR shares back into the original envelope."
+    )
 
     @Argument
     var envelopes: [Envelope] = []

@@ -1,33 +1,34 @@
 import ArgumentParser
 import BCFoundation
 
-struct ProofCreateCommand: ParsableCommand {
+struct AssertionAddPredObjCommand: ParsableCommand {
     static var configuration = CommandConfiguration(
-        commandName: "create",
-        abstract: "Create a proof that an envelope contains a target digest."
+        commandName: "pred-obj",
+        abstract: "Add an assertion with the given predicate and object to the given envelope."
     )
-    
-    @Argument(help: "The input envelope.")
+
+    @OptionGroup
+    var arguments: AssertionArguments
+
+    @Argument
     var envelope: Envelope?
     
-    @Argument(help: "The target set of digests.")
-    var target: [Digest] = []
-    
+    @Flag(help: "Add salt to the assertion.")
+    var salted: Bool = false
+
     mutating func fill() throws {
+        try arguments.fill()
         if envelope == nil {
             envelope = try readIn(Envelope.self)
         }
     }
-    
+
     mutating func run() throws {
         resetOutput()
         try fill()
         guard let envelope else {
             throw EnvelopeToolError.missingArgument("envelope")
         }
-        guard let proof = envelope.proof(contains: Set(target)) else {
-            throw EnvelopeToolError.invalidProof
-        }
-        printOut(proof.ur)
+        printOut(try envelope.addAssertion(arguments.assertion, salted: salted).ur)
     }
 }

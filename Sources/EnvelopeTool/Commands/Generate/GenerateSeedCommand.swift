@@ -3,7 +3,10 @@ import BCFoundation
 import WolfBase
 
 struct GenerateSeedCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "seed", abstract: "Generate a seed.")
+    static var configuration = CommandConfiguration(
+        commandName: "seed",
+        abstract: "Generate a seed."
+    )
 
     @Option(help: "The number of bytes for the seed. Must be in the range \(minSeedSize)...256.")
     var count: Int = 16

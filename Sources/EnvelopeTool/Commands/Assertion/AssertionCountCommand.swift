@@ -2,7 +2,10 @@ import ArgumentParser
 import BCFoundation
 
 struct AssertionCountCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "count", abstract: "Print the count of the envelope's assertions.")
+    static var configuration = CommandConfiguration(
+        commandName: "count",
+        abstract: "Print the count of the envelope's assertions."
+    )
 
     @Argument var envelope: Envelope?
     

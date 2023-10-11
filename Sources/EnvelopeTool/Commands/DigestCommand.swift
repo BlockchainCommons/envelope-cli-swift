@@ -2,7 +2,10 @@ import ArgumentParser
 import BCFoundation
 
 struct DigestCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "digest", abstract: "Print the envelope's digest.")
+    static var configuration = CommandConfiguration(
+        commandName: "digest",
+        abstract: "Print the envelope's digest."
+    )
     
     @Argument(help: "The envelope to retrieve the digest from.")
     var envelope: Envelope?

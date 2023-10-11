@@ -1,12 +1,13 @@
 import ArgumentParser
 import BCFoundation
 
-struct AssertionAllCommand: ParsableCommand {
+struct AttachmentAtCommand: ParsableCommand {
     static var configuration = CommandConfiguration(
-        commandName: "all",
-        abstract: "Retrieve all the envelope's assertions."
+        commandName: "at",
+        abstract: "Retrieve the attachment at the given index."
     )
     
+    @Argument var index: Int
     @Argument var envelope: Envelope?
     
     mutating func fill() throws {
@@ -21,6 +22,11 @@ struct AssertionAllCommand: ParsableCommand {
         guard let envelope else {
             throw EnvelopeToolError.missingArgument("envelope")
         }
-        printOut(envelope.assertions.map { $0.ur.string }.joined(separator: "\n"))
+        let attachments = try envelope.attachments()
+        let range = 0..<attachments.count
+        guard range.contains(index) else {
+            throw EnvelopeToolError.indexOutOfRange(range, index)
+        }
+        printOut(attachments[index].ur)
     }
 }

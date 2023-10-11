@@ -2,7 +2,10 @@ import ArgumentParser
 import BCFoundation
 
 struct AssertionCreateCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "create", abstract: "Create a bare assertion with the given predicate and object.")
+    static var configuration = CommandConfiguration(
+        commandName: "create",
+        abstract: "Create a bare assertion with the given predicate and object."
+    )
 
     @OptionGroup
     var arguments: AssertionArguments

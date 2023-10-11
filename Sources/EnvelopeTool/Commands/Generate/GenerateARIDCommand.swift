@@ -3,7 +3,10 @@ import BCFoundation
 import WolfBase
 
 struct GenerateARIDCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "arid", abstract: "Generate an Apparently Random Identifer (ARID).")
+    static var configuration = CommandConfiguration(
+        commandName: "arid",
+        abstract: "Generate an Apparently Random Identifer (ARID)."
+    )
 
     @Option(help: "Raw hex data for the ARID. If included, must be 32 apparently random bytes.")
     var hex: HexData?

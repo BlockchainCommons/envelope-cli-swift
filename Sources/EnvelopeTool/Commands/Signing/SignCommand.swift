@@ -2,7 +2,10 @@ import ArgumentParser
 import BCFoundation
 
 struct SignCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "sign", abstract: "Sign the envelope with the provided private key base.")
+    static var configuration = CommandConfiguration(
+        commandName: "sign",
+        abstract: "Sign the envelope with the provided private key base."
+    )
 
     @Argument var envelope: Envelope?
     @Option var prvkeys: [PrivateKeyBase] = []

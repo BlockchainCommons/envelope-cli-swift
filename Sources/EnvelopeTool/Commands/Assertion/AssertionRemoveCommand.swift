@@ -6,15 +6,18 @@ struct AssertionRemoveCommand: ParsableCommand {
         commandName: "remove",
         abstract: "Remove an assertion from the given envelope.",
         subcommands: [
-            AssertionRemovePredicateObjectCommand.self,
+            AssertionRemovePredObjCommand.self,
             AssertionRemoveEnvelopeCommand.self,
         ],
-        defaultSubcommand: AssertionRemovePredicateObjectCommand.self
+        defaultSubcommand: AssertionRemovePredObjCommand.self
     )
 }
 
-struct AssertionRemovePredicateObjectCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "predicate-object", abstract: "Remove an assertion with the given predicate and object from the given envelope.")
+struct AssertionRemovePredObjCommand: ParsableCommand {
+    static var configuration = CommandConfiguration(
+        commandName: "pred-obj",
+        abstract: "Remove an assertion with the given predicate and object from the given envelope."
+    )
 
     @OptionGroup
     var arguments: AssertionArguments

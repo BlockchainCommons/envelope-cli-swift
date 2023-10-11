@@ -2,7 +2,10 @@ import ArgumentParser
 import BCFoundation
 
 struct AssertionAtCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "at", abstract: "Retrieve the assertion at the given index.")
+    static var configuration = CommandConfiguration(
+        commandName: "at",
+        abstract: "Retrieve the assertion at the given index."
+    )
     
     @Argument var index: Int
     @Argument var envelope: Envelope?

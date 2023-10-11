@@ -3,7 +3,10 @@ import BCFoundation
 import WolfBase
 
 struct SSKRSplitCommand: ParsableCommand {
-    static var configuration = CommandConfiguration(commandName: "split", abstract: "Split an envelope into several shares using SSKR.")
+    static var configuration = CommandConfiguration(
+        commandName: "split",
+        abstract: "Split an envelope into several shares using SSKR."
+    )
 
     @Argument
     var envelope: Envelope?

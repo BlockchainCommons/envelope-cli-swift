@@ -1,17 +1,20 @@
 import ArgumentParser
 import BCFoundation
 
-struct ProofCreateCommand: ParsableCommand {
+struct AssertionAddEnvelopeCommand: ParsableCommand {
     static var configuration = CommandConfiguration(
-        commandName: "create",
-        abstract: "Create a proof that an envelope contains a target digest."
+        commandName: "envelope",
+        abstract: "Add an assertion to the given envelope. The assertion must be a single envelope containing the entire assertion."
     )
     
-    @Argument(help: "The input envelope.")
+    @Argument
+    var assertion: Envelope
+    
+    @Argument
     var envelope: Envelope?
     
-    @Argument(help: "The target set of digests.")
-    var target: [Digest] = []
+    @Flag(help: "Add salt to the assertion.")
+    var salted: Bool = false
     
     mutating func fill() throws {
         if envelope == nil {
@@ -25,9 +28,6 @@ struct ProofCreateCommand: ParsableCommand {
         guard let envelope else {
             throw EnvelopeToolError.missingArgument("envelope")
         }
-        guard let proof = envelope.proof(contains: Set(target)) else {
-            throw EnvelopeToolError.invalidProof
-        }
-        printOut(proof.ur)
+        printOut(try envelope.addAssertion(assertion, salted: salted).ur)
     }
 }
