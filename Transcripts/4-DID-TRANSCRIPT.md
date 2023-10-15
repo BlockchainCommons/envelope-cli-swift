@@ -82,5 +82,5 @@ And so there's a crypto pubkeys. This is her public keybase. So now he knows tha
 
 So now he can correspond with Alice knowing that she is in fact, the entity, that Example Ledger has on record. 
 
-Next transcript is on [Existence Proofs](5-EXISTENCE-PROOFS-TRANSCRIPT.md).
+Next transcript is on [Inclusion Proofs](5-INCLUSION-PROOFS-TRANSCRIPT.md).
 

@@ -1,12 +1,12 @@
-# `envelope` - Existence Proofs
+# `envelope` - Inclusion Proofs
 
 **See Associated Video:**
 
-[![Gordian Envelope CLI - 5 - Existence Proofs](https://img.youtube.com/vi/LUQ-n9EZa0U/mqdefault.jpg)](https://www.youtube.com/watch?v=LUQ-n9EZa0U)
+[![Gordian Envelope CLI - 5 - Inclusion Proofs](https://img.youtube.com/vi/LUQ-n9EZa0U/mqdefault.jpg)](https://www.youtube.com/watch?v=LUQ-n9EZa0U)
 
 ## Introduction
 
-An *existence proof* is a method of showing that particular information exists in a document without revealing more than is necessary about the document in which it exists.
+An *inclusion proof* is a method of showing that particular information exists in a document without revealing more than is necessary about the document in which it exists.
 
 In a previous chapter we discussed elision, which is a method whereby information can be removed from an envelope without changing its digest tree structure.
 
@@ -275,4 +275,4 @@ Now we confirm the contents of both fields with a single command.
 envelope proof confirm --silent $CREDENTIAL_ROOT $NAME_PROOF $FIRST_NAME_DIGEST $LAST_NAME_DIGEST
 ```
 
-Existence proofs are a way to confirm the existence of a digest or set of digests within an envelope using minimal disclosure, but they are only one tool in the toolbox of techniques that Envelope provides. Real-life applications are likely to employ several of these tools. In the example above, we're assuming certain things such as the credential root being trusted and the signature on the envelope having been validated; these aren't provided for by the existence proof mechanism on its own. In addition, it's possible for a specific digest to appear in more than one place in the structure of an envelope, so proving that it exists in a single place where it's expected to exist also needs to be part of the process. Using tools that incorporate randomness, like salting, signing, and encryption, as well as the tree structure of the envelope provide a variety of ways to ensure that a specific digest occurs in exactly one place.
+Inclusion proofs are a way to confirm the existence of a digest or set of digests within an envelope using minimal disclosure, but they are only one tool in the toolbox of techniques that Envelope provides. Real-life applications are likely to employ several of these tools. In the example above, we're assuming certain things such as the credential root being trusted and the signature on the envelope having been validated; these aren't provided for by the inclusion proof mechanism on its own. In addition, it's possible for a specific digest to appear in more than one place in the structure of an envelope, so proving that it exists in a single place where it's expected to exist also needs to be part of the process. Using tools that incorporate randomness, like salting, signing, and encryption, as well as the tree structure of the envelope provide a variety of ways to ensure that a specific digest occurs in exactly one place.

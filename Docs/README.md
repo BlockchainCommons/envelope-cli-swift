@@ -9,7 +9,7 @@ The following docs exemplify the basic functionality of the `envelope` command l
 * [DID Document Example](DIDExample.md) — Creating and wrapping identifiers.
 * [Verifiable Credential Example](VCResidentExample.md) — Building complex credentials around an identifier.
 * [Verifiable Credential with Detailed Elision Example](VCElisionExample.md) — Eliding some of a credential.
-* [Existence Proofs](ExistenceProofs.md) — Proving the existence of an elided credential.
+* [Inclusion Proofs](InclusionProofs.md) — Proving the inclusion of an elided credential.
 * [Diffing](Diffing.md) — Showing the differences between two envelopes.
 * [Attachments](Attachments.md) — Standardized third-party attachments for envelopes.
 

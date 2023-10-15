@@ -10,6 +10,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/BlockchainCommons/BCSwiftFoundation.git", from: "8.8.2"),
+        .package(url: "https://github.com/BlockchainCommons/BCSwiftEnvelope.git", from: "0.21.0"),
         .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.0"),
         .package(url: "https://github.com/WolfMcNally/WolfBase", from: "5.0.0"),
     ],
@@ -19,7 +20,8 @@ let package = Package(
             dependencies: [
                 "WolfBase",
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
-                .product(name: "BCFoundation", package: "BCSwiftFoundation")
+                .product(name: "BCFoundation", package: "BCSwiftFoundation"),
+                .product(name: "Envelope", package: "BCSwiftEnvelope")
             ]),
         .testTarget(
             name: "EnvelopeToolTests",

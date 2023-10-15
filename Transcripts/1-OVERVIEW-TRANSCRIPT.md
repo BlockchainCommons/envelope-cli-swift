@@ -106,7 +106,7 @@ SUBCOMMANDS:
   extract                 Extract the subject of the input envelope.
   format (default)        Print the envelope in Envelope Notation.
   generate                Utilities to generate and convert various objects.
-  proof                   Work with existence proofs.
+  proof                   Work with inclusion proofs.
   diff                    Work with envelope diffs.
   salt                    Add random salt to the envelope.
   sign                    Sign the envelope with the provided private key base.

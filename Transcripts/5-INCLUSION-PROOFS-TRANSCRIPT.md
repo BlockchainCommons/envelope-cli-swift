@@ -1,18 +1,18 @@
-# TRANSCRIPT: Gordian Envelope CLI - 5 - Existence Proofs
+# TRANSCRIPT: Gordian Envelope CLI - 5 - Inclusion Proofs
 
-[![Gordian Envelope CLI - 5 - Existence Proofs](https://img.youtube.com/vi/LUQ-n9EZa0U/mqdefault.jpg)](https://www.youtube.com/watch?v=LUQ-n9EZa0U)
+[![Gordian Envelope CLI - 5 - Inclusion Proofs](https://img.youtube.com/vi/LUQ-n9EZa0U/mqdefault.jpg)](https://www.youtube.com/watch?v=LUQ-n9EZa0U)
 
 _Part of the [Envelope-CLI Playlist](https://www.youtube.com/playlist?list=PLCkrqxOY1FbooYwJ7ZhpJ_QQk8Az1aCnG)._
 
 ## Description
 
-Existence Proofs are a feature of Gordian Envelopes that support selective disclosure with a proof capability.
+Inclusion Proofs are a feature of Gordian Envelopes that support selective disclosure with a proof capability.
  
 Envelopes are a new type of “smart document” to support the storage, backup, encryption & authentication of data, with explicit support for Merkle-based selective disclosure. It’s part of the Gordian Architecture led by Blockchain Commons. `envelope`, is CLI ( command-line interface) reference tool for creating and verifying cryptographic envelopes.
 
 This video offers an overview of the Gordian Envelope-CLI (command line interface) tool, `envelope`, which can be used to create and verify cryptographic envelopes.
 
-* [Brief Overview of These Commands](https://github.com/BlockchainCommons/envelope-cli-swift/blob/master/Docs/8-EXISTENCE-PROOFS.md)
+* [Brief Overview of These Commands](https://github.com/BlockchainCommons/envelope-cli-swift/blob/master/Docs/8-INCLUSION-PROOFS.md)
 
 **Other Overview Docs:**
 
@@ -23,7 +23,7 @@ This video offers an overview of the Gordian Envelope-CLI (command line interfac
 
 ## Unedited Transcript
 
-An existence proof is a method of showing that particular information exists in a document without revealing more than is necessary about the document in which it exists. In a previous video, I covered elision, which is a method whereby information can be removed from an envelope without changing its digest tree structure.
+An inclusion proof is a method of showing that particular information exists in a document without revealing more than is necessary about the document in which it exists. In a previous video, I covered elision, which is a method whereby information can be removed from an envelope without changing its digest tree structure.
 
 Because each element of an envelope provides a unique digest, and because changing an element in an envelope changes the digest of all the elements upwards towards its root, the structure of an envelope is comparable to a Merkel tree. In a Merkel tree, all semantically significant information is carried by the tree's leaves. For example, the transactions in a block of Bitcoin transactions, while internal nodes of the tree or nothing but digests, computed from combinations of pairs of lower nodes all the way up to the root of the tree, which is called the Merkel root. In an envelope, every digest points at some potentially useful semantic information at the subject of the envelope, at one of the assertions in the envelope or at the predicate or object of a given assertion.
 
@@ -95,7 +95,7 @@ Both of these digest the first name and last name digest. So if we actually look
 
 When you create a proof, you decide what you want to reveal. What you want to be able to prove is in the original envelope, even though all you gave them originally was just the root, just a single digest essentially.
 
-Existence proofs are a way to confirm the existence of a digest or set of digests within an envelope using minimal disclosure, but there are only one tool in the toolbox of techniques that envelope provides. Real life applications are likely to employ several of these tools. In the example above, we are assuming certain things such as the credential root being trusted, and the signature on the envelope having been validated.
+Inclusion proofs are a way to confirm the existence of a digest or set of digests within an envelope using minimal disclosure, but there are only one tool in the toolbox of techniques that envelope provides. Real life applications are likely to employ several of these tools. In the example above, we are assuming certain things such as the credential root being trusted, and the signature on the envelope having been validated.
 
-These aren't provided for by the existence proof mechanism on its own. In addition, it's possible for a specific digest to appear in more than one place in the structure of an envelope. So proving that it exists in a single place where it's expected to exist also needs to be part of the process. Using tools that incorporate randomness like salting, signing, and encryption, as well as the tree structure of the envelope, provide a variety of ways to ensure that a specific digest occurs in exactly one place.
+These aren't provided for by the inclusion proof mechanism on its own. In addition, it's possible for a specific digest to appear in more than one place in the structure of an envelope. So proving that it exists in a single place where it's expected to exist also needs to be part of the process. Using tools that incorporate randomness like salting, signing, and encryption, as well as the tree structure of the envelope, provide a variety of ways to ensure that a specific digest occurs in exactly one place.
 

@@ -24,7 +24,7 @@ The following docs exemplify the basic functionality of the `envelope-cli` app.
 * [5: DID Document Example](Docs/5-DID-EXAMPLE.md) — Creating and wrapping identifiers.
 * [6: Verifiable Credential Example](Docs/6-VC-RESIDENT-EXAMPLE.md) — Building complex credentials around an identifier.
 * [7: Verifiable Credential with Detailed Elision Example](Docs/7-VC-ELISION-EXAMPLE.md) — Eliding some of a credential.
-* [8: Existence Proofs](Docs/8-EXISTENCE-PROOFS.md) — Proving the existence of an elided credential.
+* [8: Inclusion Proofs](Docs/8-INCLUSION-PROOFS.md) — Proving the inclusion of an elided credential.
 * [9: Diffing](Docs/9-DIFFING.md) — Showing the differences between two envelopes.
 
 ## Videos
@@ -37,7 +37,7 @@ For more examples of `envelope-cli` usage, see the [envelope-cli videos](https:/
   * [Envelope CLI - 2 - Examples](https://youtu.be/K2gFTyjbiYk) [ [Rough Transcript](Transcripts/2-EXAMPLES-TRANSCRIPT.md) ]
   * [Envelope CLI - 3 - Elision in Detail](https://youtu.be/K2gFTyjbiYk) [ [Rough Transcript](Transcripts/3-ELISION-TRANSCRIPT.md) ]
   * [Envelope CLI - 4 - Distributed Identifier](https://youtu.be/K2gFTyjbiYk) [ [Rough Transcript](Transcripts/4-DID-TRANSCRIPT.md) ]
-  * [Envelope CLI - 5 - Existence Proofs](https://www.youtube.com/watch?v=LUQ-n9EZa0U)[ [Rough Transcript](Transcripts/5-EXISTENCE-PROOFS-TRANSCRIPT.md) ]
+  * [Envelope CLI - 5 - Inclusion Proofs](https://www.youtube.com/watch?v=LUQ-n9EZa0U)[ [Rough Transcript](Transcripts/5-INCLUSION-PROOFS-TRANSCRIPT.md) ]
   * Older videos
     * [Envelope MVA (Minimal Viable Architecture) & Cryptographic Choices](https://www.youtube.com/watch?v=S0deyIHXukk)
     * [Envelope Privacy Requirements for Non-Correlation & Support Elision](https://www.youtube.com/watch?v=ubqKJAizayU)

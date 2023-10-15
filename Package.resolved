@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftEnvelope.git",
       "state" : {
-        "revision" : "3141a48bdf7f67739afd99f4a61eac88c9799ff5",
-        "version" : "0.20.0"
+        "revision" : "3c0135bd6684ebe005b237264ca95198c5923134",
+        "version" : "0.21.0"
       }
     },
     {
@@ -158,8 +158,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/URKit.git",
       "state" : {
-        "revision" : "e113f3b6bc248128535a7e28527067d8d0f4d63c",
-        "version" : "11.3.2"
+        "revision" : "105ed411b83795f8dd370f77e9bc6d9057f0469d",
+        "version" : "11.4.0"
       }
     },
     {

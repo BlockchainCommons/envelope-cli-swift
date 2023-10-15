@@ -6,4 +6,4 @@ The following transcripts are drawn from the [envelope-cli videos](https://www.y
 2. [Examples](2-EXAMPLES-TRANSCRIPT.md) ([Video](https://youtu.be/K2gFTyjbiYk))
 3. [Elision in Detail](3-ELISION-TRANSCRIPT.md) ([Video](https://youtu.be/K2gFTyjbiYk))
 4. [Distributed Identifier](4-DID-TRANSCRIPT.md) ([Video](https://youtu.be/K2gFTyjbiYk))
-5. [Existence Proofs](5-EXISTENCE-PROOFS-TRANSCRIPT.md) ([Video](https://www.youtube.com/watch?v=LUQ-n9EZa0U))
+5. [Inclusion Proofs](5-INCLUSION-PROOFS-TRANSCRIPT.md) ([Video](https://www.youtube.com/watch?v=LUQ-n9EZa0U))
