@@ -32,7 +32,7 @@ struct ProofConfirmCommand: ParsableCommand {
         guard let envelope else {
             throw EnvelopeToolError.missingArgument("envelope")
         }
-        guard envelope.confirm(contains: Set(target), using: proof) else {
+        guard envelope.confirm(contains: Set(target), proof: proof) else {
             throw EnvelopeToolError.invalidProof
         }
         if !silent {
