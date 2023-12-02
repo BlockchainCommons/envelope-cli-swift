@@ -128,10 +128,10 @@ final class SubjectTests: XCTestCase {
     
     func testKnownURSubject() throws {
         let e = try envelope("subject --ur \(seedURExample)")
-        XCTAssertEqual(e, "ur:envelope/tpcstaaddwoyadgdaawzwplrbdhdpabgrnvokorolnrtemksidtbcxgu")
+        XCTAssertEqual(e, "ur:envelope/tpcstantjzoyadgdaawzwplrbdhdpabgrnvokorolnrtemkscfjpaost")
         XCTAssertEqual(try envelope(e),
             """
-            crypto-seed(Map)
+            seed(Map)
             """
         )
         XCTAssertEqual(try envelope("extract --ur \(e)"), seedURExample)

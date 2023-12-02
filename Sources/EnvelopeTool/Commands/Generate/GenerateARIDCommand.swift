@@ -12,7 +12,7 @@ struct GenerateARIDCommand: ParsableCommand {
     var hex: HexData?
     
     mutating func run() throws {
-        resetOutput()
+        setupCommand()
         let arid: ARID
         if let hex {
             if let a = ARID(hex.data) {

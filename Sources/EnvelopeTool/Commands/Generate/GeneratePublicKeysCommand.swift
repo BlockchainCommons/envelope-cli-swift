@@ -17,7 +17,7 @@ struct GeneratePublicKeysCommand: ParsableCommand {
     }
 
     mutating func run() throws {
-        resetOutput()
+        setupCommand()
         try fill()
         guard let prvkeys else {
             throw EnvelopeToolError.missingArgument("prvkeys")

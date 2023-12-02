@@ -26,7 +26,7 @@ struct AttachmentAddComponentsCommand: ParsableCommand {
     }
     
     mutating func run() throws {
-        resetOutput()
+        setupCommand()
         try fill()
         guard let subject else {
             throw EnvelopeToolError.missingArgument("envelope")

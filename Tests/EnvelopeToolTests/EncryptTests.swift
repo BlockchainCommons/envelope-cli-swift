@@ -27,7 +27,7 @@ final class EncryptTests: XCTestCase {
     }
     
     func testGeneratePrivateKeys2() throws {
-        let seed = "ur:crypto-seed/oyadhdcxhsinuesrennenlhfaopycnrfrkdmfnsrvltowmtbmyfwdafxvwmthersktcpetdweocfztrd"
+        let seed = "ur:seed/oyadhdcxhsinuesrennenlhfaopycnrfrkdmfnsrvltowmtbmyfwdafxvwmthersktcpetdweocfztrd"
         let prvkeys1 = try envelope("generate prvkeys \(seed)")
         XCTAssertEqual(prvkeys1, "ur:crypto-prvkeys/hdcxhsinuesrennenlhfaopycnrfrkdmfnsrvltowmtbmyfwdafxvwmthersktcpetdwfnbndeah")
         let prvkeys2 = try envelope("generate prvkeys \(seed)")

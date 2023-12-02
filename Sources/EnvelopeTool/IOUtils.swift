@@ -1,6 +1,7 @@
 import Foundation
 import ArgumentParser
 import WolfBase
+import SecureComponents
 
 #if DEBUG
 

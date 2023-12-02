@@ -29,10 +29,10 @@ final class GenerateTests: XCTestCase {
         let seed1 = try envelope("generate seed")
         let seed2 = try envelope("generate seed")
         XCTAssertNotEqual(seed1, seed2)
-        XCTAssertEqual(try UR(urString: seed1).type, "crypto-seed")
+        XCTAssertEqual(try UR(urString: seed1).type, "seed")
         
         let seed3 = try envelope("generate seed --hex 187a5973c64d359c836eba466a44db7b")
-        XCTAssertEqual(seed3, "ur:crypto-seed/oyadgdcsknhkjkswgtecnslsjtrdfgimfyuykglfsfwtso")
+        XCTAssertEqual(seed3, "ur:seed/oyadgdcsknhkjkswgtecnslsjtrdfgimfyuykglfsfwtso")
     }
     
     func testGenerateDigest() throws {

@@ -17,7 +17,7 @@ struct AttachmentPayloadCommand: ParsableCommand {
     }
 
     mutating func run() throws {
-        resetOutput()
+        setupCommand()
         try fill()
         guard let attachment else {
             throw EnvelopeToolError.missingArgument("attachment")

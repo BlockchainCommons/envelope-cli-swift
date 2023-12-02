@@ -28,7 +28,7 @@ struct ExtractCommand: ParsableCommand {
     }
     
     mutating func run() throws {
-        resetOutput()
+        setupCommand()
         try fill()
         
         guard let envelope else {

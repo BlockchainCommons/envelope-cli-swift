@@ -15,7 +15,7 @@ struct SubjectSingleCommand: ParsableCommand {
     }
     
     mutating func run() throws {
-        resetOutput()
+        setupCommand()
         try fill()
         printOut(try arguments.envelope.ur)
     }

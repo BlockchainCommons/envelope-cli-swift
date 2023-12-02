@@ -13,6 +13,6 @@ final class InvalidTests: XCTestCase {
     }
     
     func testInvalidData() throws {
-        XCTAssertThrowsError(try envelope("ur:crypto-seed/oyadgdtokgdpwkrsonfdltvdwttsnddneonbmdbntakkss"))
+        XCTAssertThrowsError(try envelope("ur:seed/oyadgdtokgdpwkrsonfdltvdwttsnddneonbmdbntakkss"))
     }
 }

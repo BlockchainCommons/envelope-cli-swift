@@ -18,7 +18,7 @@ struct GenerateDigestCommand: ParsableCommand {
     }
     
     mutating func run() throws {
-        resetOutput()
+        setupCommand()
         try fill()
         guard let data else {
             throw EnvelopeToolError.missingArgument("data")

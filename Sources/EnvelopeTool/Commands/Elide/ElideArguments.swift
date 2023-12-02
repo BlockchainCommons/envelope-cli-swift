@@ -26,7 +26,7 @@ struct ElideArguments: ParsableArguments {
     }
     
     mutating func run(revealing: Bool) throws {
-        resetOutput()
+        setupCommand()
         try fill()
 
         guard let envelope else {

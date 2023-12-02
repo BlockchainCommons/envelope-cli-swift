@@ -12,7 +12,7 @@ struct GeneratePrivateKeysCommand: ParsableCommand {
     var seed: Seed?
     
     mutating func run() throws {
-        resetOutput()
+        setupCommand()
         printOut(PrivateKeyBase(seed).ur)
     }
 }

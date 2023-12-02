@@ -18,7 +18,7 @@ struct AssertionCreateCommand: ParsableCommand {
     }
 
     mutating func run() throws {
-        resetOutput()
+        setupCommand()
         try fill()
         var result = try arguments.assertion
         if salted {

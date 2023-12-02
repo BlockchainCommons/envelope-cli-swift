@@ -28,7 +28,7 @@ struct GenerateSeedCommand: ParsableCommand {
     }
     
     mutating func run() throws {
-        resetOutput()
+        setupCommand()
         let seed: Seed
         if let hex {
             seed = Seed(data: hex)!

@@ -1,4 +1,4 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.9
 
 import PackageDescription
 
@@ -9,10 +9,10 @@ let package = Package(
         .macCatalyst(.v15)
     ],
     dependencies: [
-        .package(url: "https://github.com/BlockchainCommons/BCSwiftFoundation.git", from: "8.8.2"),
-        .package(url: "https://github.com/BlockchainCommons/BCSwiftEnvelope.git", from: "0.21.0"),
+        .package(url: "https://github.com/BlockchainCommons/BCSwiftFoundation.git", from: "10.0.0"),
+        .package(url: "https://github.com/BlockchainCommons/BCSwiftEnvelope.git", from: "1.0.0"),
         .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.0"),
-        .package(url: "https://github.com/WolfMcNally/WolfBase", from: "5.0.0"),
+        .package(url: "https://github.com/WolfMcNally/WolfBase", from: "6.0.0"),
     ],
     targets: [
         .executableTarget(

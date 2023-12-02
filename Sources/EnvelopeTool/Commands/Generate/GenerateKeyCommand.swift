@@ -8,7 +8,7 @@ struct GenerateKeyCommand: ParsableCommand {
     )
 
     mutating func run() throws {
-        resetOutput()
+        setupCommand()
         printOut(SymmetricKey().ur)
     }
 }

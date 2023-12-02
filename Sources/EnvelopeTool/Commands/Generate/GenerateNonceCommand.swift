@@ -12,7 +12,7 @@ struct GenerateNonceCommand: ParsableCommand {
     var hex: HexData?
     
     mutating func run() throws {
-        resetOutput()
+        setupCommand()
         let nonce: Nonce
         if let hex {
             if let c = Nonce(hex.data) {

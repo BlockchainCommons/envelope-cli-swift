@@ -541,7 +541,7 @@ For example, if we take a seed that was generated using Seed Tool, then we can a
 
 [**▶️ envelope generate prvkeys from seed:**](https://youtu.be/K2gFTyjbiYk?t=946)
 ```
-$ SEED=ur:crypto-seed/oyadgdmdeefejoaonnatcycefxjedrfyaspkiakionamgl
+$ SEED=ur:seed/oyadgdmdeefejoaonnatcycefxjedrfyaspkiakionamgl
 $ PRVKEYS=`envelope generate prvkeys $SEED`
 $ echo $PRVKEYS
 ur:crypto-prvkeys/gdmdeefejoaonnatcycefxjedrfyaspkiawdioolhs

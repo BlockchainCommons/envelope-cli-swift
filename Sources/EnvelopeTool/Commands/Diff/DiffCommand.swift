@@ -32,7 +32,7 @@ struct DiffCreateCommand: ParsableCommand {
     }
     
     mutating func run() throws {
-        resetOutput()
+        setupCommand()
         try fill()
         guard let source else {
             throw EnvelopeToolError.missingArgument("source")
@@ -61,7 +61,7 @@ struct DiffApplyCommand: ParsableCommand {
     }
     
     mutating func run() throws {
-        resetOutput()
+        setupCommand()
         try fill()
         guard let source else {
             throw EnvelopeToolError.missingArgument("source")

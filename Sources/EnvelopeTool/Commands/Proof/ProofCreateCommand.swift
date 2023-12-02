@@ -20,7 +20,7 @@ struct ProofCreateCommand: ParsableCommand {
     }
     
     mutating func run() throws {
-        resetOutput()
+        setupCommand()
         try fill()
         guard let envelope else {
             throw EnvelopeToolError.missingArgument("envelope")

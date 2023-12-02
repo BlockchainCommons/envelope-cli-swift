@@ -15,7 +15,7 @@ struct SubjectAssertionCommand: ParsableCommand {
     }
 
     mutating func run() throws {
-        resetOutput()
+        setupCommand()
         try fill()
         printOut(try arguments.assertion.ur)
     }
