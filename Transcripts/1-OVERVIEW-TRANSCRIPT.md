@@ -10,7 +10,7 @@ Envelopes are a new type of "smart document" allowing for storage and encryption
 
 This video offers an overview of the Gordian Envelope-CLI (command line interface) tool, `envelope`, which can be used to create and verify cryptographic envelopes.
 
-* [Brief Overview of These Commands](https://github.com/BlockchainCommons/envelope-cli-swift/blob/master/Docs/1-OVERVIEW.md)
+* [Brief Overview of These Commands](https://github.com/BlockchainCommons/envelope-cli-swift/blob/master/Docs/Overview.md)
 
 **Other Overview Docs:**
 
