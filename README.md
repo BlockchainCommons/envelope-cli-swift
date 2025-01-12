@@ -4,9 +4,11 @@ A Swift command line tool for manipulating the Gordian Envelope data type.
 
 Written by [Wolf McNally](https://wolfmcnally.com) for [Blockchain Commons](https://blockchaincommons.com/).
 
+**⚠️ NOTE:** This tool has been deprecated in favor of the [Rust version](https://github.com/BlockchainCommons/bc-envelope-cli-rust) and is no longer actively maintained.
+
 ## Dependencies and Resources
 
-* [Introduction to Envelope](https://www.blockchaincommons.com/introduction/Envelope-Intro/) 
+* [Introduction to Envelope](https://www.blockchaincommons.com/introduction/Envelope-Intro/)
 * [Envelope Docs](https://github.com/BlockchainCommons/Gordian/tree/master/Envelope#articles)
 * [BC Secure Components](https://github.com/BlockchainCommons/BCSwiftSecureComponents) - A collection of useful primitives for cryptography, semantic graphs, and cryptocurrency in Swift. Includes the reference implementation of the `Envelope` type.
 * [BC Foundation](https://github.com/BlockchainCommons/BCSwiftFoundation) - A collection of useful primitives for cryptocurrency wallets.
@@ -15,7 +17,7 @@ Written by [Wolf McNally](https://wolfmcnally.com) for [Blockchain Commons](http
 
 ## Documentation and Examples
 
-The following docs exemplify the basic functionality of the `envelope-cli` app. 
+The following docs exemplify the basic functionality of the `envelope-cli` app.
 
 * [1: Overview of Commands](Docs/1-OVERVIEW.md) — Adding subjects, assertions, signatures, and salt.
 * [2: Basic Examples](Docs/2-BASIC-EXAMPLES.md) — Demonstrating standard methodologies for entry, encryption, and signing.
